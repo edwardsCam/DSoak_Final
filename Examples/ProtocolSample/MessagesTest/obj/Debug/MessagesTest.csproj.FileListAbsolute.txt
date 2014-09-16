@@ -1,0 +1,7 @@
+Y:\Seafile\USU\CS5200 2014 Fall\Examples\ProtocolSample\MessagesTest\bin\Debug\MessagesTest.dll
+Y:\Seafile\USU\CS5200 2014 Fall\Examples\ProtocolSample\MessagesTest\bin\Debug\MessagesTest.pdb
+Y:\Seafile\USU\CS5200 2014 Fall\Examples\ProtocolSample\MessagesTest\bin\Debug\Common.dll
+Y:\Seafile\USU\CS5200 2014 Fall\Examples\ProtocolSample\MessagesTest\bin\Debug\Common.pdb
+Y:\Seafile\USU\CS5200 2014 Fall\Examples\ProtocolSample\MessagesTest\obj\Debug\MessagesTest.csprojResolveAssemblyReference.cache
+Y:\Seafile\USU\CS5200 2014 Fall\Examples\ProtocolSample\MessagesTest\obj\Debug\MessagesTest.dll
+Y:\Seafile\USU\CS5200 2014 Fall\Examples\ProtocolSample\MessagesTest\obj\Debug\MessagesTest.pdb
