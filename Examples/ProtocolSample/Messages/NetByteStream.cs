@@ -200,6 +200,17 @@ namespace Messages
             return IPAddress.NetworkToHostOrder(BitConverter.ToInt16(ReadBytes(2), 0));
         }
 
+        public byte PeekByte()
+        {
+            byte result = 0;
+            if (RemainingToRead > 0)
+            {
+                result = ReadBytes(1)[0];
+                memoryStream.Seek(-1, SeekOrigin.Current);
+            }
+            return result;
+        }
+
         public Int16 PeekInt16()
         {
             Int16 result = IPAddress.NetworkToHostOrder(BitConverter.ToInt16(ReadBytes(2), 0));

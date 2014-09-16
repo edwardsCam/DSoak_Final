@@ -277,8 +277,78 @@ namespace MessagesTest
         }
 
         [TestMethod]
-        public void NetByteStream_03_OtherPublicMethods()
+        public void NetByteStream_03_RemainingBytesToRead()
         {
+            NetByteStream myBytes = new NetByteStream(new byte[] { 1, 2, 3, 4, 5, 6, 7});
+            myBytes.ResetRead();
+            Assert.AreEqual(7, myBytes.RemainingToRead);
+            Assert.AreEqual(1, myBytes.ReadByte());
+            Assert.AreEqual(6, myBytes.RemainingToRead);
+            Assert.AreEqual(2*256 + 3, myBytes.ReadInt16());
+            Assert.AreEqual(4, myBytes.RemainingToRead);
+            myBytes.ReadBytes(3);
+            Assert.AreEqual(1, myBytes.RemainingToRead);
+            Assert.AreEqual(7, myBytes.ReadByte());
+            Assert.AreEqual(0, myBytes.RemainingToRead);
+            Assert.AreEqual(0, myBytes.ReadByte());
+            Assert.AreEqual(0, myBytes.RemainingToRead);
+        }
+
+        [TestMethod]
+        public void NetByteStream_04_PeekMethods()
+        {
+            // Case 1: Check Peek
+            NetByteStream myBytes = new NetByteStream(new byte[] { 1, 2, 3, 4 });
+            myBytes.ResetRead();
+            Assert.AreEqual(1, myBytes[0]);
+            Assert.AreEqual(1, myBytes.PeekByte());
+            Assert.AreEqual(1, myBytes.PeekByte());
+            Assert.AreEqual(1, myBytes.ReadByte());
+
+            // Case 1: Check PeekByte after Read
+            Assert.AreEqual(2, myBytes.PeekByte());
+            Assert.AreEqual(2, myBytes.PeekByte());
+            Assert.AreEqual(2, myBytes.ReadByte());
+
+            // Case 1: Check PeekByte after Read again
+            Assert.AreEqual(3, myBytes.PeekByte());
+            Assert.AreEqual(3, myBytes.PeekByte());
+
+            // Case 1: Check PeekInt16 after Read
+
+            Assert.AreEqual(3 * 256 + 4, myBytes.PeekInt16());
+            Assert.AreEqual(3 * 256 + 4, myBytes.PeekInt16());
+        }
+
+        [TestMethod]
+        public void NetByteStream_05_ReadMethods()
+        {
+            // Case 1: Check Reset Read
+            NetByteStream myBytes = new NetByteStream(new byte[] { 1, 2, 3, 4 });
+            myBytes.ResetRead();
+            Assert.AreEqual(1, myBytes.ReadByte());
+            Assert.AreEqual(2, myBytes.ReadByte());
+            Assert.AreEqual(3, myBytes.ReadByte());
+
+            myBytes.ResetRead();
+            Assert.AreEqual(1, myBytes.ReadByte());
+
+            // Case 2: Check ResetRead Method again, when current read point is at the begin
+            myBytes.ResetRead();
+            Assert.AreEqual(1, myBytes.ReadByte());
+
+            // Case 3: Check ResetRead Method again, when current read point is at the end
+            myBytes.ReadBytes(10);
+            myBytes.ResetRead();
+            Assert.AreEqual(1, myBytes.ReadByte());
+
+        }
+
+
+        [TestMethod]
+        public void NetByteStream_06_CreatLogString()
+        {
+            // Case 1: Check CreteLogString Method
             byte[] bigArray = new byte[300];
             for (int i = 0; i < 300; i++)
                 bigArray[i] = Convert.ToByte(i * 11 & 255);
@@ -286,8 +356,28 @@ namespace MessagesTest
 
             string logString = bigList.CreateLogString();
             Assert.IsNotNull(logString);
+            Assert.IsTrue(logString.StartsWith("0:0  1:11  2:22  3:33"));
 
-            // TODO: Finish
+            // Case 2: Check Peek
+            NetByteStream myBytes = new NetByteStream(new byte[] { 1, 2, 3, 4 });
+            myBytes.ResetRead();
+            Assert.AreEqual(1, myBytes[0]);
+            Assert.AreEqual(1, myBytes.PeekByte());
+            Assert.AreEqual(1, myBytes.PeekByte());
+            Assert.AreEqual(1, myBytes.ReadByte());
+
+            Assert.AreEqual(2, myBytes.PeekByte());
+            Assert.AreEqual(2, myBytes.PeekByte());
+            Assert.AreEqual(2, myBytes.ReadByte());
+
+            Assert.AreEqual(3, myBytes.PeekByte());
+            Assert.AreEqual(3, myBytes.PeekByte());
+
+            Assert.AreEqual(3 * 256 + 4, myBytes.PeekInt16());
+            Assert.AreEqual(3 * 256 + 4, myBytes.PeekInt16());
+
+            // Case 3: Check ResetRead Method
+            myBytes.ResetRead();
         }
 
     }

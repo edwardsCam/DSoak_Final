@@ -67,7 +67,7 @@ namespace Messages
         {
             if (nextSeqNumber == Int16.MaxValue)
                 nextSeqNumber = 0;
-            return nextSeqNumber++;
+            return ++nextSeqNumber;
         }
         #endregion
 
@@ -81,7 +81,7 @@ namespace Messages
             if (bytes == null)
                 throw new ApplicationException("Cannot encode into a null NetByteStream object");
 
-            bytes.Write(LocalProcessId);
+            bytes.Write(ProcessId);
             bytes.Write(SeqNumber);
         }
 
@@ -97,7 +97,7 @@ namespace Messages
             if (bytes.RemainingToRead < 4)
                 throw new ApplicationException("Not enough data in NetByteStream for decode MessageNumber");
 
-            LocalProcessId = bytes.ReadInt16();
+            ProcessId = bytes.ReadInt16();
             SeqNumber = bytes.ReadInt16(); 
         }
         #endregion

@@ -7,14 +7,14 @@ namespace Messages
     abstract public class Message : IComparable
     {
         #region Private Properties
-        protected enum MessageType { LOGIN, ACK, NAK }
+        protected enum MessageType { UNKNOWN=0, LOGIN=101, ACK=102, NAK=103 }
+        protected MessageType MyMessageType { get; set; }
         #endregion
 
         #region Public Properties
 
         public MessageNumber MessageNr { get; set; }
         public MessageNumber ConversationId { get; set; }
-        public MessageType MyMessageType { get; set; }
 
         #endregion
 
@@ -24,8 +24,9 @@ namespace Messages
         /// Note how this construct creates a new message number and set the conversation Id to
         /// the message number.  This is the expected behavior for an initial messsage in a conversation.
         /// </summary>
-        protected Message(bool isForSending, bool isFirstMessage)
+        protected Message(MessageType type, bool isForSending, bool isFirstMessage)
         {
+            MyMessageType = type;
             if (isForSending)
             {
                 MessageNr = MessageNumber.Create();
@@ -33,34 +34,32 @@ namespace Messages
                     ConversationId = MessageNr;
             }
         }
-        protected Message(bool isForSending) : this(isForSending, false) {}
-        protected Message() : this(false, false) { }
+        protected Message(MessageType type, bool isForSending) : this(type, isForSending, isForSending) { }
+        protected Message(MessageType type) : this(type, false) { }
+        protected Message() : this(MessageType.UNKNOWN) { }
 
         /// <summary>
         /// Factor method to create a message from a byte list
         /// </summary>
         /// <param name="bytes"></param>
         /// <returns>A new message of the right specialization</returns>
-        public static Message Create(NetByteStream bytes)
+        public static Message Create(NetByteStream stream)
         {
             Message result = null;
 
-            byte tmpMessageType = bytes.ReadByte();
-            MessageType messageType = (MessageType) tmpMessageType;
-
+            MessageType messageType = (MessageType) stream.PeekByte();
             switch (messageType)
             {
                 case MessageType.LOGIN:
-                    // result = Login.Create();
+                    result = Login.Create(stream);
                     break;
                 case MessageType.ACK:
-                    // result = Ack.Create();
+                    // result = Ack.Create(stream);
                     break;
                 case MessageType.NAK:
-                    // result = Nak.Create();
+                    // result = Nak.Create(stream);
                     break;
             }
-            // TODO: Decode byte stream into new message
 
             return result;
         }
@@ -72,18 +71,36 @@ namespace Messages
         /// This method encodes
         /// </summary>
         /// <param name="bytes"></param>
-        virtual public void Encode(NetByteStream bytes)
+        virtual public void Encode(NetByteStream stream)
         {
-            // TODO: Implement
+            if (stream != null)
+            {
+                stream.Write(MessageNr != null);        // Bool flag indicating presense of MessageNr object
+                if (MessageNr != null)
+                    MessageNr.Encode(stream);           // Encode Message Number
+
+                stream.Write(ConversationId != null);   // Bool flag indicating presense of ConversationId object
+                if (ConversationId != null)
+                    ConversationId.Encode(stream);      // Encode ConversiontId
+
+            }
         }
 
         /// <summary>
         /// This method decodes a message from a byte list
         /// </summary>
         /// <param name="bytes"></param>
-        virtual protected void Decode(NetByteStream bytes)
+        virtual protected void Decode(NetByteStream stream)
         {
-            // TODO: Implement
+            if (stream != null)
+            {
+                if (stream.ReadBool())                  // Bool flag indicating presense of MessageNr object
+                    MessageNr = MessageNumber.Create(stream);
+
+                if (stream.ReadBool())                  // Bool flag indicating presense of ConversationId object
+                    ConversationId = MessageNumber.Create(stream);
+
+            }
         }
 
         #endregion

@@ -7,13 +7,13 @@ namespace Messages
 {
     public class Login : Message
     {
-        #region Private Data
-        private string username = null;
-        private string password = null;
+        #region Public Properties
+        public string Username { get; set; }
+        public string Password { get; set; }
         #endregion
 
         #region Constructors and Factories
-        protected Login(bool isForSending, bool isFirstMessage) : base(isForSending, isFirstMessage) { }
+        protected Login(bool isForSending, bool isFirstMessage) : base(MessageType.LOGIN, isForSending, isFirstMessage) { }
         protected Login() : this(false, false) { }
 
         /// <summary>
@@ -35,26 +35,18 @@ namespace Messages
         public new static Login Create(NetByteStream stream)
         {
             Login result = null;
+            if (stream==null || stream.RemainingToRead==0)
+                throw new ApplicationException("Cannot create a LoginMessage from a null stream or stream with no more bytes to be read");
 
-            // TODO: Decode the stream into a message number
+            if ((MessageType)stream.PeekByte() != MessageType.LOGIN)
+                throw new ApplicationException("The current read position in the specified stream doesn't contain a Login Message");
+
+            result = new Login();
+            result.Decode(stream);
 
             return result;
         }
 
-        #endregion
-
-        #region Public Properties
-        public string Username
-        {
-            get { return username; }
-            set { username = value; }
-        }
-
-        public string Password
-        {
-            get { return password; }
-            set { password = value; }
-        }
         #endregion
 
         #region Encoding and Decoding methods
@@ -62,21 +54,26 @@ namespace Messages
         /// This method encodes
         /// </summary>
         /// <param name="bytes"></param>
-        public override void Encode(NetByteStream bytes)
+        public override void Encode(NetByteStream stream)
         {
-            // TODO: Implement
+            stream.Write((byte)MyMessageType);
+            base.Encode(stream);
+            stream.Write(Username);
+            stream.Write(Password);
         }
 
         /// <summary>
         /// This method decodes a message from a byte list
         /// </summary>
         /// <param name="bytes"></param>
-        protected override void Decode(NetByteStream bytes)
+        protected override void Decode(NetByteStream stream)
         {
-            // TODO: Implement
+            stream.ReadByte();
+            base.Decode(stream);
+            Username = stream.ReadString();
+            Password = stream.ReadString();
         }
         #endregion
-
 
     }
 }

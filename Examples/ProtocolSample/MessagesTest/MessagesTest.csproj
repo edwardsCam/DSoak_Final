@@ -50,8 +50,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="AckTester.cs" />
+    <Compile Include="LoginMessageTester.cs" />
     <Compile Include="NetByteStreamTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MessageNumberTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Messages\Messages.csproj">
