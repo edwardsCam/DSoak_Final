@@ -151,7 +151,7 @@ namespace Messages
         public void Write(byte[] value, int offset, int length)
         {
             if (value != null)
-                memoryStream.Write(value, this.Length, length);
+                memoryStream.Write(value, offset, length);
         }
 
         public void WriteBackLength(Int32 writePosition, Int16 length)

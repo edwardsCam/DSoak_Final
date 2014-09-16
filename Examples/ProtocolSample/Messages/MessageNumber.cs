@@ -8,7 +8,7 @@ namespace Messages
     public class MessageNumber :  IComparable
     {
         #region Private Properties
-        private static Int16 nextSeqNumber = 1;                     // Start with message #1
+        private static Int16 nextSeqNumber = 0;                     // Start with message #1
         #endregion
 
         #region Public Properties
@@ -33,9 +33,11 @@ namespace Messages
         /// <returns>A new message number</returns>
         public static MessageNumber Create()
         {
-            MessageNumber result = new MessageNumber();
-            result.ProcessId = LocalProcessId;
-            result.SeqNumber = GetNextSeqNumber();
+            MessageNumber result = new MessageNumber()
+                {
+                    ProcessId = LocalProcessId,
+                    SeqNumber = GetNextSeqNumber()
+                };
             return result;
         }
 
@@ -46,10 +48,8 @@ namespace Messages
         /// <returns></returns>
         public static MessageNumber Create(NetByteStream stream)
         {
-            MessageNumber result = null;
-
-            // TODO: Decode the stream into a message number
-
+            MessageNumber result = new MessageNumber();
+            result.Decode(stream);
             return result;
         }
 
@@ -66,7 +66,7 @@ namespace Messages
         private static Int16 GetNextSeqNumber()
         {
             if (nextSeqNumber == Int16.MaxValue)
-                nextSeqNumber = 1;
+                nextSeqNumber = 0;
             return nextSeqNumber++;
         }
         #endregion
@@ -78,7 +78,11 @@ namespace Messages
         /// <param name="bytes"></param>
         public void Encode(NetByteStream bytes)
         {
-            // TODO: Implement
+            if (bytes == null)
+                throw new ApplicationException("Cannot encode into a null NetByteStream object");
+
+            bytes.Write(LocalProcessId);
+            bytes.Write(SeqNumber);
         }
 
         /// <summary>
@@ -87,7 +91,14 @@ namespace Messages
         /// <param name="bytes"></param>
         protected void Decode(NetByteStream bytes)
         {
-            // TODO: Implement
+            if (bytes == null)
+                throw new ApplicationException("Cannot decode from a null NetByteStream object");
+
+            if (bytes.RemainingToRead < 4)
+                throw new ApplicationException("Not enough data in NetByteStream for decode MessageNumber");
+
+            LocalProcessId = bytes.ReadInt16();
+            SeqNumber = bytes.ReadInt16(); 
         }
         #endregion
 

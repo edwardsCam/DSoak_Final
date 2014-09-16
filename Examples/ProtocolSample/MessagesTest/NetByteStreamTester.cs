@@ -11,7 +11,7 @@ namespace MessagesTest
         [TestMethod]
         public void NetByteStream_01_Constructors()
         {
-            // Check out the default constructor
+            // Case 0: Check out the default constructor
             NetByteStream myBytes = new NetByteStream();
             Assert.IsNotNull(myBytes);
             Assert.AreEqual(0, myBytes.Length);

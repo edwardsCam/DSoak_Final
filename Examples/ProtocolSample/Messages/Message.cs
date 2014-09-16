@@ -7,13 +7,14 @@ namespace Messages
     abstract public class Message : IComparable
     {
         #region Private Properties
-        
+        protected enum MessageType { LOGIN, ACK, NAK }
         #endregion
 
         #region Public Properties
 
         public MessageNumber MessageNr { get; set; }
         public MessageNumber ConversationId { get; set; }
+        public MessageType MyMessageType { get; set; }
 
         #endregion
 
@@ -32,7 +33,7 @@ namespace Messages
                     ConversationId = MessageNr;
             }
         }
-        protected Message(bool isForSending) : this (isForSending, false) {}
+        protected Message(bool isForSending) : this(isForSending, false) {}
         protected Message() : this(false, false) { }
 
         /// <summary>
@@ -44,6 +45,21 @@ namespace Messages
         {
             Message result = null;
 
+            byte tmpMessageType = bytes.ReadByte();
+            MessageType messageType = (MessageType) tmpMessageType;
+
+            switch (messageType)
+            {
+                case MessageType.LOGIN:
+                    // result = Login.Create();
+                    break;
+                case MessageType.ACK:
+                    // result = Ack.Create();
+                    break;
+                case MessageType.NAK:
+                    // result = Nak.Create();
+                    break;
+            }
             // TODO: Decode byte stream into new message
 
             return result;
