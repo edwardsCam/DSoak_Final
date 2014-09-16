@@ -39,6 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Login.cs" />
+    <Compile Include="Message.cs" />
     <Compile Include="MessageNumber.cs" />
     <Compile Include="NetByteStream.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

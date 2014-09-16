@@ -22,6 +22,12 @@ namespace Messages
 
         #region Constructors and Factories
         /// <summary>
+        /// Default constructor, used by factory methods (the Create) methods.  It should not be public,
+        /// because external object should all use one of the two factor methods. 
+        /// </summary>
+        protected MessageNumber() { }
+
+        /// <summary>
         /// Factory method creates and new, unique message number.
         /// </summary>
         /// <returns>A new message number</returns>
@@ -47,43 +53,12 @@ namespace Messages
             return result;
         }
 
-        /// <summary>
-        /// Factory method that creates and message number from an existing
-        /// processId and seqNumber.  This will be used for testing.
-        /// </summary>
-        /// <param name="processId">process Id to use in the message number</param>
-        /// <param name="seqNumber">sequece number to use in the message number</param>
-        /// <returns>A new message number</returns>
-        public static MessageNumber Create(Int16 processId, Int16 seqNumber)
-        {
-            MessageNumber result = new MessageNumber();
-            result.ProcessId = processId;
-            result.SeqNumber = seqNumber;
-            return result;
-        }
-
-        /// <summary>
-        /// Default constructor, used by factory methods (the Create) methods.  It should not be public,
-        /// because external object should all use one of the two factor methods. 
-        /// </summary>
-        private MessageNumber() { }
-
         #endregion
 
         #region Overridden public methods of Object
         public override string ToString()
         {
             return ProcessId.ToString() + "." + SeqNumber.ToString();
-        }
-
-        public override bool Equals(object obj)
-        {
-            return (Compare(this,obj as MessageNumber)==0);
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
         }
         #endregion
 
@@ -178,7 +153,15 @@ namespace Messages
             return Compare(this, obj as MessageNumber);
         }
 
-        #endregion
+        public override bool Equals(object obj)
+        {
+            return (Compare(this, obj as MessageNumber) == 0);
+        }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+        #endregion
     }
 }
