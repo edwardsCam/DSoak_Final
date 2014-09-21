@@ -1,5 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Net;
+using System.Net.Sockets;
 
 using Messages;
 
@@ -55,6 +57,36 @@ namespace MessagesTest
             Assert.AreEqual(5, msg3.ConversationId.SeqNumber);
             Assert.AreEqual("Joe", msg3.Username);
             Assert.AreEqual("Francisco", msg3.Password);
+
+        }
+
+        [TestMethod]
+        public void LoginMessage_02_CheckSendingAndReceiving()
+        {
+            Login msg1 = Login.Create("Frank", "Jones");
+
+            UdpClient comm1 = new UdpClient(0);
+            UdpClient comm2 = new UdpClient(0);
+
+            NetByteStream stream1 = new NetByteStream();
+            msg1.Encode(stream1);
+
+            byte[] bytesToSend = stream1.ToBytes();
+            IPEndPoint targetEp = new IPEndPoint(IPAddress.Loopback, (comm2.Client.LocalEndPoint as IPEndPoint).Port);
+
+            comm1.Send(bytesToSend, bytesToSend.Length, targetEp);
+
+            IPEndPoint senderEP = new IPEndPoint(IPAddress.Any, 0);
+            byte[] bytesReceived = comm2.Receive(ref senderEP);
+
+            NetByteStream stream2 = new NetByteStream(bytesReceived);
+            stream2.ResetRead();
+            Message msg2 = Message.Create(stream2);
+            Assert.IsTrue(msg2 is Login);
+            Login msg3 = msg2 as Login;
+            Assert.AreEqual("Frank", msg3.Username);
+            Assert.AreEqual("Jones", msg3.Password);
+
 
         }
     }
