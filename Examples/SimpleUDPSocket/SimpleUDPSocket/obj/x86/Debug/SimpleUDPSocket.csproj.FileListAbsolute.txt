@@ -16,3 +16,6 @@ Y:\Seafile\USU\CS5200 2014 Fall\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Deb
 Y:\Seafile\USU\CS5200 2014 Fall\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.exe
 Y:\Seafile\USU\CS5200 2014 Fall\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.pdb
 Y:\Seafile\USU\CS5200 2014 Fall\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.csprojResolveAssemblyReference.cache
+Y:\UnderGIT\cs5200f14\Examples\SimpleUDPSocket\SimpleUDPSocket\bin\Debug\SimpleUDPSocket.exe.config
+Y:\UnderGIT\cs5200f14\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.exe
+Y:\UnderGIT\cs5200f14\Examples\SimpleUDPSocket\SimpleUDPSocket\obj\x86\Debug\SimpleUDPSocket.pdb
