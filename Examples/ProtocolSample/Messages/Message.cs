@@ -82,7 +82,6 @@ namespace Messages
                 stream.Write(ConversationId != null);   // Bool flag indicating presense of ConversationId object
                 if (ConversationId != null)
                     ConversationId.Encode(stream);      // Encode ConversiontId
-
             }
         }
 

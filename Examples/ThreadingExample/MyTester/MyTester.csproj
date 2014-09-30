@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C5BEBE46-8A03-4D2A-BFC4-3DDCA7AA5D1E}</ProjectGuid>
+    <ProjectGuid>{F9914503-B60A-4CBC-B96F-5F0330B4C700}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MessagesTest</RootNamespace>
-    <AssemblyName>MessagesTest</AssemblyName>
+    <RootNamespace>MyTester</RootNamespace>
+    <AssemblyName>MyTester</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,21 +50,13 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AckTester.cs" />
-    <Compile Include="InitiatorConversation_Login_Tester.cs" />
-    <Compile Include="LoginMessageTester.cs" />
-    <Compile Include="NetByteStreamTester.cs" />
+    <Compile Include="SimpleSharedResourceTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="MessageNumberTester.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Conversations\Conversations.csproj">
-      <Project>{21aac31a-be8a-4863-96b7-66213ee651d4}</Project>
-      <Name>Conversations</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Messages\Messages.csproj">
-      <Project>{d640de10-596f-4541-bae0-4d3f39913d8f}</Project>
-      <Name>Messages</Name>
+    <ProjectReference Include="..\ThreadingExample\ThreadingExample.csproj">
+      <Project>{485b74a2-07f3-4807-97dc-84feadf85dde}</Project>
+      <Name>ThreadingExample</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
