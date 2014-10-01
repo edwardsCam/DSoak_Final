@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;dSoak-Java&apos; to &apos;dSoak-Common-Java&apos;" description="Rename resource &apos;dSoak-Java&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/dSoak-Java" name="dSoak-Common-Java" stamp="1412193296655" updateReferences="true"/>
+</session>
