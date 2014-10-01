@@ -1,0 +1,46 @@
+
+Reference : http://stackoverflow.com/questions/2836646/java-serializable-object-to-byte-array
+
+import static org.junit.Assert.*;
+import org.junit.Test;
+
+		private static Map<String, Object> serilaizers = null;
+	private static Object LookupSerializer(Message message)
+    {
+        return LookupSerializer(message.getClass().getName());
+    }
+	
+	private static Object LookupSerializer(String typeName)
+    {
+        return serilaizers.get(typeName);
+    }
+	 
+	private static void Initialize()
+    {
+		serilaizers = new HashMap<String, Object>();
+		serilaizers.put("Ack", new Ack());
+		serilaizers.put("AliveQuery", new AliveQuery());
+    }
+
+		
+		/*FileOutputStream file = new FileOutputStream(this.toString() + ".dat");
+		ObjectOutputStream objectOStream = new ObjectOutputStream(file);
+		//Serializable message = this;
+		//ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		
+		objectOStream.writeObject(this);
+		objectOStream.flush();
+		return .toByteArray();
+		
+		
+		Decode: 
+		String typeName = ParseTypeName(bytes);
+		Object serializer  = LookupSerializer(typeName);
+		
+		ByteArrayInputStream stream = new ByteArrayInputStream(bytes);
+		
+		ObjectInputStream inputStream = new ObjectInputStream();
+		Message result = (Message) inputStream.readObject();
+
+		return result;
+		*/
