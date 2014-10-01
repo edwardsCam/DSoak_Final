@@ -15,7 +15,8 @@ import SharedObject.Umbrella;
 public class UmbrellaPurchasedTester {
 
 	@Test
-	public void test() throws ClassNotFoundException, NoSuchAlgorithmException, IOException {
+	public void test_EveryThings() throws ClassNotFoundException, NoSuchAlgorithmException, IOException
+	{
 		Umbrella umbrella = new Umbrella(10);
 		UmbrellaPurchased msg1 = new UmbrellaPurchased(umbrella);
 	
@@ -25,5 +26,4 @@ public class UmbrellaPurchasedTester {
 		assertEquals(msg1.Umbrella.getX(), msg2.Umbrella.getX());
 		assertNotNull(msg1);
 	}
-
 }

@@ -10,7 +10,7 @@ import org.junit.Test;
 public class AckTester {
 
 	@Test
-	public void test_Constructor() throws IOException, ClassNotFoundException 
+	public void test_EveryThings() throws IOException, ClassNotFoundException 
 	{
 		Ack ack = new Ack();
 		ack.x = 10;

@@ -1,11 +1,13 @@
 package SharedObject;
 
+import java.io.Serializable;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-public class PublicEndPoint 
+public class PublicEndPoint implements Serializable
 {
+	private static final long SerialVersionUID = -145514789630468800L;
 	public String Host;
 	public int Port;
 	
@@ -25,15 +27,11 @@ public class PublicEndPoint
 	
 	public static InetAddress LookupAddress(String host) throws UnknownHostException
     {
-		// the first way
-		//InetAddress result = InetAddress.getByName(host);
-		//return result;
-		//
-		InetAddress result2 = null;
+		InetAddress result = null;
 		InetAddress[] addressList = InetAddress.getAllByName(host);
-        for (int i = 0; i < addressList.length && result2 == null; i++)
-            if (addressList[i].getHostAddress().equals(host) && result2 instanceof Inet4Address)
-                result2 = addressList[i];
-        return result2;
+        for (int i = 0; i < addressList.length && result == null; i++)
+            if (addressList[i].getHostAddress().equals(host) && result instanceof Inet4Address)
+                result = addressList[i];
+        return result;
     }
 }

@@ -1,0 +1,14 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class ThrowBalloonTester {
+
+	@Test
+	public void test_Constuctor() {
+		ThrowBalloon throwBallon = new ThrowBalloon();
+	}
+
+}

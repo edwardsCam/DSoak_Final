@@ -1,10 +1,12 @@
 package SharedObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 
-public class Penny extends SharedResource {
-
+public class Penny extends SharedResource implements Serializable
+{
+	private static final long SerialVersionUID = -1455824467430468998L;
 	public Penny() throws NoSuchAlgorithmException, IOException {
 		super();
 	}

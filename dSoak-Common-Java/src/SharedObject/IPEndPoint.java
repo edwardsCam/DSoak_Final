@@ -1,11 +1,13 @@
 package SharedObject;
 
+import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 
-public class IPEndPoint
+public class IPEndPoint implements Serializable
 {
+	private static final long SerialVersionUID = -1455333421930468998L;
 	public InetAddress Address;
 	public int Port;
 	public static final int MinPort = 0, MaxPort = 65535;
@@ -50,6 +52,4 @@ public class IPEndPoint
 	public String ToString() {
 		return Address.toString() + ":" + Port;
 	}
-	
-	
 }

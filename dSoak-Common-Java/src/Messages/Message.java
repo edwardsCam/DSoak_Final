@@ -28,6 +28,7 @@ public class Message implements Serializable
 			out = new ObjectOutputStream(bos);
 			out.writeObject(this);
 			bytes = bos.toByteArray();
+			out.close();
 		}
 		catch (IOException ex) {}
 		return bytes;

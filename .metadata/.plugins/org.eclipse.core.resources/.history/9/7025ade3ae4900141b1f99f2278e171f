@@ -1,0 +1,18 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import Messages.Nak;
+
+public class NakTester {
+
+	@Test
+	public void test_Constructor() {
+		Nak nak = new Nak();
+		nak.
+		
+	}
+
+}
