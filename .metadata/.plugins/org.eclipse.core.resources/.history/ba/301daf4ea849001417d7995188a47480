@@ -18,7 +18,7 @@ public class Message implements Serializable
 {
 	private static final long SerialVersionUID = -1455333437430468800L;
 	private byte[] bytes = null;
-	// base class for all messages
+	
 	public byte[] Encode()
 	{
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();

@@ -7,7 +7,6 @@ INDEX VERSION 1.126+C:\Users\NawafUSU\Documents\cs5200f14\.metadata\.plugins\org
 1775145456.index
 836277986.index
 1791666208.index
-1741233483.index
 2005105739.index
 1383058296.index
 2551484819.index
