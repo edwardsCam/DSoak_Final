@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{66891FA7-AEC6-4256-8BF7-01F5965D3485}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messages", "Messages\Messages.csproj", "{3E0A677D-9F28-4010-87AD-D03C4A84C6DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedObjects", "SharedObjects\SharedObjects.csproj", "{C3BC84DA-4FA3-4B1D-9AAC-C1D4ADE2EFFC}"
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{66891FA7-AEC6-4256-8BF7-01F5965D3485}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{66891FA7-AEC6-4256-8BF7-01F5965D3485}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{66891FA7-AEC6-4256-8BF7-01F5965D3485}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{66891FA7-AEC6-4256-8BF7-01F5965D3485}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3E0A677D-9F28-4010-87AD-D03C4A84C6DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3E0A677D-9F28-4010-87AD-D03C4A84C6DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E0A677D-9F28-4010-87AD-D03C4A84C6DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
