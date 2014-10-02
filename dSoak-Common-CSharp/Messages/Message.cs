@@ -15,6 +15,11 @@ namespace Messages
     {
         private static Dictionary<string, DataContractJsonSerializer> serializers = null;
 
+        [DataMember]
+        public MessageNumber MessageNr;
+        [DataMember]
+        public MessageNumber ConvId;
+
         public byte[] Encode()
         {
             DataContractJsonSerializer serializer = LookupSerializer(this);

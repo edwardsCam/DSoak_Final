@@ -66,10 +66,6 @@
     <Compile Include="UmbrellaPurchased.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Common\Common.csproj">
-      <Project>{66891fa7-aec6-4256-8bf7-01f5965d3485}</Project>
-      <Name>Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SharedObjects\SharedObjects.csproj">
       <Project>{c3bc84da-4fa3-4b1d-9aac-c1d4ade2effc}</Project>
       <Name>SharedObjects</Name>
