@@ -20,7 +20,10 @@ namespace SharedObjects
         {
             get
             {
-                return new IPEndPoint(LookupAddress(Host), Port);
+                IPEndPoint result = null;
+                if (!string.IsNullOrWhiteSpace(Host))
+                    result = new IPEndPoint(LookupAddress(Host), Port);
+                return result;
             }
             set
             {
@@ -35,10 +38,13 @@ namespace SharedObjects
         public static IPAddress LookupAddress(string host)
         {
             IPAddress result = null;
-            IPAddress[] addressList = Dns.GetHostAddresses(host);
-            for (int i = 0; i < addressList.Length && result == null; i++)
-                if (addressList[i].AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
-                    result = addressList[i];
+            if (!string.IsNullOrWhiteSpace(host))
+            {
+                IPAddress[] addressList = Dns.GetHostAddresses(host);
+                for (int i = 0; i < addressList.Length && result == null; i++)
+                    if (addressList[i].AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        result = addressList[i];
+            }
             return result;
         }
     }

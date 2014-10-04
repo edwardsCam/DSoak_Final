@@ -58,8 +58,9 @@
     <Compile Include="PlayerInfoTester.cs" />
     <Compile Include="UmbrellaTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PublicEndPoint.cs" />
-    <Compile Include="UmbrellaRaising.cs" />
+    <Compile Include="PublicEndPointTester.cs" />
+    <Compile Include="UmbrellaRaisingTester.cs" />
+    <Compile Include="SharedResoureTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharedObjects\SharedObjects.csproj">

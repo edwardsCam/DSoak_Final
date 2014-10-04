@@ -8,9 +8,9 @@ using System.Runtime.Serialization;
 namespace SharedObjects
 {
     [DataContract]
-    class GamePlayerInfo
+    public class GamePlayerInfo
     {
-        public enum StatusCode { InGame, LeftGame, Winner };
+        public enum StatusCode { Unknown=0, InGame=1, LeftGame=2, Winner=3 };
 
         [DataMember]
         public Int16 GameId { get; set; }

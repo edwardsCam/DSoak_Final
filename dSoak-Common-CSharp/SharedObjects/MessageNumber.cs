@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization;
 
-namespace Messages
+namespace SharedObjects
 {
     [DataContract]
     public class MessageNumber :  IComparable
@@ -28,7 +28,7 @@ namespace Messages
         /// Default constructor, used by factory methods (the Create) methods.  It should not be public,
         /// because external object should all use one of the two factor methods. 
         /// </summary>
-        protected MessageNumber() { }
+        public MessageNumber() { }
 
         /// <summary>
         /// Factory method creates and new, unique message number.

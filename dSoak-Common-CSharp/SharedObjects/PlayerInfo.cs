@@ -10,7 +10,7 @@ namespace SharedObjects
     [DataContract]
     public class PlayerInfo
     {
-        public enum StateCode { OnLine, OffLine };
+        public enum StateCode { Unknown=0, OnLine=1, OffLine=2 };
 
         [DataMember]
         public Int32 PlayerId { get; set; }

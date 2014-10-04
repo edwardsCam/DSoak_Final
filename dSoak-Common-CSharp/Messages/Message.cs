@@ -8,33 +8,50 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 
+using SharedObjects;
+
 namespace Messages
 {
     [DataContract]
     public class Message
     {
         private static Dictionary<string, DataContractJsonSerializer> serializers = null;
+        private static bool hasBeenInitialized = false;
 
         [DataMember]
         public MessageNumber MessageNr;
         [DataMember]
         public MessageNumber ConvId;
 
+        public Message()
+        {
+            if (!hasBeenInitialized)
+                Initialize();
+
+            MessageNr = MessageNumber.Create();
+            ConvId = MessageNr;
+        }
+
         public byte[] Encode()
         {
             DataContractJsonSerializer serializer = LookupSerializer(this);
 
             MemoryStream mstream = new MemoryStream();
+            string type = this.GetType().Name + ":";
+            byte[] typeBytes = Encoding.ASCII.GetBytes(type);
+            mstream.Write(typeBytes, 0, typeBytes.Length);
+
             serializer.WriteObject(mstream, this);
             return mstream.ToArray();
         }
 
         public static Message Decode(byte[] bytes)
         {
-            string typeName = ParseTypeName(bytes);
+            MemoryStream mstream = new MemoryStream(bytes);
+
+            string typeName = ParseTypeName(mstream);
             DataContractJsonSerializer serializer = LookupSerializer(typeName);
 
-            MemoryStream mstream = new MemoryStream(bytes);
             Message result = (Message) serializer.ReadObject(mstream);
 
             return result;
@@ -75,13 +92,20 @@ namespace Messages
             return serializers[typeName];
         }
 
-        private static string ParseTypeName(byte[] bytes)
+        private static string ParseTypeName(MemoryStream mstream)
         {
             string result = string.Empty;
-            string tmp = Encoding.ASCII.GetString(bytes);
-            Match match = Regex.Match(tmp, @"\x7B\x22(\w*)\x22");
-            if (match.Success)
-                result = match.Groups[0].Value;
+            byte[] bytes = new byte[mstream.Length - mstream.Position];
+            int index;
+            for (index = 0; index < mstream.Length - mstream.Position; index++)
+            {
+                bytes[index] = (byte) mstream.ReadByte();
+                if (bytes[index] == (int)':')
+                    break;
+            }
+
+            if (index>0)
+                result = Encoding.ASCII.GetString(bytes, 0, index);
             return result;
         }
     }

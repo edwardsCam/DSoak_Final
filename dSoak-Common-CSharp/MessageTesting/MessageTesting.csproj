@@ -51,7 +51,20 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AckTester.cs" />
+    <Compile Include="AliveQueryTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BalloonFilledTester.cs" />
+    <Compile Include="BalloonPurchasedTester.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Messages\Messages.csproj">
+      <Project>{3e0a677d-9f28-4010-87ad-d03c4a84c6db}</Project>
+      <Name>Messages</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharedObjects\SharedObjects.csproj">
+      <Project>{c3bc84da-4fa3-4b1d-9aac-c1d4ade2effc}</Project>
+      <Name>SharedObjects</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

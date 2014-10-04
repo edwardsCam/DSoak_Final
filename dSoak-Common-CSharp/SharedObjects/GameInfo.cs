@@ -10,7 +10,7 @@ namespace SharedObjects
     [DataContract]
     public class GameInfo
     {
-        public enum StatusCode { Avaliable, InProgress, Complete, Cancelled } ;
+        public enum StatusCode { Unknown=0, Avaliable=1, InProgress=2, Complete=3, Cancelled=4 } ;
         [DataMember]
         public Int16 GameId { get; set; }
         [DataMember]
