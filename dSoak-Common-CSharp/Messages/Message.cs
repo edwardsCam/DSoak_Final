@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.IO;
-using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 
@@ -59,27 +55,29 @@ namespace Messages
 
         private static void Initialize()
         {
-            serializers = new Dictionary<string, DataContractJsonSerializer>();
-
-            serializers.Add("Ack", new DataContractJsonSerializer(typeof(Ack)));
-            serializers.Add("AliveQuery", new DataContractJsonSerializer(typeof(AliveQuery)));
-            serializers.Add("BalloonFilled", new DataContractJsonSerializer(typeof(BalloonFilled)));
-            serializers.Add("BalloonPurchased", new DataContractJsonSerializer(typeof(BalloonPurchased)));
-            serializers.Add("BuyBalloon", new DataContractJsonSerializer(typeof(BuyBalloon)));
-            serializers.Add("Continue", new DataContractJsonSerializer(typeof(Continue)));
-            serializers.Add("FillBalloon", new DataContractJsonSerializer(typeof(FillBalloon)));
-            serializers.Add("GameJoined", new DataContractJsonSerializer(typeof(GameJoined)));
-            serializers.Add("GameOver", new DataContractJsonSerializer(typeof(GameOver)));
-            serializers.Add("Hit", new DataContractJsonSerializer(typeof(Hit)));
-            serializers.Add("JoinGame", new DataContractJsonSerializer(typeof(JoinGame)));
-            serializers.Add("LeaveGame", new DataContractJsonSerializer(typeof(LeaveGame)));
-            serializers.Add("Nak", new DataContractJsonSerializer(typeof(Nak)));
-            serializers.Add("RaiseUmbrella", new DataContractJsonSerializer(typeof(RaiseUmbrella)));
-            serializers.Add("SetupStream", new DataContractJsonSerializer(typeof(SetupStream)));
-            serializers.Add("Shutdown", new DataContractJsonSerializer(typeof(Shutdown)));
-            serializers.Add("StopStream", new DataContractJsonSerializer(typeof(StopStream)));
-            serializers.Add("ThrowBalloon", new DataContractJsonSerializer(typeof(ThrowBalloon)));
-            serializers.Add("UmbrellaPurchased", new DataContractJsonSerializer(typeof(UmbrellaPurchased)));
+            serializers = new Dictionary<string, DataContractJsonSerializer>
+            {
+                {"Ack", new DataContractJsonSerializer(typeof (Ack))},
+                {"AliveQuery", new DataContractJsonSerializer(typeof (AliveQuery))},
+                {"BalloonFilled", new DataContractJsonSerializer(typeof (BalloonFilled))},
+                {"BalloonPurchased", new DataContractJsonSerializer(typeof (BalloonPurchased))},
+                {"BuyBalloon", new DataContractJsonSerializer(typeof (BuyBalloon))},
+                {"Continue", new DataContractJsonSerializer(typeof (Continue))},
+                {"FillBalloon", new DataContractJsonSerializer(typeof (FillBalloon))},
+                {"GameData", new DataContractJsonSerializer(typeof(GameData))},
+                {"GameJoined", new DataContractJsonSerializer(typeof (GameJoined))},
+                {"GameOver", new DataContractJsonSerializer(typeof (GameOver))},
+                {"Hit", new DataContractJsonSerializer(typeof (Hit))},
+                {"JoinGame", new DataContractJsonSerializer(typeof (JoinGame))},
+                {"LeaveGame", new DataContractJsonSerializer(typeof (LeaveGame))},
+                {"Nak", new DataContractJsonSerializer(typeof (Nak))},
+                {"RaiseUmbrella", new DataContractJsonSerializer(typeof (RaiseUmbrella))},
+                {"SetupStream", new DataContractJsonSerializer(typeof (SetupStream))},
+                {"Shutdown", new DataContractJsonSerializer(typeof (Shutdown))},
+                {"StopStream", new DataContractJsonSerializer(typeof (StopStream))},
+                {"ThrowBalloon", new DataContractJsonSerializer(typeof (ThrowBalloon))},
+                {"UmbrellaPurchased", new DataContractJsonSerializer(typeof (UmbrellaPurchased))}
+            };
         }
 
         private static DataContractJsonSerializer LookupSerializer(Message message)
