@@ -1,0 +1,24 @@
+package SharedObjectTester;
+
+import static org.junit.Assert.*;
+
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+
+import org.junit.Test;
+
+import SharedObject.SharedResource;
+
+public class SharedResoureTester 
+{
+	@Test
+	public void test_EveryThing() throws NoSuchAlgorithmException, IOException
+	{
+		SharedResource r1 = new SharedResource();
+		
+		assertTrue(r1.Id > 0);
+		assertNotNull(r1.DigitalSignature);
+		assertTrue(r1.DigitalSignature.length > 0);
+	}
+
+}

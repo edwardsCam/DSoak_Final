@@ -1,0 +1,27 @@
+package SharedObjectTester;
+
+import static org.junit.Assert.*;
+
+import java.io.Serializable;
+
+import org.junit.Test;
+
+import SharedObject.GameInfo;
+
+public class GameInfoTester  implements Serializable
+{
+	private static final long serialVersionUID = -1209475923101432431L;
+
+	@Test
+	public void test_EveryThing() 
+	{
+		GameInfo g1 = new GameInfo();
+		assertNull(g1.FlightManagerEP);
+		assertEquals(0, g1.GameId);
+		assertEquals(0, g1.MaxPlayers);
+		System.out.println(g1.Status);
+		assertEquals(GameInfo.StatusCode.Unknow,  g1.Status);
+		
+	}
+
+}

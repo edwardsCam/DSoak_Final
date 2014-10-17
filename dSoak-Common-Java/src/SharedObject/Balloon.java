@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class Balloon extends SharedResource implements Serializable
 {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1750540724293699377L;
 	public short UnitOfWater;
 	
 	public Balloon() throws NoSuchAlgorithmException, IOException {

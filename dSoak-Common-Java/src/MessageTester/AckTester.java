@@ -12,12 +12,11 @@ public class AckTester
 	public void test_EveryThings() throws IOException, ClassNotFoundException 
 	{
 		Ack ack = new Ack();
-		ack.x = 10;
-		ack.message = "ack message tester";
+		assertNotNull(ack);
+		
 		byte[] bytes = ack.Encode();
 		
 		Ack ack2 = (Ack) Message.Decode(bytes);
-		assertEquals(ack.x, ack2.x);
-		assertTrue(ack.message.equals(ack2.message));
+		assertNotNull(ack2);
 	}
 }

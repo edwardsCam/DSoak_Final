@@ -10,7 +10,7 @@ public class MessageNumber implements Comparable<Object>, Serializable
     public short ProcessId;
     public short SeqNumber;
  
-    protected MessageNumber() { }
+    public MessageNumber() { }
     
     public static MessageNumber Create() 
     {

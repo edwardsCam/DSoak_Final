@@ -1,0 +1,17 @@
+package SharedObjectTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import SharedObject.MessageNumber;
+
+public class MessageNumberTester {
+
+	@Test
+	public void test_EveryThing()
+	{
+		MessageNumber.LocalProcessId =100;
+	}
+
+}

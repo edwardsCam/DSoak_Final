@@ -1,0 +1,15 @@
+package SharedObjectTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class PublicEndPointTester {
+
+	@Test
+	public void test_EveryThing() 
+	{
+		
+	}
+
+}

@@ -2,7 +2,6 @@
 <qualifiedTypeNameHistroy>
 <fullyQualifiedTypeName name="MessageTester.ThrowBalloonTester"/>
 <fullyQualifiedTypeName name="Messages.ThrowBalloon"/>
-<fullyQualifiedTypeName name="SharedObject.Balloon"/>
 <fullyQualifiedTypeName name="MessageTester.NakTester"/>
 <fullyQualifiedTypeName name="Messages.Nak"/>
 <fullyQualifiedTypeName name="MessageTester.LeaveGameTester"/>
@@ -10,11 +9,25 @@
 <fullyQualifiedTypeName name="MessageTester.JoinGameTester"/>
 <fullyQualifiedTypeName name="Messages.JoinGame"/>
 <fullyQualifiedTypeName name="SharedObject.BitConverter"/>
-<fullyQualifiedTypeName name="java.io.Serializable"/>
 <fullyQualifiedTypeName name="MessageTester.GameOverTester"/>
-<fullyQualifiedTypeName name="SharedObject.PlayerInfo"/>
-<fullyQualifiedTypeName name="SharedObject.PublicEndPoint"/>
 <fullyQualifiedTypeName name="Messages.Message"/>
 <fullyQualifiedTypeName name="Messages.GameOver"/>
+<fullyQualifiedTypeName name="SharedObject.Balloon"/>
+<fullyQualifiedTypeName name="SharedObjectTester.GameInfoTester"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="SharedObject.GameInfo"/>
+<fullyQualifiedTypeName name="SharedObject.GameInfo.StatusCode"/>
+<fullyQualifiedTypeName name="SharedObjectTester.GamePlayerInfoTester"/>
+<fullyQualifiedTypeName name="SharedObject.GamePlayerInfo"/>
+<fullyQualifiedTypeName name="SharedObject.GamePlayerInfo.StatusCode"/>
 <fullyQualifiedTypeName name="SharedObject.MessageNumber"/>
+<fullyQualifiedTypeName name="SharedObject.Penny"/>
+<fullyQualifiedTypeName name="SharedObject.PlayerInfo"/>
+<fullyQualifiedTypeName name="SharedObject.PlayerInfo.StateCode"/>
+<fullyQualifiedTypeName name="SharedObject.PublicEndPoint"/>
+<fullyQualifiedTypeName name="SharedObject.SharedResource"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="SharedObject.UmbrellaRaising"/>
+<fullyQualifiedTypeName name="SharedObject.Umbrella"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
 </qualifiedTypeNameHistroy>

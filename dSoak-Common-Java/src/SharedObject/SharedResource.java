@@ -12,19 +12,40 @@ public class SharedResource implements Serializable
 	private static final long serialVersionUID = 1L;
 	private static short nextId = 0;
 	private static byte[] nounce;
-	private static Random randomizer;
+	private static Random randomizer = new Random();
 	private static MessageDigest digest;
-      
+	private static boolean hasBeenInitialized = false;
 	public short Id;
 	public byte[] DigitalSignature;
 	
 	public SharedResource() throws NoSuchAlgorithmException, IOException
 	{
-		randomizer = new Random();
+		if (!hasBeenInitialized)
+			 Initialize();
+		
 		Id = GetNextId();
 		Sign();
 	}
       
+	 public boolean IsValid() throws IOException
+      {
+          boolean result = false;
+          if (DigitalSignature != null)
+          {
+        	  byte[] tmpSignature = ComputeDigitalSignature(new ByteArrayOutputStream());
+        	  if ((DigitalSignature.length == tmpSignature.length))
+        		  result = true;
+        	  else
+        		  result = false;
+        	  
+        	  for (int i = 0; i < DigitalSignature.length && result; i++)
+        		  if (DigitalSignature[i] != tmpSignature[i])
+        			  result = false;
+           }
+          return result;
+              
+      }
+
 	private static void Initialize() throws NoSuchAlgorithmException
 	{
 		digest = MessageDigest.getInstance("MD5");

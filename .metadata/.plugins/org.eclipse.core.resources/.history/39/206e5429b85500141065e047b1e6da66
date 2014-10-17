@@ -1,0 +1,16 @@
+package SharedObjectTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class GamePlayerInfoTester 
+{
+	@Test
+	public void test_EveryThing()
+	{
+		GamePlayerInfo gp1 = new GamePlayerInfo();
+		
+	}
+
+}

@@ -1,0 +1,19 @@
+package SharedObjectTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import SharedObject.GameInfo;
+
+public class GameInfoTester 
+{
+	@Test
+	public void test_EveryThing() 
+	{
+		GameInfo g1 = new GameInfo();
+		assertNull(g1.FlightManagerEP);
+		
+	}
+
+}

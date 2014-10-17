@@ -1,0 +1,17 @@
+package SharedObjectTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import SharedObject.PlayerInfo;
+
+public class PlayerInfoTester {
+
+	@Test
+	public void test_EveryThing()
+	{
+		PlayerInfo p1 = new PlayerInfo()
+	}
+
+}

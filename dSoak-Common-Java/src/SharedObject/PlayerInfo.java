@@ -9,4 +9,18 @@ public class PlayerInfo implements Serializable
     public int PlayerId;
     public PublicEndPoint EndPoint;
     public StateCode Status;
+    public enum StatusCode
+   	{
+   		UNKNOWN((short)0),
+   		ONLINE((short)1), 
+   		OFFLINE((short)2); 
+   		
+   		short value;
+   		StatusCode(short va) { this.value = va;	}
+   		
+   		public short getValue()
+   		{
+   			return value;
+   		}
+   	}
 }

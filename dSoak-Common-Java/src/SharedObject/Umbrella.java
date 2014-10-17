@@ -8,14 +8,7 @@ public class Umbrella extends SharedResource implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 	 
-	int x;
-	
-	public Umbrella(int x) throws NoSuchAlgorithmException, IOException{
+	public Umbrella() throws NoSuchAlgorithmException, IOException{
 		super();
-		this.x = x;
-	}
-	
-	public int getX() {
-		return x;
 	}
 }
