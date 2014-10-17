@@ -1,2 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="MessageTester.ThrowBalloonTester"/>
+<fullyQualifiedTypeName name="Messages.ThrowBalloon"/>
+<fullyQualifiedTypeName name="SharedObject.Balloon"/>
+<fullyQualifiedTypeName name="MessageTester.NakTester"/>
+<fullyQualifiedTypeName name="Messages.Nak"/>
+<fullyQualifiedTypeName name="MessageTester.LeaveGameTester"/>
+<fullyQualifiedTypeName name="Messages.LeaveGame"/>
+<fullyQualifiedTypeName name="MessageTester.JoinGameTester"/>
+<fullyQualifiedTypeName name="Messages.JoinGame"/>
+<fullyQualifiedTypeName name="SharedObject.BitConverter"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="MessageTester.GameOverTester"/>
+<fullyQualifiedTypeName name="SharedObject.PlayerInfo"/>
+<fullyQualifiedTypeName name="SharedObject.PublicEndPoint"/>
+<fullyQualifiedTypeName name="Messages.Message"/>
+<fullyQualifiedTypeName name="Messages.GameOver"/>
+<fullyQualifiedTypeName name="SharedObject.MessageNumber"/>
+</qualifiedTypeNameHistroy>

@@ -7,7 +7,8 @@ import java.net.UnknownHostException;
 
 public class IPEndPoint implements Serializable
 {
-	private static final long SerialVersionUID = -1455333421930468998L;
+	private static final long serialVersionUID = 4448169691526934231L;
+	
 	public InetAddress Address;
 	public int Port;
 	public static final int MinPort = 0, MaxPort = 65535;

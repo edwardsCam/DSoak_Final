@@ -7,7 +7,8 @@ import SharedObject.Penny;
 
 public class GameJoined extends Message implements Serializable
 {
-	private static final long SerialVersionUID = -1455333437430469100L;
+	private static final long serialVersionUID = -7287080222819817227L;
+	
 	public short GameId;
 	public List<Penny> Pennies;
 }

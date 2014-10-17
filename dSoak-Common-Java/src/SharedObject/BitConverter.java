@@ -1,12 +1,15 @@
 package SharedObject;
 
+import java.io.Serializable;
 import java.lang.Exception;
 
 // This class is because Java has no bitConverter class.
 // http://www.nextgenupdate.com/forums/computer-programming/394645-java-bitconverter-c.html
-public class BitConverter {
+public class BitConverter implements Serializable 
+{
 
-    public static final boolean IsLittleEndian = false;
+	private static final long serialVersionUID = 559539043095715455L;
+	public static final boolean IsLittleEndian = false;
 
     public static byte[] getBytes(boolean x) {
         return new byte[]{

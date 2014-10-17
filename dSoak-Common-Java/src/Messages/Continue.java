@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Continue extends Message implements Serializable
 {
-	private static final long SerialVersionUID = -1455333437430461100L;
+	private static final long serialVersionUID = 4096127881936671018L;
+	
 	public short MissingReplyDeqNr;
 }

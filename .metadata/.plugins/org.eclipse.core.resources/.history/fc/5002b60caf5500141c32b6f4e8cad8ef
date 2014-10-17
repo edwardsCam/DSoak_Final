@@ -1,0 +1,20 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import Messages.GameOver;
+import SharedObject.PlayerInfo;
+
+public class GameOverTester {
+
+	@Test
+	public void test_EveryThings()
+	{
+		GameOver gameOver = new GameOver();
+		gameOver.GameId  = (short)10;
+		gameOver.Winner = new PlayerInfo();
+	}
+
+}

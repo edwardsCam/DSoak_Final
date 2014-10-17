@@ -1,0 +1,28 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import Messages.GameOver;
+import SharedObject.PlayerInfo;
+import SharedObject.PublicEndPoint;
+
+public class GameOverTester {
+
+	@Test
+	public void test_EveryThings()
+	{
+		GameOver gameOver = new GameOver();
+		PublicEndPoint ep = new PublicEndPoint();
+		ep.Host = "127.0.0.1";
+		ep.Port = 1010;
+		PlayerInfo winer = new PlayerInfo();
+		winer.EndPoint = ep;
+		
+		gameOver.GameId  = (short)10;
+		gameOver.Winner = winer;
+		
+	}
+
+}

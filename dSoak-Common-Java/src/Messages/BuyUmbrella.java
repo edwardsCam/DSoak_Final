@@ -4,5 +4,6 @@ import java.io.Serializable;
 
 public class BuyUmbrella extends ResourceRequest implements Serializable
 {
-	private static final long SerialVersionUID = -1455793437430468800L;
+	private static final long serialVersionUID = 3641872652293327980L;
+	
 }

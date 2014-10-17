@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class GameInfo implements Serializable
 {
-	private static final long SerialVersionUID = -1455876467430468998L;
+	private static final long serialVersionUID = 1L;
 	public short GameId;
     public PublicEndPoint FlightManagerEP;
     public StatusCode Status;
@@ -14,8 +14,6 @@ public class GameInfo implements Serializable
 	{
 		AVAILABLE, INPROGRESS, COMPLETE, CANCLED; 
 	
-		StatusCode() {
-		
-		}
+		StatusCode() {	}
 	}
 }

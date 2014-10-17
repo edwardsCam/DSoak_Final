@@ -5,6 +5,7 @@ import SharedObject.*;
 
 public class FillBalloon extends ResourceRequest implements Serializable
 {
-	private static final long SerialVersionUID = -1451233437430468800L;
+	private static final long serialVersionUID = -6539311549193170393L;
+	
 	public Balloon Balloon;
 }

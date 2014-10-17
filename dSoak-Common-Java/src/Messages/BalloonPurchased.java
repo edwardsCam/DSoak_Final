@@ -5,6 +5,7 @@ import SharedObject.*;
 
 public class BalloonPurchased extends Message implements Serializable
 {
-	private static final long SerialVersionUID = -1455333437430468120L;
+	private static final long serialVersionUID = -7580640607652110571L;
+	
 	public Balloon Balloon;
 }

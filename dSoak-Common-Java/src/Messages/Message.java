@@ -2,23 +2,28 @@ package Messages;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import SharedObject.MessageNumber;
 
 public class Message implements Serializable
 {
-	private static final long SerialVersionUID = -1455333437430468800L;
+	private static final long serialVersionUID = 2731655107048353376L;
+	
 	private byte[] bytes = null;
-	// base class for all messages
+	public MessageNumber MessageNr;
+	public MessageNumber ConvId;
+	
+	public Message() 
+	{
+		MessageNr =MessageNumber.Create();
+		ConvId = MessageNr;
+	}
+	
 	public byte[] Encode()
 	{
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();

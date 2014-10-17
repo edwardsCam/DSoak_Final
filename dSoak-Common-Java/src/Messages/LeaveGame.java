@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class LeaveGame extends Message implements Serializable
 {
-	private static final long SerialVersionUID = -1455339437430468800L;
+	private static final long serialVersionUID = 7360788984493439522L;
+	
 	public short GameId;
 }

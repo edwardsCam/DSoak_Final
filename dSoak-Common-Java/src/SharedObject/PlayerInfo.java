@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class PlayerInfo implements Serializable
 {
-	private static final long SerialVersionUID = -1455333467430654800L; 
+	private static final long serialVersionUID = 1L;
 	public enum StateCode { OnLine, OffLine };
     public int PlayerId;
     public PublicEndPoint EndPoint;

@@ -1,14 +1,24 @@
 package SharedObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 
 public class Balloon extends SharedResource implements Serializable
 {
-	private static final long SerialVersionUID = -1455333467430468998L;
+	private static final long serialVersionUID = 1L;
+	public short UnitOfWater;
+	
 	public Balloon() throws NoSuchAlgorithmException, IOException {
 		super();
-		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	protected void AddOwnDataToStream(ByteArrayOutputStream mStream) throws IOException 
+	{
+		byte[] tmp = BitConverter.getBytes(UnitOfWater);
+		mStream.write(tmp, 0, tmp.length);
+		super.AddOwnDataToStream(mStream);
 	}
 }

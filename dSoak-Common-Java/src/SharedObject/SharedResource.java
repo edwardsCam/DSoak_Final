@@ -2,7 +2,6 @@ package SharedObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -10,7 +9,7 @@ import java.util.Random;
 
 public class SharedResource implements Serializable
 {
-	private static final long SerialVersionUID = -1455333467430468340L;  
+	private static final long serialVersionUID = 1L;
 	private static short nextId = 0;
 	private static byte[] nounce;
 	private static Random randomizer;

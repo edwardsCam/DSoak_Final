@@ -5,10 +5,9 @@ import org.junit.Test;
 import Messages.Ack;
 import Messages.Message;
 import static org.junit.Assert.*;
-import org.junit.Test;
 
-public class AckTester {
-
+public class AckTester 
+{
 	@Test
 	public void test_EveryThings() throws IOException, ClassNotFoundException 
 	{

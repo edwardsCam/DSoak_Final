@@ -6,7 +6,8 @@ import SharedObject.*;
 
 public class UmbrellaPurchased extends Message implements Serializable
 {
-	private static final long SerialVersionUID = -1455333467430468800L;
+	private static final long serialVersionUID = -1092915128222526056L;
+
 	public Umbrella Umbrella;
 	
 	public UmbrellaPurchased(Umbrella ump) {

@@ -2,9 +2,9 @@ package SharedObject;
 
 import java.io.Serializable;
 
-public class MessageNumber implements Comparable, Serializable
+public class MessageNumber implements Comparable<Object>, Serializable
 {
-	private static final long SerialVersionUID = -1455333467491068998L;
+	private static final long serialVersionUID = 1L;
 	private static short nextSeqNumber = 1;             
     public static short LocalProcessId;
     public short ProcessId;

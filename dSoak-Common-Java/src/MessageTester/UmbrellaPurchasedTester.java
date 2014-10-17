@@ -1,19 +1,15 @@
 package MessageTester;
 
 import static org.junit.Assert.*;
-
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-
 import org.junit.Test;
-
-import Messages.Ack;
 import Messages.Message;
 import Messages.UmbrellaPurchased;
 import SharedObject.Umbrella;
 
-public class UmbrellaPurchasedTester {
-
+public class UmbrellaPurchasedTester 
+{
 	@Test
 	public void test_EveryThings() throws ClassNotFoundException, NoSuchAlgorithmException, IOException
 	{

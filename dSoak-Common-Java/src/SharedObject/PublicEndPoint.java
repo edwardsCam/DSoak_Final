@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 
 public class PublicEndPoint implements Serializable
 {
-	private static final long SerialVersionUID = -145514789630468800L;
+	private static final long serialVersionUID = 1L;
 	public String Host;
 	public int Port;
 	
