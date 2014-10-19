@@ -2,11 +2,6 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-
 import org.junit.Test;
 
 import Messages.GameOver;
@@ -18,7 +13,7 @@ import SharedObject.PublicEndPoint;
 public class GameOverTester {
 
 	@Test
-	public void test_EveryThings() throws ClassNotFoundException, IOException
+	public void test_EveryThings() throws ClassNotFoundException
 	{
 		GameOver gameOver = new GameOver();
 		MessageNumber msgN =  MessageNumber.Create();
@@ -34,9 +29,6 @@ public class GameOverTester {
 		gameOver.Winner = winer;
 		
 		byte[] bytes = gameOver.Encode();
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
 		
 		GameOver msg = (GameOver)Message.Decode(bytes);
 		

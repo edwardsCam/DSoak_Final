@@ -2,6 +2,11 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+
 import org.junit.Test;
 
 import Messages.JoinGame;
@@ -12,7 +17,7 @@ import SharedObject.PublicEndPoint;
 public class JoinGameTester {
 
 	@Test
-	public void test_Everythings() throws ClassNotFoundException 
+	public void test_Everythings() throws ClassNotFoundException, IOException 
 	{
 		JoinGame msg1 = new JoinGame();
 		msg1.GameId = 10;
@@ -24,6 +29,9 @@ public class JoinGameTester {
 		msg1.Player = info;
 		
 		byte[] bytes = msg1.Encode();
+		InputStream myInputStream = new ByteArrayInputStream(bytes);
+		ObjectInputStream oin = new ObjectInputStream(myInputStream);
+		String type = (String) oin.readObject();
 		
 		JoinGame msg2 = (JoinGame) Message.Decode(bytes);
 		
