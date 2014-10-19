@@ -40,9 +40,11 @@ namespace MessageTesting
             Message msg3 = Message.Decode(bytes);
             Assert.IsTrue(msg3 is BalloonPurchased);
             BalloonPurchased msg4 = msg3 as BalloonPurchased;
-            Assert.AreEqual(msg4.MessageNr, msg4.MessageNr);
+
+            Assert.AreEqual(msg4.MessageNr, msg3.MessageNr);
             Assert.AreEqual(msg2.ConvId, msg4.ConvId);
             Assert.AreEqual(msg2.Balloon.Id, msg4.Balloon.Id);
+
         }
     }
 }

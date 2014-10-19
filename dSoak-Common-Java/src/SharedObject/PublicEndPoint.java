@@ -13,7 +13,10 @@ public class PublicEndPoint implements Serializable
 	
 	public IPEndPoint GetIPEndPoint() throws UnknownHostException
     {
-        return new IPEndPoint(LookupAddress(Host), Port);
+		   IPEndPoint result = null;
+           if (Host != null)
+               result = new IPEndPoint(LookupAddress(Host), Port);
+           return result;
     }
 	
 	public void SettIPEndPoint(IPEndPoint value)

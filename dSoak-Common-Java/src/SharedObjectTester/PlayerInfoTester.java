@@ -26,10 +26,10 @@ public class PlayerInfoTester {
 		PlayerInfo p2 = new PlayerInfo();
 		p2.EndPoint = ep1;
 		p2.PlayerId = 101;
-		p2.Status = StateCode.OffLine;
+		p2.Status = StateCode.OFFLINE;
 		
 		assertEquals(101, p2.PlayerId);
 		assertTrue(ep1.Host.equals(p2.EndPoint.Host));
-		assertEquals(StateCode.OffLine, p2.Status);
+		assertEquals(StateCode.OFFLINE, p2.Status);
 	}
 }

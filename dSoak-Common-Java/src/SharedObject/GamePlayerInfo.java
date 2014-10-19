@@ -6,7 +6,21 @@ public class GamePlayerInfo implements Serializable
 {
 	private static final long serialVersionUID = 1951609679759293604L;
 	
-	public enum StatusCode { InGame, LeftGame, Winner };
+	public enum StatusCode
+	{ 
+		UNKNOWN((short)0),
+		INGAME((short)1),
+		LEFTGAME((short)2),
+		WINNER((short)3);
+		short value;
+		
+		StatusCode(short va) { this.value = va;	}
+		
+		public short getValue()
+		{
+			return value;
+		}
+	};
 	
 	public short GameId; 
 	public PlayerInfo Player;

@@ -1,0 +1,29 @@
+package MessageTester;
+
+import java.io.IOException;
+
+import org.junit.Test;
+
+import Messages.Ack;
+import Messages.Message;
+import SharedObject.MessageNumber;
+import static org.junit.Assert.*;
+
+public class AckTester 
+{
+	@Test
+	public void test_EveryThings() throws IOException, ClassNotFoundException 
+	{
+		MessageNumber.LocalProcessId = 100;
+		
+		Ack ack = new Ack();
+		assertNotNull(ack);
+		assertTrue(ack.MessageNr.SeqNumber > 0);
+		assertEquals(ack.MessageNr, ack.ConvId);
+		
+		byte[] bytes = ack.Encode();
+		
+		Ack ack2 = (Ack) Message.Decode(bytes);
+		assertNotNull(ack2);
+	}
+}

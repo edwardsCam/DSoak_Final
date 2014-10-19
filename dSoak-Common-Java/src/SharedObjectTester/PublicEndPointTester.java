@@ -17,7 +17,9 @@ public class PublicEndPointTester {
 		
 		assertNull(ep1.Host);
 		assertEquals(0, ep1.Port);
-		assertNotNull(ep1.GetIPEndPoint());
+		assertNotNull(ep1.Port);
+		assertNull(ep1.Host);
+		assertNull(ep1.GetIPEndPoint());
 		
 		PublicEndPoint ep2 = new PublicEndPoint();
 		ep2.Host =  "swcwin.serv.usu.edu";

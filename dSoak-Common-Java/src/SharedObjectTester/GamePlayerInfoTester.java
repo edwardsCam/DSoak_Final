@@ -25,16 +25,16 @@ public class GamePlayerInfoTester
 		PlayerInfo pInfo = new PlayerInfo();
 		pInfo.EndPoint = ep1;
 		pInfo.PlayerId = 100;
-		pInfo.Status =  PlayerInfo.StateCode.OnLine;
+		pInfo.Status =  PlayerInfo.StateCode.ONLINE;
 		
 		gp1 = new GamePlayerInfo();
 		gp1.GameId = 10;
 		gp1.Player = pInfo;
-		gp1.Status = GamePlayerInfo.StatusCode.Winner;
+		gp1.Status = GamePlayerInfo.StatusCode.WINNER;
 		
 		assertEquals(10, gp1.GameId);
 		assertEquals(pInfo, gp1.Player);
-		assertEquals(GamePlayerInfo.StatusCode.Winner, gp1.Status);
+		assertEquals(GamePlayerInfo.StatusCode.WINNER, gp1.Status);
 		
 	}
 
