@@ -1,0 +1,29 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import Messages.BalloonFilled;
+import SharedObject.Balloon;
+import SharedObject.MessageNumber;
+
+public class BalloonFilledTester {
+
+	@Test
+	public void test_EveryThing()
+	{
+		MessageNumber.LocalProcessId = 100;
+		
+		BalloonFilled msg1 = new BalloonFilled();
+		assertNotNull(msg1.MessageNr);
+		assertEquals(100, msg1.MessageNr.ProcessId);
+		assertTrue(msg1.MessageNr.SeqNumber > 0);
+		assertEquals(msg1.MessageNr, msg1.ConvId);
+		
+		Balloon b = new Balloon();
+		
+		
+	}
+
+}

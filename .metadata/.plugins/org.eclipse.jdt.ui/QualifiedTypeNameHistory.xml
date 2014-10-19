@@ -29,9 +29,13 @@
 <fullyQualifiedTypeName name="java.util.Random"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="Messages.Ack"/>
-<fullyQualifiedTypeName name="SharedObject.MessageNumber"/>
-<fullyQualifiedTypeName name="MessageTester.BalloonPurchasedTester"/>
-<fullyQualifiedTypeName name="SharedObject.Balloon"/>
-<fullyQualifiedTypeName name="Messages.Message"/>
 <fullyQualifiedTypeName name="Messages.BalloonPurchased"/>
+<fullyQualifiedTypeName name="MessageTester.BalloonFilledTester"/>
+<fullyQualifiedTypeName name="SharedObject.Balloon"/>
+<fullyQualifiedTypeName name="Messages.BalloonFilled"/>
+<fullyQualifiedTypeName name="MessageTester.BalloonPurchasedTester"/>
+<fullyQualifiedTypeName name="MessageTester.AliveQueryTester"/>
+<fullyQualifiedTypeName name="SharedObject.MessageNumber"/>
+<fullyQualifiedTypeName name="Messages.Message"/>
+<fullyQualifiedTypeName name="Messages.AliveQuery"/>
 </qualifiedTypeNameHistroy>
