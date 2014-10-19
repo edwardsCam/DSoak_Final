@@ -38,4 +38,7 @@
 <fullyQualifiedTypeName name="SharedObject.MessageNumber"/>
 <fullyQualifiedTypeName name="Messages.Message"/>
 <fullyQualifiedTypeName name="Messages.AliveQuery"/>
+<fullyQualifiedTypeName name="java.io.ByteArrayInputStream"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
 </qualifiedTypeNameHistroy>

@@ -50,7 +50,7 @@ public class BalloonPurchasedTester
 		byte[] bytes = msg2.Encode();
 		InputStream myInputStream = new ByteArrayInputStream(bytes);
 		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject(); // message type
+		String type = (String) oin.readObject();
 		
 		BalloonPurchased msg3 = (BalloonPurchased) Message.Decode(bytes);
 		

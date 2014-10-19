@@ -3,7 +3,6 @@ package MessageTester;
 import static org.junit.Assert.*;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 
@@ -16,7 +15,7 @@ import SharedObject.MessageNumber;
 public class AliveQueryTester {
 
 	@Test
-	public void test_EveryThing() throws ClassNotFoundException, IOException 
+	public void test_EveryThing() throws ClassNotFoundException 
 	{
 		MessageNumber.LocalProcessId = 100;
 		
@@ -36,8 +35,7 @@ public class AliveQueryTester {
 		byte[] bytes = msg2.Encode();
 		InputStream myInputStream = new ByteArrayInputStream(bytes);
 		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
-		
+		String type = oin.readUTF();
 		Message msg3 = Message.Decode(bytes);
 		
 		assertTrue(msg3 instanceof AliveQuery);

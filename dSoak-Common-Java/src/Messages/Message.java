@@ -32,7 +32,7 @@ public class Message implements Serializable
 		try
 		{
 			out = new ObjectOutputStream(bos);
-			String type = this.getClass().getSimpleName() + ":";
+			String type = this.getClass().getSimpleName() + ":"; // get class name 
 			out.writeObject(type); // write out message type ended with : to ObjectOutput
 			out.writeObject(this); // write out the object itself to ObjectOutput
 			out.flush();

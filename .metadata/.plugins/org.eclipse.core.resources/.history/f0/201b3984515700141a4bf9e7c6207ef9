@@ -12,8 +12,8 @@ import Messages.Message;
 import SharedObject.Balloon;
 import SharedObject.MessageNumber;
 
-public class BalloonPurchasedTester {
-
+public class BalloonPurchasedTester
+{
 	@Test
 	public void test_EveryThing() throws NoSuchAlgorithmException, IOException, ClassNotFoundException
 	{
@@ -22,16 +22,14 @@ public class BalloonPurchasedTester {
 		BalloonPurchased msg1 = new BalloonPurchased();
 		assertNotNull(msg1.MessageNr);
 		assertNotNull(msg1.ConvId);
-		
-		assertEquals(100, msg1.MessageNr.ProcessId);
-		assertEquals(1, msg1.MessageNr.SeqNumber);
-		assertEquals(100, msg1.ConvId.ProcessId);
-		assertEquals(1, msg1.ConvId.SeqNumber);
-		
-		assertEquals(msg1.MessageNr, msg1.ConvId);
 		assertTrue(msg1.MessageNr.SeqNumber > 0);
+		assertEquals(msg1.MessageNr, msg1.ConvId);
+		assertEquals(100, msg1.MessageNr.ProcessId);
+		assertEquals(100, msg1.ConvId.ProcessId);
 		
 		Balloon b = new Balloon();
+		b.Id = 10;
+		b.UnitOfWater = 5;
 		
 		BalloonPurchased msg2 = new BalloonPurchased();
 		msg2.ConvId = msg1.ConvId;
@@ -43,21 +41,27 @@ public class BalloonPurchasedTester {
 		assertEquals(msg1.ConvId, msg2.ConvId);
 		assertNotNull(msg2.Balloon);
 		assertSame(b, msg2.Balloon);
+		assertEquals(5, msg2.Balloon.UnitOfWater);
+		assertEquals(10, msg2.Balloon.Id);
 		
 		byte[] bytes = msg2.Encode();
-		//String str = 
-		Message msg3 = (BalloonPurchased) Message.Decode(bytes);
+		 
+		BalloonPurchased msg3 = (BalloonPurchased) Message.Decode(bytes);
 		
 		assertTrue(msg3 instanceof BalloonPurchased);
+		assertEquals(msg2.Balloon.UnitOfWater, msg3.Balloon.UnitOfWater);
+		assertEquals(msg2.ConvId.ProcessId, msg3.ConvId.ProcessId);
+		assertEquals(msg2.ConvId.SeqNumber, msg3.ConvId.SeqNumber);
+		assertEquals(msg2.MessageNr.ProcessId, msg3.MessageNr.ProcessId);
+		assertEquals(msg2.MessageNr.SeqNumber, msg3.MessageNr.SeqNumber);
 		
 		BalloonPurchased msg4 = (BalloonPurchased) msg3;
+		
 		assertEquals(msg4.MessageNr, msg3.MessageNr);
-		assertEquals(msg4.ConvId, msg3.ConvId);
+		assertEquals(msg1.ConvId.ProcessId, msg4.ConvId.ProcessId);
 		assertEquals(msg2.Balloon.Id, msg4.Balloon.Id);
 		
-		
-		  
-		
+		assertEquals(msg2.ConvId.SeqNumber, msg4.ConvId.SeqNumber);
+		assertEquals(msg2.ConvId.ProcessId, msg4.ConvId.ProcessId);
 	}
-
 }

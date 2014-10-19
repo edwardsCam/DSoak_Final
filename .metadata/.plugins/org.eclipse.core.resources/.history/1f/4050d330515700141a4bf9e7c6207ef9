@@ -36,7 +36,7 @@ public class AliveQueryTester {
 		byte[] bytes = msg2.Encode();
 		InputStream myInputStream = new ByteArrayInputStream(bytes);
 		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
+		String type = oin.readObject();
 		
 		Message msg3 = Message.Decode(bytes);
 		
