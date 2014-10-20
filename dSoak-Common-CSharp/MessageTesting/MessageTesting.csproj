@@ -55,6 +55,22 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BalloonFilledTester.cs" />
     <Compile Include="BalloonPurchasedTester.cs" />
+    <Compile Include="BuyBalloonTester.cs" />
+    <Compile Include="BuyUmbrellaTester.cs" />
+    <Compile Include="ContinueTester.cs" />
+    <Compile Include="FillBalloonTester.cs" />
+    <Compile Include="GameDataTester.cs" />
+    <Compile Include="GameJoinedTester.cs" />
+    <Compile Include="HitTester.cs" />
+    <Compile Include="JoinGameTester.cs" />
+    <Compile Include="LeaveGameTester.cs" />
+    <Compile Include="NakTester.cs" />
+    <Compile Include="RaiseUmbrellaTester.cs" />
+    <Compile Include="SetupStreamTester.cs" />
+    <Compile Include="ShutdownTester.cs" />
+    <Compile Include="StopStreamTester.cs" />
+    <Compile Include="ThrowBalloonTester.cs" />
+    <Compile Include="UmbrellaPurchasedTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Messages\Messages.csproj">
