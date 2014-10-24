@@ -13,7 +13,7 @@ namespace SharedObjectTesting
         public void GameInfo_TestEverything()
         {
             GameInfo g1 = new GameInfo();
-            Assert.IsNull(g1.FlightManagerEP);
+            Assert.AreEqual(null, g1.FlightManagerEP);
             Assert.AreEqual(0, g1.GameId);
             Assert.AreEqual(0, g1.MaxPlayers);
             Assert.AreEqual(GameInfo.StatusCode.Unknown, g1.Status);

@@ -1,6 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.IO;
+using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 
@@ -48,7 +52,7 @@ namespace Messages
             string typeName = ParseTypeName(mstream);
             DataContractJsonSerializer serializer = LookupSerializer(typeName);
 
-            Message result = (Message) serializer.ReadObject(mstream);
+            Message result = (Message)serializer.ReadObject(mstream);
 
             return result;
         }
@@ -62,6 +66,7 @@ namespace Messages
                 {"BalloonFilled", new DataContractJsonSerializer(typeof (BalloonFilled))},
                 {"BalloonPurchased", new DataContractJsonSerializer(typeof (BalloonPurchased))},
                 {"BuyBalloon", new DataContractJsonSerializer(typeof (BuyBalloon))},
+                {"BuyUmbrella", new DataContractJsonSerializer(typeof (BuyUmbrella))},
                 {"Continue", new DataContractJsonSerializer(typeof (Continue))},
                 {"FillBalloon", new DataContractJsonSerializer(typeof (FillBalloon))},
                 {"GameData", new DataContractJsonSerializer(typeof(GameData))},
@@ -97,12 +102,12 @@ namespace Messages
             int index;
             for (index = 0; index < mstream.Length - mstream.Position; index++)
             {
-                bytes[index] = (byte) mstream.ReadByte();
+                bytes[index] = (byte)mstream.ReadByte();
                 if (bytes[index] == (int)':')
                     break;
             }
 
-            if (index>0)
+            if (index > 0)
                 result = Encoding.ASCII.GetString(bytes, 0, index);
             return result;
         }

@@ -41,7 +41,7 @@ namespace MessageTesting
             Message msg3 = Message.Decode(bytes);
             Assert.IsTrue(msg3 is AliveQuery);
             AliveQuery msg4 = msg3 as AliveQuery;
-            Assert.AreEqual(msg4.MessageNr, msg4.MessageNr);
+            Assert.AreEqual(msg2.MessageNr, msg4.MessageNr);
             Assert.AreEqual(msg2.ConvId, msg4.ConvId);
 
         }
