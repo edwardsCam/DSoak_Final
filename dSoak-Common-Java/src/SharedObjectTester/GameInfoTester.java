@@ -17,7 +17,7 @@ public class GameInfoTester
 	{
 		GameInfo g1 = new GameInfo();
 		
-		assertNull(g1.FlightManagerEP);
+		assertEquals(null, g1.FlightManagerEP);
 		assertEquals(0, g1.GameId);
 		assertEquals(0, g1.MaxPlayers);
 		assertNull(g1.Status);

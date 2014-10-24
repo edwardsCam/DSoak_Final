@@ -1,0 +1,60 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+
+import org.junit.Test;
+
+import Messages.JoinGame;
+import Messages.Message;
+import SharedObject.MessageNumber;
+import SharedObject.PlayerInfo;
+import SharedObject.PublicEndPoint;
+
+public class JoinGameTester {
+
+	@Test
+	public void test_Everythings() throws ClassNotFoundException, IOException 
+	{
+		MessageNumber.LocalProcessId = 100;
+		
+		JoinGame msg1 = new JoinGame();
+		assertNotNull(msg1.MessageNr);
+		assertEquals(100, msg1.MessageNr.ProcessId);
+		assertTrue(msg1.MessageNr.SeqNumber > 0);
+		assertEquals(msg1.MessageNr, msg1.ConvId);
+		
+		PlayerInfo playerInfo = new PlayerInfo();
+		playerInfo.PlayerId = 10;
+		playerInfo.Status = PlayerInfo.StateCode.ONLINE;
+		
+		JoinGame msg2 = new JoinGame();
+		msg2.GameId = 123;
+		msg2.Player = playerInfo;
+		
+		
+		
+		PublicEndPoint ep = new PublicEndPoint();
+		ep.Host = "127.0.0.1";
+		ep.Port = 123456;
+		playerInfo.EndPoint = ep;
+		msg1.Player = playerInfo;
+		
+		byte[] bytes = msg1.Encode();
+		InputStream myInputStream = new ByteArrayInputStream(bytes);
+		ObjectInputStream oin = new ObjectInputStream(myInputStream);
+		String type = (String) oin.readObject();
+		
+		assertTrue(type.equals("JoinGame:"));
+		JoinGame msg2 = (JoinGame) Message.Decode(bytes);
+		
+		assertNotNull(msg2);
+		assertEquals(msg1.GameId, msg2.GameId);
+		assertTrue(msg1.Player.EndPoint.Host.equals(msg2.Player.EndPoint.Host));
+		assertEquals(msg1.Player.EndPoint.Port, msg2.Player.EndPoint.Port);
+	}
+}

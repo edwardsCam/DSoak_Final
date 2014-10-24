@@ -1,0 +1,44 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+
+import org.junit.Test;
+
+import Messages.BuyUmbrella;
+import SharedObject.MessageNumber;
+import SharedObject.Penny;
+
+public class BuyUmbrellaTester
+{
+	@Test
+	public void test_EveryThing() throws NoSuchAlgorithmException, IOException
+	{
+		MessageNumber.LocalProcessId = 100;
+		
+		BuyUmbrella msg1 = new BuyUmbrella();
+		
+		assertNotNull(msg1.MessageNr);
+		assertEquals(100, msg1.MessageNr.ProcessId);
+		assertTrue(msg1.MessageNr.SeqNumber > 0);
+		assertEquals(msg1.MessageNr, msg1.ConvId);
+	
+		ArrayList<Penny> pennies = new  ArrayList<Penny>();
+		pennies.add(new Penny());
+		pennies.add(new Penny());
+		pennies.add(new Penny());
+		pennies.add(new Penny());
+		pennies.add(new Penny());
+		pennies.add(new Penny());
+		
+		BuyUmbrella msg2 = new BuyUmbrella();
+		msg2.Pennies = pennies;
+		
+		
+		
+	}
+
+}

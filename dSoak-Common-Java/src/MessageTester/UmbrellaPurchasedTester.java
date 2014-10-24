@@ -11,7 +11,9 @@ import java.security.NoSuchAlgorithmException;
 import org.junit.Test;
 
 import Messages.Message;
+import Messages.StopStream;
 import Messages.UmbrellaPurchased;
+import SharedObject.MessageNumber;
 import SharedObject.Umbrella;
 
 public class UmbrellaPurchasedTester 
@@ -19,18 +21,50 @@ public class UmbrellaPurchasedTester
 	@Test
 	public void test_EveryThings() throws ClassNotFoundException, NoSuchAlgorithmException, IOException
 	{
-		Umbrella umbrella = new Umbrella();
-		UmbrellaPurchased msg1 = new UmbrellaPurchased(umbrella);
-	
-		byte[] bytes = msg1.Encode();
+		MessageNumber.LocalProcessId = 100;
+		
+		UmbrellaPurchased msg1 = new UmbrellaPurchased();
+		assertNotNull(msg1.MessageNr);
+		assertEquals(100, msg1.MessageNr.ProcessId);
+		assertTrue(msg1.MessageNr.SeqNumber > 0);
+		assertEquals(msg1.MessageNr, msg1.ConvId);
+		
+		Umbrella u = new Umbrella();
+		UmbrellaPurchased msg2 = new UmbrellaPurchased();
+		msg2.ConvId = msg1.ConvId;
+		msg2.Umbrella = u;
+		assertNotNull(msg2.MessageNr);
+		assertNotNull(msg2.Umbrella);
+		assertEquals(100, msg2.MessageNr.ProcessId);
+		assertTrue(msg2.MessageNr.SeqNumber > 0);
+		assertEquals(msg1.MessageNr.SeqNumber + 1, msg2.MessageNr.SeqNumber);
+		assertEquals(msg1.MessageNr.ProcessId, msg2.MessageNr.ProcessId);
+		assertEquals(msg1.ConvId.ProcessId, msg2.ConvId.ProcessId);
+		assertEquals(msg1.ConvId.SeqNumber, msg2.ConvId.SeqNumber);
+		assertSame(u, msg2.Umbrella);
+		
+		byte[] bytes = msg2.Encode();
 		InputStream myInputStream = new ByteArrayInputStream(bytes);
 		ObjectInputStream oin = new ObjectInputStream(myInputStream);
 		String type = (String) oin.readObject();
+		assertTrue(type.equals("UmbrellaPurchased:"));
 		
+		Message msg3 = Message.Decode(bytes);
+		assertNotNull(msg3);
+		assertEquals(msg2.MessageNr.ProcessId, msg3.MessageNr.ProcessId);
+		assertEquals(msg2.MessageNr.SeqNumber, msg3.MessageNr.SeqNumber);
+	
 		
-		UmbrellaPurchased msg2 = (UmbrellaPurchased) Message.Decode(bytes);
-		assertNotNull(msg1);
-		assertNotNull(msg2);
+		UmbrellaPurchased msg4 = (UmbrellaPurchased) msg3;
+		assertNotNull(msg4.Umbrella);
+		assertTrue(msg4 instanceof UmbrellaPurchased);
+		assertEquals(msg3.MessageNr, msg4.MessageNr);
+		assertEquals(msg3.ConvId, msg4.ConvId);
 		
+		assertEquals(msg2.Umbrella.Id, msg4.Umbrella.Id);
+		assertEquals(msg2.MessageNr.ProcessId, msg4.MessageNr.ProcessId);
+		assertEquals(msg2.MessageNr.SeqNumber, msg4.MessageNr.SeqNumber);
+		assertEquals(msg2.ConvId.ProcessId, msg4.ConvId.ProcessId);
+		assertEquals(msg2.ConvId.SeqNumber, msg4.ConvId.SeqNumber);
 	}
 }

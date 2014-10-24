@@ -1,0 +1,15 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class SetupStreamTester
+{
+	@Test
+	public void test_EveryThing() 
+	{
+		
+	}
+
+}

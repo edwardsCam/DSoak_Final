@@ -1,0 +1,36 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import Messages.Continue;
+import SharedObject.MessageNumber;
+
+public class ContinueTester
+{
+	@Test
+	public void test_EveryThing() 
+	{
+		MessageNumber.LocalProcessId = 100;
+		
+		Continue msg1 = new Continue();
+		assertNotNull(msg1.MessageNr);
+		assertEquals(100, msg1.MessageNr.ProcessId);
+		assertTrue(msg1.MessageNr.SeqNumber > 0);
+		assertEquals(msg1.MessageNr, msg1.ConvId);
+		
+		Continue msg2 = new Continue();
+		msg2.MissingReplyDeqNr = 3;
+		
+		assertNotNull(msg2.MessageNr);
+		assertEquals(100, msg2.MessageNr.ProcessId);
+		assertEquals(msg1.MessageNr.SeqNumber + 1 , msg2.MessageNr.SeqNumber);
+		assertEquals(msg2.MessageNr, msg2.ConvId);
+		assertNotNull(msg2.Pennies);
+		assertSame(pennies, msg2.Pennies);
+		
+		
+	}
+
+}

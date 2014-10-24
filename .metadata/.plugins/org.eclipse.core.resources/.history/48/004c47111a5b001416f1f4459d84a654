@@ -1,0 +1,23 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import Messages.BuyBalloon;
+import SharedObject.MessageNumber;
+
+public class BuyBalloonTester {
+
+	@Test
+	public void test_EveryThing()
+	{
+		MessageNumber.LocalProcessId = 100;
+		
+		BuyBalloon msg1 = new BuyBalloon();
+		assertNotNull(msg1.MessageNr);
+		assertEquals(100, msg1.MessageNr.ProcessId);
+		
+	}
+
+}

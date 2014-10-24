@@ -32,10 +32,13 @@ public class PublicEndPoint implements Serializable
     {
 		InetAddress result = null;
 		InetAddress[] addressList = InetAddress.getAllByName(host);
+		
         for (int i = 0; i < addressList.length && result == null; i++)
         {
-        	if (addressList[i].getHostAddress().equals(host) && result instanceof Inet4Address)
-                result = addressList[i];
+        	String str1 = addressList[i].getHostName();
+        	String str2 = addressList[i].getHostAddress();
+        	if (str1.equals(host))
+                result = InetAddress.getByName(str2);
         }
         return result;
     }

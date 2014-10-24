@@ -10,7 +10,4 @@ public class UmbrellaPurchased extends Message implements Serializable
 
 	public Umbrella Umbrella;
 	
-	public UmbrellaPurchased(Umbrella ump) {
-		this.Umbrella = ump;
-	}
 }

@@ -1,0 +1,25 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import Messages.Continue;
+import SharedObject.MessageNumber;
+
+public class ContinueTester
+{
+	@Test
+	public void test_EveryThing() 
+	{
+		MessageNumber.LocalProcessId = 100;
+		
+		Continue msg1 = new Continue();
+		assertNotNull(msg1.MessageNr);
+		assertEquals(100, msg1.MessageNr.ProcessId);
+		assertTrue(msg1.MessageNr.SeqNumber > 0);
+		assertEquals(msg1.MessageNr, msg1.ConvId);
+		
+	}
+
+}
