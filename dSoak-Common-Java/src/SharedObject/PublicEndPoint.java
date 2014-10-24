@@ -15,7 +15,7 @@ public class PublicEndPoint implements Serializable
     {
 		   IPEndPoint result = null;
            if (Host != null)
-               result = new IPEndPoint(LookupAddress(Host), Port);
+               result = new IPEndPoint(Host, Port);
            return result;
     }
 	
@@ -23,7 +23,7 @@ public class PublicEndPoint implements Serializable
     {
 		if (value != null)
         {
-			Host = value.Address.toString();
+			Host = value.Address.getHostAddress();
             Port = value.Port;
          }
     }
@@ -33,8 +33,10 @@ public class PublicEndPoint implements Serializable
 		InetAddress result = null;
 		InetAddress[] addressList = InetAddress.getAllByName(host);
         for (int i = 0; i < addressList.length && result == null; i++)
-            if (addressList[i].getHostAddress().equals(host) && result instanceof Inet4Address)
+        {
+        	if (addressList[i].getHostAddress().equals(host) && result instanceof Inet4Address)
                 result = addressList[i];
+        }
         return result;
     }
 }

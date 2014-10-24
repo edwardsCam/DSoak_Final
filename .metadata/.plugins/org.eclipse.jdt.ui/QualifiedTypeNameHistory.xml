@@ -21,7 +21,6 @@
 <fullyQualifiedTypeName name="SharedObject.Penny"/>
 <fullyQualifiedTypeName name="SharedObject.PlayerInfo"/>
 <fullyQualifiedTypeName name="SharedObject.PlayerInfo.StateCode"/>
-<fullyQualifiedTypeName name="SharedObject.PublicEndPoint"/>
 <fullyQualifiedTypeName name="SharedObject.SharedResource"/>
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="SharedObject.UmbrellaRaising"/>
@@ -41,4 +40,7 @@
 <fullyQualifiedTypeName name="java.io.ByteArrayInputStream"/>
 <fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
+<fullyQualifiedTypeName name="SharedObject.PublicEndPoint"/>
+<fullyQualifiedTypeName name="SharedObject.IPEndPoint"/>
+<fullyQualifiedTypeName name="java.net.InetAddress"/>
 </qualifiedTypeNameHistroy>

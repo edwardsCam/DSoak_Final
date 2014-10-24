@@ -51,6 +51,6 @@ public class IPEndPoint implements Serializable
 	}
 	
 	public String ToString() {
-		return Address.toString() + ":" + Port;
+		return Address.getHostAddress() + ":" + Port;
 	}
 }
