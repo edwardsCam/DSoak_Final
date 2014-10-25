@@ -26,7 +26,7 @@ namespace MessageTesting
             Assert.IsTrue(msg1.MessageNr.SeqNumber > 0);
             Assert.AreEqual(msg1.MessageNr, msg1.ConvId);
 
-            GameInfo gameInfo = new GameInfo() { GameId = 102, Status = GameInfo.StatusCode.Avaliable };
+            GameInfo gameInfo = new GameInfo() { GameId = 102, Status = GameInfo.StatusCode.NotInitialized };
             List<PlayerInfo> players = new List<PlayerInfo>() { new PlayerInfo() { PlayerId = 10 }, new PlayerInfo() { PlayerId = 20 }, new PlayerInfo() { PlayerId = 30 } };
             GameData msg2 = new GameData() { Info = gameInfo, Players = players };
             Assert.IsNotNull(msg2.MessageNr);
