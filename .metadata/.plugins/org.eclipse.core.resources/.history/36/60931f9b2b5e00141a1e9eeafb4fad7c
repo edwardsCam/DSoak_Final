@@ -1,7 +1,6 @@
 package SharedObject;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class GameInfo implements Serializable
 {
@@ -11,7 +10,6 @@ public class GameInfo implements Serializable
     public PublicEndPoint FlightManagerEP;
     public StatusCode Status;
     public short MaxPlayers;
-    public Date AliveTimeStamp;
     
     public enum StatusCode
 	{

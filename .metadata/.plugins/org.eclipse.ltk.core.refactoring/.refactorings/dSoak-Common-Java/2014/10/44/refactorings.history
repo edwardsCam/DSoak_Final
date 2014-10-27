@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename enum constant &apos;UNKNOWN&apos; of &apos;SharedObject.GameInfo.StatusCode&apos; to &apos;NOTINITIALIZED&apos;&#x0D;&#x0A;- Original project: &apos;dSoak-Common-Java&apos;&#x0D;&#x0A;- Original element: &apos;SharedObject.GameInfo.StatusCode.UNKNOWN&apos;&#x0D;&#x0A;- Renamed element: &apos;SharedObject.GameInfo.StatusCode.NOTINITIALIZED&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" delegate="false" deprecate="false" description="Rename enum constant &apos;UNKNOWN&apos;" flags="589830" getter="false" id="org.eclipse.jdt.ui.rename.enum.constant" input="/src&lt;SharedObject{GameInfo.java[GameInfo[StatusCode^UNKNOWN" name="NOTINITIALIZED" references="true" setter="false" stamp="1414450115830" textual="false" version="1.0"/>
+</session>
