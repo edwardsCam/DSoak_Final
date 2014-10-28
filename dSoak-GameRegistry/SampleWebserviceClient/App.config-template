@@ -10,7 +10,7 @@
         </basicHttpBinding>
       </bindings>
       <client>
-        <endpoint address="http://localhost:3154/Registrar.svc" binding="basicHttpBinding"
+        <endpoint address="http://ec2-54-186-119-124.us-west-2.compute.amazonaws.com/Registrar.svc" binding="basicHttpBinding"
           bindingConfiguration="BasicHttpBinding_IRegistrar" contract="Registry.IRegistrar"
           name="BasicHttpBinding_IRegistrar" />
       </client>

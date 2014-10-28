@@ -53,17 +53,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Properties\DataSources\SharedObjects.GameInfo.datasource" />
     <None Include="Properties\DataSources\SharedObjects.RegistryEntry.datasource" />
-    <None Include="Service References\Registry\Registrar1.wsdl" />
-    <None Include="Service References\Registry\Registrar3.xsd">
+    <None Include="Service References\Registry\Registrar.wsdl" />
+    <None Include="Service References\Registry\Registrar.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Registry\Registrar31.xsd">
+    <None Include="Service References\Registry\Registrar1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Registry\Registrar32.xsd">
+    <None Include="Service References\Registry\Registrar2.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -96,7 +98,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\Registry\Registrar1.disco" />
+    <None Include="Service References\Registry\Registrar.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

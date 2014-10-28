@@ -92,6 +92,8 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\cs5200.swclyde.com - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\cs5200web.serv.usu.edu.pubxml" />
+    <None Include="Properties\PublishProfiles\AWS USU - Default Web Site.pubxml" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
