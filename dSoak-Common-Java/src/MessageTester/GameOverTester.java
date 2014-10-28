@@ -26,8 +26,8 @@ public class GameOverTester {
 		gameOver.ConvId = gameOver.MessageNr;
 		
 		PublicEndPoint ep = new PublicEndPoint();
-		ep.Host = "127.0.0.1";
-		ep.Port = 1010;
+		ep.Host("127.0.0.1");
+		ep.Port(1010);
 		PlayerInfo winer = new PlayerInfo();
 		winer.EndPoint = ep;
 		gameOver.GameId  = (short)10;
@@ -41,8 +41,8 @@ public class GameOverTester {
 		GameOver msg = (GameOver)Message.Decode(bytes);
 		
 		assertEquals((short)10, msg.GameId);
-		assertEquals(1010, msg.Winner.EndPoint.Port);
-		assertTrue(msg.Winner.EndPoint.Host.equals("127.0.0.1"));
+		assertEquals(1010, msg.Winner.EndPoint.Port());
+		assertTrue(msg.Winner.EndPoint.Host().equals("127.0.0.1"));
 		assertEquals(msgN.ProcessId, msg.MessageNr.ProcessId);
 		assertEquals(msgN.SeqNumber, msg.MessageNr.SeqNumber);
 		assertEquals(winer.PlayerId, msg.Winner.PlayerId);

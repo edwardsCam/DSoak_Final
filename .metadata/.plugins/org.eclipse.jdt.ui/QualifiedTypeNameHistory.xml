@@ -55,7 +55,7 @@
 <fullyQualifiedTypeName name="SharedObject.Balloon"/>
 <fullyQualifiedTypeName name="java.lang.Long"/>
 <fullyQualifiedTypeName name="java.net.InetSocketAddress"/>
-<fullyQualifiedTypeName name="SharedObject.IPEndPoint"/>
 <fullyQualifiedTypeName name="SharedObject.PublicEndPoint"/>
+<fullyQualifiedTypeName name="SharedObject.IPEndPoint"/>
 <fullyQualifiedTypeName name="java.net.InetAddress"/>
 </qualifiedTypeNameHistroy>

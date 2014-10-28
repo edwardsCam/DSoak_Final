@@ -29,8 +29,8 @@ public class JoinGameTester {
 		assertEquals(msg1.MessageNr, msg1.ConvId);
 		
 		PublicEndPoint ep = new PublicEndPoint();
-		ep.Host = "127.0.0.1";
-		ep.Port = 123456;
+		ep.Host("127.0.0.1");
+		ep.Port(123456);
 		PlayerInfo playerInfo = new PlayerInfo();
 		playerInfo.PlayerId = 10;
 		playerInfo.Status = PlayerInfo.StateCode.ONLINE;
@@ -47,8 +47,8 @@ public class JoinGameTester {
 		assertEquals(123, msg2.GameId);
 		assertNotNull(msg2.Player);
 		assertSame(playerInfo, msg2.Player);
-		assertTrue(msg2.Player.EndPoint.Host.equals( "127.0.0.1"));
-		assertEquals(123456, msg2.Player.EndPoint.Port);
+		assertTrue(msg2.Player.EndPoint.Host().equals( "127.0.0.1"));
+		assertEquals(123456, msg2.Player.EndPoint.Port());
 		
 		byte[] bytes = msg2.Encode();
 		InputStream myInputStream = new ByteArrayInputStream(bytes);
@@ -60,21 +60,21 @@ public class JoinGameTester {
 		assertNotNull(msg3);
 		assertTrue(msg3 instanceof JoinGame);
 		assertEquals(msg2.GameId, msg3.GameId);
-		assertTrue(msg2.Player.EndPoint.Host.equals(msg3.Player.EndPoint.Host));
-		assertEquals(msg2.Player.EndPoint.Port, msg3.Player.EndPoint.Port);
+		assertTrue(msg2.Player.EndPoint.Host().equals(msg3.Player.EndPoint.Host()));
+		assertEquals(msg2.Player.EndPoint.Port(), msg3.Player.EndPoint.Port());
 		assertEquals(msg2.Player.Status.getValue(), msg3.Player.Status.getValue());
 		assertEquals(msg2.Player.PlayerId, msg3.Player.PlayerId);
 		
 		JoinGame msg4 = (JoinGame) msg3;
 		assertEquals(msg3.GameId, msg4.GameId);
-		assertTrue(msg3.Player.EndPoint.Host.equals(msg4.Player.EndPoint.Host));
-		assertEquals(msg3.Player.EndPoint.Port, msg4.Player.EndPoint.Port);
+		assertTrue(msg3.Player.EndPoint.Host().equals(msg4.Player.EndPoint.Host()));
+		assertEquals(msg3.Player.EndPoint.Port(), msg4.Player.EndPoint.Port());
 		assertEquals(msg3.Player.Status.getValue(), msg4.Player.Status.getValue());
 		assertEquals(msg3.Player.PlayerId, msg4.Player.PlayerId);
 		
 		assertEquals(msg2.GameId, msg4.GameId);
-		assertTrue(msg2.Player.EndPoint.Host.equals(msg4.Player.EndPoint.Host));
-		assertEquals(msg2.Player.EndPoint.Port, msg4.Player.EndPoint.Port);
+		assertTrue(msg2.Player.EndPoint.Host().equals(msg4.Player.EndPoint.Host()));
+		assertEquals(msg2.Player.EndPoint.Port(), msg4.Player.EndPoint.Port());
 		assertEquals(msg2.Player.Status.getValue(), msg4.Player.Status.getValue());
 		assertEquals(msg2.Player.PlayerId, msg4.Player.PlayerId);
 	}

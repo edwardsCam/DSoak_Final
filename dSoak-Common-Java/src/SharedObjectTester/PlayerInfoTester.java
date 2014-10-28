@@ -20,8 +20,8 @@ public class PlayerInfoTester {
 		
 		
 		PublicEndPoint ep1 = new PublicEndPoint();
-		ep1.Host =  "swcwin.serv.usu.edu";
-		ep1.Port = 35420;
+		ep1.Host("swcwin.serv.usu.edu");
+		ep1.Port(35420);
 		
 		PlayerInfo p2 = new PlayerInfo();
 		p2.EndPoint = ep1;
@@ -29,7 +29,7 @@ public class PlayerInfoTester {
 		p2.Status = StateCode.OFFLINE;
 		
 		assertEquals(101, p2.PlayerId);
-		assertTrue(ep1.Host.equals(p2.EndPoint.Host));
+		assertTrue(ep1.Host().equals(p2.EndPoint.Host()));
 		assertEquals(StateCode.OFFLINE, p2.Status);
 	}
 }

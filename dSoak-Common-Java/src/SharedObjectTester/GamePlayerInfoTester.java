@@ -19,8 +19,8 @@ public class GamePlayerInfoTester
 		assertNull(gp1.Status);
 		
 		PublicEndPoint ep1 = new PublicEndPoint();
-		ep1.Host =  "swcwin.serv.usu.edu";
-		ep1.Port = 35420;
+		ep1.Host("swcwin.serv.usu.edu");
+		ep1.Port(35420);
 		
 		PlayerInfo pInfo = new PlayerInfo();
 		pInfo.EndPoint = ep1;

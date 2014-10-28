@@ -23,8 +23,8 @@ public class GameInfoTester
 		assertNull(g1.Status);
 		
 		PublicEndPoint ep1 = new PublicEndPoint();
-		ep1.Host =  "buzz.serv.usu.edu";
-		ep1.Port = 20011;
+		ep1.Host("buzz.serv.usu.edu");
+		ep1.Port(20011);
 		
 		GameInfo g2 = new GameInfo();
 		g2.FlightManagerEP = ep1;
@@ -32,7 +32,7 @@ public class GameInfoTester
 		g2.MaxPlayers = 5;
 		g2.Status = GameInfo.StatusCode.AVAILABLE;
 		
-		assertTrue(ep1.Host.equals(g2.FlightManagerEP.Host));
+		assertTrue(ep1.Host().equals(g2.FlightManagerEP.Host()));
 		assertEquals(10, g2.GameId);
 		assertEquals(5,g2.MaxPlayers);
 		assertEquals(GameInfo.StatusCode.AVAILABLE, g2.Status);
