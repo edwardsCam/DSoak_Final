@@ -22,11 +22,11 @@
     <MetadataSource Address="http://localhost:3154/Registrar.svc" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Registrar3.xsd" MetadataType="Schema" ID="67ec1001-fa40-43d2-8683-61fa2ce2d537" SourceId="1" SourceUrl="http://localhost:3154/Registrar.svc?xsd=xsd1" />
-    <MetadataFile FileName="Registrar1.wsdl" MetadataType="Wsdl" ID="51b0e0ab-d456-4ddd-98ad-08febbbc50e5" SourceId="1" SourceUrl="http://localhost:3154/Registrar.svc?wsdl" />
-    <MetadataFile FileName="Registrar31.xsd" MetadataType="Schema" ID="baf7ace2-7e48-48de-953e-74391f33e3d1" SourceId="1" SourceUrl="http://localhost:3154/Registrar.svc?xsd=xsd2" />
-    <MetadataFile FileName="Registrar1.disco" MetadataType="Disco" ID="cf80eac7-5dbb-4006-9186-b143627df821" SourceId="1" SourceUrl="http://localhost:3154/Registrar.svc?disco" />
-    <MetadataFile FileName="Registrar32.xsd" MetadataType="Schema" ID="d2c590ff-e9d3-42f5-83bb-4dc59d2d6bbc" SourceId="1" SourceUrl="http://localhost:3154/Registrar.svc?xsd=xsd0" />
+    <MetadataFile FileName="Registrar3.xsd" MetadataType="Schema" ID="6a57429a-2b96-40ae-a0a4-c94212874ee4" SourceId="1" SourceUrl="http://localhost:3154/Registrar.svc?xsd=xsd1" />
+    <MetadataFile FileName="Registrar1.wsdl" MetadataType="Wsdl" ID="827e70ac-f602-4ab4-aaad-d85f1aa8ff1a" SourceId="1" SourceUrl="http://localhost:3154/Registrar.svc?wsdl" />
+    <MetadataFile FileName="Registrar31.xsd" MetadataType="Schema" ID="7136f730-4123-41aa-800e-3f442492ebe6" SourceId="1" SourceUrl="http://localhost:3154/Registrar.svc?xsd=xsd2" />
+    <MetadataFile FileName="Registrar1.disco" MetadataType="Disco" ID="18cfd58a-95b9-41a5-91c9-fe3a359b8673" SourceId="1" SourceUrl="http://localhost:3154/Registrar.svc?disco" />
+    <MetadataFile FileName="Registrar32.xsd" MetadataType="Schema" ID="d240f7ca-8944-43db-bde9-dd7cff625d0a" SourceId="1" SourceUrl="http://localhost:3154/Registrar.svc?xsd=xsd0" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -9,329 +9,17 @@
 //------------------------------------------------------------------------------
 
 namespace SampleWebserviceClient.Registry {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PublicEndPoint", Namespace="http://schemas.datacontract.org/2004/07/SharedObjects")]
-    [System.SerializableAttribute()]
-    public partial class PublicEndPoint : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string HostAndPortField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string HostAndPort {
-            get {
-                return this.HostAndPortField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.HostAndPortField, value) != true)) {
-                    this.HostAndPortField = value;
-                    this.RaisePropertyChanged("HostAndPort");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="RegistryEntry", Namespace="http://schemas.datacontract.org/2004/07/SharedObjects")]
-    [System.SerializableAttribute()]
-    public partial class RegistryEntry : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime AliveTimestampField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SampleWebserviceClient.Registry.PublicEndPoint EpField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LabelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private short ProcessIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SampleWebserviceClient.Registry.RegistryEntry.ProcessType TypeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime AliveTimestamp {
-            get {
-                return this.AliveTimestampField;
-            }
-            set {
-                if ((this.AliveTimestampField.Equals(value) != true)) {
-                    this.AliveTimestampField = value;
-                    this.RaisePropertyChanged("AliveTimestamp");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleWebserviceClient.Registry.PublicEndPoint Ep {
-            get {
-                return this.EpField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EpField, value) != true)) {
-                    this.EpField = value;
-                    this.RaisePropertyChanged("Ep");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Label {
-            get {
-                return this.LabelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LabelField, value) != true)) {
-                    this.LabelField = value;
-                    this.RaisePropertyChanged("Label");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public short ProcessId {
-            get {
-                return this.ProcessIdField;
-            }
-            set {
-                if ((this.ProcessIdField.Equals(value) != true)) {
-                    this.ProcessIdField = value;
-                    this.RaisePropertyChanged("ProcessId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleWebserviceClient.Registry.RegistryEntry.ProcessType Type {
-            get {
-                return this.TypeField;
-            }
-            set {
-                if ((this.TypeField.Equals(value) != true)) {
-                    this.TypeField = value;
-                    this.RaisePropertyChanged("Type");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-        
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-        [System.Runtime.Serialization.DataContractAttribute(Name="RegistryEntry.ProcessType", Namespace="http://schemas.datacontract.org/2004/07/SharedObjects")]
-        public enum ProcessType : int {
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            GameManager = 0,
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            Player = 1,
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GameInfo", Namespace="http://schemas.datacontract.org/2004/07/SharedObjects")]
-    [System.SerializableAttribute()]
-    public partial class GameInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime AliveTimestampField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SampleWebserviceClient.Registry.PublicEndPoint FightManagerEPField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private short GameIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LabelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private short MaxPlayersField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SampleWebserviceClient.Registry.GameInfo.StatusCode StatusField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime AliveTimestamp {
-            get {
-                return this.AliveTimestampField;
-            }
-            set {
-                if ((this.AliveTimestampField.Equals(value) != true)) {
-                    this.AliveTimestampField = value;
-                    this.RaisePropertyChanged("AliveTimestamp");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleWebserviceClient.Registry.PublicEndPoint FightManagerEP {
-            get {
-                return this.FightManagerEPField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FightManagerEPField, value) != true)) {
-                    this.FightManagerEPField = value;
-                    this.RaisePropertyChanged("FightManagerEP");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public short GameId {
-            get {
-                return this.GameIdField;
-            }
-            set {
-                if ((this.GameIdField.Equals(value) != true)) {
-                    this.GameIdField = value;
-                    this.RaisePropertyChanged("GameId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Label {
-            get {
-                return this.LabelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LabelField, value) != true)) {
-                    this.LabelField = value;
-                    this.RaisePropertyChanged("Label");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public short MaxPlayers {
-            get {
-                return this.MaxPlayersField;
-            }
-            set {
-                if ((this.MaxPlayersField.Equals(value) != true)) {
-                    this.MaxPlayersField = value;
-                    this.RaisePropertyChanged("MaxPlayers");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SampleWebserviceClient.Registry.GameInfo.StatusCode Status {
-            get {
-                return this.StatusField;
-            }
-            set {
-                if ((this.StatusField.Equals(value) != true)) {
-                    this.StatusField = value;
-                    this.RaisePropertyChanged("Status");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-        
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-        [System.Runtime.Serialization.DataContractAttribute(Name="GameInfo.StatusCode", Namespace="http://schemas.datacontract.org/2004/07/SharedObjects")]
-        public enum StatusCode : int {
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            NotInitialized = 0,
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            Available = 1,
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            InProgress = 2,
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            Complete = 3,
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            Cancelled = 4,
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="Registry.IRegistrar")]
     public interface IRegistrar {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GetProcessId", ReplyAction="http://tempuri.org/IRegistrar/GetProcessIdResponse")]
-        short GetProcessId(SampleWebserviceClient.Registry.PublicEndPoint ep, string label, SampleWebserviceClient.Registry.RegistryEntry.ProcessType processType);
+        short GetProcessId(SharedObjects.PublicEndPoint ep, string label, SharedObjects.RegistryEntry.ProcessType processType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GetProcessId", ReplyAction="http://tempuri.org/IRegistrar/GetProcessIdResponse")]
-        System.Threading.Tasks.Task<short> GetProcessIdAsync(SampleWebserviceClient.Registry.PublicEndPoint ep, string label, SampleWebserviceClient.Registry.RegistryEntry.ProcessType processType);
+        System.Threading.Tasks.Task<short> GetProcessIdAsync(SharedObjects.PublicEndPoint ep, string label, SharedObjects.RegistryEntry.ProcessType processType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/AmAlive", ReplyAction="http://tempuri.org/IRegistrar/AmAliveResponse")]
         void AmAlive(int processId);
@@ -340,28 +28,28 @@ namespace SampleWebserviceClient.Registry {
         System.Threading.Tasks.Task AmAliveAsync(int processId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GetGameManagers", ReplyAction="http://tempuri.org/IRegistrar/GetGameManagersResponse")]
-        SampleWebserviceClient.Registry.RegistryEntry[] GetGameManagers();
+        SharedObjects.RegistryEntry[] GetGameManagers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GetGameManagers", ReplyAction="http://tempuri.org/IRegistrar/GetGameManagersResponse")]
-        System.Threading.Tasks.Task<SampleWebserviceClient.Registry.RegistryEntry[]> GetGameManagersAsync();
+        System.Threading.Tasks.Task<SharedObjects.RegistryEntry[]> GetGameManagersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GetPlayers", ReplyAction="http://tempuri.org/IRegistrar/GetPlayersResponse")]
-        SampleWebserviceClient.Registry.RegistryEntry[] GetPlayers();
+        SharedObjects.RegistryEntry[] GetPlayers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GetPlayers", ReplyAction="http://tempuri.org/IRegistrar/GetPlayersResponse")]
-        System.Threading.Tasks.Task<SampleWebserviceClient.Registry.RegistryEntry[]> GetPlayersAsync();
+        System.Threading.Tasks.Task<SharedObjects.RegistryEntry[]> GetPlayersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/RegisterGame", ReplyAction="http://tempuri.org/IRegistrar/RegisterGameResponse")]
-        SampleWebserviceClient.Registry.GameInfo RegisterGame(int gameManagerId, string label, int maxPlayers);
+        SharedObjects.GameInfo RegisterGame(int gameManagerId, string label, int maxPlayers);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/RegisterGame", ReplyAction="http://tempuri.org/IRegistrar/RegisterGameResponse")]
-        System.Threading.Tasks.Task<SampleWebserviceClient.Registry.GameInfo> RegisterGameAsync(int gameManagerId, string label, int maxPlayers);
+        System.Threading.Tasks.Task<SharedObjects.GameInfo> RegisterGameAsync(int gameManagerId, string label, int maxPlayers);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GetGames", ReplyAction="http://tempuri.org/IRegistrar/GetGamesResponse")]
-        SampleWebserviceClient.Registry.GameInfo[] GetGames(SampleWebserviceClient.Registry.GameInfo.StatusCode status);
+        SharedObjects.GameInfo[] GetGames(SharedObjects.GameInfo.StatusCode status);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GetGames", ReplyAction="http://tempuri.org/IRegistrar/GetGamesResponse")]
-        System.Threading.Tasks.Task<SampleWebserviceClient.Registry.GameInfo[]> GetGamesAsync(SampleWebserviceClient.Registry.GameInfo.StatusCode status);
+        System.Threading.Tasks.Task<SharedObjects.GameInfo[]> GetGamesAsync(SharedObjects.GameInfo.StatusCode status);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GameAmAlive", ReplyAction="http://tempuri.org/IRegistrar/GameAmAliveResponse")]
         void GameAmAlive(int gameId);
@@ -370,10 +58,10 @@ namespace SampleWebserviceClient.Registry {
         System.Threading.Tasks.Task GameAmAliveAsync(int gameId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/ChangeStatus", ReplyAction="http://tempuri.org/IRegistrar/ChangeStatusResponse")]
-        void ChangeStatus(int gameId, SampleWebserviceClient.Registry.GameInfo.StatusCode status);
+        void ChangeStatus(int gameId, SharedObjects.GameInfo.StatusCode status);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/ChangeStatus", ReplyAction="http://tempuri.org/IRegistrar/ChangeStatusResponse")]
-        System.Threading.Tasks.Task ChangeStatusAsync(int gameId, SampleWebserviceClient.Registry.GameInfo.StatusCode status);
+        System.Threading.Tasks.Task ChangeStatusAsync(int gameId, SharedObjects.GameInfo.StatusCode status);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/EndPointReflector", ReplyAction="http://tempuri.org/IRegistrar/EndPointReflectorResponse")]
         string EndPointReflector();
@@ -409,11 +97,11 @@ namespace SampleWebserviceClient.Registry {
                 base(binding, remoteAddress) {
         }
         
-        public short GetProcessId(SampleWebserviceClient.Registry.PublicEndPoint ep, string label, SampleWebserviceClient.Registry.RegistryEntry.ProcessType processType) {
+        public short GetProcessId(SharedObjects.PublicEndPoint ep, string label, SharedObjects.RegistryEntry.ProcessType processType) {
             return base.Channel.GetProcessId(ep, label, processType);
         }
         
-        public System.Threading.Tasks.Task<short> GetProcessIdAsync(SampleWebserviceClient.Registry.PublicEndPoint ep, string label, SampleWebserviceClient.Registry.RegistryEntry.ProcessType processType) {
+        public System.Threading.Tasks.Task<short> GetProcessIdAsync(SharedObjects.PublicEndPoint ep, string label, SharedObjects.RegistryEntry.ProcessType processType) {
             return base.Channel.GetProcessIdAsync(ep, label, processType);
         }
         
@@ -425,35 +113,35 @@ namespace SampleWebserviceClient.Registry {
             return base.Channel.AmAliveAsync(processId);
         }
         
-        public SampleWebserviceClient.Registry.RegistryEntry[] GetGameManagers() {
+        public SharedObjects.RegistryEntry[] GetGameManagers() {
             return base.Channel.GetGameManagers();
         }
         
-        public System.Threading.Tasks.Task<SampleWebserviceClient.Registry.RegistryEntry[]> GetGameManagersAsync() {
+        public System.Threading.Tasks.Task<SharedObjects.RegistryEntry[]> GetGameManagersAsync() {
             return base.Channel.GetGameManagersAsync();
         }
         
-        public SampleWebserviceClient.Registry.RegistryEntry[] GetPlayers() {
+        public SharedObjects.RegistryEntry[] GetPlayers() {
             return base.Channel.GetPlayers();
         }
         
-        public System.Threading.Tasks.Task<SampleWebserviceClient.Registry.RegistryEntry[]> GetPlayersAsync() {
+        public System.Threading.Tasks.Task<SharedObjects.RegistryEntry[]> GetPlayersAsync() {
             return base.Channel.GetPlayersAsync();
         }
         
-        public SampleWebserviceClient.Registry.GameInfo RegisterGame(int gameManagerId, string label, int maxPlayers) {
+        public SharedObjects.GameInfo RegisterGame(int gameManagerId, string label, int maxPlayers) {
             return base.Channel.RegisterGame(gameManagerId, label, maxPlayers);
         }
         
-        public System.Threading.Tasks.Task<SampleWebserviceClient.Registry.GameInfo> RegisterGameAsync(int gameManagerId, string label, int maxPlayers) {
+        public System.Threading.Tasks.Task<SharedObjects.GameInfo> RegisterGameAsync(int gameManagerId, string label, int maxPlayers) {
             return base.Channel.RegisterGameAsync(gameManagerId, label, maxPlayers);
         }
         
-        public SampleWebserviceClient.Registry.GameInfo[] GetGames(SampleWebserviceClient.Registry.GameInfo.StatusCode status) {
+        public SharedObjects.GameInfo[] GetGames(SharedObjects.GameInfo.StatusCode status) {
             return base.Channel.GetGames(status);
         }
         
-        public System.Threading.Tasks.Task<SampleWebserviceClient.Registry.GameInfo[]> GetGamesAsync(SampleWebserviceClient.Registry.GameInfo.StatusCode status) {
+        public System.Threading.Tasks.Task<SharedObjects.GameInfo[]> GetGamesAsync(SharedObjects.GameInfo.StatusCode status) {
             return base.Channel.GetGamesAsync(status);
         }
         
@@ -465,11 +153,11 @@ namespace SampleWebserviceClient.Registry {
             return base.Channel.GameAmAliveAsync(gameId);
         }
         
-        public void ChangeStatus(int gameId, SampleWebserviceClient.Registry.GameInfo.StatusCode status) {
+        public void ChangeStatus(int gameId, SharedObjects.GameInfo.StatusCode status) {
             base.Channel.ChangeStatus(gameId, status);
         }
         
-        public System.Threading.Tasks.Task ChangeStatusAsync(int gameId, SampleWebserviceClient.Registry.GameInfo.StatusCode status) {
+        public System.Threading.Tasks.Task ChangeStatusAsync(int gameId, SharedObjects.GameInfo.StatusCode status) {
             return base.Channel.ChangeStatusAsync(gameId, status);
         }
         

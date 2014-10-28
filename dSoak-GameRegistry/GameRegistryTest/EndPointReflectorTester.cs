@@ -43,7 +43,7 @@ namespace GameRegistryTester
         [TestMethod]
         public void EndPointReflector_Webservice()
         {
-            RegistrarClient registrar = new RegistrarClient("LocalHttpBinding_IRegistrar");
+            RegistrarClient registrar = new RegistrarClient("BasicHttpBinding_IRegistrar");
 
             string publicEndPoint = registrar.EndPointReflector();
             Assert.IsNotNull(publicEndPoint);

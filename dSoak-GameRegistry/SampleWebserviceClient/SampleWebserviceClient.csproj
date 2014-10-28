@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ShareObjects, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -53,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Properties\DataSources\SharedObjects.GameInfo.datasource" />
+    <None Include="Properties\DataSources\SharedObjects.RegistryEntry.datasource" />
     <None Include="Service References\Registry\Registrar1.wsdl" />
     <None Include="Service References\Registry\Registrar3.xsd">
       <SubType>Designer</SubType>
@@ -62,12 +65,6 @@
     </None>
     <None Include="Service References\Registry\Registrar32.xsd">
       <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\Registry\SampleWebserviceClient.Registry.GameInfo.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\Registry\SampleWebserviceClient.Registry.RegistryEntry.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -89,9 +86,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\Registry\Registrar1.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\dSoak-Common-CSharp\SharedObjects\SharedObjects.csproj">
       <Project>{c3bc84da-4fa3-4b1d-9aac-c1d4ade2effc}</Project>
       <Name>SharedObjects</Name>
@@ -100,6 +94,9 @@
       <Project>{7e9cfcbe-3d2c-42a5-96f6-4343e92e1f02}</Project>
       <Name>GameRegistry</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\Registry\Registrar1.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

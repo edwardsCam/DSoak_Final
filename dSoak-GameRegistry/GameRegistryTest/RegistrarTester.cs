@@ -17,7 +17,7 @@ namespace GameRegistryTester
         [TestMethod]
         public void Registrar_TestEverything()
         {
-            RegistrarClient registrar = new RegistrarClient("LocalHttpBinding_IRegistrar");
+            RegistrarClient registrar = new RegistrarClient("BasicHttpBinding_IRegistrar");
             // RegistrarClient registrar = new RegistrarClient("ProdHttpBinding_IRegistrar");
 
             PublicEndPoint myPublicEP = new PublicEndPoint() { HostAndPort = registrar.EndPointReflector() };
@@ -50,7 +50,7 @@ namespace GameRegistryTester
         [TestMethod]
         public void Registrar_TestEndPointReflection()
         {
-            RegistrarClient registrar = new RegistrarClient("LocalHttpBinding_IRegistrar");
+            RegistrarClient registrar = new RegistrarClient("BasicHttpBinding_IRegistrar");
             // RegistrarClient registrar = new RegistrarClient("ProdHttpBinding_IRegistrar");
 
             string reflectorEndPointString = registrar.EndPointReflector();
