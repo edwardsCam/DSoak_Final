@@ -30,6 +30,11 @@ namespace GameRegistry
             return Registry.Instance.GetPlayers().ToArray();
         }
 
+        public RegistryEntry GetProcessInfo(short processId)
+        {
+            return Registry.Instance.GetProcessInfo(processId);
+        }
+
         public void AmAlive(int processId)
         {
             Registry.Instance.AmAlive(Convert.ToInt16(processId));
@@ -43,6 +48,11 @@ namespace GameRegistry
         public GameInfo[] GetGames(GameInfo.StatusCode status = GameInfo.StatusCode.Available)
         {
             return Registry.Instance.GetGames(status).ToArray();
+        }
+
+        public GameInfo GetGameInfo(int gameId)
+        {
+            return Registry.Instance.GetGameInfo(gameId);
         }
 
         public void GameAmAlive(int gameId)

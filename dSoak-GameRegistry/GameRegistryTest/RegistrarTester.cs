@@ -22,7 +22,7 @@ namespace GameRegistryTester
 
             PublicEndPoint myPublicEP = new PublicEndPoint() { HostAndPort = registrar.EndPointReflector() };
 
-            Int16 localProcessId = registrar.GetProcessId(myPublicEP, "Test Process 34", GameRegistry.RegistryEntry.ProcessType.GameManager);
+            Int16 localProcessId = registrar.GetProcessId(myPublicEP, "Test Process 34", RegistryEntry.ProcessType.GameManager);
 
             GameInfo g0 = registrar.RegisterGame(localProcessId, "Test Game 0", 10);
             Assert.IsNotNull(g0);

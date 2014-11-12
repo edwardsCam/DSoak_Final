@@ -43,6 +43,12 @@ namespace GameRegistry
         }
 
         [WebMethod]
+        public RegistryEntry GetProcessInfo(short processId)
+        {
+            return Registry.Instance.GetProcessInfo(processId);
+        }
+
+        [WebMethod]
         public GameInfo RegisterGame(int gameManagerId, string label, int maxPlayers)
         {
             return Registry.Instance.RegisterGame(Convert.ToInt16(gameManagerId), label, Convert.ToInt16(maxPlayers));
@@ -52,6 +58,12 @@ namespace GameRegistry
         public GameInfo[] GetGames(GameInfo.StatusCode status = GameInfo.StatusCode.Available)
         {
             return Registry.Instance.GetGames(status).ToArray();
+        }
+
+        [WebMethod]
+        public GameInfo GetGameInfo(int gameId)
+        {
+            return Registry.Instance.GetGameInfo(gameId);
         }
 
         [WebMethod]

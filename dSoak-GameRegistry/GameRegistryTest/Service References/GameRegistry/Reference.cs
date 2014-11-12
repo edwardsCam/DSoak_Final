@@ -9,139 +9,17 @@
 //------------------------------------------------------------------------------
 
 namespace GameRegistryTester.GameRegistry {
-    using System.Runtime.Serialization;
-    using System;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="RegistryEntry", Namespace="http://schemas.datacontract.org/2004/07/SharedObjects")]
-    [System.SerializableAttribute()]
-    public partial class RegistryEntry : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime AliveTimestampField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private SharedObjects.PublicEndPoint EpField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string LabelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private short ProcessIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private GameRegistryTester.GameRegistry.RegistryEntry.ProcessType TypeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime AliveTimestamp {
-            get {
-                return this.AliveTimestampField;
-            }
-            set {
-                if ((this.AliveTimestampField.Equals(value) != true)) {
-                    this.AliveTimestampField = value;
-                    this.RaisePropertyChanged("AliveTimestamp");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public SharedObjects.PublicEndPoint Ep {
-            get {
-                return this.EpField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EpField, value) != true)) {
-                    this.EpField = value;
-                    this.RaisePropertyChanged("Ep");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Label {
-            get {
-                return this.LabelField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.LabelField, value) != true)) {
-                    this.LabelField = value;
-                    this.RaisePropertyChanged("Label");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public short ProcessId {
-            get {
-                return this.ProcessIdField;
-            }
-            set {
-                if ((this.ProcessIdField.Equals(value) != true)) {
-                    this.ProcessIdField = value;
-                    this.RaisePropertyChanged("ProcessId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public GameRegistryTester.GameRegistry.RegistryEntry.ProcessType Type {
-            get {
-                return this.TypeField;
-            }
-            set {
-                if ((this.TypeField.Equals(value) != true)) {
-                    this.TypeField = value;
-                    this.RaisePropertyChanged("Type");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-        
-        [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-        [System.Runtime.Serialization.DataContractAttribute(Name="RegistryEntry.ProcessType", Namespace="http://schemas.datacontract.org/2004/07/SharedObjects")]
-        public enum ProcessType : int {
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            GameManager = 0,
-            
-            [System.Runtime.Serialization.EnumMemberAttribute()]
-            Player = 1,
-        }
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="GameRegistry.IRegistrar")]
     public interface IRegistrar {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GetProcessId", ReplyAction="http://tempuri.org/IRegistrar/GetProcessIdResponse")]
-        short GetProcessId(SharedObjects.PublicEndPoint ep, string label, GameRegistryTester.GameRegistry.RegistryEntry.ProcessType processType);
+        short GetProcessId(SharedObjects.PublicEndPoint ep, string label, SharedObjects.RegistryEntry.ProcessType processType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GetProcessId", ReplyAction="http://tempuri.org/IRegistrar/GetProcessIdResponse")]
-        System.Threading.Tasks.Task<short> GetProcessIdAsync(SharedObjects.PublicEndPoint ep, string label, GameRegistryTester.GameRegistry.RegistryEntry.ProcessType processType);
+        System.Threading.Tasks.Task<short> GetProcessIdAsync(SharedObjects.PublicEndPoint ep, string label, SharedObjects.RegistryEntry.ProcessType processType);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/AmAlive", ReplyAction="http://tempuri.org/IRegistrar/AmAliveResponse")]
         void AmAlive(int processId);
@@ -150,16 +28,16 @@ namespace GameRegistryTester.GameRegistry {
         System.Threading.Tasks.Task AmAliveAsync(int processId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GetGameManagers", ReplyAction="http://tempuri.org/IRegistrar/GetGameManagersResponse")]
-        GameRegistryTester.GameRegistry.RegistryEntry[] GetGameManagers();
+        SharedObjects.RegistryEntry[] GetGameManagers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GetGameManagers", ReplyAction="http://tempuri.org/IRegistrar/GetGameManagersResponse")]
-        System.Threading.Tasks.Task<GameRegistryTester.GameRegistry.RegistryEntry[]> GetGameManagersAsync();
+        System.Threading.Tasks.Task<SharedObjects.RegistryEntry[]> GetGameManagersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GetPlayers", ReplyAction="http://tempuri.org/IRegistrar/GetPlayersResponse")]
-        GameRegistryTester.GameRegistry.RegistryEntry[] GetPlayers();
+        SharedObjects.RegistryEntry[] GetPlayers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/GetPlayers", ReplyAction="http://tempuri.org/IRegistrar/GetPlayersResponse")]
-        System.Threading.Tasks.Task<GameRegistryTester.GameRegistry.RegistryEntry[]> GetPlayersAsync();
+        System.Threading.Tasks.Task<SharedObjects.RegistryEntry[]> GetPlayersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRegistrar/RegisterGame", ReplyAction="http://tempuri.org/IRegistrar/RegisterGameResponse")]
         SharedObjects.GameInfo RegisterGame(int gameManagerId, string label, int maxPlayers);
@@ -219,11 +97,11 @@ namespace GameRegistryTester.GameRegistry {
                 base(binding, remoteAddress) {
         }
         
-        public short GetProcessId(SharedObjects.PublicEndPoint ep, string label, GameRegistryTester.GameRegistry.RegistryEntry.ProcessType processType) {
+        public short GetProcessId(SharedObjects.PublicEndPoint ep, string label, SharedObjects.RegistryEntry.ProcessType processType) {
             return base.Channel.GetProcessId(ep, label, processType);
         }
         
-        public System.Threading.Tasks.Task<short> GetProcessIdAsync(SharedObjects.PublicEndPoint ep, string label, GameRegistryTester.GameRegistry.RegistryEntry.ProcessType processType) {
+        public System.Threading.Tasks.Task<short> GetProcessIdAsync(SharedObjects.PublicEndPoint ep, string label, SharedObjects.RegistryEntry.ProcessType processType) {
             return base.Channel.GetProcessIdAsync(ep, label, processType);
         }
         
@@ -235,19 +113,19 @@ namespace GameRegistryTester.GameRegistry {
             return base.Channel.AmAliveAsync(processId);
         }
         
-        public GameRegistryTester.GameRegistry.RegistryEntry[] GetGameManagers() {
+        public SharedObjects.RegistryEntry[] GetGameManagers() {
             return base.Channel.GetGameManagers();
         }
         
-        public System.Threading.Tasks.Task<GameRegistryTester.GameRegistry.RegistryEntry[]> GetGameManagersAsync() {
+        public System.Threading.Tasks.Task<SharedObjects.RegistryEntry[]> GetGameManagersAsync() {
             return base.Channel.GetGameManagersAsync();
         }
         
-        public GameRegistryTester.GameRegistry.RegistryEntry[] GetPlayers() {
+        public SharedObjects.RegistryEntry[] GetPlayers() {
             return base.Channel.GetPlayers();
         }
         
-        public System.Threading.Tasks.Task<GameRegistryTester.GameRegistry.RegistryEntry[]> GetPlayersAsync() {
+        public System.Threading.Tasks.Task<SharedObjects.RegistryEntry[]> GetPlayersAsync() {
             return base.Channel.GetPlayersAsync();
         }
         

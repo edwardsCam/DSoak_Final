@@ -124,24 +124,41 @@ namespace GameRegistry
 
         public List<RegistryEntry> GetGameManagers()
         {
-            List<RegistryEntry> result = new List<RegistryEntry>();
-
-            Dictionary<string, RegistryEntry>.Enumerator iterator = gameManagers.GetEnumerator();
-            while (iterator.MoveNext())
-                result.Add(iterator.Current.Value);
-
+            List<RegistryEntry> result = null;
+            lock (myLock)
+            {
+                result = gameManagers.Values.ToList();
+            }
             return result;
         }
 
         public List<RegistryEntry> GetPlayers()
         {
-            List<RegistryEntry> result = new List<RegistryEntry>();
-
-            Dictionary<string, RegistryEntry>.Enumerator iterator = players.GetEnumerator();
-            while (iterator.MoveNext())
-                result.Add(iterator.Current.Value);
-
+            List<RegistryEntry> result = null;
+            lock (myLock)
+            {
+                result = players.Values.ToList();
+            }
             return result;
+        }
+
+        public RegistryEntry GetProcessInfo(short processId)
+        {
+            RegistryEntry entry = null;
+
+            lock (myLock)
+            {
+                IEnumerable<KeyValuePair<string, RegistryEntry>> set = gameManagers.Where(e => e.Value.ProcessId == processId);
+                if (set.Count() > 0)
+                    entry = set.First().Value;
+                else
+                {
+                    set = players.Where(e => e.Value.ProcessId == processId);
+                    if (set.Count() > 0)
+                        entry = set.First().Value;
+                }
+            }
+            return entry;
         }
 
         public void AmAlive(Int16 processId)
@@ -185,14 +202,24 @@ namespace GameRegistry
 
             lock (myLock)
             {
-                Dictionary<int, GameInfo>.Enumerator enumerator = games.GetEnumerator();
-                while (enumerator.MoveNext())
-                {
-                    if (enumerator.Current.Value.Status == status)
-                        filteredGameList.Add(enumerator.Current.Value);
-                }
+                filteredGameList = games.Where(item => item.Value.Status == status).Select(item => item.Value) .ToList();            
             }
+
             return filteredGameList;
+        }
+
+        public GameInfo GetGameInfo(int gameId)
+        {
+            GameInfo gameInfo = null;
+
+            log.DebugFormat("In ChangeChangeStatus for gameId={0}", gameId);
+            lock (myLock)
+            {
+                if (games.ContainsKey(gameId))
+                    gameInfo = games[gameId];
+            }
+
+            return gameInfo;
         }
 
         public void GameAmAlive(Int16 gameId)

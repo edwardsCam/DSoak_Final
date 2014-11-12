@@ -84,9 +84,7 @@
     <None Include="Properties\DataSources\Common.GameInfoAlt.datasource" />
     <None Include="Properties\DataSources\GameRegistry.RegistryEntry.datasource" />
     <None Include="Properties\DataSources\SharedObjects.GameInfo.datasource" />
-    <None Include="Service References\GameRegistry\GameRegistryTester.GameRegistry.RegistryEntry.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
+    <None Include="Properties\DataSources\SharedObjects.RegistryEntry.datasource" />
     <None Include="Service References\GameRegistry\Registrar.wsdl" />
     <None Include="Service References\GameRegistry\Registrar.xsd">
       <SubType>Designer</SubType>

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
 
-using GameRegistry;
 using SampleWebserviceClient.Registry;
 using SharedObjects;
 

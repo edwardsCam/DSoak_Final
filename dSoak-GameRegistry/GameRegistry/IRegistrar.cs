@@ -26,10 +26,16 @@ namespace GameRegistry
         RegistryEntry[] GetPlayers();
 
         [OperationContract]
+        RegistryEntry GetProcessInfo(short processId);
+
+        [OperationContract]
         GameInfo RegisterGame(int gameManagerId, string label, int maxPlayers);
 
         [OperationContract]
         GameInfo[] GetGames(GameInfo.StatusCode status = GameInfo.StatusCode.Available);
+
+        [OperationContract]
+        GameInfo GetGameInfo(int gameId);
 
         [OperationContract]
         void GameAmAlive(int gameId);
@@ -39,5 +45,6 @@ namespace GameRegistry
 
         [OperationContract]
         string EndPointReflector();
+
     }
 }
