@@ -18,7 +18,7 @@ namespace MessageTesting
         }
 
         [TestMethod]
-        public void Setup_CheckEverything()
+        public void Hit_CheckEverything()
         {
             Hit msg1 = new Hit();
             Assert.IsNotNull(msg1.MessageNr);

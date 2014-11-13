@@ -14,6 +14,17 @@ namespace SharedObjects
         [DataMember]
         public Int16 UnitsOfWater { get; set; }
 
+        public Balloon Copy
+        {
+            get
+            {
+                Balloon result = new Balloon();
+                result.CopyFrom(this);
+                result.UnitsOfWater = UnitsOfWater;
+                return result;
+            }
+        }
+
         protected override void AddOwnDataToStream(MemoryStream mStream)
         {
             byte[] tmp = BitConverter.GetBytes(UnitsOfWater);
@@ -21,7 +32,6 @@ namespace SharedObjects
 
             base.AddOwnDataToStream(mStream);
         }
-
     }
 
 }

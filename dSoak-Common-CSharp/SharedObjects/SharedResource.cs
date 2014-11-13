@@ -39,6 +39,11 @@ namespace SharedObjects
         #endregion
 
         #region Public Methods
+        public void Sign()
+        {
+            DigitalSignature = ComputeDigitalSignature(new MemoryStream());
+        }
+
         public bool IsValid
         {
             get
@@ -74,9 +79,12 @@ namespace SharedObjects
             return ++nextId;
         }
 
-        protected void Sign()
+        protected void CopyFrom(SharedResource orig)
         {
-            DigitalSignature = ComputeDigitalSignature(new MemoryStream());
+            this.Id = orig.Id;
+            this.DigitalSignature = new byte[orig.DigitalSignature.Length];
+            for (int i = 0; i < orig.DigitalSignature.Length; i++)
+                this.DigitalSignature[i] = orig.DigitalSignature[i];
         }
 
         protected byte[] ComputeDigitalSignature(MemoryStream mStream)
@@ -88,7 +96,7 @@ namespace SharedObjects
             return result;
         }
 
-        virtual protected void AddOwnDataToStream(MemoryStream mStream)
+        protected virtual void AddOwnDataToStream(MemoryStream mStream)
         {
             byte[] idBytes = BitConverter.GetBytes(Id);
             mStream.Write(idBytes, 0, idBytes.Length);

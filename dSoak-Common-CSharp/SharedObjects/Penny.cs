@@ -11,5 +11,14 @@ namespace SharedObjects
     public class Penny : SharedResource
     {
 
+        public Penny Copy
+        {
+            get
+            {
+                Penny result = new Penny();
+                result.CopyFrom(this);
+                return result;
+            }
+        }
     }
 }

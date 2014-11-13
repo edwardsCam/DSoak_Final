@@ -10,5 +10,14 @@ namespace SharedObjects
     [DataContract]
     public class Umbrella : SharedResource
     {
+        public Umbrella Copy
+        {
+            get
+            {
+                Umbrella result = new Umbrella();
+                result.CopyFrom(this);
+                return result;
+            }
+        }
     }
 }

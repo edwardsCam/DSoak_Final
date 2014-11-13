@@ -19,5 +19,21 @@ namespace SharedObjects
         [DataMember]
         public StateCode Status { get; set; }
 
+        public virtual PlayerInfo Copy
+        {
+            get
+            {
+                PlayerInfo result = new PlayerInfo();
+                result.CopyFrom(this);
+                return result;
+            }
+        }
+
+        protected void CopyFrom(PlayerInfo orig)
+        {
+            PlayerId = orig.PlayerId;
+            EndPoint = orig.EndPoint;
+            Status = orig.Status;
+        }
     }
 }

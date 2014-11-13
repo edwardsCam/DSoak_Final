@@ -23,8 +23,7 @@ namespace SharedObjectTesting
             Assert.AreEqual(ep1, g2.FightManagerEP);
             Assert.AreEqual(10, g2.GameId);
             Assert.AreEqual(5, g2.MaxPlayers);
-            Assert.AreEqual(GameInfo.StatusCode.NotInitialized, g2.Status);
-
+            Assert.AreEqual(GameInfo.StatusCode.NotInitialized, g2.Status);           
         }
 
     }
