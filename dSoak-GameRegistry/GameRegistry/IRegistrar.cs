@@ -29,7 +29,7 @@ namespace GameRegistry
         RegistryEntry GetProcessInfo(short processId);
 
         [OperationContract]
-        GameInfo RegisterGame(int gameManagerId, string label, int maxPlayers);
+        GameInfo RegisterGame(int gameManagerId, string label, int maxPlayers, int maxThiefs);
 
         [OperationContract]
         GameInfo[] GetGames(GameInfo.StatusCode status = GameInfo.StatusCode.Available);

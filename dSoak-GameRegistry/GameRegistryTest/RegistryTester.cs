@@ -114,10 +114,11 @@ namespace GameRegistryTester
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.NotInitialized).Count);
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.InProgress).Count);
 
-            GameInfo g0 = myRegistry.RegisterGame(id1, "Game0", 10);
+            GameInfo g0 = myRegistry.RegisterGame(id1, "Game0", 10, 2);
             Assert.IsNotNull(g0);
             Assert.AreEqual("Game0", g0.Label);
             Assert.AreEqual(10, g0.MaxPlayers);
+            Assert.AreEqual(2, g0.MaxThiefs);
             Assert.AreEqual(GameInfo.StatusCode.NotInitialized, g0.Status);
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.Available).Count);
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.Complete).Count);
@@ -134,10 +135,11 @@ namespace GameRegistryTester
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.InProgress).Count);
             Assert.AreSame(g0, myRegistry.GetGames(GameInfo.StatusCode.Available)[0]);
 
-            GameInfo g1 = myRegistry.RegisterGame(id1, "Game1", 15);
+            GameInfo g1 = myRegistry.RegisterGame(id1, "Game1", 15, 3);
             Assert.IsNotNull(g1);
             Assert.AreEqual("Game1", g1.Label);
             Assert.AreEqual(15, g1.MaxPlayers);
+            Assert.AreEqual(3, g1.MaxThiefs);
             Assert.AreEqual(GameInfo.StatusCode.NotInitialized, g1.Status);
             Assert.AreEqual(1, myRegistry.GetGames(GameInfo.StatusCode.Available).Count);
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.Complete).Count);
@@ -156,7 +158,7 @@ namespace GameRegistryTester
             Assert.AreSame(g0, myRegistry.GetGames(GameInfo.StatusCode.Available)[0]);
             Assert.AreSame(g1, myRegistry.GetGames(GameInfo.StatusCode.Available)[1]);
 
-            GameInfo g2 = myRegistry.RegisterGame(id1, "Game2", 10);
+            GameInfo g2 = myRegistry.RegisterGame(id1, "Game2", 10, 2);
             Assert.IsNotNull(g2);
             Assert.AreEqual("Game2", g2.Label);
             Assert.AreEqual(10, g2.MaxPlayers);
@@ -180,7 +182,7 @@ namespace GameRegistryTester
             Assert.AreSame(g1, myRegistry.GetGames(GameInfo.StatusCode.Available)[1]);
             Assert.AreSame(g2, myRegistry.GetGames(GameInfo.StatusCode.Complete)[0]);
 
-            GameInfo g3 = myRegistry.RegisterGame(id1, "Game3", 10);
+            GameInfo g3 = myRegistry.RegisterGame(id1, "Game3", 10,2 );
             myRegistry.ChangeGameStatus(g3.GameId, GameInfo.StatusCode.Cancelled);
             Assert.AreEqual(2, myRegistry.GetGames(GameInfo.StatusCode.Available).Count);
             Assert.AreEqual(1, myRegistry.GetGames(GameInfo.StatusCode.Complete).Count);
@@ -192,7 +194,7 @@ namespace GameRegistryTester
             Assert.AreSame(g2, myRegistry.GetGames(GameInfo.StatusCode.Complete)[0]);
             Assert.AreSame(g3, myRegistry.GetGames(GameInfo.StatusCode.Cancelled)[0]);
 
-            GameInfo g4 = myRegistry.RegisterGame(id1, "Game4", 10);
+            GameInfo g4 = myRegistry.RegisterGame(id1, "Game4", 10, 2);
             Assert.AreEqual(2, myRegistry.GetGames(GameInfo.StatusCode.Available).Count);
             Assert.AreEqual(1, myRegistry.GetGames(GameInfo.StatusCode.Complete).Count);
             Assert.AreEqual(1, myRegistry.GetGames(GameInfo.StatusCode.Cancelled).Count);
@@ -204,7 +206,7 @@ namespace GameRegistryTester
             Assert.AreSame(g3, myRegistry.GetGames(GameInfo.StatusCode.Cancelled)[0]);
             Assert.AreSame(g4, myRegistry.GetGames(GameInfo.StatusCode.NotInitialized)[0]);
 
-            GameInfo g5 = myRegistry.RegisterGame(id1, "Game5", 10);
+            GameInfo g5 = myRegistry.RegisterGame(id1, "Game5", 10, 2);
             myRegistry.ChangeGameStatus(g5.GameId, GameInfo.StatusCode.InProgress);
             Assert.AreEqual(2, myRegistry.GetGames(GameInfo.StatusCode.Available).Count);
             Assert.AreEqual(1, myRegistry.GetGames(GameInfo.StatusCode.Complete).Count);
@@ -281,13 +283,13 @@ namespace GameRegistryTester
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.NotInitialized).Count);
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.InProgress).Count);
 
-            g0 = myRegistry.RegisterGame(id2, "Game0", 10);
+            g0 = myRegistry.RegisterGame(id2, "Game0", 10, 2);
             Assert.IsNull(g0);
 
-            g0 = myRegistry.RegisterGame(id1, null, 10);
+            g0 = myRegistry.RegisterGame(id1, null, 10, 2);
             Assert.IsNull(g0);
 
-            g0 = myRegistry.RegisterGame(id1, "Game0", 10);
+            g0 = myRegistry.RegisterGame(id1, "Game0", 10, 2);
             myRegistry.ChangeGameStatus(g0.GameId, GameInfo.StatusCode.Available);
             Assert.AreEqual(1, myRegistry.GetGames(GameInfo.StatusCode.Available).Count);
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.Complete).Count);
@@ -296,7 +298,7 @@ namespace GameRegistryTester
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.InProgress).Count);
             Assert.AreSame(g0, myRegistry.GetGames(GameInfo.StatusCode.Available)[0]);
 
-            g1 = myRegistry.RegisterGame(id1, "Game1", 15);
+            g1 = myRegistry.RegisterGame(id1, "Game1", 15, 5);
             myRegistry.ChangeGameStatus(g1.GameId, GameInfo.StatusCode.Available);
             Assert.AreEqual(2, myRegistry.GetGames(GameInfo.StatusCode.Available).Count);
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.Complete).Count);
@@ -346,12 +348,12 @@ namespace GameRegistryTester
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.NotInitialized).Count);
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.InProgress).Count);
 
-            g2 = myRegistry.RegisterGame(id1, "Game2", 10);
+            g2 = myRegistry.RegisterGame(id1, "Game2", 10, 2);
             myRegistry.ChangeGameStatus(g2.GameId, GameInfo.StatusCode.Complete);
-            g3 = myRegistry.RegisterGame(id1, "Game3", 10);
+            g3 = myRegistry.RegisterGame(id1, "Game3", 10, 2);
             myRegistry.ChangeGameStatus(g3.GameId, GameInfo.StatusCode.Cancelled);
-            g4 = myRegistry.RegisterGame(id1, "Game4", 10);
-            g5 = myRegistry.RegisterGame(id1, "Game5", 19);
+            g4 = myRegistry.RegisterGame(id1, "Game4", 10, 2);
+            g5 = myRegistry.RegisterGame(id1, "Game5", 19, 4);
             myRegistry.ChangeGameStatus(g5.GameId, GameInfo.StatusCode.InProgress);
             Assert.AreEqual(2, myRegistry.GetGames(GameInfo.StatusCode.Available).Count);
             Assert.AreEqual(1, myRegistry.GetGames(GameInfo.StatusCode.Complete).Count);

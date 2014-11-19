@@ -170,7 +170,7 @@ namespace GameRegistry
             }
         }
 
-        public GameInfo RegisterGame(Int16 gameManagerId, string label, Int16 maxPlayers)
+        public GameInfo RegisterGame(Int16 gameManagerId, string label, Int16 maxPlayers, Int16 maxThiefs)
         {
             log.Debug("In RegisterGame");
             GameInfo game = null;
@@ -178,7 +178,14 @@ namespace GameRegistry
             {
                 log.DebugFormat("Register {0} to process {1}", label, gameManagerId);
 
-                game = new GameInfo() { Label = label, FightManagerEP = processes[gameManagerId].Ep, MaxPlayers = maxPlayers, AliveTimestamp = DateTime.Now };
+                game = new GameInfo()
+                            {
+                                Label = label,
+                                FightManagerEP = processes[gameManagerId].Ep,
+                                MaxPlayers = maxPlayers,
+                                MaxThiefs = maxThiefs,
+                                AliveTimestamp = DateTime.Now
+                            };
                 game.GameId = GetNextIdNumber();
                 log.DebugFormat("New game's id={0}", game.GameId);
                 lock (myLock)

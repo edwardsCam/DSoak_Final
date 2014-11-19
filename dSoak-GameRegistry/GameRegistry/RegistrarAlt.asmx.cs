@@ -49,9 +49,9 @@ namespace GameRegistry
         }
 
         [WebMethod]
-        public GameInfo RegisterGame(int gameManagerId, string label, int maxPlayers)
+        public GameInfo RegisterGame(int gameManagerId, string label, int maxPlayers, int maxThiefs)
         {
-            return Registry.Instance.RegisterGame(Convert.ToInt16(gameManagerId), label, Convert.ToInt16(maxPlayers));
+            return Registry.Instance.RegisterGame(Convert.ToInt16(gameManagerId), label, Convert.ToInt16(maxPlayers), Convert.ToInt16(maxThiefs));
         }
 
         [WebMethod]

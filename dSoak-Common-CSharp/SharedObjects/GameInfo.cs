@@ -22,6 +22,8 @@ namespace SharedObjects
         [DataMember]
         public Int16 MaxPlayers { get; set; }
         [DataMember]
+        public Int16 MaxThiefs { get; set; }
+
         public DateTime AliveTimestamp { get; set; }
 
         public virtual GameInfo Copy
