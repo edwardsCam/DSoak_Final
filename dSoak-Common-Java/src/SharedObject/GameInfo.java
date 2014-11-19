@@ -12,7 +12,8 @@ public class GameInfo implements Serializable
     public StatusCode Status;
     public short MaxPlayers;
     public Date AliveTimeStamp;
-    
+    public short MaxThiefs;
+
     public enum StatusCode
 	{
 		NOTINITIALIZED((short) 0),

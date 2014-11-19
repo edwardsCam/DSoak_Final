@@ -31,10 +31,12 @@ public class GameInfoTester
 		g2.GameId = 10;
 		g2.MaxPlayers = 5;
 		g2.Status = GameInfo.StatusCode.AVAILABLE;
+		g2.MaxThiefs = 2;
 		
 		assertTrue(ep1.Host().equals(g2.FlightManagerEP.Host()));
 		assertEquals(10, g2.GameId);
 		assertEquals(5,g2.MaxPlayers);
 		assertEquals(GameInfo.StatusCode.AVAILABLE, g2.Status);
+		assertEquals(2, g2.MaxThiefs);
 	}
 }

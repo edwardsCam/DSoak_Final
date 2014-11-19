@@ -1,0 +1,8 @@
+package Messages;
+
+import SharedObject.Balloon;
+
+public class BalloonStolen extends StealingBase
+{
+	public Balloon StolenBalloon;
+}

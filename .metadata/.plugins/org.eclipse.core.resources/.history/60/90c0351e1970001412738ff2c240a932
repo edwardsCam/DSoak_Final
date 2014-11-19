@@ -1,0 +1,46 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import Messages.ProcessSummary;
+import SharedObject.MessageNumber;
+import SharedObject.ProcessData;
+
+public class ProcessSummaryTester
+{
+	@Test
+	public void test() 
+	{
+		MessageNumber.LocalProcessId = 100;
+		
+		ProcessSummary msg1 = new ProcessSummary();
+		assertNotNull(msg1.MessageNr);
+		assertEquals(100, msg1.MessageNr.ProcessId);
+		assertTrue(msg1.MessageNr.SeqNumber > 0);
+		assertEquals(msg1.MessageNr, msg1.ConvId);
+		
+		ProcessData data = new ProcessData();
+		data.GameId = 102;
+		data.ProcessId = 10;
+		data.ProcessType = ProcessData.PossibleProcessType.Player;
+		data.LifePoints = 200;
+		data.HitPoints = 10;
+		data.NumberOfPennies = 11;
+		data.NumberOfUnfilledBalloon = 12;
+		data.NumberOfFilledBalloon = 13;
+		data.NumberOfUnraisedUmbrellas = 14;
+		data.HasUmbrellaRaised = true;
+             
+       ProcessSummary msg2 = new ProcessSummary();
+       msg2.Data = data;
+       assertNotNull(msg2.MessageNr);
+       assertEquals(100, msg2.MessageNr.ProcessId);
+       assertEquals(msg1.MessageNr.SeqNumber + 1, msg2.MessageNr.SeqNumber);
+       assertEquals(msg2.MessageNr, msg2.ConvId);
+       assertNotNull(msg2.Data);
+       assertSame(data, msg2.Data);
+	}
+
+}

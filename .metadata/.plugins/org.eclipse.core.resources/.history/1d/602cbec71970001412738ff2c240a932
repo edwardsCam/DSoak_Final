@@ -1,0 +1,17 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import SharedObject.MessageNumber;
+
+public class StealingBlockedTester 
+{
+	@Test
+	public void test_Everything() 
+	{
+		MessageNumber.LocalProcessId = 100;
+	}
+
+}

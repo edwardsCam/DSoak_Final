@@ -1,0 +1,9 @@
+package Messages;
+
+import java.io.Serializable;
+
+public class BlockStealing extends StealingBase implements Serializable
+{
+s	private static final long serialVersionUID = -5521356665495815372L;
+
+}

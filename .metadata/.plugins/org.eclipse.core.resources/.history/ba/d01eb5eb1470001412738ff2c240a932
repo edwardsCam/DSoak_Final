@@ -1,0 +1,10 @@
+package Messages;
+
+import java.io.Serializable;
+
+import SharedObject.Balloon;
+
+public class BalloonStolen extends StealingBase implements Serializable
+{
+	public Balloon StolenBalloon;
+}

@@ -1,0 +1,41 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import Messages.BlockStealing;
+import SharedObject.MessageNumber;
+
+public class BlockStealingTester 
+{
+	@Test
+	public void test_Everything()
+	{
+		 MessageNumber.LocalProcessId = 100;
+		 
+		 BlockStealing msg1 = new BlockStealing();
+		 assertNotNull(msg1.MessageNr);
+         assertEquals(100, msg1.MessageNr.ProcessId);
+         assertTrue(msg1.MessageNr.SeqNumber > 0);
+         assertEquals(msg1.MessageNr, msg1.ConvId);
+         assertEquals(0, msg1.GameId);
+         assertEquals(0, msg1.TargetProcessId);
+         assertEquals(0, msg1.ThiefId);
+
+         BlockStealing msg2 = new BlockStealing();
+         msg2.GameId = 11;
+         msg2.TargetProcessId = 12;
+         msg2.ThiefId = 13;
+         
+         Assert.IsNotNull(msg2.MessageNr);
+         Assert.AreEqual(100, msg2.MessageNr.ProcessId);
+         Assert.AreEqual(msg1.MessageNr.SeqNumber + 1, msg2.MessageNr.SeqNumber);
+         Assert.AreEqual(msg2.MessageNr, msg2.ConvId);
+         Assert.AreEqual(11, msg2.GameId);
+         Assert.AreEqual(12, msg2.TargetProcessId);
+         Assert.AreEqual(13, msg2.ThiefId);
+
+	}
+
+}

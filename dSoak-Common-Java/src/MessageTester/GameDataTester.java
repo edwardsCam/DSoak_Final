@@ -18,6 +18,8 @@ import SharedObject.GameInfo.StatusCode;
 import SharedObject.MessageNumber;
 import SharedObject.Penny;
 import SharedObject.PlayerInfo;
+import SharedObject.ProcessData;
+import SharedObject.ProcessData.PossibleProcessType;
 
 public class GameDataTester
 {
@@ -37,30 +39,37 @@ public class GameDataTester
 		gameInfo.GameId = 102;
 		gameInfo.Status = GameInfo.StatusCode.AVAILABLE;
 		
-		ArrayList<PlayerInfo> players = new  ArrayList<PlayerInfo>();
-		PlayerInfo plyerInfo1 = new PlayerInfo();
-		plyerInfo1.PlayerId = 10 ;
+		ArrayList<ProcessData> processes = new  ArrayList<ProcessData>();
+		ProcessData process1 = new ProcessData();
+		process1.GameId = 102;
+		process1.ProcessId = 10;
+		process1.ProcessType = PossibleProcessType.Player;
 		
-		PlayerInfo plyerInfo2 = new PlayerInfo();
-		plyerInfo2.PlayerId = 20 ;
+		ProcessData process2 = new ProcessData();
+		process2.GameId = 102;
+		process2.ProcessId = 20;
+		process2.ProcessType = PossibleProcessType.Player;
 		
-		PlayerInfo plyerInfo3 = new PlayerInfo();
-		plyerInfo3.PlayerId = 30 ;
+		ProcessData process3 = new ProcessData();
+		process3.GameId = 102;
+		process3.ProcessId = 30;
+		process3.ProcessType = PossibleProcessType.Thief;
 		
-		players.add(plyerInfo1);
-		players.add(plyerInfo2);
-		players.add(plyerInfo3);
+		
+		processes.add(process1);
+		processes.add(process2);
+		processes.add(process3);
 		
 		GameData msg2 = new GameData();
 		msg2.Info = gameInfo;
-		msg2.Players = players;
+		msg2.Processes  = processes;
 			
 		assertNotNull(msg2.MessageNr);
 		assertEquals(100, msg2.MessageNr.ProcessId);
 		assertEquals(msg1.MessageNr.SeqNumber + 1 , msg2.MessageNr.SeqNumber);
 		assertEquals(msg2.MessageNr, msg2.ConvId);
-		assertNotNull(msg2.Players);
-		assertSame(players, msg2.Players);
+		assertNotNull(msg2.Processes);
+		assertSame(processes, msg2.Processes);
 		
 		byte[] bytes = msg2.Encode();
 		
@@ -81,8 +90,8 @@ public class GameDataTester
 		assertNotNull(msg4.Info);
 		assertEquals(msg2.Info.GameId, msg4.Info.GameId);
 		assertEquals(msg2.Info.Status.getValue(), msg4.Info.Status.getValue());
-		assertNotNull(msg4.Players);
-		assertEquals(msg2.Players.size(), msg4.Players.size());
+		assertNotNull(msg4.Processes);
+		assertEquals(msg2.Processes.size(), msg4.Processes.size());
 	}
 
 }

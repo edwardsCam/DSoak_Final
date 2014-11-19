@@ -31,5 +31,10 @@ public class PlayerInfoTester {
 		assertEquals(101, p2.PlayerId);
 		assertTrue(ep1.Host().equals(p2.EndPoint.Host()));
 		assertEquals(StateCode.OFFLINE, p2.Status);
+		
+		PlayerInfo p3 = p2.Copy();
+		assertEquals(p2.PlayerId, p3.PlayerId);
+		assertTrue(ep1.Host().equals(p3.EndPoint.Host()));
+		assertEquals(p2.Status, p3.Status);
 	}
 }

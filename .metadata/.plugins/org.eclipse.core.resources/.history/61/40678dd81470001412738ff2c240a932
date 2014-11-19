@@ -1,0 +1,6 @@
+package Messages;
+
+public class ProcessSummary extends Message
+{
+	public ProcessData Data;
+}

@@ -1,0 +1,10 @@
+package Messages;
+
+import java.io.Serializable;
+
+import SharedObject.ProcessData;
+
+public class ProcessSummary extends Message implements Serializable
+{
+	public ProcessData Data;
+}

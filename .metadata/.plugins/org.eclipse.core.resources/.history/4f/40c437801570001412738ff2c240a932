@@ -1,0 +1,27 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import SharedObject.MessageNumber;
+
+public class BalloonStolenTester
+{
+	@Test
+	public void test() 
+	{
+		MessageNumber.LocalProcessId = 100;
+		
+		BalloonStolen msg1 = new BalloonStolen();
+		Assert.IsNotNull(msg1.MessageNr);
+		Assert.AreEqual(100, msg1.MessageNr.ProcessId);
+		Assert.IsTrue(msg1.MessageNr.SeqNumber > 0);
+		Assert.AreEqual(msg1.MessageNr, msg1.ConvId);
+		Assert.AreEqual(0, msg1.GameId);
+		Assert.AreEqual(0, msg1.TargetProcessId);
+		Assert.AreEqual(0, msg1.ThiefId);
+		Assert.IsNull(msg1.StolenBalloon);
+	}	
+
+}

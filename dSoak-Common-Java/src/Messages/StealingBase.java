@@ -1,0 +1,10 @@
+package Messages;
+
+public abstract class StealingBase extends Message
+{
+	public short GameId;
+    
+    public short TargetProcessId;
+    
+    public short ThiefId;
+}

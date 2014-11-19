@@ -1,0 +1,19 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class ProcessSummaryTester
+{
+	@Test
+	public void test() 
+	{
+		MessageNumber.LocalProcessId = 100;
+		
+	
+	
+	
+	}
+
+}
