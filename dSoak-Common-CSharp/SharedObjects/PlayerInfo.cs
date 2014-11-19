@@ -19,6 +19,8 @@ namespace SharedObjects
         [DataMember]
         public StateCode Status { get; set; }
 
+        public DateTime? AliveTimestamp { get; set; }
+
         public virtual PlayerInfo Copy
         {
             get
