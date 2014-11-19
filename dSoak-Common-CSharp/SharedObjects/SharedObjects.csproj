@@ -46,6 +46,7 @@
     <Compile Include="MessageNumber.cs" />
     <Compile Include="Penny.cs" />
     <Compile Include="PlayerInfo.cs" />
+    <Compile Include="ProcessData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublicEndPoint.cs" />
     <Compile Include="RegistryEntry.cs" />

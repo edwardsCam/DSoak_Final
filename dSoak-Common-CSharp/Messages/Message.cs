@@ -81,7 +81,13 @@ namespace Messages
                 {"Shutdown", new DataContractJsonSerializer(typeof (Shutdown))},
                 {"StopStream", new DataContractJsonSerializer(typeof (StopStream))},
                 {"ThrowBalloon", new DataContractJsonSerializer(typeof (ThrowBalloon))},
-                {"UmbrellaPurchased", new DataContractJsonSerializer(typeof (UmbrellaPurchased))}
+                {"UmbrellaPurchased", new DataContractJsonSerializer(typeof (UmbrellaPurchased))},
+                {"ProcessSummary", new DataContractJsonSerializer(typeof (ProcessSummary))},
+                {"Stealing", new DataContractJsonSerializer(typeof (Stealing))},
+                {"BlockStealing", new DataContractJsonSerializer(typeof (BlockStealing))},
+                {"StealingBlocked", new DataContractJsonSerializer(typeof (StealingBlocked))},
+                {"GiveUpABalloon", new DataContractJsonSerializer(typeof (GiveUpABalloon))},
+                {"BalloonStolen", new DataContractJsonSerializer(typeof (BalloonStolen))}
             };
         }
 

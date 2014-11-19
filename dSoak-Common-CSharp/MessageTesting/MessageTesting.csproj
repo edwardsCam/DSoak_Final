@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AckTester.cs" />
     <Compile Include="AliveQueryTester.cs" />
+    <Compile Include="BlockStealingTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BalloonFilledTester.cs" />
     <Compile Include="BalloonPurchasedTester.cs" />
@@ -71,6 +72,11 @@
     <Compile Include="StopStreamTester.cs" />
     <Compile Include="ThrowBalloonTester.cs" />
     <Compile Include="UmbrellaPurchasedTester.cs" />
+    <Compile Include="ProcessSummaryTester.cs" />
+    <Compile Include="StealingTester.cs" />
+    <Compile Include="StealingBlockedTester.cs" />
+    <Compile Include="BalloonStolenTester.cs" />
+    <Compile Include="GiveUpABalloonTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Messages\Messages.csproj">

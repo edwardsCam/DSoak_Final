@@ -61,6 +61,7 @@
     <Compile Include="PublicEndPointTester.cs" />
     <Compile Include="UmbrellaRaisingTester.cs" />
     <Compile Include="SharedResoureTester.cs" />
+    <Compile Include="ProcessDataTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SharedObjects\SharedObjects.csproj">
