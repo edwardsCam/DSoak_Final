@@ -15,6 +15,6 @@ namespace Messages
         [DataMember]
         public GameInfo Info { get; set; }
         [DataMember]
-        public List<PlayerInfo> Players { get; set; }
+        public List<ProcessData> Processes { get; set; }
     }
 }
