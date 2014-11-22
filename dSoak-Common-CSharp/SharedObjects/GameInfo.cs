@@ -22,7 +22,7 @@ namespace SharedObjects
         [DataMember]
         public Int16 MaxPlayers { get; set; }
         [DataMember]
-        public Int16 MaxThiefs { get; set; }
+        public Int16 MaxThieves { get; set; }
 
         public DateTime AliveTimestamp { get; set; }
 
