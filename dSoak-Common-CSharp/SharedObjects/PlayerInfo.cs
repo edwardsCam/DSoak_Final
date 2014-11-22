@@ -10,10 +10,10 @@ namespace SharedObjects
     [DataContract]
     public class PlayerInfo
     {
-        public enum StateCode { Unknown=0, OnLine=1, OffLine=2 };
+        public enum StateCode { Unknown = 0, OnLine = 1, OffLine = 2 };
 
         [DataMember]
-        public Int32 PlayerId { get; set; }
+        public Int16 PlayerId { get; set; }
         [DataMember]
         public PublicEndPoint EndPoint { get; set; }
         [DataMember]
