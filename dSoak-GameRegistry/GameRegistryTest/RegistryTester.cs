@@ -118,7 +118,7 @@ namespace GameRegistryTester
             Assert.IsNotNull(g0);
             Assert.AreEqual("Game0", g0.Label);
             Assert.AreEqual(10, g0.MaxPlayers);
-            Assert.AreEqual(2, g0.MaxThiefs);
+            Assert.AreEqual(2, g0.MaxThieves);
             Assert.AreEqual(GameInfo.StatusCode.NotInitialized, g0.Status);
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.Available).Count);
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.Complete).Count);
@@ -139,7 +139,7 @@ namespace GameRegistryTester
             Assert.IsNotNull(g1);
             Assert.AreEqual("Game1", g1.Label);
             Assert.AreEqual(15, g1.MaxPlayers);
-            Assert.AreEqual(3, g1.MaxThiefs);
+            Assert.AreEqual(3, g1.MaxThieves);
             Assert.AreEqual(GameInfo.StatusCode.NotInitialized, g1.Status);
             Assert.AreEqual(1, myRegistry.GetGames(GameInfo.StatusCode.Available).Count);
             Assert.AreEqual(0, myRegistry.GetGames(GameInfo.StatusCode.Complete).Count);
