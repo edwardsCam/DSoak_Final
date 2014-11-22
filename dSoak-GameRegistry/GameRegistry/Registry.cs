@@ -108,7 +108,7 @@ namespace GameRegistry
                     if (gameManagers.ContainsKey(epString))
                         result = (processType == RegistryEntry.ProcessType.GameManager) ? gameManagers[epString].ProcessId : (Int16)(-2);
                     else if (players.ContainsKey(epString))
-                        result = (processType == RegistryEntry.ProcessType.Player) ? players[epString].ProcessId : (Int16)(-2);
+                        result = players[epString].ProcessId;
                     else
                     {
                         result = GetNextIdNumber();
@@ -165,14 +165,18 @@ namespace GameRegistry
         {
             lock (myLock)
             {
+                log.DebugFormat("Enter AmLive, with processId={0}", processId);
                 if (processes.ContainsKey(processId))
+                {
                     processes[processId].AliveTimestamp = DateTime.Now;
+                    log.DebugFormat("Updated Timestamp for Process {0} to {1}", processId, processes[processId].AliveTimestamp);
+                }
             }
         }
 
-        public GameInfo RegisterGame(Int16 gameManagerId, string label, Int16 maxPlayers, Int16 maxThiefs)
+        public GameInfo RegisterGame(Int16 gameManagerId, string label, Int16 maxPlayers, Int16 maxThieves)
         {
-            log.Debug("In RegisterGame");
+            log.DebugFormat("In RegisterGame, with gameManagerId={0}, label={1}, maxPlayers={2}, maxThieves={3}", gameManagerId, label, maxPlayers, maxThieves);
             GameInfo game = null;
             if (!string.IsNullOrWhiteSpace(label) && processes.ContainsKey(gameManagerId) && processes[gameManagerId].Type == RegistryEntry.ProcessType.GameManager)
             {
@@ -183,7 +187,7 @@ namespace GameRegistry
                                 Label = label,
                                 FightManagerEP = processes[gameManagerId].Ep,
                                 MaxPlayers = maxPlayers,
-                                MaxThiefs = maxThiefs,
+                                MaxThieves = maxThieves,
                                 AliveTimestamp = DateTime.Now
                             };
                 game.GameId = GetNextIdNumber();
@@ -233,8 +237,12 @@ namespace GameRegistry
         {
             lock (myLock)
             {
+                log.DebugFormat("Enter GameAmAlive, with gameId={0}", gameId);
                 if (games.ContainsKey(gameId))
+                {
                     games[gameId].AliveTimestamp = DateTime.Now;
+                    log.DebugFormat("Update Timestamp for game {0} to {1}", gameId, games[gameId].AliveTimestamp);
+                }
             }
         }
 
@@ -421,6 +429,7 @@ namespace GameRegistry
                 while (iterator.MoveNext())
                 {
                     RegistryEntry entry = iterator.Current.Value;
+
                     if (entry.AliveTimestamp.AddMilliseconds(deadTimeout) >= DateTime.Now)
                         livingProcesses.Add(entry.ProcessId, entry);
                 }
@@ -432,6 +441,7 @@ namespace GameRegistry
                 iterator = processes.GetEnumerator();
                 while (iterator.MoveNext())
                 {
+                    log.DebugFormat("Keep {0} process {1}", iterator.Current.Value.Type, iterator.Current.Value.ProcessId);
                     Dictionary<string, RegistryEntry> dictionary = (iterator.Current.Value.Type == RegistryEntry.ProcessType.GameManager) ? gameManagers : players;
                     dictionary.Add(iterator.Current.Value.Ep.ToString(), iterator.Current.Value);
                 }
@@ -455,7 +465,10 @@ namespace GameRegistry
                         case GameInfo.StatusCode.InProgress:
                             keep = true;
                             if (game.AliveTimestamp.AddMilliseconds(deadTimeout) < DateTime.Now)
+                            {
+                                log.DebugFormat("Game {0} is not alive, mark as cancelled", game.GameId);
                                 game.Status = GameInfo.StatusCode.Cancelled;
+                            }
                             break;
                         case GameInfo.StatusCode.Cancelled:
                         case GameInfo.StatusCode.Complete:
@@ -463,7 +476,12 @@ namespace GameRegistry
                             break;
                     }
                     if (keep)
+                    {
                         livingGames.Add(game.GameId, game);
+                        log.DebugFormat("Keep game {0} around", game.GameId);
+                    }
+                    else
+                        log.DebugFormat("Don't keep {0} around", game.GameId);
                 }
                 games = livingGames;
             }
