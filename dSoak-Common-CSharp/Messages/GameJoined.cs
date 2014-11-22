@@ -15,6 +15,8 @@ namespace Messages
         [DataMember]
         public Int16 GameId { get; set; }
         [DataMember]
+        public Int16 InitialLifePoints { get; set; }
+        [DataMember]
         public List<Penny> Pennies { get; set; }
     }
 }
