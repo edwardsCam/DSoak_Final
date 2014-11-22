@@ -98,6 +98,9 @@ namespace Messages
 
         private static DataContractJsonSerializer LookupSerializer(string typeName)
         {
+            if (!hasBeenInitialized)
+                Initialize();
+
             return serializers[typeName];
         }
 
