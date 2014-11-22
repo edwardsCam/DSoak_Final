@@ -10,7 +10,7 @@ namespace SharedObjects
     [DataContract]
     public class RegistryEntry
     {
-        public enum ProcessType { GameManager, Player };
+        public enum ProcessType { GameManager, Player, BalloonStore, WaterServer, UmbrellaManager, Thief };
 
         [DataMember]
         public PublicEndPoint Ep { get; set; }
