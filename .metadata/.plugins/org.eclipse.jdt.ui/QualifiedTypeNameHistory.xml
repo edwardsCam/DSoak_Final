@@ -57,7 +57,7 @@
 <fullyQualifiedTypeName name="SharedObject.ProcessData"/>
 <fullyQualifiedTypeName name="Messages.StealingBlocked"/>
 <fullyQualifiedTypeName name="SharedObject.MessageNumber"/>
-<fullyQualifiedTypeName name="java.io.Serializable"/>
 <fullyQualifiedTypeName name="Messages.Stealing"/>
 <fullyQualifiedTypeName name="Messages.Message"/>
+<fullyQualifiedTypeName name="java.io.Serializable"/>
 </qualifiedTypeNameHistroy>

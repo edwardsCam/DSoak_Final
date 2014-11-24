@@ -1,0 +1,8 @@
+package SharedObject;
+
+import java.io.Serializable;
+
+public class RegistryEntry implements Serializable
+{
+
+}
