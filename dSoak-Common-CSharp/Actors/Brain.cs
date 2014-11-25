@@ -108,7 +108,10 @@ namespace Actors
 				_Registrar.GameInfo g = null;
 				foreach (_Registrar.GameInfo i in games)
 					if (i.Status == _Registrar.GameInfoStatusCode.Available)
+					{
 						g = i;
+						break;
+					}
 
 				active_game = new Game(g);
 			}
