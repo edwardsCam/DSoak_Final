@@ -57,6 +57,12 @@ namespace Messages
             return result;
         }
 
+		public string getTypeAsString()
+		{
+			DataContractJsonSerializer json = LookupSerializer(GetType().Name);
+			return serializers.FirstOrDefault(x => x.Value == json).Key;
+		}
+
         private static void Initialize()
         {
             serializers = new Dictionary<string, DataContractJsonSerializer>

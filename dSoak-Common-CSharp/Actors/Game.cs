@@ -54,7 +54,7 @@ namespace Actors
 				status = (SharedObjects.GameInfo.StatusCode)g.Status;
 				maxPlayers = g.MaxPlayers;
 				fightManagerEP = new SharedObjects.PublicEndPoint(g.FightManagerEP.HostAndPort);
-				timestamp = g.AliveTimestamp;
+				//timestamp = g.AliveTimestamp;
 			}
 			else
 				new Game();

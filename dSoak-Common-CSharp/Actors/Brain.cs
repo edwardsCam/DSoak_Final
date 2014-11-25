@@ -120,7 +120,7 @@ namespace Actors
 			{
 				SharedObjects.PlayerInfo player = new SharedObjects.PlayerInfo();
 				player.EndPoint = com.setLocalEP(false);
-				player.PlayerId = 0198284601;
+				player.PlayerId = 019828; //todo
 				player.Status = SharedObjects.PlayerInfo.StateCode.OnLine;
 
 				Messages.JoinGame msg = new Messages.JoinGame();
