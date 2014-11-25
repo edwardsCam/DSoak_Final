@@ -16,6 +16,8 @@ namespace SharedObjects
         [DataMember]
         public string Label { get; set; }
         [DataMember]
+        public Int16 FightManagerId { get; set; }
+        [DataMember]
         public PublicEndPoint FightManagerEP { get; set; }
         [DataMember]
         public StatusCode Status { get; set; }

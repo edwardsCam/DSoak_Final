@@ -10,7 +10,6 @@ namespace SharedObjects
     [DataContract]
     public class Penny : SharedResource
     {
-
         public Penny Copy
         {
             get
