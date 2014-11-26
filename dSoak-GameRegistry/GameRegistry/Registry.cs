@@ -14,6 +14,7 @@ using log4net;
 
 namespace GameRegistry
 {
+    // TODO: Switch over to Concurrent Dictionaries
     public class Registry : IDisposable
     {
         #region Private and Protected Data Members
@@ -28,7 +29,7 @@ namespace GameRegistry
         protected Dictionary<string, RegistryEntry> players;
         protected Dictionary<Int16, RegistryEntry> processes;
         protected Dictionary<int, GameInfo> games;
-        private Int16 NextGameId = 1;
+        private Int16 nextId = 1;
         protected Timer cleanupTimer;
         protected string fileName;
         protected int inCleanup = 0;
@@ -108,7 +109,10 @@ namespace GameRegistry
                     if (gameManagers.ContainsKey(epString))
                         result = (processType == RegistryEntry.ProcessType.GameManager) ? gameManagers[epString].ProcessId : (Int16)(-2);
                     else if (players.ContainsKey(epString))
+                    {
                         result = players[epString].ProcessId;
+                        players[epString].Type = processType;
+                    }
                     else
                     {
                         result = GetNextIdNumber();
@@ -185,6 +189,7 @@ namespace GameRegistry
                 game = new GameInfo()
                             {
                                 Label = label,
+                                FightManagerId = gameManagerId,
                                 FightManagerEP = processes[gameManagerId].Ep,
                                 MaxPlayers = maxPlayers,
                                 MaxThieves = maxThieves,
@@ -204,6 +209,19 @@ namespace GameRegistry
             return game;
         }
 
+        public List<GameInfo> GetAllGames()
+        {
+            log.Debug("In GetGames");
+
+            List<GameInfo> gameList;
+
+            lock (myLock)
+            {
+                gameList = games.Values.ToList();
+            }
+            
+            return gameList;
+        }
 
         public List<GameInfo> GetGames(GameInfo.StatusCode status)
         {
@@ -240,8 +258,13 @@ namespace GameRegistry
                 log.DebugFormat("Enter GameAmAlive, with gameId={0}", gameId);
                 if (games.ContainsKey(gameId))
                 {
-                    games[gameId].AliveTimestamp = DateTime.Now;
-                    log.DebugFormat("Update Timestamp for game {0} to {1}", gameId, games[gameId].AliveTimestamp);
+                    if (processes.ContainsKey(games[gameId].FightManagerId))
+                    {
+                        games[gameId].AliveTimestamp = DateTime.Now;
+                        log.DebugFormat("Update Timestamp for game {0} to {1}", gameId, games[gameId].AliveTimestamp);
+                    }
+                    else
+                        log.Warn("Can no long keep game alive, because it game manager is dead");
                 }
             }
         }
@@ -264,6 +287,7 @@ namespace GameRegistry
         public void LoadFromFile(string filename)
         {
             log.Debug("In LoadFromFile");
+
             if (!string.IsNullOrWhiteSpace(filename) &&
                 File.Exists(filename))
             {
@@ -301,6 +325,7 @@ namespace GameRegistry
                     processes.Add(entry.ProcessId, entry);
                     Dictionary<string, RegistryEntry> dictionary = (entry.Type == RegistryEntry.ProcessType.GameManager) ? gameManagers : players;
                     dictionary.Add(entry.Ep.ToString(), entry);
+                    nextId = Math.Max(nextId, Convert.ToInt16(entry.ProcessId+1));
                 }
             }
         }
@@ -328,6 +353,7 @@ namespace GameRegistry
                     GameInfo game = (GameInfo) serializer.ReadObject(mstream);
                     game.AliveTimestamp = DateTime.Now;
                     games.Add(game.GameId, game);
+                    nextId = Math.Max(nextId, Convert.ToInt16(game.GameId+1));
                 }
             }
         }
@@ -401,9 +427,9 @@ namespace GameRegistry
         #region Private Methods
         private Int16 GetNextIdNumber()
         {
-            if (NextGameId == Int16.MaxValue)
-                NextGameId = 1;
-            return NextGameId++;
+            if (nextId == Int16.MaxValue)
+                nextId = 1;
+            return nextId++;
         }
 
         private void Cleanup(object state)
@@ -432,6 +458,11 @@ namespace GameRegistry
 
                     if (entry.AliveTimestamp.AddMilliseconds(deadTimeout) >= DateTime.Now)
                         livingProcesses.Add(entry.ProcessId, entry);
+                    else
+                    {
+                        log.DebugFormat("Don't keep process {0}", entry.ProcessId);
+                        CancelGamesForProcess(entry.ProcessId);
+                    }
                 }
                 processes = livingProcesses;
 
@@ -444,6 +475,22 @@ namespace GameRegistry
                     log.DebugFormat("Keep {0} process {1}", iterator.Current.Value.Type, iterator.Current.Value.ProcessId);
                     Dictionary<string, RegistryEntry> dictionary = (iterator.Current.Value.Type == RegistryEntry.ProcessType.GameManager) ? gameManagers : players;
                     dictionary.Add(iterator.Current.Value.Ep.ToString(), iterator.Current.Value);
+                }
+            }
+        }
+
+        private void CancelGamesForProcess(Int16 gameManagerId)
+        {
+            log.DebugFormat("Cleanup games for {0}", gameManagerId);
+            Dictionary<int, GameInfo>.Enumerator gameIterator = games.GetEnumerator();
+            while (gameIterator.MoveNext())
+            {
+                log.DebugFormat("Consider game {0}, FightManagerId={1}, Status={2}", gameIterator.Current.Value.GameId, gameIterator.Current.Value.FightManagerId, gameIterator.Current.Value.Status);
+                if (gameIterator.Current.Value.FightManagerId == gameManagerId &&
+                    gameIterator.Current.Value.Status != GameInfo.StatusCode.Complete)
+                {
+                    log.DebugFormat("Cancelling game {0}", gameIterator.Current.Value.GameId);
+                    gameIterator.Current.Value.Status = GameInfo.StatusCode.Cancelled;
                 }
             }
         }
@@ -471,6 +518,8 @@ namespace GameRegistry
                             }
                             break;
                         case GameInfo.StatusCode.Cancelled:
+                            keep = false;
+                            break;
                         case GameInfo.StatusCode.Complete:
                             keep = (game.AliveTimestamp.AddMilliseconds(cleanupFrequency) >= DateTime.Now);
                             break;

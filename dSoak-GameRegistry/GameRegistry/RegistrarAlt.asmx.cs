@@ -55,6 +55,12 @@ namespace GameRegistry
         }
 
         [WebMethod]
+        public GameInfo[] GetAllGames()
+        {
+            return Registry.Instance.GetAllGames().ToArray();
+        }
+
+        [WebMethod]
         public GameInfo[] GetGames(GameInfo.StatusCode status = GameInfo.StatusCode.Available)
         {
             return Registry.Instance.GetGames(status).ToArray();
