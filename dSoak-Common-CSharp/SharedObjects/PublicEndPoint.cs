@@ -112,5 +112,21 @@ namespace SharedObjects
         {
             return string.Format("{0}:{1}", Host, Port);
         }
+
+        public override int GetHashCode()
+        {
+            return HostAndPort.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            bool result = false;
+            PublicEndPoint other = obj as PublicEndPoint;
+            if (other != null)
+            {
+                result = (HostAndPort == other.HostAndPort);
+            }
+            return result;
+        }
     }
 }
