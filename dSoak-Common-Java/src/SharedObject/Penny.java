@@ -12,5 +12,4 @@ public class Penny extends SharedResource implements Serializable
 	{
 		super();
 	}
-
 }

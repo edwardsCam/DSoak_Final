@@ -87,10 +87,10 @@ public class PublicEndPointTester {
 		ep3.Host("swcwin.serv.usu.edu");
 		ep3.Port(12001);
 		
-		//assertTrue(ep3.equals(ep1));
-		//assertTrue(ep2.equals(ep1));
-		//assertFalse(ep3.equals(null));
-		//assertFalse(ep3.equals(ep1));
+		assertTrue(ep3.equals(ep2));
+		assertTrue(ep2.equals(ep3));
+		assertFalse(ep3.equals(null));
+		assertFalse(ep3.equals(ep1));
 		//assertFalse(ep3.equals(new PublicEndPoint() { Host = "127.0.0.1", Port = 12001 }));
 		//assertFalse(ep3.equals(new PublicEndPoint() { Host = "swcwin.serv.usu.edu", Port = 23324 }));
 		//assertFalse(ep3.equals(new PublicEndPoint() { Host = "", Port = 12001 }));

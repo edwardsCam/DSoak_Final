@@ -121,7 +121,6 @@ public class PublicEndPoint implements Serializable
 		}
 		return result;
 	}
-	
 	@Override
 	public String toString()
 	{

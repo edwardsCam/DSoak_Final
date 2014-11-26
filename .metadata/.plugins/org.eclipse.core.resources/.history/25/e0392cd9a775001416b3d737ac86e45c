@@ -117,11 +117,10 @@ public class PublicEndPoint implements Serializable
 		PublicEndPoint other = (PublicEndPoint) obj;
 		if (other != null)
 		{
-			result = (HostAndPort() == other.HostAndPort());
+			result = (HostAndPort() == other.HostAndPort())
 		}
 		return result;
 	}
-	
 	@Override
 	public String toString()
 	{

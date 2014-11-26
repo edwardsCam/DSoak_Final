@@ -35,7 +35,7 @@ public class GameInfoTester
 		g2.MaxThieves = 2;
 		
 		assertTrue(ep1.Host().equals(g2.FlightManagerEP.Host()));
-		assertEquals(2, g2.FightManagerId);
+		assertTrue(2, g2.FightManagerId);
 		assertEquals(10, g2.GameId);
 		assertEquals(5,g2.MaxPlayers);
 		assertEquals(GameInfo.StatusCode.AVAILABLE, g2.Status);

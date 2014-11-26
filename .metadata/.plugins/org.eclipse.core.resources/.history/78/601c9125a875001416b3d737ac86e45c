@@ -83,17 +83,16 @@ public class PublicEndPointTester {
 		str2 = address.getHostName();
 		assertTrue(str1.equals(str2));
 		
-		PublicEndPoint ep3 = (PublicEndPoint) ep1;
-		ep3.Host("swcwin.serv.usu.edu");
-		ep3.Port(12001);
-		
-		//assertTrue(ep3.equals(ep1));
-		//assertTrue(ep2.equals(ep1));
-		//assertFalse(ep3.equals(null));
-		//assertFalse(ep3.equals(ep1));
-		//assertFalse(ep3.equals(new PublicEndPoint() { Host = "127.0.0.1", Port = 12001 }));
-		//assertFalse(ep3.equals(new PublicEndPoint() { Host = "swcwin.serv.usu.edu", Port = 23324 }));
-		//assertFalse(ep3.equals(new PublicEndPoint() { Host = "", Port = 12001 }));
-		//assertFalse(ep3.equals(new PublicEndPoint() { Host = null, Port = 12001 }));
+		PublicEndPoint ep3 = new PublicEndPoint();
+		ep3.Host = "swcwin.serv.usu.edu";
+		ep3.Port = 12001;
+        Assert.IsTrue(ep3.Equals(ep2));
+        Assert.IsTrue(ep2.Equals(ep3));
+        Assert.IsFalse(ep3.Equals(null));
+        Assert.IsFalse(ep3.Equals(ep1));
+        Assert.IsFalse(ep3.Equals(new PublicEndPoint() { Host = "127.0.0.1", Port = 12001 }));
+        Assert.IsFalse(ep3.Equals(new PublicEndPoint() { Host = "swcwin.serv.usu.edu", Port = 23324 }));
+        Assert.IsFalse(ep3.Equals(new PublicEndPoint() { Host = "", Port = 12001 }));
+        Assert.IsFalse(ep3.Equals(new PublicEndPoint() { Host = null, Port = 12001 }));
 	}
 }

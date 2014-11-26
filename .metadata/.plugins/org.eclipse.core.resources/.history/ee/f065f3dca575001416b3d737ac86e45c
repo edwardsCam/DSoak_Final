@@ -8,7 +8,6 @@ public class GameInfo implements Serializable
 	private static final long serialVersionUID = -8579515000505941289L;
 	public short GameId;
 	public String Label;
-    public short FightManagerId;
     public PublicEndPoint FlightManagerEP;
     public StatusCode Status;
     public short MaxPlayers;
