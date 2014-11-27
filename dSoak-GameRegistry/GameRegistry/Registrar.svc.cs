@@ -45,6 +45,11 @@ namespace GameRegistry
             return Registry.Instance.RegisterGame(Convert.ToInt16(gameManagerId), label, Convert.ToInt16(maxPlayers), Convert.ToInt16(maxThieves));
         }
 
+        public GameInfo[] GetAllGames()
+        {
+            return Registry.Instance.GetAllGames().ToArray();
+        }
+
         public GameInfo[] GetGames(GameInfo.StatusCode status = GameInfo.StatusCode.Available)
         {
             return Registry.Instance.GetGames(status).ToArray();

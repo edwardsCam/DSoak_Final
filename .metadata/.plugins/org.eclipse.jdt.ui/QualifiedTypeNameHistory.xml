@@ -25,7 +25,6 @@
 <fullyQualifiedTypeName name="java.io.ObjectInputStream"/>
 <fullyQualifiedTypeName name="java.awt.List"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="SharedObject.Penny"/>
 <fullyQualifiedTypeName name="Messages.BuyBalloon"/>
 <fullyQualifiedTypeName name="Messages.BuyUmbrella"/>
 <fullyQualifiedTypeName name="Messages.Continue"/>
@@ -44,7 +43,6 @@
 <fullyQualifiedTypeName name="Messages.StopStream"/>
 <fullyQualifiedTypeName name="java.lang.Long"/>
 <fullyQualifiedTypeName name="java.net.InetSocketAddress"/>
-<fullyQualifiedTypeName name="SharedObject.PublicEndPoint"/>
 <fullyQualifiedTypeName name="SharedObject.IPEndPoint"/>
 <fullyQualifiedTypeName name="java.net.InetAddress"/>
 <fullyQualifiedTypeName name="SharedObject.ProcessData.PossibleProcessType"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="Messages.Stealing"/>
 <fullyQualifiedTypeName name="Messages.Message"/>
 <fullyQualifiedTypeName name="java.io.Serializable"/>
+<fullyQualifiedTypeName name="SharedObject.Penny"/>
+<fullyQualifiedTypeName name="SharedObject.PublicEndPoint"/>
 </qualifiedTypeNameHistroy>
