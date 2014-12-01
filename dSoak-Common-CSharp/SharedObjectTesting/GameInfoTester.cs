@@ -27,7 +27,18 @@ namespace SharedObjectTesting
             Assert.AreEqual("Test Game", g2.Label);
             Assert.AreEqual(5, g2.MaxPlayers);
             Assert.AreEqual(2, g2.MaxThieves);
-            Assert.AreEqual(GameInfo.StatusCode.NotInitialized, g2.Status);           
+            Assert.AreEqual(GameInfo.StatusCode.NotInitialized, g2.Status);
+
+            GameInfo g3 = g2.Copy;
+            Assert.IsNotNull(g3);
+            Assert.AreNotSame(g2, g3);
+            Assert.AreEqual(2, g3.FightManagerId);
+            Assert.AreEqual(ep1, g3.FightManagerEP);
+            Assert.AreEqual(10, g3.GameId);
+            Assert.AreEqual("Test Game", g3.Label);
+            Assert.AreEqual(5, g3.MaxPlayers);
+            Assert.AreEqual(2, g3.MaxThieves);
+            Assert.AreEqual(GameInfo.StatusCode.NotInitialized, g3.Status);
         }
 
     }
