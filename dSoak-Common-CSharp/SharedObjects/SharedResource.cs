@@ -14,6 +14,7 @@ namespace SharedObjects
     {
         #region Private Static Attributes
         private static Int16 nextId = 0;
+        private static Int32 nounceInt = 0;
         private static byte[] nounce;
         private static Random randomizer = null;
         private static HashAlgorithm hasher = null;
@@ -21,10 +22,8 @@ namespace SharedObjects
         #endregion
 
         #region Public Properties
-        [DataMember]
-        public Int16 Id { get; set; }
-        [DataMember]
-        public byte[] DigitalSignature { get; set; }
+
+
         #endregion
 
         #region Constructor(s)
@@ -39,6 +38,31 @@ namespace SharedObjects
         #endregion
 
         #region Public Methods
+        [DataMember]
+        public Int16 Id { get; set; }
+        [DataMember]
+        public byte[] DigitalSignature { get; set; }
+
+        public static Int32 Nounce
+        {
+            get { return nounceInt; }
+            set
+            {
+                nounceInt = value;
+                nounce = BitConverter.GetBytes(nounceInt);
+            }
+        }
+
+        public static void Initialize()
+        {
+            hasher = MD5.Create();
+            randomizer = new Random();
+            randomizer.Next();
+            nounceInt = randomizer.Next();
+            nounce = BitConverter.GetBytes(nounceInt);
+            hasBeenInitialized = true;
+        }
+
         public void Sign()
         {
             DigitalSignature = ComputeDigitalSignature(new MemoryStream());
@@ -63,14 +87,6 @@ namespace SharedObjects
         #endregion
 
         #region Private Methods
-        private static void Initialize()
-        {
-            hasher = MD5.Create();
-            randomizer = new Random();
-            randomizer.Next();
-            nounce = BitConverter.GetBytes(randomizer.Next());
-            hasBeenInitialized = true;
-        }
 
         private static Int16 GetNextId()
         {
