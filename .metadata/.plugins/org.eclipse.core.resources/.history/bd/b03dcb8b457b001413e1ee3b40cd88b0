@@ -1,0 +1,6 @@
+package Messages;
+
+public class Continue extends Message 
+{
+	public short MissingReplyDeqNr;
+}

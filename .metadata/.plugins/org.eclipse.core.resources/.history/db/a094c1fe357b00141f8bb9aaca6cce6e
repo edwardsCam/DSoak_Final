@@ -1,0 +1,12 @@
+package Messages;
+
+import java.io.Serializable;
+import java.util.List;
+
+import SharedObject.*;
+
+public class GameData extends Message 
+{
+	public GameInfo Info;
+	public List<ProcessData> Processes;
+}

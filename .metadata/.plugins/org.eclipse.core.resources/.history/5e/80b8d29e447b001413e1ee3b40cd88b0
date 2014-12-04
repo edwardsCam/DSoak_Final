@@ -1,0 +1,8 @@
+package Messages;
+
+import SharedObject.Balloon;
+
+public class BalloonFilled extends Message 
+{
+	public Balloon Balloon;
+}

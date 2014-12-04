@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using SharedObjects;
@@ -17,6 +18,13 @@ namespace SharedObjectTesting
 
             p1.Id++;
             Assert.IsFalse(p1.IsValid);
+
+            List<Penny> pennies = new List<Penny>();
+            for (Int16 i = 0; i < 1000; i++)
+                pennies.Add(new Penny());
+
+           Assert.IsTrue(SharedResource.AreValidToUse(pennies));
+           Assert.IsFalse(SharedResource.AreValidToUse(pennies));
         }
 
         [TestMethod]

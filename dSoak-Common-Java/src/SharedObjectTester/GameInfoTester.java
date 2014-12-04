@@ -2,18 +2,17 @@ package SharedObjectTester;
 
 import static org.junit.Assert.*;
 
-import java.io.Serializable;
+import java.net.UnknownHostException;
 
 import org.junit.Test;
 
 import SharedObject.GameInfo;
-import SharedObject.GameInfo.StatusCode;
 import SharedObject.PublicEndPoint;
 
 public class GameInfoTester  
 {
 	@Test
-	public void test_EveryThing() 
+	public void test_EveryThing() throws UnknownHostException 
 	{
 		GameInfo g1 = new GameInfo();
 		
@@ -22,9 +21,7 @@ public class GameInfoTester
 		assertEquals(0, g1.MaxPlayers);
 		assertNull(g1.Status);
 		
-		PublicEndPoint ep1 = new PublicEndPoint();
-		ep1.Host("buzz.serv.usu.edu");
-		ep1.Port(20011);
+		PublicEndPoint ep1 = new PublicEndPoint("buzz.serv.usu.edu:20011");
 		
 		GameInfo g2 = new GameInfo();
 		g2.FlightManagerEP = ep1;
@@ -34,7 +31,7 @@ public class GameInfoTester
 		g2.Status = GameInfo.StatusCode.AVAILABLE;
 		g2.MaxThieves = 2;
 		
-		assertTrue(ep1.Host().equals(g2.FlightManagerEP.Host()));
+		assertTrue(ep1.getHost().equals(g2.FlightManagerEP.getHost()));
 		assertEquals(2, g2.FightManagerId);
 		assertEquals(10, g2.GameId);
 		assertEquals(5,g2.MaxPlayers);

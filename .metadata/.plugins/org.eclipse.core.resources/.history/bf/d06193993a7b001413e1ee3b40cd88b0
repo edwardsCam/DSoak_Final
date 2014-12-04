@@ -1,0 +1,94 @@
+package Messages;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.nio.ByteBuffer;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.stream.JsonReader;
+import SharedObject.MessageNumber;
+
+public class Message 
+{
+	public MessageNumber MessageNr;
+	public MessageNumber ConvId;
+	private static boolean hasBeenInitialized = false;
+	private static HashMap<String, Class<?>> classType = null;
+	
+	public Message() 
+	{
+		MessageNr = MessageNumber.Create();
+		ConvId = MessageNr;
+	}
+	
+	public byte[] Encode() throws IOException 
+	{
+		ByteArrayOutputStream byteArrayOutStream = new ByteArrayOutputStream();
+		OutputStreamWriter outstreamWriter = new OutputStreamWriter(byteArrayOutStream, "US-ASCII"); 
+	
+		String type = this.getClass().getSimpleName() + ":";
+		outstreamWriter.write(type);
+		Gson gson = new GsonBuilder().create();
+		gson.toJson(this, this.getClass(), outstreamWriter);
+		outstreamWriter.flush();
+		return byteArrayOutStream.toByteArray();
+	}
+	
+	public static Message Decode(byte[] bytes) throws ClassNotFoundException, IOException
+    {
+	    Message message = null ;
+		ByteBuffer stream = ByteBuffer.wrap(bytes);
+		String typeName = ParseTypeName(stream);
+		Class<?> classType = LookupClassType(typeName);
+		ByteArrayInputStream input = new ByteArrayInputStream(bytes, typeName.length() + 1, bytes.length- typeName.length() -1);
+		JsonReader reader = new JsonReader(new InputStreamReader(input, "US-ASCII"));
+		
+	    Gson gson = new GsonBuilder().create();
+	   	message = (Message) gson.fromJson(reader, classType);
+	    return message;
+    }
+	
+	private static String ParseTypeName(ByteBuffer buff) throws IOException, ClassNotFoundException
+	{
+		String result = "";
+		byte[] bytes = new byte[buff.capacity() - buff.position()];
+		int index;
+        for (index = 0; index < (buff.capacity() - buff.position()); index++)
+        {
+        	bytes[index] = (byte)buff.get();
+            if (bytes[index] == (int)':')
+            	  break;
+          }
+          if (index > 0)
+          {
+        	  result = new String(bytes, 0, index);
+          }
+          return result;
+ 	}
+	
+	 private static Class<?> LookupClassType(String typeName)
+     {
+         if (!hasBeenInitialized)
+             Initialize();
+
+         return classType.get(typeName);
+     }
+	 
+	 private static void Initialize()
+     {
+         classType = new HashMap<String, Class<?>>();
+        
+         classType.put("Ack", Ack.class); 
+         classType.put("AliveQuery", AliveQuery.class);
+         classType.put("BalloonFilled", BalloonFilled.class);
+         
+         classType.put("Message", Message.class); 
+         classType.put("JoinGame", JoinGame.class); 
+         classType.put("Nak", Nak.class); 
+         
+    }
+}

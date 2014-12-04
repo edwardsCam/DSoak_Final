@@ -42,9 +42,11 @@ namespace SharedObjects
         {
             GameId = orig.GameId;
             Label = orig.Label;
+            FightManagerId = orig.FightManagerId;
             FightManagerEP = orig.FightManagerEP;
             Status = orig.Status;
             MaxPlayers = orig.MaxPlayers;
+            MaxThieves = orig.MaxThieves;
             AliveTimestamp = orig.AliveTimestamp;
         }
     }

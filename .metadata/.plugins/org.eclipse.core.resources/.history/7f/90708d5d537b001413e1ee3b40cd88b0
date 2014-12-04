@@ -1,0 +1,51 @@
+package MessageTester;
+
+import static org.junit.Assert.*;
+import java.io.IOException;
+import org.junit.Test;
+import Messages.Message;
+import Messages.Nak;
+import SharedObject.MessageNumber;
+
+public class NakTester {
+
+	@Test
+	public void test_EveryThings() throws ClassNotFoundException, IOException 
+	{
+		MessageNumber.LocalProcessId = 100;
+		Nak msg1 = new Nak();
+		
+		assertNotNull(msg1.MessageNr);
+		assertEquals(100, msg1.MessageNr.ProcessId);
+		assertTrue(msg1.MessageNr.SeqNumber > 0);
+		assertEquals(msg1.MessageNr, msg1.ConvId);
+		
+		Nak msg2 = new Nak();
+		msg2.Error = "Error: test error message...";
+		assertNotNull(msg2.MessageNr);
+		assertTrue(msg2.MessageNr.SeqNumber > 0);
+		assertEquals(msg1.MessageNr.SeqNumber + 1, msg2.MessageNr.SeqNumber);
+		assertEquals(msg1.MessageNr.ProcessId, msg2.MessageNr.ProcessId);
+		assertEquals(msg1.ConvId.ProcessId, msg2.ConvId.ProcessId);
+		assertEquals(msg1.ConvId.SeqNumber + 1, msg2.ConvId.SeqNumber);
+		assertTrue(msg2.Error.equals("Error: test error message..."));
+		
+		
+		byte[] bytes = msg2.Encode();
+		
+		Message msg3 = Message.Decode(bytes);
+		assertNotNull(msg3);
+		assertTrue(msg3 instanceof Nak);
+		assertEquals(msg2.MessageNr.ProcessId, msg3.MessageNr.ProcessId);
+		assertEquals(msg2.MessageNr.SeqNumber, msg3.MessageNr.SeqNumber);
+		assertEquals(msg2.ConvId.ProcessId, msg3.ConvId.ProcessId);
+		assertEquals(msg2.ConvId.SeqNumber, msg3.ConvId.SeqNumber);
+		
+		Nak msg4 = (Nak) msg3;
+		assertNotNull(msg4);
+		assertTrue(msg4 instanceof Nak);
+		assertEquals(msg3.MessageNr, msg4.MessageNr);
+		assertEquals(msg3.ConvId, msg4.ConvId);
+		assertTrue(msg4.Error.equals(msg2.Error));
+	}
+}

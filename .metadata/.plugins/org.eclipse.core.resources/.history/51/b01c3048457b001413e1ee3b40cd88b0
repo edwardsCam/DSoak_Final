@@ -1,0 +1,8 @@
+package Messages;
+
+import SharedObject.ProcessData;
+
+public class ProcessSummary extends Message 
+{
+	public ProcessData Data;
+}

@@ -1,19 +1,19 @@
 package SharedObject;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class GameInfo implements Serializable
+import com.google.gson.annotations.Expose;
+
+public class GameInfo 
 {
-	private static final long serialVersionUID = -8579515000505941289L;
-	public short GameId;
-	public String Label;
-    public short FightManagerId;
-    public PublicEndPoint FlightManagerEP;
-    public StatusCode Status;
-    public short MaxPlayers;
-    public Date AliveTimeStamp;
-    public short MaxThieves;
+	@Expose public short GameId;
+	@Expose public String Label;
+	@Expose public short FightManagerId;
+	@Expose public PublicEndPoint FlightManagerEP;
+	@Expose public StatusCode Status;
+	@Expose public short MaxPlayers;
+	@Expose public Date AliveTimeStamp;
+	@Expose public short MaxThieves;
 
     public enum StatusCode
 	{

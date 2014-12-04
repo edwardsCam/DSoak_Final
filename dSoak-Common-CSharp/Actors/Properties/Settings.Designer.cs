@@ -22,15 +22,5 @@ namespace Actors.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://ec2-54-186-119-124.us-west-2.compute.amazonaws.com/Registrar.svc")]
-        public string Actors__Registrar_Registrar {
-            get {
-                return ((string)(this["Actors__Registrar_Registrar"]));
-            }
-        }
     }
 }

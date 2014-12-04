@@ -1,0 +1,6 @@
+package Messages;
+
+public class StealingBlocked extends StealingBase
+{
+	private static final long serialVersionUID = 8966796479515691505L;
+}

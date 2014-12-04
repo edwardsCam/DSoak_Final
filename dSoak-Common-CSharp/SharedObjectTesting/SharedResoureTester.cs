@@ -30,6 +30,12 @@ namespace SharedObjectTesting
             Assert.AreEqual(r2.Id, r3.Id);
             Assert.IsTrue(r3.IsValid);
 
+            Int32 originalNounce = SharedResource.Nounce;
+            SharedResource.Nounce = originalNounce + 1;
+            Assert.IsFalse(r3.IsValid);
+
+            SharedResource.Nounce = originalNounce;
+            Assert.IsTrue(r3.IsValid);
         }
     }
 }

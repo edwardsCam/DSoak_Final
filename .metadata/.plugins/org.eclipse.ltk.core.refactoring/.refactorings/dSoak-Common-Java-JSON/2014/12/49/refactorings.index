@@ -1,0 +1,11 @@
+1417562131204	Rename field 'obj'
+1417573790675	Rename type 'Test'
+1417574722009	Delete element
+1417582529206	Rename local variable 'in'
+1417583594336	Copy compilation unit
+1417586242574	Rename local variable 'p'
+1417631958096	Infer generic type arguments
+1417632942844	Rename field 'serializers'
+1417638939614	Rename local variable 'writer'
+1417642733424	Rename method 'LookupSerializer'
+1417642884458	Rename local variable 'serializer'

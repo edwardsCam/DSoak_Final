@@ -14,17 +14,12 @@ namespace SharedObjects
     {
         #region Private Static Attributes
         private static Int16 nextId = 0;
+        private static Int32 nounceInt = 0;
         private static byte[] nounce;
         private static Random randomizer = null;
         private static HashAlgorithm hasher = null;
         private static bool hasBeenInitialized = false;
-        #endregion
-
-        #region Public Properties
-        [DataMember]
-        public Int16 Id { get; set; }
-        [DataMember]
-        public byte[] DigitalSignature { get; set; }
+        private static object myLock = new object();
         #endregion
 
         #region Constructor(s)
@@ -39,6 +34,31 @@ namespace SharedObjects
         #endregion
 
         #region Public Methods
+        [DataMember]
+        public Int16 Id { get; set; }
+        [DataMember]
+        public byte[] DigitalSignature { get; set; }
+
+        public static Int32 Nounce
+        {
+            get { return nounceInt; }
+            set
+            {
+                nounceInt = value;
+                nounce = BitConverter.GetBytes(nounceInt);
+            }
+        }
+
+        public static void Initialize()
+        {
+            hasher = MD5.Create();
+            randomizer = new Random();
+            randomizer.Next();
+            nounceInt = randomizer.Next();
+            nounce = BitConverter.GetBytes(nounceInt);
+            hasBeenInitialized = true;
+        }
+
         public void Sign()
         {
             DigitalSignature = ComputeDigitalSignature(new MemoryStream());
@@ -60,18 +80,34 @@ namespace SharedObjects
                 return result;
             }
         }
+
+        public string DigitalSignatureString
+        {
+            get
+            {
+                string result = string.Empty;
+                foreach (byte b in DigitalSignature)
+                    result += b.ToString().PadLeft(4);
+                return result;
+            }
+        }
+
+        public static bool AreValidToUse<T>(List<T> resources) where T : SharedResource
+        {
+            bool result = (resources != null && resources.Count > 0);
+            for (int i = 0; i < resources.Count && result; i++)
+                result = ValidateUse(resources[i]);
+            return result;
+        }
+
+        public static bool ValidateUse(SharedResource resource)
+        {
+            return (resource.IsValid && CheckUsedId(resource.Id));
+        }
+
         #endregion
 
         #region Private Methods
-        private static void Initialize()
-        {
-            hasher = MD5.Create();
-            randomizer = new Random();
-            randomizer.Next();
-            nounce = BitConverter.GetBytes(randomizer.Next());
-            hasBeenInitialized = true;
-        }
-
         private static Int16 GetNextId()
         {
             if (nextId == Int16.MaxValue)
@@ -105,5 +141,21 @@ namespace SharedObjects
 
         #endregion
 
+        #region Id Management
+        private static List<Int16> usedIds = new List<short>();
+        public static bool CheckUsedId(Int16 id)
+        {
+            bool result = false;
+            lock (myLock)
+            {
+                if (!usedIds.Contains(id))
+                {
+                    usedIds.Add(id);
+                    result = true;
+                }
+            }
+            return result;
+        }
+        #endregion
     }
 }
