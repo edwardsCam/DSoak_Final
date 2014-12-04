@@ -1,15 +1,14 @@
 package SharedObject;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class PlayerInfo implements Serializable
+import com.google.gson.annotations.Expose;
+
+public class PlayerInfo 
 {
-	private static final long serialVersionUID = 1L;
-	
-    public short PlayerId;
-    public PublicEndPoint EndPoint;
-    public StateCode Status;
+	@Expose public short PlayerId;
+    @Expose public PublicEndPoint EndPoint;
+    @Expose public StateCode Status;
     public Date AliveTimestamp;
     
     public PlayerInfo Copy()
@@ -39,5 +38,17 @@ public class PlayerInfo implements Serializable
    		{
    			return value;
    		}
+   		
+	   	public static StateCode setValue(short b)
+	   	 {
+	   		StateCode temp = null;
+		    for (StateCode  t : StateCode.values()) 
+		    {
+		    	if (t.value == b) {
+		    		temp = t;
+		        }
+		    }
+		    return temp;
+		  }
    	}
 }

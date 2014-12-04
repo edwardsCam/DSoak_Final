@@ -2,10 +2,7 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.security.NoSuchAlgorithmException;
 
 import org.junit.Test;
@@ -42,10 +39,7 @@ public class BalloonFilledTester {
 		assertSame(b, msg2.Balloon);
 		
 		byte[] bytes = msg2.Encode();
-		
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject(); // message type 
+		String str = new String(bytes);
 		
 		Message msg3 = Message.Decode(bytes);
 		

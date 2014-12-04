@@ -1,11 +1,10 @@
 package Messages;
 
-import java.io.Serializable;
+import com.google.gson.annotations.Expose;
 
 import SharedObject.Balloon;
 
-public class BalloonStolen extends StealingBase implements Serializable
+public class BalloonStolen extends StealingBase 
 {
-	private static final long serialVersionUID = 7684966139890319072L;
-	public Balloon StolenBalloon;
+	@Expose public Balloon StolenBalloon;
 }

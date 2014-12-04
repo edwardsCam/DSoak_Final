@@ -1,10 +1,8 @@
 package Messages;
 
-import java.io.Serializable;
+import com.google.gson.annotations.Expose;
 
-public class LeaveGame extends Message implements Serializable
+public class LeaveGame extends Message 
 {
-	private static final long serialVersionUID = 7360788984493439522L;
-	
-	public short GameId;
+	@Expose public short GameId;
 }

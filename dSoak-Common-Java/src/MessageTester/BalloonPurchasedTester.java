@@ -2,10 +2,7 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.security.NoSuchAlgorithmException;
 
 import org.junit.Test;
@@ -31,8 +28,8 @@ public class BalloonPurchasedTester
 		assertEquals(100, msg1.ConvId.ProcessId);
 		
 		Balloon b = new Balloon();
-		b.Id = 10;
-		b.UnitOfWater = 5;
+	//	b.Id = 10;
+		//b.UnitOfWater = 5;
 		
 		BalloonPurchased msg2 = new BalloonPurchased();
 		msg2.ConvId = msg1.ConvId;
@@ -44,13 +41,11 @@ public class BalloonPurchasedTester
 		assertEquals(msg1.ConvId, msg2.ConvId);
 		assertNotNull(msg2.Balloon);
 		assertSame(b, msg2.Balloon);
-		assertEquals(5, msg2.Balloon.UnitOfWater);
-		assertEquals(10, msg2.Balloon.Id);
+	//	assertEquals(5, msg2.Balloon.UnitOfWater);
+		//assertEquals(10, msg2.Balloon.Id);
 		
 		byte[] bytes = msg2.Encode();
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject(); // message type
+		String str = new String(bytes);
 		
 		BalloonPurchased msg3 = (BalloonPurchased) Message.Decode(bytes);
 		

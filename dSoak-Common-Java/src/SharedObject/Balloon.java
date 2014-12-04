@@ -2,13 +2,13 @@ package SharedObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 
-public class Balloon extends SharedResource implements Serializable
+import com.google.gson.annotations.Expose;
+
+public class Balloon extends SharedResource
 {
-	private static final long serialVersionUID = 1750540724293699377L;
-	public short UnitOfWater;
+	@Expose public short UnitOfWater;
 	
 	public Balloon() throws NoSuchAlgorithmException, IOException {
 		super();

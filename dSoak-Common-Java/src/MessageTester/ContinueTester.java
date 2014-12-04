@@ -2,14 +2,10 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 
 import org.junit.Test;
 
-import Messages.BuyUmbrella;
 import Messages.Continue;
 import Messages.Message;
 import SharedObject.MessageNumber;
@@ -37,12 +33,7 @@ public class ContinueTester
 		assertEquals(3, msg2.MissingReplyDeqNr);
 		
 		byte[] bytes = msg2.Encode();
-		
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
-		
-		assertTrue(type.equals("Continue:"));
+		String str = new String(bytes);
 		
 		Message msg3 = Message.Decode(bytes);
 		assertTrue(msg3 instanceof Continue);

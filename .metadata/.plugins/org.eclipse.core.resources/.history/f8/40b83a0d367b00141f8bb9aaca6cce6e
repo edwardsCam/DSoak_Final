@@ -1,0 +1,13 @@
+package Messages;
+
+import java.io.Serializable;
+import java.util.List;
+
+import SharedObject.Penny;
+
+public class GameJoined extends Message 
+{
+	public short GameId;
+    public short InitialLifePoints;
+	public List<Penny> Pennies;
+}

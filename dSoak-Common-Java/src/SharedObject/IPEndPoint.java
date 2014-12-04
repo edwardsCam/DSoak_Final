@@ -1,16 +1,15 @@
 package SharedObject;
 
-import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 
-public class IPEndPoint implements Serializable
+import com.google.gson.annotations.Expose;
+
+public class IPEndPoint 
 {
-	private static final long serialVersionUID = 4448169691526934231L;
-	
-	public InetAddress Address;
-	public int Port;
+	@Expose public InetAddress Address;
+	@Expose public int Port;
 	public static final int MinPort = 0, MaxPort = 65535;
 	
 	public IPEndPoint() {

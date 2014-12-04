@@ -1,9 +1,10 @@
 package Messages;
-import SharedObject.*;
+
+import com.google.gson.annotations.Expose;
+
+import SharedObject.Balloon;
 
 public class BalloonFilled extends Message 
 {
-	private static final long serialVersionUID = 7773635748816180667L;
-	
-	public Balloon Balloon;
+	@Expose public Balloon Balloon;
 }

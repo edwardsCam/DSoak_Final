@@ -1,10 +1,8 @@
 package Messages;
 
-import java.io.Serializable;
+import com.google.gson.annotations.Expose;
 
-public class Nak extends Message implements Serializable
+public class Nak extends Message 
 {
-	private static final long serialVersionUID = 1466758924667271406L;
-	
-	public String Error;
+	@Expose public String Error;
 }

@@ -1,0 +1,8 @@
+package Messages;
+
+import SharedObject.*;
+
+public class FillBalloon extends ResourceRequest 
+{
+	public Balloon Balloon;
+}

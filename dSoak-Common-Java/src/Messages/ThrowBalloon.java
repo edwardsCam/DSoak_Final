@@ -1,14 +1,11 @@
 package Messages;
 
-import java.io.Serializable;
-
+import com.google.gson.annotations.Expose;
 import SharedObject.*;
 
-public class ThrowBalloon extends Message implements Serializable
+public class ThrowBalloon extends Message 
 {
-	private static final long serialVersionUID = 1119847867053235579L;
-	 
-	public short GameId;
-    public Balloon Balloon;
-    public short TargetPlayerId;
+	@Expose public short GameId;
+	@Expose public Balloon Balloon;
+	@Expose public short TargetPlayerId;
 }

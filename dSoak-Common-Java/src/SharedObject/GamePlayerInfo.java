@@ -1,10 +1,13 @@
 package SharedObject;
 
-import java.io.Serializable;
+import com.google.gson.annotations.Expose;
 
-public class GamePlayerInfo implements Serializable
+public class GamePlayerInfo 
 {
-	private static final long serialVersionUID = 1951609679759293604L;
+	@Expose public short GameId; 
+	@Expose public PlayerInfo Player;
+	@Expose public StatusCode Status;
+	
 	
 	public enum StatusCode
 	{ 
@@ -20,9 +23,16 @@ public class GamePlayerInfo implements Serializable
 		{
 			return value;
 		}
+		public static StatusCode setValue(short b)
+	   	 {
+			StatusCode temp = null;
+		    for (StatusCode  t : StatusCode.values()) 
+		    {
+		    	if (t.value == b) {
+		    		temp = t;
+		        }
+		    }
+		    return temp;
+		  }
 	};
-	
-	public short GameId; 
-	public PlayerInfo Player;
-	public StatusCode Status;
 }

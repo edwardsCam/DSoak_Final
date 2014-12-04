@@ -1,10 +1,10 @@
 package Messages;
 
+import com.google.gson.annotations.Expose;
+
 public abstract class StealingBase extends Message
 {
-	public short GameId;
-    
-    public short TargetProcessId;
-    
-    public short ThiefId;
+	@Expose public short GameId;
+	@Expose public short TargetProcessId;
+	@Expose public short ThiefId;
 }

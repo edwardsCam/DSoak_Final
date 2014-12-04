@@ -2,10 +2,7 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 
 import org.junit.Test;
 
@@ -34,9 +31,8 @@ public class AliveQueryTester {
 		assertEquals(msg1.ConvId, msg2.ConvId);
 		
 		byte[] bytes = msg2.Encode();
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
+		String str = new String(bytes);
+		
 		
 		Message msg3 = Message.Decode(bytes);
 		

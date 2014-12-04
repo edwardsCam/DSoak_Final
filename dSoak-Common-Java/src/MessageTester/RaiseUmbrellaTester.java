@@ -2,12 +2,11 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.security.NoSuchAlgorithmException;
+
 import org.junit.Test;
+
 import Messages.Message;
 import Messages.RaiseUmbrella;
 import SharedObject.MessageNumber;
@@ -27,7 +26,7 @@ public class RaiseUmbrellaTester
 		assertEquals(msg1.MessageNr, msg1.ConvId);
 		
 		Umbrella u = new Umbrella();
-		u.Id = 10;
+		u.Id = 100;
 		RaiseUmbrella msg2 = new RaiseUmbrella();
 		msg2.Umbrella = u;
 		assertNotNull(msg2.MessageNr);
@@ -39,10 +38,7 @@ public class RaiseUmbrellaTester
 		assertEquals(msg2.Umbrella.Id, u.Id);
 		
 		byte[] bytes = msg2.Encode();
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
-		assertTrue(type.equals("RaiseUmbrella:"));
+		String str = new String(bytes);
 		
 		Message msg3 = Message.Decode(bytes);
 		assertNotNull(msg3);

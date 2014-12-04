@@ -1,10 +1,8 @@
 package Messages;
 
-import java.io.Serializable;
+import com.google.gson.annotations.Expose;
 
-public class Continue extends Message implements Serializable
+public class Continue extends Message 
 {
-	private static final long serialVersionUID = 4096127881936671018L;
-	
-	public short MissingReplyDeqNr;
+	@Expose public short MissingReplyDeqNr;
 }

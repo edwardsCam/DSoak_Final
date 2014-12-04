@@ -1,0 +1,9 @@
+package Messages;
+import java.io.Serializable;
+
+import SharedObject.*;
+
+public class RaiseUmbrella extends Message 
+{
+	public Umbrella Umbrella;
+}

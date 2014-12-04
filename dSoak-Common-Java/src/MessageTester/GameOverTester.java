@@ -2,10 +2,7 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 
 import org.junit.Test;
 
@@ -25,24 +22,19 @@ public class GameOverTester {
 		gameOver.MessageNr = msgN;
 		gameOver.ConvId = gameOver.MessageNr;
 		
-		PublicEndPoint ep = new PublicEndPoint();
-		ep.Host("127.0.0.1");
-		ep.Port(1010);
+		PublicEndPoint ep = new PublicEndPoint("127.0.0.1:1010");
 		PlayerInfo winer = new PlayerInfo();
 		winer.EndPoint = ep;
 		gameOver.GameId  = (short)10;
 		gameOver.Winner = winer;
 		
 		byte[] bytes = gameOver.Encode();
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
-		
+		String str = new String(bytes);
+		 
 		GameOver msg = (GameOver)Message.Decode(bytes);
 		
 		assertEquals((short)10, msg.GameId);
-		assertEquals(1010, msg.Winner.EndPoint.Port());
-		assertTrue(msg.Winner.EndPoint.Host().equals("127.0.0.1"));
+		assertTrue(msg.Winner.EndPoint.HostAndPort.equals("127.0.0.1:1010"));
 		assertEquals(msgN.ProcessId, msg.MessageNr.ProcessId);
 		assertEquals(msgN.SeqNumber, msg.MessageNr.SeqNumber);
 		assertEquals(winer.PlayerId, msg.Winner.PlayerId);

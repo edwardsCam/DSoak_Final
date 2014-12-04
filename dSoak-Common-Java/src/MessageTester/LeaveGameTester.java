@@ -2,14 +2,10 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 
 import org.junit.Test;
 
-import Messages.JoinGame;
 import Messages.LeaveGame;
 import Messages.Message;
 import SharedObject.MessageNumber;
@@ -28,7 +24,7 @@ public class LeaveGameTester {
 		assertEquals(msg1.MessageNr, msg1.ConvId);
 		
 		LeaveGame msg2 = new LeaveGame();
-		msg1.GameId = 123;
+		msg2.GameId = 123;
 		assertNotNull(msg2.MessageNr);
 		assertTrue(msg2.MessageNr.SeqNumber > 0);
 		assertEquals(msg1.MessageNr.SeqNumber + 1, msg2.MessageNr.SeqNumber);
@@ -37,10 +33,7 @@ public class LeaveGameTester {
 		assertEquals(msg1.ConvId.SeqNumber + 1, msg2.ConvId.SeqNumber);
 		
 		byte[] bytes = msg2.Encode();
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
-		assertTrue(type.equals("LeaveGame:"));
+		String str = new String(bytes);
 		
 		LeaveGame msg3 = (LeaveGame) Message.Decode(bytes);
 		assertNotNull(msg3);

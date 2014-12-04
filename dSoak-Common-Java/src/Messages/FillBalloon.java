@@ -1,11 +1,9 @@
 package Messages;
-import java.io.Serializable;
 
+import com.google.gson.annotations.Expose;
 import SharedObject.*;
 
-public class FillBalloon extends ResourceRequest implements Serializable
+public class FillBalloon extends ResourceRequest 
 {
-	private static final long serialVersionUID = -6539311549193170393L;
-	
-	public Balloon Balloon;
+	@Expose public Balloon Balloon;
 }

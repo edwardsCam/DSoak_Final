@@ -1,0 +1,11 @@
+package Messages;
+
+import java.io.Serializable;
+
+import SharedObject.PlayerInfo;
+
+public class GameOver extends Message 
+{
+	public short GameId;
+	public PlayerInfo Winner;
+}

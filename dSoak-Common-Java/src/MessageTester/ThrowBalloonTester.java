@@ -1,17 +1,10 @@
 package MessageTester;
 
 import static org.junit.Assert.*;
-
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.security.NoSuchAlgorithmException;
-
 import org.junit.Test;
-
 import Messages.Message;
-import Messages.StopStream;
 import Messages.ThrowBalloon;
 import SharedObject.Balloon;
 import SharedObject.MessageNumber;
@@ -48,11 +41,7 @@ public class ThrowBalloonTester {
 		assertEquals(352, msg2.TargetPlayerId);
 		
 		byte[] bytes = msg2.Encode();
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
-		assertTrue(type.equals("ThrowBalloon:"));
-		
+		String str = new String(bytes);
 		
 		Message msg3 = Message.Decode(bytes);
 		assertNotNull(msg3);

@@ -1,13 +1,11 @@
 package Messages;
 
-import java.io.Serializable;
+import com.google.gson.annotations.Expose;
 
 import SharedObject.PlayerInfo;
 
-public class GameOver extends Message implements Serializable
+public class GameOver extends Message 
 {
-	private static final long serialVersionUID = 3733186951527175746L;
-	
-	public short GameId;
-	public PlayerInfo Winner;
+	@Expose public short GameId;
+	@Expose public PlayerInfo Winner;
 }

@@ -2,10 +2,7 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 
 import org.junit.Test;
 
@@ -17,7 +14,7 @@ import SharedObject.ProcessData;
 public class ProcessSummaryTester
 {
 	@Test
-	public void test() throws IOException, ClassNotFoundException 
+	public void test() throws ClassNotFoundException, IOException 
 	{
 		MessageNumber.LocalProcessId = 100;
 		
@@ -49,11 +46,7 @@ public class ProcessSummaryTester
        assertSame(data, msg2.Data);
        
        byte[] bytes = msg2.Encode();
-		
-       InputStream myInputStream = new ByteArrayInputStream(bytes);
-       ObjectInputStream oin = new ObjectInputStream(myInputStream);
-       String type = (String) oin.readObject();
-       assertTrue(type.equals("ProcessSummary:"));
+       String str = new String(bytes);
        
        Message msg3 = Message.Decode(bytes);
        assertTrue(msg3 instanceof ProcessSummary);

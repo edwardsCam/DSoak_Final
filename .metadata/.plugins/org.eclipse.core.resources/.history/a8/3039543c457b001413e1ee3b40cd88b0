@@ -1,0 +1,9 @@
+package Messages;
+
+import java.util.List;
+import SharedObject.Penny;
+
+public class ResourceRequest extends Message 
+{
+	public List<Penny> Pennies;
+}

@@ -2,14 +2,10 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 
 import org.junit.Test;
 
-import Messages.LeaveGame;
 import Messages.Message;
 import Messages.Nak;
 import SharedObject.MessageNumber;
@@ -28,21 +24,18 @@ public class NakTester {
 		assertEquals(msg1.MessageNr, msg1.ConvId);
 		
 		Nak msg2 = new Nak();
-		msg2.Error = "Error: test error message...";
+		msg2.Error = "Test error message";
 		assertNotNull(msg2.MessageNr);
 		assertTrue(msg2.MessageNr.SeqNumber > 0);
 		assertEquals(msg1.MessageNr.SeqNumber + 1, msg2.MessageNr.SeqNumber);
 		assertEquals(msg1.MessageNr.ProcessId, msg2.MessageNr.ProcessId);
 		assertEquals(msg1.ConvId.ProcessId, msg2.ConvId.ProcessId);
 		assertEquals(msg1.ConvId.SeqNumber + 1, msg2.ConvId.SeqNumber);
-		assertTrue(msg2.Error.equals("Error: test error message..."));
+		assertTrue(msg2.Error.equals("Test error message"));
 		
 		
 		byte[] bytes = msg2.Encode();
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
-		assertTrue(type.equals("Nak:"));
+		String str = new String(bytes);
 		
 		Message msg3 = Message.Decode(bytes);
 		assertNotNull(msg3);

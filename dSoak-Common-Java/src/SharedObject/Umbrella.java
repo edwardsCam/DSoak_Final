@@ -1,14 +1,12 @@
 package SharedObject;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 
-public class Umbrella extends SharedResource implements Serializable 
+public class Umbrella extends SharedResource 
 {
-	private static final long serialVersionUID = 1L;
-	 
-	public Umbrella() throws NoSuchAlgorithmException, IOException{
+	public Umbrella() throws NoSuchAlgorithmException, IOException
+	{
 		super();
 	}
 }

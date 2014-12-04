@@ -2,10 +2,7 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 
 import org.junit.Test;
 
@@ -29,6 +26,7 @@ public class ShutdownTester
 		
 		Shutdown msg2 = new Shutdown();
 		msg2.ConvId = msg1.ConvId;
+		
 		assertNotNull(msg2.MessageNr);
 		assertEquals(100, msg2.MessageNr.ProcessId);
 		assertTrue(msg2.MessageNr.SeqNumber > 0);
@@ -38,10 +36,8 @@ public class ShutdownTester
 		assertEquals(msg1.ConvId.SeqNumber, msg2.ConvId.SeqNumber);
 		
 		byte[] bytes = msg2.Encode();
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
-		assertTrue(type.equals("Shutdown:"));
+		String str = new String(bytes);
+		
 		
 		Message msg3 = Message.Decode(bytes);
 		assertNotNull(msg3);

@@ -1,11 +1,9 @@
 package Messages;
 
-import java.io.Serializable;
-
+import com.google.gson.annotations.Expose;
 import SharedObject.ProcessData;
 
-public class ProcessSummary extends Message implements Serializable
+public class ProcessSummary extends Message 
 {
-	private static final long serialVersionUID = -133431157696154433L;
-	public ProcessData Data;
+	@Expose public ProcessData Data;
 }

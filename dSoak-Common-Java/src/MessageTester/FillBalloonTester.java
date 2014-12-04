@@ -2,16 +2,12 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import org.junit.Test;
 
-import Messages.BuyUmbrella;
 import Messages.FillBalloon;
 import Messages.Message;
 import SharedObject.MessageNumber;
@@ -35,9 +31,6 @@ public class FillBalloonTester
 		pennies.add(new Penny());
 		pennies.add(new Penny());
 		pennies.add(new Penny());
-		pennies.add(new Penny());
-		pennies.add(new Penny());
-		pennies.add(new Penny());
 		
 		FillBalloon msg2 = new FillBalloon();
 		msg2.Pennies = pennies;
@@ -50,12 +43,8 @@ public class FillBalloonTester
 		assertSame(pennies, msg2.Pennies);
 		
 		byte[] bytes = msg2.Encode();
+		String str = new String(bytes);
 		
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
-		
-		assertTrue(type.equals("FillBalloon:"));
 		
 		Message msg3 = Message.Decode(bytes);
 		assertTrue(msg3 instanceof FillBalloon);

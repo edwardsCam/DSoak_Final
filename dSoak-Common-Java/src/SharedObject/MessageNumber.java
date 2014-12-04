@@ -1,14 +1,13 @@
 package SharedObject;
 
-import java.io.Serializable;
+import com.google.gson.annotations.Expose;
 
-public class MessageNumber implements Comparable<Object>, Serializable
+public class MessageNumber implements Comparable<Object>
 {
-	private static final long serialVersionUID = 1L;
 	private static short nextSeqNumber = 1;             
     public static short LocalProcessId;
-    public short ProcessId;
-    public short SeqNumber;
+    @Expose public short ProcessId;
+    @Expose public short SeqNumber;
  
     public MessageNumber() { }
     

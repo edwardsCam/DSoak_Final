@@ -2,21 +2,21 @@ package SharedObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
-public class SharedResource implements Serializable
+import com.google.gson.annotations.Expose;
+
+public class SharedResource
 {
-	private static final long serialVersionUID = 1L;
 	private static short nextId = 0;
 	private static byte[] nounce;
 	private static Random randomizer = new Random();
 	private static MessageDigest digest;
 	private static boolean hasBeenInitialized = false;
-	public short Id;
-	public byte[] DigitalSignature;
+	@Expose public short Id;
+	@Expose public byte[] DigitalSignature;
 	
 	public SharedResource() throws NoSuchAlgorithmException, IOException
 	{

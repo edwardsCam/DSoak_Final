@@ -1,0 +1,10 @@
+package Messages;
+
+import SharedObject.*;
+
+public class ThrowBalloon extends Message 
+{
+	public short GameId;
+    public Balloon Balloon;
+    public short TargetPlayerId;
+}

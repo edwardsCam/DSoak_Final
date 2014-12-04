@@ -1,0 +1,8 @@
+package Messages;
+
+import SharedObject.*;
+
+public class BalloonPurchased extends Message 
+{
+	public Balloon Balloon;
+}

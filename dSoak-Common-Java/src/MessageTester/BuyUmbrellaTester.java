@@ -2,16 +2,12 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import org.junit.Test;
 
-import Messages.BuyBalloon;
 import Messages.BuyUmbrella;
 import Messages.Message;
 import SharedObject.MessageNumber;
@@ -37,7 +33,7 @@ public class BuyUmbrellaTester
 		pennies.add(new Penny());
 		pennies.add(new Penny());
 		pennies.add(new Penny());
-		pennies.add(new Penny());
+
 		
 		BuyUmbrella msg2 = new BuyUmbrella();
 		msg2.Pennies = pennies;
@@ -50,12 +46,8 @@ public class BuyUmbrellaTester
 		assertSame(pennies, msg2.Pennies);
 		
 		byte[] bytes = msg2.Encode();
+		String str = new String(bytes);
 		
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
-		
-		assertTrue(type.equals("BuyUmbrella:"));
 		
 		Message msg3 = Message.Decode(bytes);
 		assertTrue(msg3 instanceof BuyUmbrella);

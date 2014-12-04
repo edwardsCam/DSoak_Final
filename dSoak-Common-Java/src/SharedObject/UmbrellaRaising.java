@@ -1,13 +1,12 @@
 package SharedObject;
 
-import java.io.Serializable;
 import java.util.Date;
+import com.google.gson.annotations.Expose;
 
-public class UmbrellaRaising implements Serializable
+public class UmbrellaRaising 
 {
-	private static final long serialVersionUID = 1L;
-	public short GameId;
-    public short PlayerId;
-    public short UmbrellaId;
-    public Date AtTime;
+	@Expose public short GameId;
+	@Expose public short PlayerId;
+	@Expose public short UmbrellaId;
+	@Expose public Date AtTime;
 }

@@ -1,14 +1,13 @@
 package Messages;
 
-import java.io.Serializable;
 import java.util.List;
+
+import com.google.gson.annotations.Expose;
 
 import SharedObject.*;
 
-public class GameData extends Message implements Serializable
+public class GameData extends Message 
 {
-	private static final long serialVersionUID = 8209022363040598597L;
-	
-	public GameInfo Info;
-	public List<ProcessData> Processes;
+	@Expose public GameInfo Info;
+	@Expose public List<ProcessData> Processes;
 }

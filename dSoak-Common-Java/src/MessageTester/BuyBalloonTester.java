@@ -2,11 +2,7 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.awt.List;
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
@@ -46,12 +42,7 @@ public class BuyBalloonTester {
 		assertSame(pennies, msg2.Pennies);
 		
 		byte[] bytes = msg2.Encode();
-		
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
-		
-		assertTrue(type.equals("BuyBalloon:"));
+		String str = new String(bytes);
 		
 		Message msg3 = Message.Decode(bytes);
 		assertTrue(msg3 instanceof BuyBalloon);

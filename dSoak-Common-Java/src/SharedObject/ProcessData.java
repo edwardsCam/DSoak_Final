@@ -1,30 +1,19 @@
 package SharedObject;
 
-import java.io.Serializable;
+import com.google.gson.annotations.Expose;
 
-public class ProcessData implements Serializable
+public class ProcessData 
 {
-	private static final long serialVersionUID = 1821207611587414708L;
-
-	public short GameId;
-    
-    public short ProcessId;
-    
-    public PossibleProcessType ProcessType; 
-    
-    public short LifePoints; 
-    
-    public short HitPoints; 
-    
-    public short NumberOfPennies; 
-    
-    public short NumberOfUnfilledBalloon; 
-    
-    public short NumberOfFilledBalloon; 
-    
-    public short NumberOfUnraisedUmbrellas; 
-    
-    public boolean HasUmbrellaRaised; 
+	@Expose public short GameId;
+	@Expose public short ProcessId;
+	@Expose public PossibleProcessType ProcessType; 
+	@Expose public short LifePoints; 
+	@Expose public short HitPoints; 
+	@Expose public short NumberOfPennies; 
+	@Expose public short NumberOfUnfilledBalloon; 
+	@Expose public short NumberOfFilledBalloon; 
+	@Expose public short NumberOfUnraisedUmbrellas; 
+	@Expose public boolean HasUmbrellaRaised; 
     
     public enum PossibleProcessType
 	{ 

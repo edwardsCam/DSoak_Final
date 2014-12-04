@@ -1,0 +1,9 @@
+package Messages;
+import java.io.Serializable;
+
+import SharedObject.*;
+
+public class FillBalloon extends ResourceRequest 
+{
+	public Balloon Balloon;
+}

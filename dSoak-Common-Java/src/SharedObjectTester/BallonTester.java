@@ -1,13 +1,9 @@
 package SharedObjectTester;
 
 import static org.junit.Assert.*;
-
 import java.io.IOException;
-import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
-
 import org.junit.Test;
-
 import SharedObject.Balloon;
 
 public class BallonTester 
@@ -22,7 +18,6 @@ public class BallonTester
 		
 		b1.UnitOfWater = 1;
 		assertEquals(1, b1.UnitOfWater);
-		//assertFalse(b1.IsValid());
 	}
 
 }

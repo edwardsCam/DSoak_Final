@@ -1,12 +1,12 @@
 package MessageTester;
 
 import static org.junit.Assert.*;
-import java.io.ByteArrayInputStream;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.security.NoSuchAlgorithmException;
+
 import org.junit.Test;
+
 import Messages.Message;
 import Messages.SetupStream;
 import SharedObject.MessageNumber;
@@ -34,10 +34,7 @@ public class SetupStreamTester
 		assertEquals(msg1.ConvId.SeqNumber, msg2.ConvId.SeqNumber);
 		
 		byte[] bytes = msg2.Encode();
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
-		assertTrue(type.equals("SetupStream:"));
+		String str = new String(bytes);
 		
 		Message msg3 = Message.Decode(bytes);
 		assertNotNull(msg3);

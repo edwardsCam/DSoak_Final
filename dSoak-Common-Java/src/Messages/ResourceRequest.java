@@ -1,13 +1,12 @@
 package Messages;
 
-import java.io.Serializable;
 import java.util.List;
+
+import com.google.gson.annotations.Expose;
 
 import SharedObject.Penny;
 
-public class ResourceRequest extends Message implements Serializable
+public class ResourceRequest extends Message 
 {
-	private static final long serialVersionUID = 5272578343088726328L;
-	
-	public List<Penny> Pennies;
+	@Expose public List<Penny> Pennies;
 }

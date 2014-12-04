@@ -1,23 +1,13 @@
 package MessageTester;
 
 import static org.junit.Assert.*;
-
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
-
 import org.junit.Test;
-
-import Messages.FillBalloon;
 import Messages.GameData;
 import Messages.Message;
 import SharedObject.GameInfo;
-import SharedObject.GameInfo.StatusCode;
 import SharedObject.MessageNumber;
-import SharedObject.Penny;
-import SharedObject.PlayerInfo;
 import SharedObject.ProcessData;
 import SharedObject.ProcessData.PossibleProcessType;
 
@@ -37,7 +27,7 @@ public class GameDataTester
 	
 		GameInfo gameInfo = new GameInfo();
 		gameInfo.GameId = 102;
-		gameInfo.Status = GameInfo.StatusCode.AVAILABLE;
+		gameInfo.Status = GameInfo.StatusCode.NOTINITIALIZED;
 		
 		ArrayList<ProcessData> processes = new  ArrayList<ProcessData>();
 		ProcessData process1 = new ProcessData();
@@ -72,12 +62,7 @@ public class GameDataTester
 		assertSame(processes, msg2.Processes);
 		
 		byte[] bytes = msg2.Encode();
-		
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
-		
-		assertTrue(type.equals("GameData:"));
+		String str = new String(bytes);
 		
 		Message msg3 = Message.Decode(bytes);
 		assertTrue(msg3 instanceof GameData);

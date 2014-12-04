@@ -1,0 +1,6 @@
+package Messages;
+
+public class Hit extends Message
+{
+	public short UnitsOfWater;
+}

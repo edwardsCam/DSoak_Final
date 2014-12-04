@@ -2,6 +2,8 @@ package SharedObjectTester;
 
 import static org.junit.Assert.*;
 
+import java.net.UnknownHostException;
+
 import org.junit.Test;
 
 import SharedObject.GamePlayerInfo;
@@ -11,17 +13,15 @@ import SharedObject.PublicEndPoint;
 public class GamePlayerInfoTester 
 {
 	@Test
-	public void test_EveryThing()
+	public void test_EveryThing() throws UnknownHostException
 	{
 		GamePlayerInfo gp1 = new GamePlayerInfo();
 		assertEquals(0, gp1.GameId);
 		assertNull(gp1.Player);
 		assertNull(gp1.Status);
 		
-		PublicEndPoint ep1 = new PublicEndPoint();
-		ep1.Host("swcwin.serv.usu.edu");
-		ep1.Port(35420);
-		
+		PublicEndPoint ep1 = new PublicEndPoint("swcwin.serv.usu.edu:35420");
+	
 		PlayerInfo pInfo = new PlayerInfo();
 		pInfo.EndPoint = ep1;
 		pInfo.PlayerId = 100;

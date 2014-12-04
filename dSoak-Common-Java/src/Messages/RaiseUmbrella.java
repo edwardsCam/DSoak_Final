@@ -1,11 +1,9 @@
 package Messages;
-import java.io.Serializable;
 
+import com.google.gson.annotations.Expose;
 import SharedObject.*;
 
-public class RaiseUmbrella extends Message implements Serializable
+public class RaiseUmbrella extends Message 
 {
-	private static final long serialVersionUID = 5965853462602457661L;
-	
-	public Umbrella Umbrella;
+	@Expose public Umbrella Umbrella;
 }

@@ -2,10 +2,10 @@ package MessageTester;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 
 import org.junit.Test;
 
@@ -15,8 +15,8 @@ import SharedObject.MessageNumber;
 import SharedObject.PlayerInfo;
 import SharedObject.PublicEndPoint;
 
-public class JoinGameTester {
-
+public class JoinGameTester
+{
 	@Test
 	public void test_Everythings() throws ClassNotFoundException, IOException 
 	{
@@ -28,9 +28,7 @@ public class JoinGameTester {
 		assertTrue(msg1.MessageNr.SeqNumber > 0);
 		assertEquals(msg1.MessageNr, msg1.ConvId);
 		
-		PublicEndPoint ep = new PublicEndPoint();
-		ep.Host("127.0.0.1");
-		ep.Port(123456);
+		PublicEndPoint ep = new PublicEndPoint("127.0.0.1:123456");
 		PlayerInfo playerInfo = new PlayerInfo();
 		playerInfo.PlayerId = 10;
 		playerInfo.Status = PlayerInfo.StateCode.ONLINE;
@@ -47,35 +45,60 @@ public class JoinGameTester {
 		assertEquals(123, msg2.GameId);
 		assertNotNull(msg2.Player);
 		assertSame(playerInfo, msg2.Player);
-		assertTrue(msg2.Player.EndPoint.Host().equals( "127.0.0.1"));
-		assertEquals(123456, msg2.Player.EndPoint.Port());
+		assertTrue(msg2.Player.EndPoint.getHost().equals( "127.0.0.1"));
+		assertEquals(123456, msg2.Player.EndPoint.getPort());
 		
 		byte[] bytes = msg2.Encode();
-		InputStream myInputStream = new ByteArrayInputStream(bytes);
-		ObjectInputStream oin = new ObjectInputStream(myInputStream);
-		String type = (String) oin.readObject();
+		String str = new String(bytes);
 		
-		assertTrue(type.equals("JoinGame:"));
 		JoinGame msg3 = (JoinGame) Message.Decode(bytes);
 		assertNotNull(msg3);
 		assertTrue(msg3 instanceof JoinGame);
 		assertEquals(msg2.GameId, msg3.GameId);
-		assertTrue(msg2.Player.EndPoint.Host().equals(msg3.Player.EndPoint.Host()));
-		assertEquals(msg2.Player.EndPoint.Port(), msg3.Player.EndPoint.Port());
+		assertTrue(msg2.Player.EndPoint.HostAndPort.equals(msg3.Player.EndPoint.HostAndPort));
 		assertEquals(msg2.Player.Status.getValue(), msg3.Player.Status.getValue());
 		assertEquals(msg2.Player.PlayerId, msg3.Player.PlayerId);
 		
 		JoinGame msg4 = (JoinGame) msg3;
 		assertEquals(msg3.GameId, msg4.GameId);
-		assertTrue(msg3.Player.EndPoint.Host().equals(msg4.Player.EndPoint.Host()));
-		assertEquals(msg3.Player.EndPoint.Port(), msg4.Player.EndPoint.Port());
+		assertTrue(msg3.Player.EndPoint.HostAndPort.equals(msg4.Player.EndPoint.HostAndPort));
 		assertEquals(msg3.Player.Status.getValue(), msg4.Player.Status.getValue());
 		assertEquals(msg3.Player.PlayerId, msg4.Player.PlayerId);
 		
 		assertEquals(msg2.GameId, msg4.GameId);
-		assertTrue(msg2.Player.EndPoint.Host().equals(msg4.Player.EndPoint.Host()));
-		assertEquals(msg2.Player.EndPoint.Port(), msg4.Player.EndPoint.Port());
+		assertTrue(msg2.Player.EndPoint.HostAndPort.equals(msg4.Player.EndPoint.HostAndPort));
 		assertEquals(msg2.Player.Status.getValue(), msg4.Player.Status.getValue());
 		assertEquals(msg2.Player.PlayerId, msg4.Player.PlayerId);
 	}
+	
+	@Test
+	public void test_Compatabilitys() throws ClassNotFoundException, IOException 
+	{
+		MessageNumber.LocalProcessId = 100;
+		
+		JoinGame msg2 = new JoinGame();
+		PlayerInfo playerInfo = new PlayerInfo();
+		playerInfo.PlayerId = 10;
+		playerInfo.Status = PlayerInfo.StateCode.ONLINE;
+		msg2.GameId = 123;
+		msg2.Player = playerInfo;
+		
+		byte[] bytes = msg2.Encode();
+		String str = new String(bytes);
+		
+		Message msg = Message.Decode(bytes);
+		JoinGame join = (JoinGame) msg;
+		assertEquals(msg.ConvId.ProcessId, msg2.ConvId.ProcessId);
+		assertEquals(msg.ConvId.SeqNumber, msg2.ConvId.SeqNumber);
+		assertEquals(msg.MessageNr.ProcessId, msg2.MessageNr.ProcessId);
+		assertEquals(msg.MessageNr.SeqNumber, msg2.MessageNr.SeqNumber);
+		assertEquals(join.ConvId.ProcessId, msg2.ConvId.ProcessId);
+		assertEquals(join.ConvId.SeqNumber, msg2.ConvId.SeqNumber);
+		assertEquals(join.MessageNr.ProcessId, msg2.MessageNr.ProcessId);
+		assertEquals(join.MessageNr.SeqNumber, msg2.MessageNr.SeqNumber);
+		assertEquals(join.GameId, msg2.GameId);
+		assertEquals(join.Player.PlayerId, msg2.Player.PlayerId);
+		assertEquals(join.Player.Status.getValue(), msg2.Player.Status.getValue());
+	}
+	
 }
