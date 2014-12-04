@@ -2,18 +2,20 @@ package SharedObject;
 
 import java.util.Date;
 
+import SharedObject.PlayerInfo.StateCode;
+
 import com.google.gson.annotations.Expose;
 
 public class GameInfo 
 {
-	@Expose public short GameId;
-	@Expose public String Label;
-	@Expose public short FightManagerId;
-	@Expose public PublicEndPoint FlightManagerEP;
-	@Expose public StatusCode Status;
-	@Expose public short MaxPlayers;
-	@Expose public Date AliveTimeStamp;
-	@Expose public short MaxThieves;
+	public short GameId;
+	public String Label;
+	public short FightManagerId;
+	public PublicEndPoint FlightManagerEP;
+	public StatusCode Status;
+	public short MaxPlayers;
+	public Date AliveTimeStamp;
+	public short MaxThieves;
 
     public enum StatusCode
 	{
@@ -29,6 +31,18 @@ public class GameInfo
 		public short getValue()
 		{
 			return value;
+		}
+		
+		public static StatusCode setValue(short b)
+	   	{
+			StatusCode temp = null;
+		    for (StatusCode  t : StatusCode.values()) 
+		    {
+		    	if (t.value == b) {
+		    		temp = t;
+		        }
+		    }
+		    return temp;
 		}
 	}
 }

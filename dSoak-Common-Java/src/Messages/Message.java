@@ -13,7 +13,18 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import com.google.gson.stream.JsonReader;
 
+import Deserializer.GameInfoDeserializer;
+import Deserializer.GameOverDeserializer;
+import Deserializer.PlayerInfoDeserializer;
+import Deserializer.PublicEndPointDeserializer;
+import Serializers.GameInfoSerializer;
+import Serializers.GameOverSerializer;
+import Serializers.PlayerInfoSerializer;
+import Serializers.PublicEndPointSerializer;
+import SharedObject.GameInfo;
 import SharedObject.MessageNumber;
+import SharedObject.PlayerInfo;
+import SharedObject.PublicEndPoint;
 
 public class Message 
 {
@@ -36,7 +47,15 @@ public class Message
 		String type = this.getClass().getSimpleName() + ":";
 		outstreamWriter.write(type);
 		outstreamWriter.flush();
-		Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().serializeNulls().create();
+		final GsonBuilder gsonBuilder = new GsonBuilder();
+	
+		gsonBuilder.registerTypeAdapter(PublicEndPoint.class, new PublicEndPointSerializer());
+		gsonBuilder.registerTypeAdapter(PlayerInfo.class, new PlayerInfoSerializer());
+		gsonBuilder.registerTypeAdapter(GameOver.class, new GameOverSerializer());
+		gsonBuilder.registerTypeAdapter(GameInfo.class, new GameInfoSerializer());
+		
+		Gson gson = gsonBuilder.excludeFieldsWithoutExposeAnnotation().serializeNulls().create(); 
+	
 		gson.toJson(this, this.getClass(), outstreamWriter);
 		outstreamWriter.flush();
 		return byteArrayOutStream.toByteArray();
@@ -50,8 +69,15 @@ public class Message
 		Class<?> classType = LookupClassType(typeName);
 		ByteArrayInputStream input = new ByteArrayInputStream(bytes, typeName.length() + 1, bytes.length- typeName.length() -1);
 		JsonReader reader = new JsonReader(new InputStreamReader(input, "US-ASCII"));
+		final GsonBuilder gsonBuilder = new GsonBuilder();
 		
-	    Gson gson = new GsonBuilder().create();
+		gsonBuilder.registerTypeAdapter(PublicEndPoint.class, new PublicEndPointDeserializer());
+		gsonBuilder.registerTypeAdapter(PlayerInfo.class, new PlayerInfoDeserializer());
+		gsonBuilder.registerTypeAdapter(GameOver.class, new GameOverDeserializer());
+		gsonBuilder.registerTypeAdapter(GameInfo.class, new GameInfoDeserializer());
+		
+		Gson gson = gsonBuilder.create();
+		
 	   	message = (Message) gson.fromJson(reader, classType);
 	    return message;
     }
@@ -112,6 +138,7 @@ public class Message
          classType.put("GiveUpABalloon", GiveUpABalloon.class);
          classType.put("BalloonStolen", BalloonStolen.class);
          classType.put("ThrowBalloon", ThrowBalloon.class);
-         
+         classType.put("PublicEndPoint", PublicEndPoint.class);
+         classType.put("PlayerInfo", PlayerInfo.class);
     }
 }

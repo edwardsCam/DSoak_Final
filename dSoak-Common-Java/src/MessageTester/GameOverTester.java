@@ -17,14 +17,16 @@ public class GameOverTester {
 	@Test
 	public void test_EveryThings() throws ClassNotFoundException, IOException
 	{
+		MessageNumber.LocalProcessId =100;
 		GameOver gameOver = new GameOver();
-		MessageNumber msgN =  MessageNumber.Create();
-		gameOver.MessageNr = msgN;
+	
+		gameOver.MessageNr = gameOver.MessageNr;
 		gameOver.ConvId = gameOver.MessageNr;
 		
 		PublicEndPoint ep = new PublicEndPoint("127.0.0.1:1010");
 		PlayerInfo winer = new PlayerInfo();
 		winer.EndPoint = ep;
+		winer.Status = PlayerInfo.StateCode.OFFLINE;
 		gameOver.GameId  = (short)10;
 		gameOver.Winner = winer;
 		
@@ -35,8 +37,9 @@ public class GameOverTester {
 		
 		assertEquals((short)10, msg.GameId);
 		assertTrue(msg.Winner.EndPoint.HostAndPort.equals("127.0.0.1:1010"));
-		assertEquals(msgN.ProcessId, msg.MessageNr.ProcessId);
-		assertEquals(msgN.SeqNumber, msg.MessageNr.SeqNumber);
+		assertEquals(gameOver.ConvId.ProcessId , msg.ConvId.ProcessId);
+		assertEquals(gameOver.MessageNr.SeqNumber + 1, msg.MessageNr.SeqNumber);
+		
 		assertEquals(winer.PlayerId, msg.Winner.PlayerId);
 	}
 }

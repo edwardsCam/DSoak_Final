@@ -11,7 +11,7 @@ public class PublicEndPoint
 	private  IPEndPoint myIPEndPoint = null;
 	private  String myHost;
 	private  int myPort;
-	@Expose public String HostAndPort;
+	public String HostAndPort; 
 	
 	public PublicEndPoint() {	}
 	
@@ -65,11 +65,13 @@ public class PublicEndPoint
 	{
 		if (str != null)
 		{
+			HostAndPort = str;
 			String[] tmp = str.split(":");
 			if ((tmp.length == 2) && (tmp[0] != null))
 			{
 				setHost(tmp[0]);
 				setPort(Integer.parseInt(tmp[1]));
+				
 			}
 		}
 	}
