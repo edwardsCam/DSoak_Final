@@ -79,19 +79,6 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://ec2-54-186-119-124.us-west-2.compute.amazonaws.com/Registrar.svc">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\_Registrar\</RelPath>
-      <UpdateFromURL>http://ec2-54-186-119-124.us-west-2.compute.amazonaws.com/Registrar.svc</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>Actors__Registrar_Registrar</CachedSettingsPropName>
-    </WebReferenceUrl>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -111,6 +98,19 @@
     <None Include="Web References\_Registrar\RegistryEntry.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://ec2-54-186-119-124.us-west-2.compute.amazonaws.com/Registrar.svc">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\_Registrar\</RelPath>
+      <UpdateFromURL>http://ec2-54-186-119-124.us-west-2.compute.amazonaws.com/Registrar.svc</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Actors__Registrar_Registrar</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\_Registrar\Registrar.disco" />

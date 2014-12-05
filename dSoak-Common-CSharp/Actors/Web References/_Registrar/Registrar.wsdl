@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Registrar" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://ec2-54-186-119-124.us-west-2.compute.amazonaws.com/Registrar.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://ec2-54-186-119-124.us-west-2.compute.amazonaws.com/Registrar.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://ec2-54-186-119-124.us-west-2.compute.amazonaws.com/Registrar.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/SharedObjects" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IRegistrar_GetProcessId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProcessId" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GetProcessId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProcessIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_AmAlive_InputMessage">
+    <wsdl:part name="parameters" element="tns:AmAlive" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_AmAlive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AmAliveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GetGameManagers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGameManagers" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GetGameManagers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGameManagersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GetPlayers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayers" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GetPlayers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GetProcessInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetProcessInfo" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GetProcessInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetProcessInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_RegisterGame_InputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterGame" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_RegisterGame_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterGameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GetAllGames_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllGames" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GetAllGames_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllGamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GetGames_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGames" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GetGames_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGamesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GetGameInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetGameInfo" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GetGameInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetGameInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GameAmAlive_InputMessage">
+    <wsdl:part name="parameters" element="tns:GameAmAlive" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_GameAmAlive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GameAmAliveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_ChangeStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStatus" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_ChangeStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_EndPointReflector_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndPointReflector" />
+  </wsdl:message>
+  <wsdl:message name="IRegistrar_EndPointReflector_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndPointReflectorResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IRegistrar">
+    <wsdl:operation name="GetProcessId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRegistrar/GetProcessId" message="tns:IRegistrar_GetProcessId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistrar/GetProcessIdResponse" message="tns:IRegistrar_GetProcessId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AmAlive">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRegistrar/AmAlive" message="tns:IRegistrar_AmAlive_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistrar/AmAliveResponse" message="tns:IRegistrar_AmAlive_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGameManagers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRegistrar/GetGameManagers" message="tns:IRegistrar_GetGameManagers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistrar/GetGameManagersResponse" message="tns:IRegistrar_GetGameManagers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRegistrar/GetPlayers" message="tns:IRegistrar_GetPlayers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistrar/GetPlayersResponse" message="tns:IRegistrar_GetPlayers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProcessInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRegistrar/GetProcessInfo" message="tns:IRegistrar_GetProcessInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistrar/GetProcessInfoResponse" message="tns:IRegistrar_GetProcessInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RegisterGame">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRegistrar/RegisterGame" message="tns:IRegistrar_RegisterGame_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistrar/RegisterGameResponse" message="tns:IRegistrar_RegisterGame_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllGames">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRegistrar/GetAllGames" message="tns:IRegistrar_GetAllGames_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistrar/GetAllGamesResponse" message="tns:IRegistrar_GetAllGames_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGames">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRegistrar/GetGames" message="tns:IRegistrar_GetGames_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistrar/GetGamesResponse" message="tns:IRegistrar_GetGames_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetGameInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRegistrar/GetGameInfo" message="tns:IRegistrar_GetGameInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistrar/GetGameInfoResponse" message="tns:IRegistrar_GetGameInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GameAmAlive">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRegistrar/GameAmAlive" message="tns:IRegistrar_GameAmAlive_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistrar/GameAmAliveResponse" message="tns:IRegistrar_GameAmAlive_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRegistrar/ChangeStatus" message="tns:IRegistrar_ChangeStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistrar/ChangeStatusResponse" message="tns:IRegistrar_ChangeStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndPointReflector">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRegistrar/EndPointReflector" message="tns:IRegistrar_EndPointReflector_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRegistrar/EndPointReflectorResponse" message="tns:IRegistrar_EndPointReflector_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IRegistrar" type="tns:IRegistrar">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetProcessId">
+      <soap:operation soapAction="http://tempuri.org/IRegistrar/GetProcessId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AmAlive">
+      <soap:operation soapAction="http://tempuri.org/IRegistrar/AmAlive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGameManagers">
+      <soap:operation soapAction="http://tempuri.org/IRegistrar/GetGameManagers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayers">
+      <soap:operation soapAction="http://tempuri.org/IRegistrar/GetPlayers" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProcessInfo">
+      <soap:operation soapAction="http://tempuri.org/IRegistrar/GetProcessInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RegisterGame">
+      <soap:operation soapAction="http://tempuri.org/IRegistrar/RegisterGame" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllGames">
+      <soap:operation soapAction="http://tempuri.org/IRegistrar/GetAllGames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGames">
+      <soap:operation soapAction="http://tempuri.org/IRegistrar/GetGames" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetGameInfo">
+      <soap:operation soapAction="http://tempuri.org/IRegistrar/GetGameInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GameAmAlive">
+      <soap:operation soapAction="http://tempuri.org/IRegistrar/GameAmAlive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeStatus">
+      <soap:operation soapAction="http://tempuri.org/IRegistrar/ChangeStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndPointReflector">
+      <soap:operation soapAction="http://tempuri.org/IRegistrar/EndPointReflector" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Registrar">
+    <wsdl:port name="BasicHttpBinding_IRegistrar" binding="tns:BasicHttpBinding_IRegistrar">
+      <soap:address location="http://ec2-54-186-119-124.us-west-2.compute.amazonaws.com/Registrar.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
