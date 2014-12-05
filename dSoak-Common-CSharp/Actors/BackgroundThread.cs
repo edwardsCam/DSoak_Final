@@ -19,7 +19,7 @@ namespace Actors
 
 		private Thread _t;
 		protected static MessageQueue q_request;
-		protected static Dictionary<SharedObjects.MessageNumber, MessageQueue> conversation_queues;
+		protected static ConversationList conversation_queues;
 
 		#endregion
 
@@ -61,24 +61,12 @@ namespace Actors
 
 		public bool hasConversation()
 		{
-			if (conversation_queues != null)
-			{
-				foreach (KeyValuePair<SharedObjects.MessageNumber, MessageQueue> entry in conversation_queues)
-				{
-					if (entry.Value.size() > 0)
-					{
-						return true;
-					}
-				}
-			}
-			return false;
+			return conversation_queues.hasConvos();
 		}
 
 		public bool hasConversation(SharedObjects.MessageNumber convID)
 		{
-			return conversation_queues != null &&
-				conversation_queues[convID] != null &&
-				conversation_queues[convID].size() > 0;
+			return conversation_queues.hasConvo(convID);
 		}
 
 		#endregion

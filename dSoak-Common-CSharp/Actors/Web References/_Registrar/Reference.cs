@@ -41,6 +41,8 @@ namespace Actors._Registrar {
         
         private System.Threading.SendOrPostCallback RegisterGameOperationCompleted;
         
+        private System.Threading.SendOrPostCallback GetAllGamesOperationCompleted;
+        
         private System.Threading.SendOrPostCallback GetGamesOperationCompleted;
         
         private System.Threading.SendOrPostCallback GetGameInfoOperationCompleted;
@@ -106,6 +108,9 @@ namespace Actors._Registrar {
         
         /// <remarks/>
         public event RegisterGameCompletedEventHandler RegisterGameCompleted;
+        
+        /// <remarks/>
+        public event GetAllGamesCompletedEventHandler GetAllGamesCompleted;
         
         /// <remarks/>
         public event GetGamesCompletedEventHandler GetGamesCompleted;
@@ -321,6 +326,35 @@ namespace Actors._Registrar {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IRegistrar/GetAllGames", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [return: System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
+        [return: System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/SharedObjects")]
+        public GameInfo[] GetAllGames() {
+            object[] results = this.Invoke("GetAllGames", new object[0]);
+            return ((GameInfo[])(results[0]));
+        }
+        
+        /// <remarks/>
+        public void GetAllGamesAsync() {
+            this.GetAllGamesAsync(null);
+        }
+        
+        /// <remarks/>
+        public void GetAllGamesAsync(object userState) {
+            if ((this.GetAllGamesOperationCompleted == null)) {
+                this.GetAllGamesOperationCompleted = new System.Threading.SendOrPostCallback(this.OnGetAllGamesOperationCompleted);
+            }
+            this.InvokeAsync("GetAllGames", new object[0], this.GetAllGamesOperationCompleted, userState);
+        }
+        
+        private void OnGetAllGamesOperationCompleted(object arg) {
+            if ((this.GetAllGamesCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.GetAllGamesCompleted(this, new GetAllGamesCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/IRegistrar/GetGames", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlArrayAttribute(IsNullable=true)]
         [return: System.Xml.Serialization.XmlArrayItemAttribute(Namespace="http://schemas.datacontract.org/2004/07/SharedObjects")]
@@ -528,6 +562,10 @@ namespace Actors._Registrar {
         
         private PublicEndPoint fightManagerEPField;
         
+        private short fightManagerIdField;
+        
+        private bool fightManagerIdFieldSpecified;
+        
         private short gameIdField;
         
         private bool gameIdFieldSpecified;
@@ -554,6 +592,27 @@ namespace Actors._Registrar {
             }
             set {
                 this.fightManagerEPField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public short FightManagerId {
+            get {
+                return this.fightManagerIdField;
+            }
+            set {
+                this.fightManagerIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool FightManagerIdSpecified {
+            get {
+                return this.fightManagerIdFieldSpecified;
+            }
+            set {
+                this.fightManagerIdFieldSpecified = value;
             }
         }
         
@@ -951,6 +1010,32 @@ namespace Actors._Registrar {
             get {
                 this.RaiseExceptionIfNecessary();
                 return ((GameInfo)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    public delegate void GetAllGamesCompletedEventHandler(object sender, GetAllGamesCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.0.30319.18408")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class GetAllGamesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal GetAllGamesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public GameInfo[] Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((GameInfo[])(this.results[0]));
             }
         }
     }

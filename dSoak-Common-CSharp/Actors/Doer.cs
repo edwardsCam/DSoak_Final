@@ -58,7 +58,7 @@ namespace Actors
 		{
 
 			if (conversation_queues == null)
-				conversation_queues = new Dictionary<SharedObjects.MessageNumber, MessageQueue>();
+				conversation_queues = new ConversationList();
 
 			if (q_request == null)
 				q_request = new MessageQueue();
@@ -101,49 +101,39 @@ namespace Actors
 				if (hasRequests())
 				{
 					Envelope msg = q_request.pop();
-					MessageQueue newConversation = new MessageQueue();
-					newConversation.push(msg);
-					conversation_queues.Add(msg.getPayload().ConvId, newConversation);
+					conversation_queues.add(msg);
 				}
 
 				if (hasConversation())
 				{
-					foreach (KeyValuePair<SharedObjects.MessageNumber, MessageQueue> entry in conversation_queues)
+					Conversation convo = conversation_queues.pop();
+					Envelope request = convo.pop();
+					Messages.Message msg = request.getPayload();
+					switch (msg.getTypeAsString())
 					{
-						MessageQueue convo = entry.Value;
-						if (convo.size() > 0)
-						{
-							Envelope request = convo.pop();
-							Messages.Message msg = request.getPayload();
-							switch (msg.getTypeAsString())
-							{
-								case "GameJoined":
-									Messages.GameJoined joined = msg as Messages.GameJoined;
-									addPennies(joined.Pennies);
-									break;
+						case "GameJoined":
+							Messages.GameJoined joined = msg as Messages.GameJoined;
+							addPennies(joined.Pennies);
+							break;
 
-								case "UmbrellaPurchased":
-									Messages.UmbrellaPurchased purchased = msg as Messages.UmbrellaPurchased;
-									addUmbrella(purchased.Umbrella);
-									break;
+						case "UmbrellaPurchased":
+							Messages.UmbrellaPurchased purchased = msg as Messages.UmbrellaPurchased;
+							addUmbrella(purchased.Umbrella);
+							break;
 
-								case "BalloonPurchased":
-									Messages.BalloonPurchased balloon = msg as Messages.BalloonPurchased;
-									addBalloon(balloon.Balloon);
-									break;
+						case "BalloonPurchased":
+							Messages.BalloonPurchased balloon = msg as Messages.BalloonPurchased;
+							addBalloon(balloon.Balloon);
+							break;
 
-								case "Ack":
-									message_to_return = "Ack";
-									break;
+						case "Ack":
+							message_to_return = "Ack";
+							break;
 
-								case "Nak":
-									Messages.Nak nak = msg as Messages.Nak;
-									message_to_return = nak.Error;
-									break;
-							}
-						}
-						else
-							convo = null;
+						case "Nak":
+							Messages.Nak nak = msg as Messages.Nak;
+							message_to_return = nak.Error;
+							break;
 					}
 				}
 			}
@@ -164,7 +154,7 @@ namespace Actors
 
 		public Envelope popConversation(SharedObjects.MessageNumber convID)
 		{
-			return conversation_queues[convID].pop();
+			return conversation_queues.getConvo(convID).pop();
 		}
 
 		#endregion

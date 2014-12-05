@@ -1,0 +1,42 @@
+package Deserializer;
+
+import java.lang.reflect.Type;
+
+import SharedObject.ProcessData;
+
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+
+public class ProcessDataDeserializer implements JsonDeserializer<ProcessData>
+{
+	public ProcessData deserialize(JsonElement jsonElement, Type type,	JsonDeserializationContext context) throws JsonParseException 
+	{
+		final JsonObject jsonObject = jsonElement.getAsJsonObject();
+	
+		final short gameId = jsonObject.get("GameId").getAsShort();
+		final short processId = jsonObject.get("ProcessId").getAsShort();
+		final short processType = jsonObject.get("ProcessType").getAsShort();
+		final short lifePoints = jsonObject.get("LifePoints").getAsShort();
+		final short hitPoints = jsonObject.get("HitPoints").getAsShort();
+		final short numberOfPennies = jsonObject.get("NumberOfPennies").getAsShort();
+		final short numberOfUnfilledBalloon = jsonObject.get("NumberOfUnfilledBalloon").getAsShort();
+		final short numberOfFilledBalloon = jsonObject.get("NumberOfFilledBalloon").getAsShort();
+		final short numberOfUnraisedUmbrellas = jsonObject.get("NumberOfUnraisedUmbrellas").getAsShort();
+		final boolean hasUmbrellaRaised = jsonObject.get("HasUmbrellaRaised").getAsBoolean();
+		
+		ProcessData data = new ProcessData();
+		data.GameId = gameId;
+		data.ProcessId = processId;
+		data.ProcessType = ProcessData.PossibleProcessType.setValue(processType);
+		data.LifePoints = lifePoints;
+		data.HitPoints = hitPoints;
+		data.NumberOfPennies =numberOfPennies;
+		data.NumberOfUnfilledBalloon = numberOfUnfilledBalloon;
+		data.NumberOfFilledBalloon = numberOfFilledBalloon;
+		
+	}
+
+}

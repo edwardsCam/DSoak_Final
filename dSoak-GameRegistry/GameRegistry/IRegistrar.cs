@@ -32,6 +32,9 @@ namespace GameRegistry
         GameInfo RegisterGame(int gameManagerId, string label, int maxPlayers, int maxThieves);
 
         [OperationContract]
+        GameInfo[] GetAllGames();
+
+        [OperationContract]
         GameInfo[] GetGames(GameInfo.StatusCode status = GameInfo.StatusCode.Available);
 
         [OperationContract]

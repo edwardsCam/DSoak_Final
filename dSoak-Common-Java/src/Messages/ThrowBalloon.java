@@ -1,0 +1,11 @@
+package Messages;
+
+import com.google.gson.annotations.Expose;
+import SharedObject.*;
+
+public class ThrowBalloon extends Message 
+{
+	@Expose public short GameId;
+	@Expose public Balloon Balloon;
+	@Expose public short TargetPlayerId;
+}

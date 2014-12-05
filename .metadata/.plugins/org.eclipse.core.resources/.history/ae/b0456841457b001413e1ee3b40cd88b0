@@ -1,0 +1,8 @@
+package Messages;
+
+import SharedObject.*;
+
+public class RaiseUmbrella extends Message 
+{
+	public Umbrella Umbrella;
+}

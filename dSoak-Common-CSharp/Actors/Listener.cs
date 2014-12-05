@@ -55,7 +55,7 @@ namespace Actors
 		private void initialize(bool threading)
 		{
 			if (conversation_queues == null)
-				conversation_queues = new Dictionary<SharedObjects.MessageNumber, MessageQueue>();
+				conversation_queues = new ConversationList();
 
 			if (q_request == null)
 				q_request = new MessageQueue();
@@ -102,11 +102,9 @@ namespace Actors
 
 		#region Queue stuff
 
-		public void addConversation(SharedObjects.MessageNumber convID, Envelope msg)
+		public void addConversation(Envelope msg)
 		{
-			if (!conversation_queues.ContainsKey(convID))
-				conversation_queues.Add(convID, new MessageQueue());
-			conversation_queues[convID].push(msg);
+			conversation_queues.add(msg);
 		}
 
 		public void addRequest(Envelope msg)
@@ -135,7 +133,7 @@ namespace Actors
 				if (hasPendingConversation())
 				{
 					Envelope env = pendingMessages.pop();
-					conversation_queues[env.getPayload().ConvId].push(env);
+					conversation_queues.add(env);
 				}
 			}
 		}

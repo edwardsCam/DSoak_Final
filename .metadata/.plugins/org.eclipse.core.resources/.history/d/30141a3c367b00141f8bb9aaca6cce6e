@@ -1,0 +1,8 @@
+package Messages;
+
+import java.io.Serializable;
+
+public class LeaveGame extends Message 
+{
+	public short GameId;
+}

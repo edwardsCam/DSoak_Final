@@ -123,7 +123,7 @@ namespace Actors
 			{
 				SharedObjects.PlayerInfo player = new SharedObjects.PlayerInfo();
 				player.EndPoint = com.setLocalEP(false);
-				player.PlayerId = 019828; //todo
+				//player.PlayerId = 019828; //todo
 				player.Status = SharedObjects.PlayerInfo.StateCode.OnLine;
 
 				Messages.JoinGame msg = new Messages.JoinGame();
@@ -132,7 +132,7 @@ namespace Actors
 
 				com.setRemoteEP(g.getFightManagerEP());
 				com.send(msg);
-				if (com.receive())
+				if (com.receiveNotNak())
 				{
 					active_game.setPennyList(com.returnPennies());
 					active_game.activate();

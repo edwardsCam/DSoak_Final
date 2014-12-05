@@ -1,0 +1,139 @@
+package SharedObject;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+import com.google.gson.annotations.Expose;
+
+public class PublicEndPoint 
+{
+	private  InetAddress myIPAddress = null;
+	private  IPEndPoint myIPEndPoint = null;
+	private  String myHost;
+	private  int myPort;
+	@Expose public String HostAndPort;
+	
+	public PublicEndPoint() {	}
+	
+	public PublicEndPoint(String hostnameAndPort) throws UnknownHostException 
+	{
+		if (hostnameAndPort != null)
+		{
+			SetHostAndPortValue(hostnameAndPort);
+			HostAndPort = hostnameAndPort;
+			String[] str = hostnameAndPort.split(":");
+			myIPAddress = InetAddress.getByName(str[0]);
+			myIPEndPoint = new IPEndPoint(str[0], Integer.parseInt(str[1]));
+		}
+	}
+	
+	public String getHostAndPort()
+	{
+		HostAndPort =  ((myHost == null) ? ("0.0.0.0:" + getPort()) : getHost() + ":" + getPort());
+		return HostAndPort;
+	}
+	
+	public void setHostAndPort(String value)
+	{
+		SetHostAndPortValue(value);
+	}
+	
+	public String getHost()
+	{
+		return myHost;
+	}
+	
+	public void setHost(String value)
+	{
+		myHost = value;
+		myIPAddress = null;
+		myIPEndPoint = null;
+	}
+	
+	public int getPort()
+	{
+		return myPort;
+	}
+	
+	public void setPort(int value)
+	{
+		myPort = value;
+		myIPEndPoint = null;
+	}
+	
+	private void SetHostAndPortValue(String str) 
+	{
+		if (str != null)
+		{
+			String[] tmp = str.split(":");
+			if ((tmp.length == 2) && (tmp[0] != null))
+			{
+				setHost(tmp[0]);
+				setPort(Integer.parseInt(tmp[1]));
+			}
+		}
+	}
+
+	public IPEndPoint getIPEndPoint() throws UnknownHostException
+    {
+		if (myIPEndPoint == null) 
+		{
+			if  (myIPAddress == null)
+			{
+				if (getHost() != null)
+				{
+					myIPAddress = LookupAddress(getHost());
+				}
+				if  (myIPAddress != null)
+				{
+					myIPEndPoint =  new IPEndPoint(myIPAddress, getPort());
+				}
+			}
+		}
+		return myIPEndPoint;
+    }
+	
+	public void SetIPEndPoint(IPEndPoint value)
+    {
+		if (value != null)
+        {
+			setHost(value.Address.getHostAddress());
+            setPort(value.Port);
+            myIPAddress = value.Address;
+            myIPEndPoint = value;
+         }
+    }
+	
+	public static InetAddress LookupAddress(String host) throws UnknownHostException
+    {
+		InetAddress result = null;
+		InetAddress[] addressList = InetAddress.getAllByName(host);
+		
+        for (int i = 0; i < addressList.length && result == null; i++)
+        {
+        	String str1 = addressList[i].getHostName();
+        	String str2 = addressList[i].getHostAddress();
+        	if (str1.equals(host))
+                result = InetAddress.getByName(str2);
+        }
+        return result;
+    }
+	
+	@Override
+	public boolean equals(Object obj) 
+	{
+		boolean result = false;
+		PublicEndPoint other = (PublicEndPoint) obj;
+		if (other != null)
+		{
+			result = (getHostAndPort() == other.getHostAndPort());
+		}
+		return result;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return getHost() + ":" + getPort();
+	}
+}

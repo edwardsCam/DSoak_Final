@@ -84,17 +84,29 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetAllGames">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllGamesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SharedObjects" minOccurs="0" name="GetAllGamesResult" nillable="true" type="q7:ArrayOfGameInfo" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="GetGames">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/SharedObjects" minOccurs="0" name="status" type="q7:GameInfo.StatusCode" />
+        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SharedObjects" minOccurs="0" name="status" type="q8:GameInfo.StatusCode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetGamesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/SharedObjects" minOccurs="0" name="GetGamesResult" nillable="true" type="q8:ArrayOfGameInfo" />
+        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SharedObjects" minOccurs="0" name="GetGamesResult" nillable="true" type="q9:ArrayOfGameInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -108,7 +120,7 @@
   <xs:element name="GetGameInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/SharedObjects" minOccurs="0" name="GetGameInfoResult" nillable="true" type="q9:GameInfo" />
+        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SharedObjects" minOccurs="0" name="GetGameInfoResult" nillable="true" type="q10:GameInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -128,7 +140,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="gameId" type="xs:int" />
-        <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/SharedObjects" minOccurs="0" name="status" type="q10:GameInfo.StatusCode" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/SharedObjects" minOccurs="0" name="status" type="q11:GameInfo.StatusCode" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

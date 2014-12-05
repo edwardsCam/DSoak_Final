@@ -36,6 +36,7 @@
   <xs:complexType name="GameInfo">
     <xs:sequence>
       <xs:element minOccurs="0" name="FightManagerEP" nillable="true" type="tns:PublicEndPoint" />
+      <xs:element minOccurs="0" name="FightManagerId" type="xs:short" />
       <xs:element minOccurs="0" name="GameId" type="xs:short" />
       <xs:element minOccurs="0" name="Label" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="MaxPlayers" type="xs:short" />

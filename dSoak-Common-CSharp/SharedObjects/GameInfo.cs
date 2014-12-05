@@ -16,6 +16,8 @@ namespace SharedObjects
         [DataMember]
         public string Label { get; set; }
         [DataMember]
+        public Int16 FightManagerId { get; set; }
+        [DataMember]
         public PublicEndPoint FightManagerEP { get; set; }
         [DataMember]
         public StatusCode Status { get; set; }
@@ -40,9 +42,11 @@ namespace SharedObjects
         {
             GameId = orig.GameId;
             Label = orig.Label;
+            FightManagerId = orig.FightManagerId;
             FightManagerEP = orig.FightManagerEP;
             Status = orig.Status;
             MaxPlayers = orig.MaxPlayers;
+            MaxThieves = orig.MaxThieves;
             AliveTimestamp = orig.AliveTimestamp;
         }
     }

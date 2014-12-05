@@ -1,0 +1,14 @@
+package SharedObject;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class RegistryEntry 
+{
+	public enum ProcessType { GameManager, Player, BalloonStore, WaterServer, UmbrellaManager, Thief };
+    public PublicEndPoint Ep;
+    public String Label; 
+    public short ProcessId; 
+    public ProcessType Type;
+    public Date AliveTimestamp; 
+}
