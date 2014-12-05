@@ -1,0 +1,17 @@
+package Serializers;
+
+import java.lang.reflect.Type;
+import SharedObject.ProcessData;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
+public class ProcessDataSerializer implements JsonSerializer<ProcessData> 
+{
+	public JsonElement serialize(ProcessData processData, Type type, JsonSerializationContext context) 
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

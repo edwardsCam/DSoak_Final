@@ -32,7 +32,7 @@ public class AckTester
 		byte[] bytes = ack2.Encode();
 		String str = new String(bytes);
 		
-		Message ack3 = (Ack) Message.Decode(bytes);
+		Message ack3 = (Ack) Message.Decode(str.getBytes());
 		assertTrue(ack3 instanceof Ack);
 		assertNotNull(ack3);
 		Ack ack4 = (Ack) ack3;

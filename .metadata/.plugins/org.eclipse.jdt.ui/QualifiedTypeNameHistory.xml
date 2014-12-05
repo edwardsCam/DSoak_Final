@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="Messages.GameData"/>
-<fullyQualifiedTypeName name="Messages.GameJoined"/>
-<fullyQualifiedTypeName name="Messages.Hit"/>
-<fullyQualifiedTypeName name="Messages.LeaveGame"/>
 <fullyQualifiedTypeName name="Messages.RaiseUmbrella"/>
 <fullyQualifiedTypeName name="SharedObject.Umbrella"/>
 <fullyQualifiedTypeName name="Messages.SetupStream"/>
 <fullyQualifiedTypeName name="Messages.Shutdown"/>
 <fullyQualifiedTypeName name="Messages.StopStream"/>
 <fullyQualifiedTypeName name="java.lang.Long"/>
-<fullyQualifiedTypeName name="SharedObject.ProcessData.PossibleProcessType"/>
 <fullyQualifiedTypeName name="SharedObject.PlayerInfo"/>
 <fullyQualifiedTypeName name="Messages.BalloonStolen"/>
 <fullyQualifiedTypeName name="Messages.BlockStealing"/>
 <fullyQualifiedTypeName name="Messages.GiveUpABalloon"/>
 <fullyQualifiedTypeName name="Messages.ProcessSummary"/>
-<fullyQualifiedTypeName name="SharedObject.ProcessData"/>
 <fullyQualifiedTypeName name="Messages.StealingBlocked"/>
 <fullyQualifiedTypeName name="Messages.Stealing"/>
 <fullyQualifiedTypeName name="java.io.Serializable"/>
@@ -60,4 +54,10 @@
 <fullyQualifiedTypeName name="java.net.InetAddress"/>
 <fullyQualifiedTypeName name="SharedObject.IPEndPoint"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="SharedObject.ProcessData.PossibleProcessType"/>
+<fullyQualifiedTypeName name="SharedObject.ProcessData"/>
+<fullyQualifiedTypeName name="Serializers.PlayerInfoSerializer"/>
+<fullyQualifiedTypeName name="Deserializer.PlayerInfoDeserializer"/>
+<fullyQualifiedTypeName name="Serializers.ProcessDataSerializer"/>
+<fullyQualifiedTypeName name="Deserializer.ProcessDataDeserializer"/>
 </qualifiedTypeNameHistroy>

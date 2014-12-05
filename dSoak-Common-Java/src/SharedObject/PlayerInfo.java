@@ -6,9 +6,9 @@ import com.google.gson.annotations.Expose;
 
 public class PlayerInfo 
 {
-	@Expose public short PlayerId;
-    @Expose public PublicEndPoint EndPoint;
-    @Expose public StateCode Status;
+	public short PlayerId; 
+	public PublicEndPoint EndPoint; 
+	public StateCode Status; 
     public Date AliveTimestamp;
     
     public PlayerInfo Copy()

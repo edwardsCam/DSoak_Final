@@ -1,14 +1,18 @@
 package MessageTester;
 
 import static org.junit.Assert.*;
+
 import java.io.IOException;
 import java.util.ArrayList;
+
 import org.junit.Test;
+
 import Messages.GameData;
 import Messages.Message;
 import SharedObject.GameInfo;
 import SharedObject.MessageNumber;
 import SharedObject.ProcessData;
+import SharedObject.PublicEndPoint;
 import SharedObject.ProcessData.PossibleProcessType;
 
 public class GameDataTester
@@ -17,6 +21,7 @@ public class GameDataTester
 	public void test_EveryThing() throws ClassNotFoundException, IOException
 	{
 		MessageNumber.LocalProcessId = 100;
+		//PublicEndPoint ep1 = new PublicEndPoint("buzz.serv.usu.edu:20011");
 		
 		GameData msg1 = new GameData();
 		
@@ -26,8 +31,13 @@ public class GameDataTester
 		assertEquals(msg1.MessageNr, msg1.ConvId);
 	
 		GameInfo gameInfo = new GameInfo();
-		gameInfo.GameId = 102;
+		gameInfo.GameId = 10;
 		gameInfo.Status = GameInfo.StatusCode.NOTINITIALIZED;
+		//gameInfo.Label = "Test Game";
+		//gameInfo.FlightManagerEP = ep1;
+		gameInfo.FightManagerId = 2;
+		gameInfo.MaxPlayers = 5;
+		gameInfo.MaxThieves = 2;
 		
 		ArrayList<ProcessData> processes = new  ArrayList<ProcessData>();
 		ProcessData process1 = new ProcessData();

@@ -75,11 +75,13 @@ public class JoinGameTester
 	public void test_Compatabilitys() throws ClassNotFoundException, IOException 
 	{
 		MessageNumber.LocalProcessId = 100;
-		
-		JoinGame msg2 = new JoinGame();
+		PublicEndPoint ep = new PublicEndPoint("127.0.0.1:123456");
 		PlayerInfo playerInfo = new PlayerInfo();
 		playerInfo.PlayerId = 10;
 		playerInfo.Status = PlayerInfo.StateCode.ONLINE;
+		playerInfo.EndPoint = ep;
+		
+		JoinGame msg2 = new JoinGame();
 		msg2.GameId = 123;
 		msg2.Player = playerInfo;
 		

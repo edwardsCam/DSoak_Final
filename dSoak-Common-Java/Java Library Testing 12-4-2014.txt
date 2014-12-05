@@ -1,0 +1,156 @@
+Java: 204
+
+UmbrellaPurchased:{"Umbrella":{"Id":1,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},"MessageNr":{"ProcessId":100,"SeqNumber":2},"ConvId":{"ProcessId":100,"SeqNumber":1}}
+
+C#: 202
+UmbrellaPurchased:{"ConvId":{"ProcessId":100,"SeqNumber":1},"MessageNr":{"ProcessId":100,"SeqNumber":2},"Umbrella":{"DigitalSignature":[181,192,192,52,36,105,87,175,248,95,44,107,40,124,139,99],"Id":1}
+
+=============================================
+
+Java: 250
+
+ThrowBalloon:{"GameId":123,"Balloon":{"UnitOfWater":0,"Id":245,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},"TargetPlayerId":352,"MessageNr":{"ProcessId":100,"SeqNumber":2},"ConvId":{"ProcessId":100,"SeqNumber":2}}
+
+C#: 251
+
+ThrowBalloon:{"ConvId":{"ProcessId":100,"SeqNumber":2},"MessageNr":{"ProcessId":100,"SeqNumber":2},"Balloon":{"DigitalSignature":[13,247,161,36,67,243,192,166,192,206,49,193,191,111,114,41],"Id":245,"UnitsOfWater":0},"GameId":123,"TargetPlayerId":352}
+
+
+=============================================
+
+Java: 202
+RaiseUmbrella:{"Umbrella":{"Id":100,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},"MessageNr":{"ProcessId":100,"SeqNumber":2},"ConvId":{"ProcessId":100,"SeqNumber":2}}
+
+C#: 199
+RaiseUmbrella:{"ConvId":{"ProcessId":100,"SeqNumber":2},"MessageNr":{"ProcessId":100,"SeqNumber":2},"Umbrella":{"DigitalSignature":[151,82,240,171,156,232,47,29,214,16,58,37,238,195,56,68],"Id":100}}
+
+===========================================
+
+Java: 319
+ProcessSummary:{"Data":{"GameId":102,"ProcessId":10,"ProcessType":1,"LifePoints":200,"HitPoints":10,"NumberOfPennies":11,"NumberOfUnfilledBalloon":12,"NumberOfFilledBalloon":13,"NumberOfUnraisedUmbrellas":14,"HasUmbrellaRaised":true},"MessageNr":{"ProcessId":100,"SeqNumber":2},"ConvId":{"ProcessId":100,"SeqNumber":2}}
+
+C#: 319
+ProcessSummary:{"ConvId":{"ProcessId":100,"SeqNumber":2},"MessageNr":{"ProcessId":100,"SeqNumber":2},"Data":{"GameId":102,"HasUmbrellaRaised":true,"HitPoints":10,"LifePoints":200,"NumberOfFilledBalloon":13,"NumberOfPennies":11,"NumberOfUnfilledBalloon":12,"NumberOfUnraisedUmbrellas":14,"ProcessId":10,"ProcessType":1}}
+
+==========================================
+
+Java: 589
+
+GameJoined:{"GameId":123,"InitialLifePoints":0,"Pennies":[{"Id":1,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},{"Id":2,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},{"Id":3,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},{"Id":4,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},{"Id":5,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]}],"MessageNr":{"ProcessId":100,"SeqNumber":2},"ConvId":{"ProcessId":100,"SeqNumber":2}}
+
+C#: 578
+GameJoined:{"ConvId":{"ProcessId":100,"SeqNumber":2},"MessageNr":{"ProcessId":100,"SeqNumber":2},"GameId":123,"InitialLifePoints":0,"Pennies":[{"DigitalSignature":[106,89,125,243,148,129,59,97,155,239,65,213,210,77,82,66],"Id":1},{"DigitalSignature":[91,202,5,29,169,242,18,249,238,231,223,65,110,109,110,247],"Id":2},{"DigitalSignature":[21,53,16,27,25,52,157,144,225,40,172,53,168,154,90,34],"Id":3},{"DigitalSignature":[165,50,4,47,209,115,191,158,150,45,182,209,118,91,200,101],"Id":4},{"DigitalSignature":[249,139,135,20,146,193,53,5,107,123,58,177,182,222,76,19],"Id":5}]}
+
+
+=========================================
+
+Java: 841
+GameData:{"Info":{"GameId":10,"Label":null,"FightManagerId":2,"FlightManagerEP":null,"Status":0,"MaxPlayers":5,"MaxThieves":2},"Processes":[{"GameId":102,"ProcessId":10,"ProcessType":1,"LifePoints":0,"HitPoints":0,"NumberOfPennies":0,"NumberOfUnfilledBalloon":0,"NumberOfFilledBalloon":0,"NumberOfUnraisedUmbrellas":0,"HasUmbrellaRaised":false},{"GameId":102,"ProcessId":20,"ProcessType":1,"LifePoints":0,"HitPoints":0,"NumberOfPennies":0,"NumberOfUnfilledBalloon":0,"NumberOfFilledBalloon":0,"NumberOfUnraisedUmbrellas":0,"HasUmbrellaRaised":false},{"GameId":102,"ProcessId":30,"ProcessType":5,"LifePoints":0,"HitPoints":0,"NumberOfPennies":0,"NumberOfUnfilledBalloon":0,"NumberOfFilledBalloon":0,"NumberOfUnraisedUmbrellas":0,"HasUmbrellaRaised":false}],"MessageNr":{"ProcessId":100,"SeqNumber":2},"ConvId":{"ProcessId":100,"SeqNumber":2}}
+
+
+C#: 841
+GameData:{"ConvId":{"ProcessId":100,"SeqNumber":2},"MessageNr":{"ProcessId":100,"SeqNumber":2},"Info":{"FightManagerEP":null,"FightManagerId":0,"GameId":102,"Label":null,"MaxPlayers":0,"MaxThieves":0,"Status":0},"Processes":[{"GameId":102,"HasUmbrellaRaised":false,"HitPoints":0,"LifePoints":0,"NumberOfFilledBalloon":0,"NumberOfPennies":0,"NumberOfUnfilledBalloon":0,"NumberOfUnraisedUmbrellas":0,"ProcessId":10,"ProcessType":1},{"GameId":102,"HasUmbrellaRaised":false,"HitPoints":0,"LifePoints":0,"NumberOfFilledBalloon":0,"NumberOfPennies":0,"NumberOfUnfilledBalloon":0,"NumberOfUnraisedUmbrellas":0,"ProcessId":20,"ProcessType":1},{"GameId":102,"HasUmbrellaRaised":false,"HitPoints":0,"LifePoints":0,"NumberOfFilledBalloon":0,"NumberOfPennies":0,"NumberOfUnfilledBalloon":0,"NumberOfUnraisedUmbrellas":0,"ProcessId":30,"ProcessType":5}]}
+
+========================================
+
+Java: 392
+FillBalloon:{"Balloon":null,"Pennies":[{"Id":1,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},{"Id":2,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},{"Id":3,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]}],"MessageNr":{"ProcessId":100,"SeqNumber":2},"ConvId":{"ProcessId":100,"SeqNumber":2}}
+
+C#: 391
+
+FillBalloon:{"ConvId":{"ProcessId":100,"SeqNumber":2},"MessageNr":{"ProcessId":100,"SeqNumber":2},"Pennies":[{"DigitalSignature":[205,238,92,40,24,77,129,176,143,226,50,141,14,124,254,193],"Id":1},{"DigitalSignature":[118,90,83,104,63,177,217,238,234,205,51,183,231,3,74,105],"Id":2},{"DigitalSignature":[221,36,59,229,102,57,224,206,173,199,238,190,160,109,199,228],"Id":3}],"Balloon":null}
+
+========================================
+
+Java: 555
+BuyUmbrella:{"Pennies":[{"Id":1,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},{"Id":2,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},{"Id":3,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},{"Id":4,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},{"Id":5,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]}],"MessageNr":{"ProcessId":100,"SeqNumber":2},"ConvId":{"ProcessId":100,"SeqNumber":2}}
+
+
+C#: 548
+BuyUmbrella:{"ConvId":{"ProcessId":100,"SeqNumber":2},"MessageNr":{"ProcessId":100,"SeqNumber":2},"Pennies":[{"DigitalSignature":[150,112,179,250,214,136,126,94,42,49,189,236,107,0,109,96],"Id":1},{"DigitalSignature":[102,51,54,249,134,219,19,145,18,144,33,78,158,124,167,99],"Id":2},{"DigitalSignature":[82,242,198,252,63,6,170,254,41,165,216,50,240,136,72,0],"Id":3},{"DigitalSignature":[5,120,92,18,183,202,149,224,216,105,179,216,152,254,254,186],"Id":4},{"DigitalSignature":[46,66,240,184,237,184,189,222,131,82,237,5,172,82,144,246],"Id":5}]}
+
+========================================
+
+Java: 376
+BuyBalloon:{"Pennies":[{"Id":1,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},{"Id":2,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},{"Id":3,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]}],"MessageNr":{"ProcessId":100,"SeqNumber":2},"ConvId":{"ProcessId":100,"SeqNumber":2}}
+
+
+c#: 376
+BuyBalloon:{"ConvId":{"ProcessId":100,"SeqNumber":2},"MessageNr":{"ProcessId":100,"SeqNumber":2},"Pennies":[{"DigitalSignature":[245,50,141,222,250,124,31,227,161,74,119,195,58,189,50,221],"Id":1},{"DigitalSignature":[61,143,157,50,127,97,250,156,203,106,213,211,3,239,206,197],"Id":2},{"DigitalSignature":[176,28,127,189,47,235,253,190,187,1,255,124,229,160,51,154],"Id":3}]}
+
+=======================================
+
+Java:267
+BalloonStolen:{"StolenBalloon":{"UnitOfWater":0,"Id":1,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},"GameId":11,"TargetProcessId":12,"ThiefId":13,"MessageNr":{"ProcessId":100,"SeqNumber":2},"ConvId":{"ProcessId":100,"SeqNumber":2}}
+
+C#: 266
+BalloonStolen:{"ConvId":{"ProcessId":100,"SeqNumber":2},"MessageNr":{"ProcessId":100,"SeqNumber":2},"GameId":11,"TargetProcessId":12,"ThiefId":13,"StolenBalloon":{"DigitalSignature":[27,145,67,66,80,184,236,54,207,177,237,194,97,231,119,15],"Id":1,"UnitsOfWater":0}}
+
+=====================================
+
+Java: 218
+BalloonPurchased:{"Balloon":{"UnitOfWater":0,"Id":1,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},"MessageNr":{"ProcessId":100,"SeqNumber":2},"ConvId":{"ProcessId":100,"SeqNumber":1}}
+
+
+C#: 216
+BalloonPurchased:{"ConvId":{"ProcessId":100,"SeqNumber":1},"MessageNr":{"ProcessId":100,"SeqNumber":2},"Balloon":{"DigitalSignature":[37,23,158,60,60,220,139,203,21,1,104,221,112,92,196,195],"Id":1,"UnitsOfWater":0}}
+
+=====================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
