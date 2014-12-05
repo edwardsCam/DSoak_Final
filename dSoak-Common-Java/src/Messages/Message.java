@@ -16,14 +16,17 @@ import com.google.gson.stream.JsonReader;
 import Deserializer.GameInfoDeserializer;
 import Deserializer.GameOverDeserializer;
 import Deserializer.PlayerInfoDeserializer;
+import Deserializer.ProcessDataDeserializer;
 import Deserializer.PublicEndPointDeserializer;
 import Serializers.GameInfoSerializer;
 import Serializers.GameOverSerializer;
 import Serializers.PlayerInfoSerializer;
+import Serializers.ProcessDataSerializer;
 import Serializers.PublicEndPointSerializer;
 import SharedObject.GameInfo;
 import SharedObject.MessageNumber;
 import SharedObject.PlayerInfo;
+import SharedObject.ProcessData;
 import SharedObject.PublicEndPoint;
 
 public class Message 
@@ -53,7 +56,7 @@ public class Message
 		gsonBuilder.registerTypeAdapter(PlayerInfo.class, new PlayerInfoSerializer());
 		gsonBuilder.registerTypeAdapter(GameOver.class, new GameOverSerializer());
 		gsonBuilder.registerTypeAdapter(GameInfo.class, new GameInfoSerializer());
-		
+		gsonBuilder.registerTypeAdapter(ProcessData.class, new ProcessDataSerializer());
 		Gson gson = gsonBuilder.excludeFieldsWithoutExposeAnnotation().serializeNulls().create(); 
 	
 		gson.toJson(this, this.getClass(), outstreamWriter);
@@ -75,7 +78,7 @@ public class Message
 		gsonBuilder.registerTypeAdapter(PlayerInfo.class, new PlayerInfoDeserializer());
 		gsonBuilder.registerTypeAdapter(GameOver.class, new GameOverDeserializer());
 		gsonBuilder.registerTypeAdapter(GameInfo.class, new GameInfoDeserializer());
-		
+		gsonBuilder.registerTypeAdapter(ProcessData.class, new ProcessDataDeserializer());
 		Gson gson = gsonBuilder.create();
 		
 	   	message = (Message) gson.fromJson(reader, classType);

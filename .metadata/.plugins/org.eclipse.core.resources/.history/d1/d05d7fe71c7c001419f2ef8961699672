@@ -1,0 +1,41 @@
+package Serializers;
+
+import java.lang.reflect.Type;
+
+import SharedObject.ProcessData;
+import SharedObject.ProcessData.PossibleProcessType;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.google.gson.annotations.Expose;
+
+public class ProcessDataSerializer implements JsonSerializer<ProcessData> 
+{
+	public JsonElement serialize(ProcessData processData, Type type, JsonSerializationContext context) 
+	{
+		final JsonObject jsonObject = new JsonObject();
+
+		jsonObject.addProperty("GameId", processData.GameId);
+		jsonObject.addProperty("ProcessId", processData.ProcessId);
+		jsonObject.addProperty("ProcessType", processData.ProcessType.getValue());
+		jsonObject.addProperty("LifePoints", processData.LifePoints);
+		jsonObject.addProperty("Status", processData.Status.getValue());
+		jsonObject.addProperty("Status", processData.Status.getValue());
+		jsonObject.addProperty("Status", processData.Status.getValue());
+		
+	}
+
+}
+/*
+@Expose public short GameId;
+@Expose public short ProcessId;
+@Expose public PossibleProcessType ProcessType; 
+@Expose public short ; 
+@Expose public short HitPoints; 
+@Expose public short NumberOfPennies; 
+@Expose public short NumberOfUnfilledBalloon; 
+@Expose public short NumberOfFilledBalloon; 
+@Expose public short NumberOfUnraisedUmbrellas; 
+@Expose public boolean HasUmbrellaRaised; */

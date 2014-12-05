@@ -1,0 +1,9 @@
+package Serializers;
+
+import SharedObject.ProcessData;
+
+import com.google.gson.JsonSerializer;
+
+public class ProcessDataSerializer implements JsonSerializer<ProcessData> {
+
+}

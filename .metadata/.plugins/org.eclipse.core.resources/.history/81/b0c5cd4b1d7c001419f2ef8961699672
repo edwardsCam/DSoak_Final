@@ -1,0 +1,10 @@
+package Deserializer;
+
+import SharedObject.ProcessData;
+
+import com.google.gson.JsonDeserializer;
+
+public class ProcessDataDeserializer implements JsonDeserializer<ProcessData>
+{
+
+}

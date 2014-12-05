@@ -1,0 +1,11 @@
+package Deserializer;
+
+import SharedObject.PlayerInfo;
+
+import com.google.gson.JsonDeserializer;
+
+public class ProcessDataDeserializer implements JsonDeserializer<ProcessData>
+
+{
+
+}

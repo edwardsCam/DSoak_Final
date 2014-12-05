@@ -1,0 +1,34 @@
+package Deserializer;
+
+import java.lang.reflect.Type;
+
+import SharedObject.ProcessData;
+
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+
+public class ProcessDataDeserializer implements JsonDeserializer<ProcessData>
+{
+	public ProcessData deserialize(JsonElement jsonElement, Type type,	JsonDeserializationContext context) throws JsonParseException 
+	{
+		final JsonObject jsonObject = jsonElement.getAsJsonObject();
+	
+		final short gameId = jsonObject.get("GameId").getAsShort();
+		final short processId = jsonObject.get("ProcessId").getAsShort();
+		final short processType = jsonObject.get("ProcessType").getAsShort();
+		final short lifePoints = jsonObject.get("LifePoints").getAsShort();
+		
+		final short lifePoints = jsonObject.get("LifePoints").getAsShort();
+		final short lifePoints = jsonObject.get("LifePoints").getAsShort();
+		final short lifePoints = jsonObject.get("LifePoints").getAsShort();
+		final short lifePoints = jsonObject.get("LifePoints").getAsShort();
+		final short lifePoints = jsonObject.get("LifePoints").getAsShort();
+		final short lifePoints = jsonObject.get("LifePoints").getAsShort();
+		
+		
+	}
+
+}

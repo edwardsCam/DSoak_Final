@@ -1,0 +1,7 @@
+package Serializers;
+
+import com.google.gson.JsonSerializer;
+
+public class ProcessDataSerializer implements JsonSerializer<ProcessData> {
+
+}

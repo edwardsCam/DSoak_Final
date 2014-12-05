@@ -5,6 +5,6 @@ import SharedObject.PlayerInfo;
 
 public class GameOver extends Message 
 {
-	public short GameId; // @Expose
+	public short GameId; 
 	public PlayerInfo Winner;
 }

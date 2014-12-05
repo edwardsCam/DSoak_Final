@@ -1,5 +1,7 @@
 package SharedObject;
 
+import SharedObject.PlayerInfo.StateCode;
+
 import com.google.gson.annotations.Expose;
 
 public class ProcessData 
@@ -32,5 +34,17 @@ public class ProcessData
 		{
 			return value;
 		}
+		
+		public static PossibleProcessType setValue(short b)
+	   	 {
+			PossibleProcessType temp = null;
+		    for (PossibleProcessType  t : PossibleProcessType.values()) 
+		    {
+		    	if (t.value == b) {
+		    		temp = t;
+		        }
+		    }
+		    return temp;
+		  }
 	};
 }

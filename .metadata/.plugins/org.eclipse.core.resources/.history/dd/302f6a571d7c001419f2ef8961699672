@@ -1,0 +1,20 @@
+package Deserializer;
+
+import java.lang.reflect.Type;
+
+import SharedObject.ProcessData;
+
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+
+public class ProcessDataDeserializer implements JsonDeserializer<ProcessData>
+{
+
+	public ProcessData deserialize(JsonElement arg0, Type arg1,	JsonDeserializationContext arg2) throws JsonParseException 
+	{
+	
+	}
+
+}
