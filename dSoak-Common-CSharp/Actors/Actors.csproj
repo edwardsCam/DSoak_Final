@@ -44,6 +44,8 @@
     <Compile Include="BackgroundThread.cs" />
     <Compile Include="Brain.cs" />
     <Compile Include="Communicator.cs" />
+    <Compile Include="Conversation.cs" />
+    <Compile Include="ConversationList.cs" />
     <Compile Include="Doer.cs" />
     <Compile Include="Envelope.cs" />
     <Compile Include="Game.cs" />

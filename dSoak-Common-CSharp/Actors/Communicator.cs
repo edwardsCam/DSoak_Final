@@ -112,6 +112,8 @@ namespace Actors
 
 		public int send(Messages.Message msg)
 		{
+			Envelope e = new Envelope(msg);
+			listener.addConversation(e);
 			return send(new Envelope(msg));
 		}
 
@@ -125,6 +127,26 @@ namespace Actors
 
 				Envelope response = Envelope.unpack(streamBack);
 				listener.addPending(response);
+				return true;
+			}
+			catch (Exception)
+			{
+				return false;
+			}
+		}
+
+		public bool receiveNotNak()
+		{
+			byte[] streamBack;
+			try
+			{
+				IPEndPoint server = remoteEP.IPEndPoint;
+				streamBack = client.Receive(ref server);
+
+				Envelope response = Envelope.unpack(streamBack);
+				listener.addPending(response);
+				if (response.getPayload().getTypeAsString() == "Nak")
+					return false;
 				return true;
 			}
 			catch (Exception)
