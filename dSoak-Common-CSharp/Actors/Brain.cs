@@ -100,11 +100,13 @@ namespace Actors
 			com.setProcessID();
 		}
 
-		private void chooseGame()
+		private bool chooseGame()
 		{
 			_Registrar.GameInfo[] games = com.GetGamesList();
 			if (games.Count() > 0)
 			{
+				if (games.Count() > 1)
+					games.Reverse();
 				_Registrar.GameInfo g = null;
 				foreach (_Registrar.GameInfo i in games)
 					if (i.Status == _Registrar.GameInfoStatusCode.Available)
@@ -114,7 +116,9 @@ namespace Actors
 					}
 
 				active_game = new Game(g);
+				return true;
 			}
+			return false;
 		}
 
 		private bool join(Game g)
