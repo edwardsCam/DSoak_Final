@@ -178,11 +178,6 @@ namespace Actors
 			return doer.hasConversation();
 		}
 
-		public bool hasRequests()
-		{
-			return doer.hasRequests();
-		}
-
 		#endregion
 
 		#region Resouce Getters

@@ -50,8 +50,13 @@ namespace Actors
 			if (hasConvo(convID))
 			{
 				foreach (Conversation c in convos)
+				{
 					if (c.getID() == convID)
+					{
 						c.push(e);
+						c.setUnchecked();
+					}
+				}
 			}
 			else
 				convos.Add(new Conversation(e));
@@ -70,7 +75,14 @@ namespace Actors
 
 		public Conversation peek()
 		{
-			return convos.ElementAt(0);
+			foreach (Conversation c in convos)
+			{
+				if (!c.isChecked())
+				{
+					return c;
+				}
+			}
+			return null;
 		}
 
 		public Conversation getConvo(SharedObjects.MessageNumber n)

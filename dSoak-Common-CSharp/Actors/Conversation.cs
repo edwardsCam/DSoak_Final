@@ -12,6 +12,7 @@ namespace Actors
 
 		private SharedObjects.MessageNumber id;
 		private MessageQueue msgs;
+		private bool allChecked;
 
 		#endregion
 
@@ -21,12 +22,14 @@ namespace Actors
 		{
 			id = new SharedObjects.MessageNumber();
 			msgs = new MessageQueue();
+			allChecked = true;
 		}
 
 		public Conversation(SharedObjects.MessageNumber n)
 		{
 			id = n;
 			msgs = new MessageQueue();
+			allChecked = true;
 		}
 
 		public Conversation(Envelope e)
@@ -34,16 +37,31 @@ namespace Actors
 			id = e.getPayload().ConvId;
 			msgs = new MessageQueue();
 			msgs.push(e);
+			allChecked = false;
 		}
 
 		#endregion
 
 		#region Public Methods
 
-
 		public bool hasMsg()
 		{
 			return msgs.size() > 0;
+		}
+
+		public bool isChecked()
+		{
+			return allChecked;
+		}
+
+		public void setUnchecked()
+		{
+			allChecked = false;
+		}
+
+		public void setChecked()
+		{
+			allChecked = true;
 		}
 
 		#endregion

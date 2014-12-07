@@ -41,7 +41,6 @@ namespace Actors
 			abort_thread();
 			remove_thread();
 			conversation_queues = null;
-			q_request = null;
 			pendingMessages = null;
 			isInitialized = false;
 		}
@@ -56,9 +55,6 @@ namespace Actors
 		{
 			if (conversation_queues == null)
 				conversation_queues = new ConversationList();
-
-			if (q_request == null)
-				q_request = new MessageQueue();
 
 			pendingMessages = new MessageQueue();
 
@@ -76,22 +72,7 @@ namespace Actors
 
 		private bool hasPendingRequests()
 		{
-			if (pendingMessages.size() > 0)
-			{
-				Messages.Message msg = pendingMessages.peek().getPayload();
-				return msg.ConvId == msg.MessageNr;
-			}
-			return false;
-		}
-
-		private bool hasPendingConversation()
-		{
-			if (pendingMessages.size() > 0)
-			{
-				Messages.Message msg = pendingMessages.peek().getPayload();
-				return msg.ConvId != msg.MessageNr;
-			}
-			return false;
+			return pendingMessages.size() > 0;
 		}
 
 		#endregion
@@ -125,13 +106,7 @@ namespace Actors
 				if (hasPendingRequests())
 				{
 					Envelope env = pendingMessages.pop();
-					q_request.push(env);
-				}
-
-				if (hasPendingConversation())
-				{
-					Envelope env = pendingMessages.pop();
-					conversation_queues.add(pendingMessages.pop());
+					conversation_queues.add(env);
 				}
 			}
 		}

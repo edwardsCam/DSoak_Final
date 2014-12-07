@@ -18,7 +18,6 @@ namespace Actors
 		#region Private and Protected Properties
 
 		private Thread _t;
-		protected static MessageQueue q_request;
 		protected static ConversationList conversation_queues;
 
 		#endregion
@@ -53,11 +52,6 @@ namespace Actors
 		#endregion
 
 		#region Queue stuff
-
-		public bool hasRequests()
-		{
-			return q_request != null && q_request.size() > 0;
-		}
 
 		public bool hasConversation()
 		{

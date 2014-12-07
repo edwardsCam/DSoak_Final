@@ -44,7 +44,6 @@ namespace Actors
 			abort_thread();
 			remove_thread();
 			conversation_queues = null;
-			q_request = null;
 			isInitialized = false;
 		}
 
@@ -59,9 +58,6 @@ namespace Actors
 
 			if (conversation_queues == null)
 				conversation_queues = new ConversationList();
-
-			if (q_request == null)
-				q_request = new MessageQueue();
 
 			if (threading)
 			{
@@ -98,21 +94,17 @@ namespace Actors
 		{
 			while (true)
 			{
-				if (hasRequests())
-				{
-					Envelope msg = q_request.pop();
-					conversation_queues.add(msg);
-				}
-
 				if (hasConversation())
 				{
-					Conversation convo = conversation_queues.peek();
 					Envelope request = null;
 					Messages.Message msg = new Messages.Nak();
+					Conversation convo = conversation_queues.peek();
 					if (convo != null)
+					{
 						request = convo.pop();
-					if (request != null)
-						msg = request.getPayload();
+						if (request != null)
+							msg = request.getPayload();
+					}
 					switch (msg.getTypeAsString())
 					{
 						case "GameJoined":
@@ -150,11 +142,6 @@ namespace Actors
 		#region Public Methods
 
 		#region Queue stuff
-
-		public Envelope popRequest()
-		{
-			return q_request.pop();
-		}
 
 		public Envelope popConversation(SharedObjects.MessageNumber convID)
 		{
