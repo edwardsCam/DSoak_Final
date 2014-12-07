@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="src" project="dSoak-Common-Java" tests="47" started="47" failures="0" errors="0" ignored="0">
+  <testsuite name="MessageTester.JoinGameTester" time="0.037">
+    <testcase name="test_Compatabilitys" classname="MessageTester.JoinGameTester" time="0.034"/>
+    <testcase name="test_Everythings" classname="MessageTester.JoinGameTester" time="0.003"/>
+  </testsuite>
+  <testsuite name="SharedObjectTester.PlayerInfoTester" time="0.005">
+    <testcase name="test_EveryThing" classname="SharedObjectTester.PlayerInfoTester" time="0.005"/>
+  </testsuite>
+  <testsuite name="MessageTester.BalloonFilledTester" time="0.009">
+    <testcase name="test_EveryThing" classname="MessageTester.BalloonFilledTester" time="0.009"/>
+  </testsuite>
+  <testsuite name="MessageTester.ThrowBalloonTester" time="0.003">
+    <testcase name="test_EveryThings" classname="MessageTester.ThrowBalloonTester" time="0.003"/>
+  </testsuite>
+  <testsuite name="MessageTester.NakTester" time="0.002">
+    <testcase name="test_EveryThings" classname="MessageTester.NakTester" time="0.002"/>
+  </testsuite>
+  <testsuite name="MessageTester.GameDataTester" time="0.006">
+    <testcase name="test_EveryThing" classname="MessageTester.GameDataTester" time="0.006"/>
+  </testsuite>
+  <testsuite name="MessageTester.HitTester" time="0.002">
+    <testcase name="test_EveryThing" classname="MessageTester.HitTester" time="0.002"/>
+  </testsuite>
+  <testsuite name="MessageTester.BalloonPurchasedTester" time="0.002">
+    <testcase name="test_EveryThing" classname="MessageTester.BalloonPurchasedTester" time="0.002"/>
+  </testsuite>
+  <testsuite name="MessageTester.RaiseUmbrellaTester" time="0.002">
+    <testcase name="test_EveryThing" classname="MessageTester.RaiseUmbrellaTester" time="0.002"/>
+  </testsuite>
+  <testsuite name="MessageTester.GameOverTester" time="0.001">
+    <testcase name="test_EveryThings" classname="MessageTester.GameOverTester" time="0.001"/>
+  </testsuite>
+  <testsuite name="MessageTester.StealingBlockedTester" time="0.001">
+    <testcase name="test_Everything" classname="MessageTester.StealingBlockedTester" time="0.001"/>
+  </testsuite>
+  <testsuite name="SharedObjectTester.MessageNumberTester" time="0.001">
+    <testcase name="test_EveryThing" classname="SharedObjectTester.MessageNumberTester" time="0.001"/>
+  </testsuite>
+  <testsuite name="MessageTester.StopStreamTester" time="0.001">
+    <testcase name="test_EveryThing" classname="MessageTester.StopStreamTester" time="0.001"/>
+  </testsuite>
+  <testsuite name="MessageTester.UmbrellaPurchasedTester" time="0.001">
+    <testcase name="test_EveryThings" classname="MessageTester.UmbrellaPurchasedTester" time="0.001"/>
+  </testsuite>
+  <testsuite name="SharedObjectTester.ProcessDataTester" time="0.001">
+    <testcase name="test_Everything" classname="SharedObjectTester.ProcessDataTester" time="0.001"/>
+  </testsuite>
+  <testsuite name="SharedObjectTester.PublicEndPointTester" time="0.001">
+    <testcase name="test_LookupAddress" classname="SharedObjectTester.PublicEndPointTester" time="0.0"/>
+    <testcase name="test_Constructor" classname="SharedObjectTester.PublicEndPointTester" time="0.001"/>
+    <testcase name="test_GetIPEndPoint_SetIPEndPoint" classname="SharedObjectTester.PublicEndPointTester" time="0.0"/>
+  </testsuite>
+  <testsuite name="SharedObjectTester.UmbrellaRaisingTester" time="0.0">
+    <testcase name="test_EveryThing" classname="SharedObjectTester.UmbrellaRaisingTester" time="0.0"/>
+  </testsuite>
+  <testsuite name="SharedObjectTester.GamePlayerInfoTester" time="0.001">
+    <testcase name="test_EveryThing" classname="SharedObjectTester.GamePlayerInfoTester" time="0.001"/>
+  </testsuite>
+  <testsuite name="MessageTester.BuyUmbrellaTester" time="0.004">
+    <testcase name="test_EveryThing" classname="MessageTester.BuyUmbrellaTester" time="0.004"/>
+  </testsuite>
+  <testsuite name="MessageTester.AliveQueryTester" time="0.001">
+    <testcase name="test_EveryThing" classname="MessageTester.AliveQueryTester" time="0.001"/>
+  </testsuite>
+  <testsuite name="MessageTester.BuyBalloonTester" time="0.003">
+    <testcase name="test_EveryThing" classname="MessageTester.BuyBalloonTester" time="0.003"/>
+  </testsuite>
+  <testsuite name="SharedObjectTester.IPEndPointTester" time="0.001">
+    <testcase name="test_Create" classname="SharedObjectTester.IPEndPointTester" time="0.0"/>
+    <testcase name="test_Constructor1" classname="SharedObjectTester.IPEndPointTester" time="0.001"/>
+    <testcase name="test_Constructor2" classname="SharedObjectTester.IPEndPointTester" time="0.0"/>
+    <testcase name="test_Constructor3" classname="SharedObjectTester.IPEndPointTester" time="0.0"/>
+    <testcase name="test_Constructor4" classname="SharedObjectTester.IPEndPointTester" time="0.0"/>
+    <testcase name="test_Constructor5" classname="SharedObjectTester.IPEndPointTester" time="0.0"/>
+  </testsuite>
+  <testsuite name="MessageTester.GameJoinedTester" time="0.003">
+    <testcase name="test_EveryThing" classname="MessageTester.GameJoinedTester" time="0.003"/>
+  </testsuite>
+  <testsuite name="SharedObjectTester.GameInfoTester" time="0.0">
+    <testcase name="test_EveryThing" classname="SharedObjectTester.GameInfoTester" time="0.0"/>
+  </testsuite>
+  <testsuite name="SharedObjectTester.UmbrellaTester" time="0.001">
+    <testcase name="test_EveryThing" classname="SharedObjectTester.UmbrellaTester" time="0.001"/>
+  </testsuite>
+  <testsuite name="MessageTester.LeaveGameTester" time="0.003">
+    <testcase name="test_EveryThings" classname="MessageTester.LeaveGameTester" time="0.003"/>
+  </testsuite>
+  <testsuite name="MessageTester.StealingTester" time="0.001">
+    <testcase name="test" classname="MessageTester.StealingTester" time="0.001"/>
+  </testsuite>
+  <testsuite name="MessageTester.ProcessSummaryTester" time="0.002">
+    <testcase name="test" classname="MessageTester.ProcessSummaryTester" time="0.002"/>
+  </testsuite>
+  <testsuite name="MessageTester.BlockStealingTester" time="0.001">
+    <testcase name="test_Everything" classname="MessageTester.BlockStealingTester" time="0.001"/>
+  </testsuite>
+  <testsuite name="SharedObjectTester.SharedResoureTester" time="0.0">
+    <testcase name="test_EveryThing" classname="SharedObjectTester.SharedResoureTester" time="0.0"/>
+  </testsuite>
+  <testsuite name="SharedObjectTester.PennyTester" time="0.0">
+    <testcase name="test_EveryThing" classname="SharedObjectTester.PennyTester" time="0.0"/>
+  </testsuite>
+  <testsuite name="MessageTester.ShutdownTester" time="0.001">
+    <testcase name="test_EveryThing" classname="MessageTester.ShutdownTester" time="0.001"/>
+  </testsuite>
+  <testsuite name="MessageTester.GiveUpABalloonTester" time="0.002">
+    <testcase name="test_Everything" classname="MessageTester.GiveUpABalloonTester" time="0.002"/>
+  </testsuite>
+  <testsuite name="SharedObjectTester.BallonTester" time="0.0">
+    <testcase name="test_EveryThing" classname="SharedObjectTester.BallonTester" time="0.0"/>
+  </testsuite>
+  <testsuite name="MessageTester.AckTester" time="0.001">
+    <testcase name="test_EveryThings" classname="MessageTester.AckTester" time="0.001"/>
+  </testsuite>
+  <testsuite name="MessageTester.BalloonStolenTester" time="0.002">
+    <testcase name="test_Everything" classname="MessageTester.BalloonStolenTester" time="0.002"/>
+  </testsuite>
+  <testsuite name="MessageTester.SetupStreamTester" time="0.001">
+    <testcase name="test_EveryThing" classname="MessageTester.SetupStreamTester" time="0.001"/>
+  </testsuite>
+  <testsuite name="MessageTester.FillBalloonTester" time="0.002">
+    <testcase name="test_EveryThing" classname="MessageTester.FillBalloonTester" time="0.002"/>
+  </testsuite>
+  <testsuite name="MessageTester.ContinueTester" time="0.001">
+    <testcase name="test_EveryThing" classname="MessageTester.ContinueTester" time="0.001"/>
+  </testsuite>
+</testrun>

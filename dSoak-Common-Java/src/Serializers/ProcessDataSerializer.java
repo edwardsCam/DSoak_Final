@@ -33,14 +33,3 @@ public class ProcessDataSerializer implements JsonSerializer<ProcessData>
 	}
 
 }
-/*
-@Expose public short GameId;
-@Expose public short ProcessId;
-@Expose public PossibleProcessType ProcessType; 
-@Expose public short ; 
-@Expose public short ; 
-@Expose public short ; 
-@Expose public short ; 
-@Expose public short ; 
-@Expose public short ; 
-@Expose public boolean ; */

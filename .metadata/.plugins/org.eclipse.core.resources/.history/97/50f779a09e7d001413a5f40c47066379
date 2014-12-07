@@ -1,0 +1,20 @@
+package Serializers;
+
+import java.lang.reflect.Type;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
+public class BalloonSerializer implements JsonSerializer<Boolean>
+{
+
+	public JsonElement serialize(Boolean ballon, Type type, JsonSerializationContext context) 
+	{
+		final JsonObject jsonObject = new JsonObject();
+		jsonObject.addProperty("UnitOfWater", ballon.UnitOfWater);
+		return jsonObject;
+	}
+
+}

@@ -17,3 +17,6 @@
 1417651250087	Rename method 'HostAndPort'
 1417651514003	Rename method 'IPEndPoint'
 1417651834114	Rename method 'IPEndPoint'
+1417830528938	Delete element
+1417909203405	Rename local variable 'ballon'
+1417909234023	Rename local variable 'ballon'

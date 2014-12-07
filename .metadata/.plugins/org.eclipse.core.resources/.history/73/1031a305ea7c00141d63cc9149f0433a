@@ -1,0 +1,24 @@
+package SharedObject;
+
+public class Test 
+{
+	public static void main(String[] args) 
+	{
+		byte b = (byte) 220;
+		/*System.out.println(b);
+		int x = (byte)(b + 128);
+		byte y = (byte)x;
+		System.out.println(y);
+		
+		
+		String str = Byte.toString(b);
+		byte  n = Byte.valueOf(str);*/
+		int x = unsignedToBytes(b);
+		System.out.println((byte)x);
+		
+	}
+	public static int unsignedToBytes(byte b) 
+	{
+	    return b & 0xFF;
+	}
+}
