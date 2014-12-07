@@ -67,8 +67,19 @@ namespace Actors
 						status = stat.Searching;
 						break;
 					case stat.Searching: //searching for games
-						chooseGame();
-						status = stat.Joining;
+						if (joinAttempts > 10)
+						{
+							status = stat.Error;
+							joinAttempts = 0;
+						}
+						if (chooseGame())
+						{
+							status = stat.Joining;
+							joinAttempts = 0;
+						}
+						else
+							joinAttempts++;
+						
 						break;
 					case stat.Joining: //joining game
 						if (joinAttempts > 10)
@@ -77,8 +88,11 @@ namespace Actors
 							joinAttempts = 0;
 						}
 						if (join(active_game))
+						{
 							status = stat.InGame;
-						joinAttempts++;
+							joinAttempts = 0;
+						} else
+							joinAttempts++;
 						break;
 					case stat.InGame: //ingame
 						gameLoop();
@@ -107,16 +121,12 @@ namespace Actors
 			{
 				if (games.Count() > 1)
 					games.Reverse();
-				_Registrar.GameInfo g = null;
 				foreach (_Registrar.GameInfo i in games)
 					if (i.Status == _Registrar.GameInfoStatusCode.Available)
 					{
-						g = i;
-						break;
-					}
-
-				active_game = new Game(g);
-				return true;
+						active_game = new Game(i);
+						return true;
+					}		
 			}
 			return false;
 		}
@@ -127,8 +137,9 @@ namespace Actors
 			{
 				SharedObjects.PlayerInfo player = new SharedObjects.PlayerInfo();
 				player.EndPoint = com.setLocalEP(false);
-				//player.PlayerId = 019828; //todo
+				player.PlayerId = 19828; //todo
 				player.Status = SharedObjects.PlayerInfo.StateCode.OnLine;
+				player.AliveTimestamp = DateTime.Now;
 
 				Messages.JoinGame msg = new Messages.JoinGame();
 				msg.Player = player;

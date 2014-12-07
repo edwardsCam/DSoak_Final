@@ -107,8 +107,12 @@ namespace Actors
 				if (hasConversation())
 				{
 					Conversation convo = conversation_queues.peek();
-					Envelope request = convo.pop();
-					Messages.Message msg = request.getPayload();
+					Envelope request = null;
+					Messages.Message msg = new Messages.Nak();
+					if (convo != null)
+						request = convo.pop();
+					if (request != null)
+						msg = request.getPayload();
 					switch (msg.getTypeAsString())
 					{
 						case "GameJoined":

@@ -123,12 +123,15 @@ namespace Actors
 			while (true)
 			{
 				if (hasPendingRequests())
-					q_request.push(pendingMessages.pop());
+				{
+					Envelope env = pendingMessages.pop();
+					q_request.push(env);
+				}
 
 				if (hasPendingConversation())
 				{
 					Envelope env = pendingMessages.pop();
-					conversation_queues.add(env);
+					conversation_queues.add(pendingMessages.pop());
 				}
 			}
 		}

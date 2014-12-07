@@ -61,12 +61,14 @@ namespace Actors
 
 		public bool hasConversation()
 		{
-			return conversation_queues.hasConvos();
+			return conversation_queues != null && 
+				conversation_queues.hasConvos();
 		}
 
 		public bool hasConversation(SharedObjects.MessageNumber convID)
 		{
-			return conversation_queues.hasConvo(convID);
+			return conversation_queues != null && 
+				conversation_queues.hasConvo(convID);
 		}
 
 		#endregion
