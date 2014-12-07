@@ -8,14 +8,14 @@ import com.google.gson.annotations.Expose;
 
 public class GameInfo 
 {
-	public short GameId;
-	public String Label;
-	public short FightManagerId;
-	public PublicEndPoint FlightManagerEP;
-	public StatusCode Status;
-	public short MaxPlayers;
+	@Expose  public short GameId;
+	@Expose public String Label;
+	@Expose public short FightManagerId;
+	@Expose public PublicEndPoint FlightManagerEP;
+	@Expose public StatusCode Status;
+	@Expose public short MaxPlayers;
 	public Date AliveTimeStamp;
-	public short MaxThieves;
+	@Expose public short MaxThieves;
 
     public enum StatusCode
 	{

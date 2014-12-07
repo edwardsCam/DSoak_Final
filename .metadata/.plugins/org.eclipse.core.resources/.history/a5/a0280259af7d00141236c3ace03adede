@@ -1,0 +1,5 @@
+package Serializers;
+
+public class UmbrellaSerializer {
+
+}

@@ -1,0 +1,22 @@
+package Serializers;
+
+import java.lang.reflect.Type;
+
+import Messages.BalloonFilled;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
+public class BalloonFilledSerializer implements JsonSerializer<BalloonFilled>
+{
+	public JsonElement serialize(BalloonFilled balloonFilled, Type type, JsonSerializationContext context) 
+	{
+		final JsonObject jsonObject = new JsonObject();
+		final JsonElement jsonBallon = context.serialize(balloonFilled.Balloon);
+		jsonObject.add("Balloon", jsonBallon);
+		
+		return jsonObject;
+	}
+}

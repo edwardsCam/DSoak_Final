@@ -1,0 +1,47 @@
+package Deserializer;
+
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.security.NoSuchAlgorithmException;
+
+import SharedObject.SharedResource;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
+
+public class SharedResourceDeserializer implements JsonDeserializer<SharedResource>
+{
+	public SharedResource deserialize(JsonElement jsonElement, Type type,	JsonDeserializationContext context) throws JsonParseException 
+	{
+		final JsonObject jsonObject = jsonElement.getAsJsonObject();
+		final short id = jsonObject.get("Id").getAsShort();
+		
+		final JsonArray jsonDigitalSignature = new JsonArray();
+		final byte[] sig = new byte[jsonDigitalSignature.size()];
+		
+		for(int i =0; i<sig.length; i++)
+		{
+			final JsonElement jsonsig = jsonDigitalSignature.get(i);
+			sig[i] = jsonsig.getAsByte();
+		}
+		
+		SharedResource sharedResources;
+		try {
+			sharedResources = new SharedResource();
+			sharedResources.Id = id;
+			sharedResources.DigitalSignature = sig;
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return sharedResources;
+	}
+
+}

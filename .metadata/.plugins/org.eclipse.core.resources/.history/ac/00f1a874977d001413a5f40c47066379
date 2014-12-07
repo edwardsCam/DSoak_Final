@@ -1,0 +1,35 @@
+package Serializers;
+
+import java.lang.reflect.Type;
+
+import SharedObject.SharedResource;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
+public class SharedResourceSerializer implements JsonSerializer<SharedResource>
+{
+	public JsonElement serialize(SharedResource sharedResources, Type type, JsonSerializationContext context) 
+	{
+		final JsonObject jsonObject = new JsonObject();
+		byte[] byteArray = sharedResources.DigitalSignature;
+		for (int i = 0; i<byteArray.length; i++)
+			byteArray[i] = (byte)convertToUnsigned(byteArray[i]);
+		
+		jsonObject.addProperty("DigitalSignature", byteArray);
+		return jsonObject;
+	}
+	
+	private int convertToUnsigned(byte b)
+	{
+		int temp;
+		if (b < 0)
+			temp = 256 - b;
+		else
+			temp = b;
+		return temp;
+	}
+
+}

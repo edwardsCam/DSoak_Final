@@ -1,0 +1,10 @@
+package Serializers;
+
+import SharedObject.SharedResource;
+
+import com.google.gson.JsonSerializer;
+
+public class SharedResourceSerializer implements JsonSerializer<SharedResource>
+{
+
+}

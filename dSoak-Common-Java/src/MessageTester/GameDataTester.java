@@ -21,7 +21,7 @@ public class GameDataTester
 	public void test_EveryThing() throws ClassNotFoundException, IOException
 	{
 		MessageNumber.LocalProcessId = 100;
-		//PublicEndPoint ep1 = new PublicEndPoint("buzz.serv.usu.edu:20011");
+		PublicEndPoint ep1 = new PublicEndPoint("buzz.serv.usu.edu:20011");
 		
 		GameData msg1 = new GameData();
 		
@@ -33,8 +33,8 @@ public class GameDataTester
 		GameInfo gameInfo = new GameInfo();
 		gameInfo.GameId = 10;
 		gameInfo.Status = GameInfo.StatusCode.NOTINITIALIZED;
-		//gameInfo.Label = "Test Game";
-		//gameInfo.FlightManagerEP = ep1;
+		gameInfo.Label = "Test Game";
+		gameInfo.FlightManagerEP = ep1;
 		gameInfo.FightManagerId = 2;
 		gameInfo.MaxPlayers = 5;
 		gameInfo.MaxThieves = 2;

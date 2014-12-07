@@ -1,0 +1,99 @@
+package SharedObject;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Random;
+
+import com.google.gson.annotations.Expose;
+
+public class SharedResource
+{
+	private static short nextId = 0;
+	private static byte[] nounce;
+	private static Random randomizer = new Random();
+	private static MessageDigest digest;
+	private static boolean hasBeenInitialized = false;
+	public short Id;
+	public byte[] DigitalSignature;
+	
+	public SharedResource() throws NoSuchAlgorithmException, IOException
+	{
+		if (!hasBeenInitialized)
+			 Initialize();
+		
+		Id = GetNextId();
+		Sign();
+	}
+      
+	 public boolean IsValid() throws IOException
+     {
+          boolean result = false;
+          if (DigitalSignature != null)
+          {
+        	  byte[] tmpSignature = ComputeDigitalSignature(new ByteArrayOutputStream());
+        	  if ((DigitalSignature.length == tmpSignature.length))
+        		  result = true;
+        	  else
+        		  result = false;
+        	  
+        	  for (int i = 0; i < DigitalSignature.length && result; i++)
+        		  if (DigitalSignature[i] != tmpSignature[i])
+        			  result = false;
+           }
+          return result;
+              
+    }
+
+	private static void Initialize() throws NoSuchAlgorithmException
+	{
+		digest = MessageDigest.getInstance("MD5");
+		randomizer.nextInt();
+		nounce = BitConverter.getBytes(randomizer.nextInt());
+	}
+      
+	private static short GetNextId()
+	{
+		if (nextId == Short.MAX_VALUE)
+			nextId = 0;
+        return ++nextId;
+    }
+      
+	protected void Sign() throws IOException, NoSuchAlgorithmException
+	{
+		if (digest == null)
+			Initialize();
+		DigitalSignature = ComputeDigitalSignature(new ByteArrayOutputStream());
+    }
+      
+	protected byte[] ComputeDigitalSignature(ByteArrayOutputStream mStream) throws IOException
+	{
+		AddOwnDataToStream(mStream);
+		mStream.reset();
+
+		byte[] result = digest.digest(); //{(byte)255, (byte)254, (byte)253, (byte)252, (byte)251, (byte)250, (byte)249, (byte)248, (byte)247, (byte) 246, (byte)245, (byte)244, (byte)243, (byte)242, (byte)241, (byte)240 }; 
+				//
+		/*for (int i = 0; i<result.length; i++)
+		{
+			if (result[i] < 0)
+				result[i] *= -1; 
+			if (result[i] == -128)
+				result[i] = 127;
+		}*/		
+		return result;
+	}
+     
+	public static int unsignedToBytes(byte b) 
+	{
+	    return b & 0xFF;
+	}
+	
+	protected void AddOwnDataToStream(ByteArrayOutputStream mStream) throws IOException
+	{
+		byte[] idBytes = BitConverter.getBytes(Id);
+		mStream.write(idBytes, 0, idBytes.length);
+		if (nounce != null)
+			mStream.write(nounce, 0, nounce.length);
+	}
+}

@@ -2,8 +2,10 @@ Java: 204
 
 UmbrellaPurchased:{"Umbrella":{"Id":1,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},"MessageNr":{"ProcessId":100,"SeqNumber":2},"ConvId":{"ProcessId":100,"SeqNumber":1}}
 
-C#: 202
-UmbrellaPurchased:{"ConvId":{"ProcessId":100,"SeqNumber":1},"MessageNr":{"ProcessId":100,"SeqNumber":2},"Umbrella":{"DigitalSignature":[181,192,192,52,36,105,87,175,248,95,44,107,40,124,139,99],"Id":1}
+UmbrellaPurchased:{"Umbrella":{"Id":1,"DigitalSignature":[-44,29,-116,-39,-113,0,-78,4,-23,-128,9,-104,-20,-8,66,126]},"MessageNr":{"ProcessId":100,"SeqNumber":2},"ConvId":{"ProcessId":100,"SeqNumber":1}}
+
+C#: 205
+UmbrellaPurchased:{"ConvId":{"ProcessId":100,"SeqNumber":1},"MessageNr":{"ProcessId":100,"SeqNumber":2},"Umbrella":{"DigitalSignature":[93,207,244,102,150,9,233,191,162,249,92,211,241,189,181,179],"Id":1}}
 
 =============================================
 

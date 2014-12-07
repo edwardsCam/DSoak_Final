@@ -1,0 +1,10 @@
+package Deserializer;
+
+import Messages.BalloonFilled;
+
+import com.google.gson.JsonDeserializer;
+
+public class BalloonFilledDeserializer implements JsonDeserializer<BalloonFilled>
+{
+
+}

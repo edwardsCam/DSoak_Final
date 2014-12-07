@@ -13,21 +13,38 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 import com.google.gson.stream.JsonReader;
 
+import Deserializer.BalloonDesrializer;
+import Deserializer.BalloonFilledDeserializer;
 import Deserializer.GameInfoDeserializer;
 import Deserializer.GameOverDeserializer;
 import Deserializer.PlayerInfoDeserializer;
 import Deserializer.ProcessDataDeserializer;
 import Deserializer.PublicEndPointDeserializer;
+import Deserializer.SharedResourceDeserializer;
+import Deserializer.UmbrellaDesrializer;
+import Serializers.BalloonFilledSerializer;
+import Serializers.BalloonSerializer;
 import Serializers.GameInfoSerializer;
 import Serializers.GameOverSerializer;
+import Serializers.PennySerializer;
 import Serializers.PlayerInfoSerializer;
 import Serializers.ProcessDataSerializer;
 import Serializers.PublicEndPointSerializer;
+import Serializers.SharedResourceSerializer;
+import Serializers.UmbrellaPurchasedSerializer;
+import Serializers.UmbrellaSerializer;
+import SharedObject.Balloon;
 import SharedObject.GameInfo;
+import SharedObject.GamePlayerInfo;
 import SharedObject.MessageNumber;
+import SharedObject.Penny;
 import SharedObject.PlayerInfo;
 import SharedObject.ProcessData;
 import SharedObject.PublicEndPoint;
+import SharedObject.RegistryEntry;
+import SharedObject.SharedResource;
+import SharedObject.Umbrella;
+import SharedObject.UmbrellaRaising;
 
 public class Message 
 {
@@ -57,8 +74,12 @@ public class Message
 		gsonBuilder.registerTypeAdapter(GameOver.class, new GameOverSerializer());
 		gsonBuilder.registerTypeAdapter(GameInfo.class, new GameInfoSerializer());
 		gsonBuilder.registerTypeAdapter(ProcessData.class, new ProcessDataSerializer());
+		gsonBuilder.registerTypeAdapter(SharedResource.class, new SharedResourceSerializer());
+		gsonBuilder.registerTypeAdapter(Umbrella.class, new UmbrellaSerializer());
+		gsonBuilder.registerTypeAdapter(Balloon.class, new BalloonSerializer());
+		gsonBuilder.registerTypeAdapter(Penny.class, new PennySerializer());
+		
 		Gson gson = gsonBuilder.excludeFieldsWithoutExposeAnnotation().serializeNulls().create(); 
-	
 		gson.toJson(this, this.getClass(), outstreamWriter);
 		outstreamWriter.flush();
 		return byteArrayOutStream.toByteArray();
@@ -79,6 +100,8 @@ public class Message
 		gsonBuilder.registerTypeAdapter(GameOver.class, new GameOverDeserializer());
 		gsonBuilder.registerTypeAdapter(GameInfo.class, new GameInfoDeserializer());
 		gsonBuilder.registerTypeAdapter(ProcessData.class, new ProcessDataDeserializer());
+		gsonBuilder.registerTypeAdapter(SharedResource.class, new SharedResourceDeserializer());
+		
 		Gson gson = gsonBuilder.create();
 		
 	   	message = (Message) gson.fromJson(reader, classType);
@@ -114,11 +137,13 @@ public class Message
 	 private static void Initialize()
      {
          classType = new HashMap<String, Class<?>>();
+         
          classType.put("Ack", Ack.class);
-         classType.put("Nak", Nak.class); 
          classType.put("AliveQuery", AliveQuery.class);
          classType.put("BalloonFilled", BalloonFilled.class);
          classType.put("BalloonPurchased", BalloonPurchased.class);
+         classType.put("BalloonStolen", BalloonStolen.class);
+         classType.put("BlockStealing", BlockStealing.class);
          classType.put("BuyBalloon", BuyBalloon.class);
          classType.put("BuyUmbrella", BuyUmbrella.class);
          classType.put("Continue", Continue.class);
@@ -126,22 +151,33 @@ public class Message
          classType.put("GameData", GameData.class);
          classType.put("GameJoined", GameJoined.class);
          classType.put("GameOver", GameOver.class);
+         classType.put("GiveUpABalloon", GiveUpABalloon.class);
          classType.put("Hit", Hit.class);
          classType.put("JoinGame", JoinGame.class); 
          classType.put("LeaveGame", LeaveGame.class);
+         classType.put("Nak", Nak.class); 
+         classType.put("ProcessSummary", ProcessSummary.class);
          classType.put("RaiseUmbrella", RaiseUmbrella.class);
+         classType.put("ResourceRequest", ResourceRequest.class);
          classType.put("SetupStream", SetupStream.class);
          classType.put("Shutdown", Shutdown.class);
+         classType.put("Stealing", Stealing.class);
+         classType.put("StealingBase", StealingBase.class);
+         classType.put("StealingBlocked", StealingBlocked.class);
          classType.put("StopStream", StopStream.class);
          classType.put("UmbrellaPurchased", UmbrellaPurchased.class);
-         classType.put("ProcessSummary", ProcessSummary.class);
-         classType.put("Stealing", Stealing.class);
-         classType.put("BlockStealing", BlockStealing.class);
-         classType.put("StealingBlocked", StealingBlocked.class);
-         classType.put("GiveUpABalloon", GiveUpABalloon.class);
-         classType.put("BalloonStolen", BalloonStolen.class);
          classType.put("ThrowBalloon", ThrowBalloon.class);
-         classType.put("PublicEndPoint", PublicEndPoint.class);
+         
+         //classType.put("Balloon", Balloon.class);
+         classType.put("GameInfo", GameInfo.class);
+         //classType.put("GamePlayerInfo", GamePlayerInfo.class);
+        // classType.put("MessageNumber", MessageNumber.class);
+         //classType.put("Penny", Penny.class);
          classType.put("PlayerInfo", PlayerInfo.class);
+         classType.put("PublicEndPoint", PublicEndPoint.class);
+         //classType.put("RegistryEntry", RegistryEntry.class);
+         //classType.put("SharedResource", SharedResource.class);
+         //classType.put("Umbrella", Umbrella.class);
+         //classType.put("UmbrellaRaising", UmbrellaRaising.class);
     }
 }

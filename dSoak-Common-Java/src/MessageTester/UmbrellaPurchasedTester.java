@@ -43,7 +43,6 @@ public class UmbrellaPurchasedTester
 		assertNotNull(msg3);
 		assertEquals(msg2.MessageNr.ProcessId, msg3.MessageNr.ProcessId);
 		assertEquals(msg2.MessageNr.SeqNumber, msg3.MessageNr.SeqNumber);
-	
 		
 		UmbrellaPurchased msg4 = (UmbrellaPurchased) msg3;
 		assertNotNull(msg4.Umbrella);

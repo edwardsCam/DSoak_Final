@@ -18,7 +18,7 @@ public class SharedResource
 	@Expose public short Id;
 	@Expose public byte[] DigitalSignature;
 	
-	public SharedResource() throws NoSuchAlgorithmException, IOException
+	public SharedResource() //throws NoSuchAlgorithmException, IOException
 	{
 		if (!hasBeenInitialized)
 			 Initialize();
@@ -28,7 +28,7 @@ public class SharedResource
 	}
       
 	 public boolean IsValid() throws IOException
-      {
+     {
           boolean result = false;
           if (DigitalSignature != null)
           {
@@ -44,11 +44,16 @@ public class SharedResource
            }
           return result;
               
-      }
+    }
 
-	private static void Initialize() throws NoSuchAlgorithmException
+	private static void Initialize() //throws NoSuchAlgorithmException
 	{
-		digest = MessageDigest.getInstance("MD5");
+		try {
+			digest = MessageDigest.getInstance("MD5");
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		randomizer.nextInt();
 		nounce = BitConverter.getBytes(randomizer.nextInt());
 	}
@@ -60,11 +65,16 @@ public class SharedResource
         return ++nextId;
     }
       
-	protected void Sign() throws IOException, NoSuchAlgorithmException
+	protected void Sign() //throws IOException, NoSuchAlgorithmException
 	{
 		if (digest == null)
 			Initialize();
-		DigitalSignature = ComputeDigitalSignature(new ByteArrayOutputStream());
+		try {
+			DigitalSignature = ComputeDigitalSignature(new ByteArrayOutputStream());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
       
 	protected byte[] ComputeDigitalSignature(ByteArrayOutputStream mStream) throws IOException
@@ -72,10 +82,23 @@ public class SharedResource
 		AddOwnDataToStream(mStream);
 		mStream.reset();
 
-		byte[] result = digest.digest();
+		byte[] result = digest.digest();  
+		
+		/*for (int i = 0; i<result.length; i++)
+		{
+			if (result[i] < 0)
+				result[i] *= -1; 
+			if (result[i] == -128)
+				result[i] = 127;
+		}*/		
 		return result;
 	}
-      
+     
+	public static int unsignedToBytes(byte b) 
+	{
+	    return b & 0xFF;
+	}
+	
 	protected void AddOwnDataToStream(ByteArrayOutputStream mStream) throws IOException
 	{
 		byte[] idBytes = BitConverter.getBytes(Id);

@@ -11,7 +11,7 @@ public class PublicEndPoint
 	private  IPEndPoint myIPEndPoint = null;
 	private  String myHost;
 	private  int myPort;
-	public String HostAndPort; 
+	@Expose public String HostAndPort; 
 	
 	public PublicEndPoint() {	}
 	

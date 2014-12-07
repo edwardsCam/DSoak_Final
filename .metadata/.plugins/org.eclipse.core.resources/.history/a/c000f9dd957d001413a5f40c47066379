@@ -1,0 +1,18 @@
+package Serializers;
+
+import java.lang.reflect.Type;
+import SharedObject.SharedResource;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
+public class SharedResourceSerializer implements JsonSerializer<SharedResource>
+{
+
+	public JsonElement serialize(SharedResource arg0, Type arg1,
+			JsonSerializationContext arg2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

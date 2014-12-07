@@ -10,7 +10,8 @@ public class Balloon extends SharedResource
 {
 	@Expose public short UnitOfWater;
 	
-	public Balloon() throws NoSuchAlgorithmException, IOException {
+	public Balloon() 
+	{
 		super();
 	}
 	

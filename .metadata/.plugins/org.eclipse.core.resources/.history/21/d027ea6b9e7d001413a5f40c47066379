@@ -1,0 +1,18 @@
+package Serializers;
+
+import java.lang.reflect.Type;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
+public class BalloonSerializer implements JsonSerializer<Boolean>
+{
+
+	public JsonElement serialize(Boolean arg0, Type arg1, JsonSerializationContext arg2) 
+	{
+	
+		return null;
+	}
+
+}

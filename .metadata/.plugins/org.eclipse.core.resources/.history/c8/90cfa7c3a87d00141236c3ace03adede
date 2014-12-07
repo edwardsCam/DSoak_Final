@@ -1,0 +1,28 @@
+package Serializers;
+
+import java.lang.reflect.Type;
+
+import SharedObject.Balloon;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+
+public class BalloonSerializer extends SharedResourceSerializer //implements JsonSerializer<Balloon>
+{
+	public JsonElement serialize(Balloon balloon, Type type, JsonSerializationContext context) 
+	{
+		final JsonObject jsonObject = new JsonObject();
+		
+		jsonObject.addProperty("UnitOfWater", balloon.UnitOfWater);
+		final JsonElement jsonId = context.serialize(balloon.Id);
+		jsonObject.add("Id", jsonId);
+		
+		final JsonElement jsonDigitalSignature = context.serialize(balloon.DigitalSignature);
+		jsonObject.add("DigitalSignature", jsonDigitalSignature);
+
+		return jsonObject;
+	}
+
+}
