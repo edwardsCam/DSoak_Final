@@ -68,6 +68,11 @@ namespace Actors
 			return ret;
 		}
 
+		public Conversation peek()
+		{
+			return convos.ElementAt(0);
+		}
+
 		public Conversation getConvo(SharedObjects.MessageNumber n)
 		{
 			foreach (Conversation c in convos)

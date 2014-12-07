@@ -104,13 +104,8 @@ namespace Actors
 
 		public void addConversation(Envelope msg)
 		{
-			conversation_queues.add(msg);
-		}
-
-		public void addRequest(Envelope msg)
-		{
 			if (msg.hasPayload())
-				q_request.push(msg);
+				conversation_queues.add(msg);
 		}
 
 		public void addPending(Envelope msg)

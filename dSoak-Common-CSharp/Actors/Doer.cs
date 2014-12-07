@@ -106,7 +106,7 @@ namespace Actors
 
 				if (hasConversation())
 				{
-					Conversation convo = conversation_queues.pop();
+					Conversation convo = conversation_queues.peek();
 					Envelope request = convo.pop();
 					Messages.Message msg = request.getPayload();
 					switch (msg.getTypeAsString())
