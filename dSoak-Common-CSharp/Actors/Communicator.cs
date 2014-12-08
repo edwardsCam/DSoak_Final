@@ -114,15 +114,15 @@ namespace Actors
 			try
 			{
 				IPEndPoint server;
-				if (gameManager)
-					server = gameManagerEP.IPEndPoint;
-				else
-					server = registrarEP.IPEndPoint;
-				byte[] streamBack = client.Receive(ref server);
-
-				Envelope response = Envelope.unpack(streamBack);
+				if (gameManager) server = gameManagerEP.IPEndPoint;
+				else server = registrarEP.IPEndPoint;
+				Envelope response = Envelope.unpack(client.Receive(ref server));
 				if (response != null)
+				{
 					listener.addPending(response);
+					if (response.getPayload().getTypeAsString() == "Nak")
+						return false;
+				}
 				return true;
 			}
 			catch (Exception)
@@ -167,7 +167,7 @@ namespace Actors
 				return null;
 			}
 		}
-		 
+
 
 		#endregion
 

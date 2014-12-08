@@ -77,7 +77,7 @@ namespace Actors
 							status = stat.Joining;
 							joinAttempts = 0;
 						}
-						
+
 						break;
 					case stat.Joining: //joining game
 						if (joinAttempts++ > 10)
@@ -123,7 +123,7 @@ namespace Actors
 					{
 						active_game = new Game(i);
 						return true;
-					}		
+					}
 			}
 			return false;
 		}
@@ -142,7 +142,7 @@ namespace Actors
 				msg.Player = player;
 				msg.GameId = g.getID();
 
-				//com.setRemoteEP(g.getFightManagerEP());
+				//com.setRemoteEP(g.getFightManagerEP()); //todo
 				com.send(new Envelope(msg), true);
 				if (com.receive(true))
 				{
