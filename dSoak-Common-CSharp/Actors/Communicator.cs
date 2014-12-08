@@ -25,6 +25,7 @@ namespace Actors
 		private UdpClient client;
 		private Listener listener;
 		private Doer doer;
+		private short processID;
 
 		#endregion
 
@@ -74,14 +75,23 @@ namespace Actors
 		{
 			if (localEP != null)
 			{
-				short id;
 				bool specified;
 				_Registrar.PublicEndPoint ep = new _Registrar.PublicEndPoint();
 				ep.HostAndPort = localEP.HostAndPort;
-				myRegistrar.GetProcessId(ep, "A01982846", _Registrar.RegistryEntryProcessType.Player, true, out id, out specified);
+				myRegistrar.GetProcessId(ep, "A01982846", _Registrar.RegistryEntryProcessType.Player, true, out processID, out specified);
 				if (specified)
-					SharedObjects.MessageNumber.LocalProcessId = id;
+					SharedObjects.MessageNumber.LocalProcessId = processID;
 			}
+		}
+
+		public void isAlive()
+		{
+			myRegistrar.AmAlive(processID, true);
+		}
+
+		public short getProcessID()
+		{
+			return processID;
 		}
 
 		#endregion
@@ -120,39 +130,16 @@ namespace Actors
 				if (response != null)
 				{
 					listener.addPending(response);
-					if (response.getPayload().getTypeAsString() == "Nak")
-						return false;
+					if (response.getPayload().getTypeAsString() != "Nak")
+						return true;
 				}
-				return true;
+				return false;
 			}
 			catch (Exception)
 			{
 				return false;
 			}
 		}
-		/*
-		public bool receiveNotNak()
-		{
-			try
-			{
-				IPEndPoint server = registrarEP.IPEndPoint;
-				byte[] streamBack = client.Receive(ref server);
-
-				Envelope response = Envelope.unpack(streamBack);
-				if (response != null)
-				{
-					listener.addPending(response);
-					if (response.getPayload().getTypeAsString() == "Nak")
-						return false;
-				}
-				return true;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
-		 * */
 
 		public Envelope receiveAsEnvelope()
 		{

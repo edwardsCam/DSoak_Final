@@ -96,40 +96,40 @@ namespace Actors
 			{
 				if (hasConversation())
 				{
-					Envelope request = null;
-					Messages.Message msg = new Messages.Nak();
 					Conversation convo = conversation_queues.peekReceived();
 					if (convo != null)
 					{
-						request = convo.peek();
+						Envelope request = convo.peek();
 						if (request != null)
-							msg = request.getPayload();
-					}
-					switch (msg.getTypeAsString())
-					{
-						case "GameJoined":
-							Messages.GameJoined joined = msg as Messages.GameJoined;
-							addPennies(joined.Pennies);
-							break;
+						{
+							Messages.Message msg = request.getPayload();
+							switch (msg.getTypeAsString())
+							{
+								case "GameJoined":
+									Messages.GameJoined joined = msg as Messages.GameJoined;
+									addPennies(joined.Pennies);
+									break;
 
-						case "UmbrellaPurchased":
-							Messages.UmbrellaPurchased purchased = msg as Messages.UmbrellaPurchased;
-							addUmbrella(purchased.Umbrella);
-							break;
+								case "UmbrellaPurchased":
+									Messages.UmbrellaPurchased purchased = msg as Messages.UmbrellaPurchased;
+									addUmbrella(purchased.Umbrella);
+									break;
 
-						case "BalloonPurchased":
-							Messages.BalloonPurchased balloon = msg as Messages.BalloonPurchased;
-							addBalloon(balloon.Balloon);
-							break;
+								case "BalloonPurchased":
+									Messages.BalloonPurchased balloon = msg as Messages.BalloonPurchased;
+									addBalloon(balloon.Balloon);
+									break;
 
-						case "Ack":
-							message_to_return = "Ack";
-							break;
+								case "Ack":
+									message_to_return = "Ack";
+									break;
 
-						case "Nak":
-							Messages.Nak nak = msg as Messages.Nak;
-							message_to_return = nak.Error;
-							break;
+								case "Nak":
+									Messages.Nak nak = msg as Messages.Nak;
+									message_to_return = nak.Error;
+									break;
+							}
+						}
 					}
 				}
 			}

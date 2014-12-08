@@ -30,7 +30,7 @@ namespace Actors
 		public bool hasConvos()
 		{
 			if (convos.Count > 0)
-				foreach (Conversation c in convos)
+				foreach (Conversation c in convos.ToList())
 					if (c.hasMsg())
 						return true;
 			return false;
@@ -38,7 +38,7 @@ namespace Actors
 
 		public bool hasConvo(SharedObjects.MessageNumber n)
 		{
-			foreach (Conversation c in convos)
+			foreach (Conversation c in convos.ToList())
 				if (c.getID() == n)
 					return true;
 			return false;
@@ -49,7 +49,7 @@ namespace Actors
 			SharedObjects.MessageNumber convID = e.getPayload().ConvId;
 			if (hasConvo(convID))
 			{
-				foreach (Conversation c in convos)
+				foreach (Conversation c in convos.ToList())
 				{
 					if (c.getID() == convID)
 					{
@@ -75,7 +75,7 @@ namespace Actors
 
 		public Conversation peek()
 		{
-			foreach (Conversation c in convos)
+			foreach (Conversation c in convos.ToList())
 				if (!c.isChecked())			
 					return c;			
 			return null;

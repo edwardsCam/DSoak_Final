@@ -60,6 +60,8 @@ namespace Actors
 			short joinAttempts = 0;
 			while (true)
 			{
+				if (status != stat.Uninitialized)
+					com.isAlive();
 				switch (status)
 				{
 					case stat.Uninitialized: //uninitialized
@@ -134,7 +136,7 @@ namespace Actors
 			{
 				SharedObjects.PlayerInfo player = new SharedObjects.PlayerInfo();
 				player.EndPoint = com.setLocalEP(false);
-				player.PlayerId = 19828; //todo
+				player.PlayerId = com.getProcessID();
 				player.Status = SharedObjects.PlayerInfo.StateCode.OnLine;
 				player.AliveTimestamp = DateTime.Now;
 
@@ -142,7 +144,6 @@ namespace Actors
 				msg.Player = player;
 				msg.GameId = g.getID();
 
-				//com.setRemoteEP(g.getFightManagerEP()); //todo
 				com.send(new Envelope(msg), true);
 				if (com.receive(true))
 				{
@@ -162,6 +163,7 @@ namespace Actors
 		{
 			while (active_game.isActive())
 			{
+				active_game.raiseUmbrella();
 				//todo
 			}
 		}
