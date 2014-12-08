@@ -41,6 +41,9 @@ namespace Player
 			updateStatus("Joining Game...");
 			while (brain.isJoining()) ;
 
+			updateStatus("In Game!");
+			while (brain.isInGame()) ;
+
 			if (brain.isInError())
 			{
 				updateStatus("Error... Could not connect to a game");

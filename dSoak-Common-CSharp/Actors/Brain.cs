@@ -163,6 +163,7 @@ namespace Actors
 		{
 			while (active_game.isActive())
 			{
+				com.isAlive();
 				active_game.raiseUmbrella();
 				//todo
 			}
