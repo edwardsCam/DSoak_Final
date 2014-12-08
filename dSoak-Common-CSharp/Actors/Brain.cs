@@ -67,7 +67,7 @@ namespace Actors
 						status = stat.Searching;
 						break;
 					case stat.Searching: //searching for games
-						if (joinAttempts > 10)
+						if (joinAttempts++ > 10)
 						{
 							status = stat.Error;
 							joinAttempts = 0;
@@ -77,12 +77,10 @@ namespace Actors
 							status = stat.Joining;
 							joinAttempts = 0;
 						}
-						else
-							joinAttempts++;
 						
 						break;
 					case stat.Joining: //joining game
-						if (joinAttempts > 10)
+						if (joinAttempts++ > 10)
 						{
 							status = stat.Error;
 							joinAttempts = 0;
@@ -91,8 +89,7 @@ namespace Actors
 						{
 							status = stat.InGame;
 							joinAttempts = 0;
-						} else
-							joinAttempts++;
+						}
 						break;
 					case stat.InGame: //ingame
 						gameLoop();
@@ -145,9 +142,9 @@ namespace Actors
 				msg.Player = player;
 				msg.GameId = g.getID();
 
-				com.setRemoteEP(g.getFightManagerEP());
-				com.send(msg);
-				if (com.receiveNotNak())
+				//com.setRemoteEP(g.getFightManagerEP());
+				com.send(new Envelope(msg), true);
+				if (com.receive(true))
 				{
 					active_game.setPennyList(com.returnPennies());
 					active_game.activate();
@@ -180,8 +177,8 @@ namespace Actors
 			Messages.LeaveGame msg = new Messages.LeaveGame();
 			msg.GameId = active_game.getID();
 
-			com.send(new Envelope(msg));
-			if (com.receive())
+			com.send(new Envelope(msg), false);
+			if (com.receive(false))
 				active_game.setMessage(com.returnMessage());
 		}
 
@@ -196,8 +193,8 @@ namespace Actors
 					Messages.RaiseUmbrella msg = new Messages.RaiseUmbrella();
 					msg.Umbrella = active_game.getUmbrella();
 
-					com.send(new Envelope(msg));
-					if (com.receive())
+					com.send(new Envelope(msg), false);
+					if (com.receive(false))
 						active_game.setMessage(com.returnMessage());
 				}
 			}
@@ -206,8 +203,8 @@ namespace Actors
 				Messages.BuyUmbrella msg = new Messages.BuyUmbrella();
 				msg.Pennies = active_game.getPennyList();
 
-				com.send(new Envelope(msg));
-				if (com.receive())
+				com.send(new Envelope(msg), false);
+				if (com.receive(false))
 					active_game.setUmbrella(com.returnUmbrella());
 			}
 		}
@@ -219,8 +216,8 @@ namespace Actors
 				Messages.FillBalloon msg = new Messages.FillBalloon();
 				msg.Pennies = active_game.getPennyList();
 
-				com.send(new Envelope(msg));
-				if (com.receive())
+				com.send(new Envelope(msg), false);
+				if (com.receive(false))
 					active_game.setBalloon(com.returnBalloon());
 			}
 		}
@@ -232,8 +229,8 @@ namespace Actors
 				Messages.BuyBalloon msg = new Messages.BuyBalloon();
 				msg.Pennies = active_game.getPennyList();
 
-				com.send(new Envelope(msg));
-				if (com.receive())
+				com.send(new Envelope(msg), false);
+				if (com.receive(false))
 					active_game.setBalloon(com.returnBalloon());
 				return true;
 			}
@@ -249,8 +246,8 @@ namespace Actors
 				msg.GameId = active_game.getID();
 				msg.TargetPlayerId = Convert.ToInt16(target_str);
 
-				com.send(new Envelope(msg));
-				if (com.receive())
+				com.send(new Envelope(msg), false);
+				if (com.receive(false))
 				{
 					active_game.setMessage(com.returnMessage());
 					return true;

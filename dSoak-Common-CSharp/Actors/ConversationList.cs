@@ -76,12 +76,8 @@ namespace Actors
 		public Conversation peek()
 		{
 			foreach (Conversation c in convos)
-			{
-				if (!c.isChecked())
-				{
-					return c;
-				}
-			}
+				if (!c.isChecked())			
+					return c;			
 			return null;
 		}
 

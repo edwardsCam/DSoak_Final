@@ -21,7 +21,7 @@ namespace Actors
 		#region Private Properties
 
 		private _Registrar.Registrar myRegistrar;
-		private SharedObjects.PublicEndPoint remoteEP, localEP;
+		private SharedObjects.PublicEndPoint gameManagerEP, localEP, registrarEP;
 		private UdpClient client;
 		private Listener listener;
 		private Doer doer;
@@ -40,7 +40,8 @@ namespace Actors
 
 			myRegistrar = new _Registrar.Registrar();
 			string EPReflector = myRegistrar.EndPointReflector();
-			remoteEP = new SharedObjects.PublicEndPoint(EPReflector);
+			registrarEP = new SharedObjects.PublicEndPoint(EPReflector);
+			gameManagerEP = new SharedObjects.PublicEndPoint(myRegistrar.GetGameManagers()[0].Ep.HostAndPort);
 			localEP = null;
 		}
 
@@ -63,15 +64,10 @@ namespace Actors
 		{
 			if (generate)
 			{
-				send(new Envelope(new Messages.AliveQuery()));
+				send(new Envelope(new Messages.AliveQuery()), false);
 				localEP = receiveAsEnvelope().getEP();
 			}
 			return localEP;
-		}
-
-		public void setRemoteEP(SharedObjects.PublicEndPoint s)
-		{
-			remoteEP = s;
 		}
 
 		public void setProcessID()
@@ -92,15 +88,18 @@ namespace Actors
 
 		#region UDP Client stuff
 
-		public int send(Envelope msg)
+		public int send(Envelope msg, bool gameManager)
 		{
 			try
 			{
 				if (msg.hasEP())
 					client.Connect(msg.getEP().IPEndPoint);
+				else if (gameManager)
+					client.Connect(gameManagerEP.IPEndPoint);
 				else
-					client.Connect(remoteEP.IPEndPoint);
+					client.Connect(registrarEP.IPEndPoint);
 
+				listener.addConversation(msg);
 				byte[] datagram = msg.encode();
 				return client.Send(datagram, datagram.Length);
 			}
@@ -110,23 +109,20 @@ namespace Actors
 			}
 		}
 
-		public int send(Messages.Message msg)
+		public bool receive(bool gameManager)
 		{
-			Envelope e = new Envelope(msg);
-			listener.addConversation(e);
-			return send(new Envelope(msg));
-		}
-
-		public bool receive()
-		{
-			byte[] streamBack;
 			try
 			{
-				IPEndPoint server = remoteEP.IPEndPoint;
-				streamBack = client.Receive(ref server);
+				IPEndPoint server;
+				if (gameManager)
+					server = gameManagerEP.IPEndPoint;
+				else
+					server = registrarEP.IPEndPoint;
+				byte[] streamBack = client.Receive(ref server);
 
 				Envelope response = Envelope.unpack(streamBack);
-				listener.addPending(response);
+				if (response != null)
+					listener.addPending(response);
 				return true;
 			}
 			catch (Exception)
@@ -134,19 +130,21 @@ namespace Actors
 				return false;
 			}
 		}
-
+		/*
 		public bool receiveNotNak()
 		{
-			byte[] streamBack;
 			try
 			{
-				IPEndPoint server = remoteEP.IPEndPoint;
-				streamBack = client.Receive(ref server);
+				IPEndPoint server = registrarEP.IPEndPoint;
+				byte[] streamBack = client.Receive(ref server);
 
 				Envelope response = Envelope.unpack(streamBack);
-				listener.addPending(response);
-				if (response.getPayload().getTypeAsString() == "Nak")
-					return false;
+				if (response != null)
+				{
+					listener.addPending(response);
+					if (response.getPayload().getTypeAsString() == "Nak")
+						return false;
+				}
 				return true;
 			}
 			catch (Exception)
@@ -154,12 +152,13 @@ namespace Actors
 				return false;
 			}
 		}
+		 * */
 
 		public Envelope receiveAsEnvelope()
 		{
 			try
 			{
-				IPEndPoint server = remoteEP.IPEndPoint;
+				IPEndPoint server = registrarEP.IPEndPoint;
 				byte[] streamBack = client.Receive(ref server);
 				return Envelope.unpack(streamBack);
 			}
@@ -168,6 +167,7 @@ namespace Actors
 				return null;
 			}
 		}
+		 
 
 		#endregion
 
@@ -214,11 +214,6 @@ namespace Actors
 		public SharedObjects.PublicEndPoint getLocalEP()
 		{
 			return localEP;
-		}
-
-		public SharedObjects.PublicEndPoint getRemoteEP()
-		{
-			return remoteEP;
 		}
 
 		#endregion
