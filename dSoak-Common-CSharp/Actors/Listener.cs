@@ -19,6 +19,7 @@ namespace Actors
 
 		private static bool isInitialized = false;
 		private MessageQueue pendingMessages;
+		private bool active;
 
 		#endregion
 
@@ -55,24 +56,38 @@ namespace Actors
 		{
 			if (conversation_queues == null)
 				conversation_queues = new ConversationList();
-
 			pendingMessages = new MessageQueue();
-
 			if (threading)
 			{
 				create_thread(new ThreadStart(listen));
 				start_thread();
 			}
 			isInitialized = true;
+			active = false;
 		}
 
 		#endregion
 
-		#region Queue stuff
+		#region THREAD LOOP
 
-		private bool hasPendingRequests()
+		private void listen()
 		{
-			return pendingMessages.size() > 0;
+			while (true)
+			{
+				if (active)
+				{
+					if (pendingMessages.size() > 0)
+					{
+						Envelope env = pendingMessages.pop();
+						if (env.hasPayload())
+						{
+							conversation_queues.add(env);
+							active = false;
+							new_flag = true;
+						}
+					}
+				}
+			}
 		}
 
 		#endregion
@@ -81,37 +96,14 @@ namespace Actors
 
 		#region Public Methods
 
-		#region Queue stuff
-
-		public void addConversation(Envelope msg)
-		{
-			if (msg.hasPayload())
-				conversation_queues.add(msg);
-		}
-
 		public void addPending(Envelope msg)
 		{
 			if (msg.hasPayload())
-				pendingMessages.push(msg);
-		}
-
-		#endregion
-
-		#region THREAD LOOP
-
-		public void listen()
-		{
-			while (true)
 			{
-				if (hasPendingRequests())
-				{
-					Envelope env = pendingMessages.pop();
-					conversation_queues.add(env);
-				}
+				pendingMessages.push(msg);
+				active = true;
 			}
 		}
-
-		#endregion
 
 		#endregion
 

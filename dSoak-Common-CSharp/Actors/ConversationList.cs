@@ -4,12 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+ * ConversationList is an abstraction that contains all the conversations
+ * */
+
 namespace Actors
 {
 	public class ConversationList
 	{
-
-
 		#region Private Properties
 
 		private List<Conversation> convos;
@@ -29,10 +31,9 @@ namespace Actors
 
 		public bool hasConvos()
 		{
-			if (convos.Count > 0)
-				foreach (Conversation c in convos.ToList())
-					if (c.hasMsg())
-						return true;
+			foreach (Conversation c in convos.ToList())
+				if (c.hasMsg())
+					return true;
 			return false;
 		}
 
@@ -62,26 +63,7 @@ namespace Actors
 				convos.Add(new Conversation(e));
 		}
 
-		#endregion
-
-		#region Accessors
-
-		public Conversation pop()
-		{
-			Conversation ret = convos.ElementAt(0);
-			convos.Remove(ret);
-			return ret;
-		}
-
 		public Conversation peek()
-		{
-			foreach (Conversation c in convos.ToList())
-				if (!c.isChecked())			
-					return c;			
-			return null;
-		}
-
-		public Conversation peekReceived()
 		{
 			foreach (Conversation c in convos.ToList())
 			{

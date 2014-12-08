@@ -24,7 +24,7 @@ namespace Actors
 		private SharedObjects.PublicEndPoint gameManagerEP, localEP, registrarEP;
 		private UdpClient client;
 		private Listener listener;
-		private Doer doer;
+		//private Doer doer;
 		private short processID;
 
 		#endregion
@@ -37,12 +37,14 @@ namespace Actors
 			client.Client.ReceiveTimeout = 10000;
 
 			listener = new Listener();
-			doer = new Doer();
+			//doer = new Doer();
 
 			myRegistrar = new _Registrar.Registrar();
 			string EPReflector = myRegistrar.EndPointReflector();
 			registrarEP = new SharedObjects.PublicEndPoint(EPReflector);
-			gameManagerEP = new SharedObjects.PublicEndPoint(myRegistrar.GetGameManagers()[0].Ep.HostAndPort);
+			_Registrar.RegistryEntry[] managers = myRegistrar.GetGameManagers();
+			if (managers.Count() > 0)
+				gameManagerEP = new SharedObjects.PublicEndPoint(managers[0].Ep.HostAndPort);
 			localEP = null;
 		}
 
@@ -50,7 +52,7 @@ namespace Actors
 		{
 			client.Close();
 			listener.clear();
-			doer.clear();
+			//doer.clear();
 
 			myRegistrar.Abort();
 		}
@@ -65,8 +67,8 @@ namespace Actors
 		{
 			if (generate)
 			{
-				send(new Envelope(new Messages.AliveQuery()), false);
-				localEP = receiveAsEnvelope().getEP();
+				sendToRegistrar(new Envelope(new Messages.AliveQuery()));
+				localEP = receiveFromRegistrar();
 			}
 			return localEP;
 		}
@@ -98,18 +100,16 @@ namespace Actors
 
 		#region UDP Client stuff
 
-		public int send(Envelope msg, bool gameManager)
+		public int send(Envelope msg)
 		{
 			try
 			{
 				if (msg.hasEP())
 					client.Connect(msg.getEP().IPEndPoint);
-				else if (gameManager)
-					client.Connect(gameManagerEP.IPEndPoint);
-				else
-					client.Connect(registrarEP.IPEndPoint);
 
-				listener.addConversation(msg);
+				client.Connect(gameManagerEP.IPEndPoint);
+
+				listener.addPending(msg);
 				byte[] datagram = msg.encode();
 				return client.Send(datagram, datagram.Length);
 			}
@@ -119,15 +119,27 @@ namespace Actors
 			}
 		}
 
-		public bool receive(bool gameManager)
+		public int sendToRegistrar(Envelope msg)
 		{
 			try
 			{
-				IPEndPoint server;
-				if (gameManager) server = gameManagerEP.IPEndPoint;
-				else server = registrarEP.IPEndPoint;
+				client.Connect(registrarEP.IPEndPoint);
+				byte[] datagram = msg.encode();
+				return client.Send(datagram, datagram.Length);
+			}
+			catch (Exception)
+			{
+				return -1;
+			}
+		}
+
+		public bool receive()
+		{
+			try
+			{
+				IPEndPoint server = gameManagerEP.IPEndPoint;
 				Envelope response = Envelope.unpack(client.Receive(ref server));
-				if (response != null)
+				if (response != null && response.hasPayload())
 				{
 					listener.addPending(response);
 					if (response.getPayload().getTypeAsString() != "Nak")
@@ -141,13 +153,13 @@ namespace Actors
 			}
 		}
 
-		public Envelope receiveAsEnvelope()
+		public SharedObjects.PublicEndPoint receiveFromRegistrar()
 		{
 			try
 			{
 				IPEndPoint server = registrarEP.IPEndPoint;
 				byte[] streamBack = client.Receive(ref server);
-				return Envelope.unpack(streamBack);
+				return Envelope.unpack(streamBack).getEP();
 			}
 			catch (Exception)
 			{
@@ -158,35 +170,38 @@ namespace Actors
 
 		#endregion
 
-		#region Queue stuff
-
-		public bool hasConversation()
-		{
-			return doer.hasConversation();
-		}
-
-		#endregion
-
 		#region Resouce Getters
 
+		/*
 		public List<SharedObjects.Penny> returnPennies()
 		{
-			return doer.returnPennies();
+			foreach (Messages.Message e in pendingActionMessages)
+			{
+				if (e.getTypeAsString() == "GameJoined")
+				{
+					Messages.GameJoined joined = e as Messages.GameJoined;
+					pendingActionMessages.Remove(e);
+					return joined.Pennies;
+				}
+			}
+			return null;
+			//return doer.returnPennies();
 		}
+		 * */
 
 		public SharedObjects.Umbrella returnUmbrella()
 		{
-			return doer.returnUmbrella();
+			return null;// doer.returnUmbrella();
 		}
 
 		public SharedObjects.Balloon returnBalloon()
 		{
-			return doer.returnBalloon();
+			return null;//doer.returnBalloon();
 		}
 
 		public string returnMessage()
 		{
-			return doer.returnMessage();
+			return null;//doer.returnMessage();
 		}
 
 		#endregion
@@ -214,7 +229,7 @@ namespace Actors
 
 		public bool doerHasThread()
 		{
-			return doer.hasThread();
+			return false;// doer.hasThread();
 		}
 
 		public bool listenerHasThread()

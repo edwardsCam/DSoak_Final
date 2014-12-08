@@ -67,6 +67,11 @@ namespace Actors
 			return messages.ToList().Last();
 		}
 
+		public List<Envelope> asList()
+		{
+			return messages.ToList();
+		}
+
 		#endregion
 
 		#endregion

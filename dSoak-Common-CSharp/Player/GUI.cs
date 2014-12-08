@@ -21,6 +21,22 @@ namespace Player
 			LAB_game_status.Update();
 		}
 
+		void updateGameInfo(short pid, short gid, short lp)
+		{
+			LAB_id1.Text = "Process ID: ";
+			LAB_id2.Text = "" + pid;
+			LAB_gameid1.Text = "Game ID: ";
+			LAB_gameID2.Text = "" + gid;
+			LAB_lp1.Text = "Lifepoints: ";
+			LAB_lp2.Text = "" + lp;
+			LAB_id1.Update();
+			LAB_id2.Update();
+			LAB_gameid1.Update();
+			LAB_gameID2.Update();
+			LAB_lp1.Update();
+			LAB_lp2.Update();
+		}
+
 		public GUI()
 		{
 			InitializeComponent();
@@ -42,6 +58,7 @@ namespace Player
 			while (brain.isJoining()) ;
 
 			updateStatus("In Game!");
+			updateGameInfo(brain.getProcessID(), brain.getGameID(), brain.getLifepoints());
 			while (brain.isInGame()) ;
 
 			if (brain.isInError())

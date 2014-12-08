@@ -18,6 +18,7 @@ namespace Actors
 		private Communicator com;
 		private Game active_game;
 		private stat status;
+		private Doer doer;
 
 		#endregion
 
@@ -78,6 +79,7 @@ namespace Actors
 						{
 							status = stat.Joining;
 							joinAttempts = 0;
+							doer = new Doer();
 						}
 
 						break;
@@ -144,12 +146,19 @@ namespace Actors
 				msg.Player = player;
 				msg.GameId = g.getID();
 
-				com.send(new Envelope(msg), true);
-				if (com.receive(true))
+				com.send(new Envelope(msg));
+				if (com.receive())
 				{
-					active_game.setPennyList(com.returnPennies());
-					active_game.activate();
-					return true;
+					Thread.Sleep(1000);
+					Messages.GameJoined join_msg = doer.gotGameJoinedMsg();
+					List<SharedObjects.Penny> pennies = join_msg.Pennies;
+					active_game.setInitialLP(join_msg.InitialLifePoints);
+					if (pennies != null)
+					{
+						active_game.setPennyList(pennies);
+						active_game.activate();
+						return true;
+					}
 				}
 			}
 			return false;
@@ -161,10 +170,9 @@ namespace Actors
 
 		private void gameLoop()
 		{
-			while (active_game.isActive())
+			if (active_game.isActive())
 			{
-				com.isAlive();
-				active_game.raiseUmbrella();
+				buyBalloon();
 				//todo
 			}
 		}
@@ -175,13 +183,32 @@ namespace Actors
 
 		#region Public Methods
 
+		public short getProcessID()
+		{
+			return com.getProcessID();
+		}
+
+		public short getGameID()
+		{
+			if (active_game != null)
+				return active_game.getID();
+			return 0;
+		}
+
+		public short getLifepoints()
+		{
+			if (active_game != null)
+				return active_game.getLP();
+			return 0;
+		}
+
 		public void quitGame()
 		{
 			Messages.LeaveGame msg = new Messages.LeaveGame();
 			msg.GameId = active_game.getID();
 
-			com.send(new Envelope(msg), false);
-			if (com.receive(false))
+			com.send(new Envelope(msg));
+			if (com.receive())
 				active_game.setMessage(com.returnMessage());
 		}
 
@@ -196,8 +223,8 @@ namespace Actors
 					Messages.RaiseUmbrella msg = new Messages.RaiseUmbrella();
 					msg.Umbrella = active_game.getUmbrella();
 
-					com.send(new Envelope(msg), false);
-					if (com.receive(false))
+					com.send(new Envelope(msg));
+					if (com.receive())
 						active_game.setMessage(com.returnMessage());
 				}
 			}
@@ -206,8 +233,8 @@ namespace Actors
 				Messages.BuyUmbrella msg = new Messages.BuyUmbrella();
 				msg.Pennies = active_game.getPennyList();
 
-				com.send(new Envelope(msg), false);
-				if (com.receive(false))
+				com.send(new Envelope(msg));
+				if (com.receive())
 					active_game.setUmbrella(com.returnUmbrella());
 			}
 		}
@@ -219,8 +246,8 @@ namespace Actors
 				Messages.FillBalloon msg = new Messages.FillBalloon();
 				msg.Pennies = active_game.getPennyList();
 
-				com.send(new Envelope(msg), false);
-				if (com.receive(false))
+				com.send(new Envelope(msg));
+				if (com.receive())
 					active_game.setBalloon(com.returnBalloon());
 			}
 		}
@@ -232,9 +259,15 @@ namespace Actors
 				Messages.BuyBalloon msg = new Messages.BuyBalloon();
 				msg.Pennies = active_game.getPennyList();
 
-				com.send(new Envelope(msg), false);
-				if (com.receive(false))
+				com.send(new Envelope(msg));
+				if (com.receive())
+				{
+					Messages.BalloonPurchased balloon_msg = doer.gotBalloonPurchasedMsg();
+					//Messages.GameJoined join_msg = doer.gotGameJoinedMsg();
+					//List<SharedObjects.Penny> pennies = join_msg.Pennies;
+					//active_game.setInitialLP(join_msg.InitialLifePoints);
 					active_game.setBalloon(com.returnBalloon());
+				}
 				return true;
 			}
 			return false;
@@ -249,8 +282,8 @@ namespace Actors
 				msg.GameId = active_game.getID();
 				msg.TargetPlayerId = Convert.ToInt16(target_str);
 
-				com.send(new Envelope(msg), false);
-				if (com.receive(false))
+				com.send(new Envelope(msg));
+				if (com.receive())
 				{
 					active_game.setMessage(com.returnMessage());
 					return true;

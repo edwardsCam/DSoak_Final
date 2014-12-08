@@ -23,9 +23,10 @@ namespace Actors
 		private string label;
 		private bool raisedUmbrella;
 		private bool active;
+		private short lp;
 		private short id;
 		private short maxPlayers;
-		private DateTime timestamp;
+		//private DateTime timestamp;
 		private SharedObjects.PublicEndPoint fightManagerEP;
 		private SharedObjects.GameInfo.StatusCode status;
 
@@ -70,6 +71,16 @@ namespace Actors
 		#endregion
 
 		#region Public Methods
+
+		public void setInitialLP(short p)
+		{
+			lp = p;
+		}
+
+		public short getLP()
+		{
+			return lp;
+		}
 
 		#region Resource Methods
 

@@ -22,6 +22,9 @@ namespace Actors
 		private SharedObjects.Balloon balloons_to_return;
 		private SharedObjects.Umbrella umbrella_to_return;
 		private string message_to_return;
+		private bool hasResourceToReturn;
+
+		private Messages.Message return_message;
 
 		#endregion
 
@@ -55,16 +58,16 @@ namespace Actors
 
 		private void initialize(bool threading)
 		{
-
 			if (conversation_queues == null)
 				conversation_queues = new ConversationList();
-
 			if (threading)
 			{
 				create_thread(new ThreadStart(execute));
 				start_thread();
 			}
 			isInitialized = true;
+			hasResourceToReturn = false;
+			return_message = null;
 		}
 
 		#endregion
@@ -94,20 +97,20 @@ namespace Actors
 		{
 			while (true)
 			{
-				if (hasConversation())
+				if (new_flag)
 				{
-					Conversation convo = conversation_queues.peekReceived();
-					if (convo != null)
+					Conversation new_convo = conversation_queues.peek();
+					if (new_convo != null)
 					{
-						Envelope request = convo.peek();
+						Envelope request = new_convo.peek();
 						if (request != null)
 						{
 							Messages.Message msg = request.getPayload();
 							switch (msg.getTypeAsString())
 							{
 								case "GameJoined":
-									Messages.GameJoined joined = msg as Messages.GameJoined;
-									addPennies(joined.Pennies);
+									return_message = msg as Messages.GameJoined;
+									hasResourceToReturn = true;
 									break;
 
 								case "UmbrellaPurchased":
@@ -116,8 +119,10 @@ namespace Actors
 									break;
 
 								case "BalloonPurchased":
-									Messages.BalloonPurchased balloon = msg as Messages.BalloonPurchased;
-									addBalloon(balloon.Balloon);
+									//Messages.BalloonPurchased balloon = msg as Messages.BalloonPurchased;
+									return_message = msg as Messages.BalloonPurchased;
+									hasResourceToReturn = true;
+									//addBalloon(balloon.Balloon);
 									break;
 
 								case "Ack":
@@ -129,6 +134,7 @@ namespace Actors
 									message_to_return = nak.Error;
 									break;
 							}
+							new_flag = false;
 						}
 					}
 				}
@@ -143,9 +149,28 @@ namespace Actors
 
 		#region Return methods
 
-		public List<SharedObjects.Penny> returnPennies()
+		public Messages.GameJoined gotGameJoinedMsg()
 		{
-			return pennies_to_return;
+			while (!hasResourceToReturn)
+			{
+				short count = 0;
+				if (count++ > 1000)
+					return null;
+			}
+			hasResourceToReturn = false;
+			return return_message as Messages.GameJoined;
+		}
+
+		public Messages.BalloonPurchased gotBalloonPurchasedMsg()
+		{
+			while (!hasResourceToReturn)
+			{
+				short count = 0;
+				if (count++ > 1000)
+					return null;
+			}
+			hasResourceToReturn = false;
+			return return_message as Messages.BalloonPurchased;
 		}
 
 		public SharedObjects.Balloon returnBalloon()

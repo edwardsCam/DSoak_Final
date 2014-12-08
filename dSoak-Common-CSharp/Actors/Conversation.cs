@@ -4,6 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+ * Conversation is an abstraction of a MessageQueue, that also has an id.
+ * */
+
 namespace Actors
 {
 	public class Conversation
@@ -64,8 +68,6 @@ namespace Actors
 			allChecked = true;
 		}
 
-		#endregion
-
 		#region Accessors and Mutators
 
 		public SharedObjects.MessageNumber getID()
@@ -83,20 +85,13 @@ namespace Actors
 			return msgs.pop();
 		}
 
-		public void setID(SharedObjects.MessageNumber n)
-		{
-			id = n;
-		}
-
 		public void push(Envelope m)
 		{
 			msgs.push(m);
 		}
 
-		public void setQueue(MessageQueue q)
-		{
-			msgs = q;
-		}
+		#endregion
+
 		#endregion
 	}
 }
