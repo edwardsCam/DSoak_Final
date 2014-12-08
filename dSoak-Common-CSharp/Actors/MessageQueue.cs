@@ -64,13 +64,7 @@ namespace Actors
 
 		public Envelope peek()
 		{
-			lock (_locker)
-			{
-				Envelope temp = pop();
-				if (temp != null)
-					push(temp);
-				return temp;
-			}
+			return messages.ToList().Last();
 		}
 
 		#endregion

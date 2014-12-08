@@ -85,17 +85,17 @@ namespace Actors
 			return null;
 		}
 
-		public Conversation getConvo(SharedObjects.MessageNumber n)
+		public Conversation peekReceived()
 		{
-			foreach (Conversation c in convos)
+			foreach (Conversation c in convos.ToList())
 			{
-				if (c.getID() == n)
+				Envelope e = c.peek();
+				if (e.isIncoming() && !c.isChecked())
 				{
-					convos.Remove(c);
+					c.setChecked();
 					return c;
 				}
 			}
-
 			return null;
 		}
 

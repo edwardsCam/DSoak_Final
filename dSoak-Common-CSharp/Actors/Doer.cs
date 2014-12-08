@@ -98,10 +98,10 @@ namespace Actors
 				{
 					Envelope request = null;
 					Messages.Message msg = new Messages.Nak();
-					Conversation convo = conversation_queues.peek();
+					Conversation convo = conversation_queues.peekReceived();
 					if (convo != null)
 					{
-						request = convo.pop();
+						request = convo.peek();
 						if (request != null)
 							msg = request.getPayload();
 					}
@@ -140,15 +140,6 @@ namespace Actors
 		#endregion
 
 		#region Public Methods
-
-		#region Queue stuff
-
-		public Envelope popConversation(SharedObjects.MessageNumber convID)
-		{
-			return conversation_queues.getConvo(convID).pop();
-		}
-
-		#endregion
 
 		#region Return methods
 

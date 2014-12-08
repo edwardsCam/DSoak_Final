@@ -13,6 +13,7 @@ namespace Actors
 
 		private Messages.Message payload;
 		private SharedObjects.PublicEndPoint ep;
+		private short direction;
 
 		#endregion
 
@@ -22,18 +23,21 @@ namespace Actors
 		{
 			payload = new Messages.Message();
 			ep = null;
+			direction = 1;
 		}
 
 		public Envelope(Messages.Message msg)
 		{
 			payload = msg;
 			ep = null;
+			direction = 1;
 		}
 
 		public Envelope(Messages.Message msg, SharedObjects.PublicEndPoint p)
 		{
 			payload = msg;
 			ep = p;
+			direction = 1;
 		}
 
 		#endregion
@@ -62,14 +66,24 @@ namespace Actors
 			return ep != null;
 		}
 
+		public bool isOutgoing()
+		{
+			return direction == 1;
+		}
+
+		public bool isIncoming()
+		{
+			return direction == 2;
+		}
+
+		public void setDirection(short d)
+		{
+			direction = d;
+		}
+
 		#endregion
 
 		#region Mutators
-
-		public void setPayload(Messages.Message msg)
-		{
-			payload = msg;
-		}
 
 		public void setEP(SharedObjects.PublicEndPoint val)
 		{
@@ -90,13 +104,17 @@ namespace Actors
 			try
 			{
 				Messages.Message msg = Messages.Message.Decode(stream);
-				return new Envelope(msg);
+				Envelope ret = new Envelope(msg);
+				ret.setDirection(2);
+				return ret;
 			}
 			catch (System.Collections.Generic.KeyNotFoundException)
 			{
 				var IPstr = System.Text.Encoding.Default.GetString(stream);
 				SharedObjects.PublicEndPoint publicEP = new SharedObjects.PublicEndPoint(IPstr);
-				return new Envelope(null, publicEP);
+				Envelope ret = new Envelope(null, publicEP);
+				ret.setDirection(2);
+				return ret;
 			}
 			catch (Exception)
 			{
