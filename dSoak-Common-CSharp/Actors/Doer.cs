@@ -163,7 +163,7 @@ namespace Actors
 			short count = 0;
 			while (!hasResourceToReturn)
 			{
-				if (count++ > 500)
+				if (count++ > 1000)
 					return false;
 			}
 			hasResourceToReturn = false;
