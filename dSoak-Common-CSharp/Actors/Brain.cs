@@ -60,7 +60,7 @@ namespace Actors
 
 		private void brainLoop()
 		{
-			short joinAttempts = 0;
+			short attempts = 0;
 			while (true)
 			{
 				if (status != stat.Uninitialized)
@@ -73,29 +73,29 @@ namespace Actors
 						break;
 
 					case stat.Searching: //searching for games
-						if (joinAttempts++ > 3)
+						if (attempts++ > 5)
 						{
 							status = stat.Error;
-							joinAttempts = 0;
+							attempts = 0;
 						}
 						if (chooseGame())
 						{
 							status = stat.Joining;
-							joinAttempts = 0;
+							attempts = 0;
 							doer = new Doer();
 						}
 						break;
 
 					case stat.Joining: //joining game
-						if (joinAttempts++ > 3)
+						if (attempts++ > 5)
 						{
 							status = stat.Error;
-							joinAttempts = 0;
+							attempts = 0;
 						}
 						if (join(active_game))
 						{
 							status = stat.InGame;
-							joinAttempts = 0;
+							attempts = 0;
 						}
 						break;
 
@@ -154,13 +154,16 @@ namespace Actors
 				{
 					Thread.Sleep(1000);
 					Messages.GameJoined join_msg = doer.gotGameJoinedMsg();
-					List<SharedObjects.Penny> pennies = join_msg.Pennies;
-					active_game.setInitialLP(join_msg.InitialLifePoints);
-					if (pennies != null)
+					if (join_msg != null)
 					{
-						active_game.setPennyList(pennies);
-						active_game.activate();
-						return true;
+						List<SharedObjects.Penny> pennies = join_msg.Pennies;
+						active_game.setInitialLP(join_msg.InitialLifePoints);
+						if (pennies != null)
+						{
+							active_game.setPennyList(pennies);
+							active_game.activate();
+							return true;
+						}
 					}
 				}
 			}
@@ -196,14 +199,17 @@ namespace Actors
 
 		#region Public Methods
 
-		public void quitGame()
+		public bool quitGame()
 		{
 			Messages.LeaveGame msg = new Messages.LeaveGame();
 			msg.GameId = active_game.getID();
 
 			com.send(msg);
-			if (com.receive("Ack")) ;
-			//active_game.setMessage(com.returnMessage()); //todo
+			if (com.receive("Ack"))
+			{
+				return true;
+			}
+			return false;
 		}
 
 		#region Getters
@@ -249,7 +255,7 @@ namespace Actors
 
 		#endregion
 
-	
+
 		#region Resource Methods
 
 		public bool umbrellaAction()
@@ -307,7 +313,7 @@ namespace Actors
 					Messages.BalloonPurchased balloon_msg = doer.gotBalloonPurchasedMsg();
 					active_game.addBalloon(balloon_msg.Balloon);
 					return true;
-				}			
+				}
 			}
 			return false;
 		}
@@ -325,7 +331,7 @@ namespace Actors
 					Messages.UmbrellaPurchased umbrella_msg = doer.gotUmbrellaPurchasedMsg();
 					active_game.addUmbrella(umbrella_msg.Umbrella);
 					return true;
-				}			
+				}
 			}
 			return false;
 		}

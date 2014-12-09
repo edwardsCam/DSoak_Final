@@ -150,16 +150,20 @@ namespace Actors
 
 		private void gotMessage(Messages.Message msg)
 		{
-			return_message = msg;
-			hasResourceToReturn = true;
+			if (!hasResourceToReturn)
+			{
+				return_message = msg;
+				hasResourceToReturn = true;
+			}
 		}
 
 		private bool waitForResource()
 		{
+			Thread.Sleep(150);
 			short count = 0;
 			while (!hasResourceToReturn)
 			{
-				if (count++ > 100)
+				if (count++ > 500)
 					return false;
 			}
 			hasResourceToReturn = false;

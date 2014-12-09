@@ -19,7 +19,6 @@ namespace Actors
 		#region Private Properties
 
 		private Knapsack r;
-		private string message;
 		private string label;
 		private bool raisedUmbrella;
 		private bool active;
@@ -190,14 +189,6 @@ namespace Actors
 			return label;
 		}
 
-		public string error_message()
-		{
-			if (message == "")
-				return "ERROR: NO COMMUNICATION WITH SERVER";
-			else
-				return message;
-		}
-
 		#endregion
 
 		#region Mutators
@@ -205,11 +196,6 @@ namespace Actors
 		public void activate()
 		{
 			active = true;
-		}
-
-		public void setMessage(string m)
-		{
-			message = m;
 		}
 
 		public void setPennyList(List<SharedObjects.Penny> l)
