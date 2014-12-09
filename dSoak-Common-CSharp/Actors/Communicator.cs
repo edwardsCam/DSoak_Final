@@ -33,7 +33,7 @@ namespace Actors
 		public Communicator()
 		{
 			client = new UdpClient();
-			client.Client.ReceiveTimeout = 10000;
+			client.Client.ReceiveTimeout = 1500;
 
 			listener = new Listener();
 
