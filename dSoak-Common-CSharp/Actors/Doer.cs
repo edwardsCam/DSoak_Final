@@ -18,9 +18,6 @@ namespace Actors
 		#region Private Properties
 
 		private static bool isInitialized = false;
-		private List<SharedObjects.Penny> pennies_to_return;
-		private SharedObjects.Balloon balloons_to_return;
-		private SharedObjects.Umbrella umbrella_to_return;
 		private string message_to_return;
 		private bool hasResourceToReturn;
 
@@ -72,25 +69,6 @@ namespace Actors
 
 		#endregion
 
-		#region Resource Actions
-
-		private void addPennies(List<SharedObjects.Penny> p)
-		{
-			pennies_to_return = p;
-		}
-
-		private void addBalloon(SharedObjects.Balloon b)
-		{
-			balloons_to_return = b;
-		}
-
-		private void addUmbrella(SharedObjects.Umbrella u)
-		{
-			umbrella_to_return = u;
-		}
-
-		#endregion
-
 		#region THREAD LOOP
 
 		private void execute()
@@ -126,7 +104,7 @@ namespace Actors
 								case "UmbrellaPurchased":
 									{
 										Messages.UmbrellaPurchased purchased = msg as Messages.UmbrellaPurchased;
-										addUmbrella(purchased.Umbrella);
+										//addUmbrella(purchased.Umbrella); //todo
 									}
 									break;
 
@@ -196,21 +174,6 @@ namespace Actors
 			if (waitForResource())
 				return return_message as Messages.ProcessSummary;
 			return null;
-		}
-
-		public SharedObjects.Balloon returnBalloon()
-		{
-			return balloons_to_return;
-		}
-
-		public SharedObjects.Umbrella returnUmbrella()
-		{
-			return umbrella_to_return;
-		}
-
-		public string returnMessage()
-		{
-			return message_to_return;
 		}
 
 		#endregion

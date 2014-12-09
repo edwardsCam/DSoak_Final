@@ -169,13 +169,6 @@ namespace Actors
 			return false;
 		}
 
-		private void sendAlivePing()
-		{
-			Messages.ProcessSummary msg = doer.gotAlivePingRequest();
-			if (msg != null)
-				com.send(new Envelope(msg));
-		}
-
 		#endregion
 
 		#region In-Game Loop
@@ -189,11 +182,30 @@ namespace Actors
 			}
 		}
 
+		private void sendAlivePing()
+		{
+			Messages.ProcessSummary msg = doer.gotAlivePingRequest();
+			if (msg != null)
+				com.send(new Envelope(msg));
+		}
+
 		#endregion
 
 		#endregion
 
 		#region Public Methods
+
+		public void quitGame()
+		{
+			Messages.LeaveGame msg = new Messages.LeaveGame();
+			msg.GameId = active_game.getID();
+
+			com.send(new Envelope(msg));
+			if (com.receive("Ack")) ;
+			//active_game.setMessage(com.returnMessage()); //todo
+		}
+
+		#region Getters
 
 		public static SharedObjects.ProcessData getProcessData()
 		{
@@ -232,16 +244,9 @@ namespace Actors
 			return 0;
 		}
 
-		public void quitGame()
-		{
-			Messages.LeaveGame msg = new Messages.LeaveGame();
-			msg.GameId = active_game.getID();
+		#endregion
 
-			com.send(new Envelope(msg));
-			if (com.receive("Ack"))
-				active_game.setMessage(com.returnMessage());
-		}
-
+	
 		#region Resource Methods
 
 		public void umbrellaAction()
@@ -254,8 +259,8 @@ namespace Actors
 					//msg.Umbrella = active_game.getUmbrella(); //todo
 
 					com.send(new Envelope(msg));
-					if (com.receive("Ack"))
-						active_game.setMessage(com.returnMessage());
+					if (com.receive("Ack")) ;
+						//active_game.setMessage(com.returnMessage()); //todo
 				}
 			}
 			else //no umbrella
@@ -264,8 +269,8 @@ namespace Actors
 				msg.Pennies = active_game.getPennyList();
 
 				com.send(new Envelope(msg));
-				if (com.receive("UmbrellaPurchased"))
-					active_game.addUmbrella(com.returnUmbrella());
+				if (com.receive("UmbrellaPurchased")) ;
+					//active_game.addUmbrella(com.returnUmbrella()); //todo
 			}
 		}
 
@@ -277,8 +282,8 @@ namespace Actors
 				msg.Pennies = active_game.getPennyList();
 
 				com.send(new Envelope(msg));
-				if (com.receive("BalloonFilled"))
-					active_game.addBalloon(com.returnBalloon());
+				if (com.receive("BalloonFilled")) ;
+					//active_game.addBalloon(com.returnBalloon()); //todo
 			}
 		}
 
@@ -312,7 +317,7 @@ namespace Actors
 				com.send(new Envelope(msg));
 				if (com.receive("Ack"))
 				{
-					active_game.setMessage(com.returnMessage());
+					//active_game.setMessage(com.returnMessage()); //todo
 					return true;
 				}
 				return false;
@@ -324,11 +329,6 @@ namespace Actors
 		#endregion
 
 		#region Status Accessors
-
-		public stat getStatus()
-		{
-			return status;
-		}
 
 		public bool isUninitialized()
 		{

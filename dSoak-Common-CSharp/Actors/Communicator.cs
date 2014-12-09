@@ -163,26 +163,6 @@ namespace Actors
 			}
 		}
 
-
-		#endregion
-
-		#region Resouce Getters
-
-		public SharedObjects.Umbrella returnUmbrella()
-		{
-			return null; //todo
-		}
-
-		public SharedObjects.Balloon returnBalloon()
-		{
-			return null;//todo
-		}
-
-		public string returnMessage()
-		{
-			return null;//todo
-		}
-
 		#endregion
 
 		#region Accessors
