@@ -16,7 +16,7 @@ namespace Actors
 
 		private Thread _t;
 		private Communicator com;
-		private Game active_game;
+		private static Game active_game;
 		private stat status;
 		private Doer doer;
 
@@ -42,6 +42,8 @@ namespace Actors
 
 		public void clear()
 		{
+			if (doer != null)
+				doer.clear();
 			if (com != null)
 				com.clear();
 			if (active_game != null)
@@ -69,6 +71,7 @@ namespace Actors
 						initialize();
 						status = stat.Searching;
 						break;
+
 					case stat.Searching: //searching for games
 						if (joinAttempts++ > 10)
 						{
@@ -81,8 +84,8 @@ namespace Actors
 							joinAttempts = 0;
 							doer = new Doer();
 						}
-
 						break;
+
 					case stat.Joining: //joining game
 						if (joinAttempts++ > 10)
 						{
@@ -95,9 +98,11 @@ namespace Actors
 							joinAttempts = 0;
 						}
 						break;
+
 					case stat.InGame: //ingame
 						gameLoop();
 						break;
+
 					case stat.Error:
 						break;
 				}
@@ -147,7 +152,7 @@ namespace Actors
 				msg.GameId = g.getID();
 
 				com.send(new Envelope(msg));
-				if (com.receive())
+				if (com.receive("GameJoined"))
 				{
 					Thread.Sleep(1000);
 					Messages.GameJoined join_msg = doer.gotGameJoinedMsg();
@@ -164,6 +169,13 @@ namespace Actors
 			return false;
 		}
 
+		private void sendAlivePing()
+		{
+			Messages.ProcessSummary msg = doer.gotAlivePingRequest();
+			if (msg != null)
+				com.send(new Envelope(msg));
+		}
+
 		#endregion
 
 		#region In-Game Loop
@@ -172,8 +184,8 @@ namespace Actors
 		{
 			if (active_game.isActive())
 			{
+				sendAlivePing();
 				buyBalloon();
-				//todo
 			}
 		}
 
@@ -182,6 +194,24 @@ namespace Actors
 		#endregion
 
 		#region Public Methods
+
+		public static SharedObjects.ProcessData getProcessData()
+		{
+			SharedObjects.ProcessData ret = new SharedObjects.ProcessData();
+
+			Knapsack resources = active_game.getResource();
+			int totalBalloons = resources.balloons.Count();
+			int filledCount = resources.numFilledBalloons();
+			ret.GameId = active_game.getID();
+			ret.LifePoints = active_game.getLP();
+			ret.ProcessId = SharedObjects.MessageNumber.LocalProcessId;
+			ret.NumberOfPennies = (short)resources.pennies.Count();
+			ret.NumberOfFilledBalloon = (short)filledCount;
+			ret.NumberOfUnfilledBalloon = (short)(totalBalloons - filledCount);
+			ret.NumberOfUnraisedUmbrellas = resources.numUnraisedUmbrellas();
+
+			return ret;
+		}
 
 		public short getProcessID()
 		{
@@ -208,7 +238,7 @@ namespace Actors
 			msg.GameId = active_game.getID();
 
 			com.send(new Envelope(msg));
-			if (com.receive())
+			if (com.receive("Ack"))
 				active_game.setMessage(com.returnMessage());
 		}
 
@@ -216,15 +246,15 @@ namespace Actors
 
 		public void umbrellaAction()
 		{
-			if (active_game.hasUmbrella())
+			if (active_game.hasUmbrellas())
 			{
 				if (!active_game.umbrellaIsRaised())
 				{
 					Messages.RaiseUmbrella msg = new Messages.RaiseUmbrella();
-					msg.Umbrella = active_game.getUmbrella();
+					//msg.Umbrella = active_game.getUmbrella(); //todo
 
 					com.send(new Envelope(msg));
-					if (com.receive())
+					if (com.receive("Ack"))
 						active_game.setMessage(com.returnMessage());
 				}
 			}
@@ -234,39 +264,36 @@ namespace Actors
 				msg.Pennies = active_game.getPennyList();
 
 				com.send(new Envelope(msg));
-				if (com.receive())
-					active_game.setUmbrella(com.returnUmbrella());
+				if (com.receive("UmbrellaPurchased"))
+					active_game.addUmbrella(com.returnUmbrella());
 			}
 		}
 
 		public void fillBalloon()
 		{
-			if (active_game.getBalloon() != null)
+			if (active_game.hasBalloons())
 			{
 				Messages.FillBalloon msg = new Messages.FillBalloon();
 				msg.Pennies = active_game.getPennyList();
 
 				com.send(new Envelope(msg));
-				if (com.receive())
-					active_game.setBalloon(com.returnBalloon());
+				if (com.receive("BalloonFilled"))
+					active_game.addBalloon(com.returnBalloon());
 			}
 		}
 
 		public bool buyBalloon()
 		{
-			if (active_game.getBalloon() == null)
+			if (!active_game.hasBalloons())
 			{
 				Messages.BuyBalloon msg = new Messages.BuyBalloon();
 				msg.Pennies = active_game.getPennyList();
 
 				com.send(new Envelope(msg));
-				if (com.receive())
+				if (com.receive("BalloonPurchased"))
 				{
 					Messages.BalloonPurchased balloon_msg = doer.gotBalloonPurchasedMsg();
-					//Messages.GameJoined join_msg = doer.gotGameJoinedMsg();
-					//List<SharedObjects.Penny> pennies = join_msg.Pennies;
-					//active_game.setInitialLP(join_msg.InitialLifePoints);
-					active_game.setBalloon(com.returnBalloon());
+					//active_game.setBalloon(com.returnBalloon());
 				}
 				return true;
 			}
@@ -275,15 +302,15 @@ namespace Actors
 
 		public bool throwBalloon(string target_str)
 		{
-			if (active_game.getBalloon() != null)
+			if (active_game.hasBalloons())
 			{
 				Messages.ThrowBalloon msg = new Messages.ThrowBalloon();
-				msg.Balloon = active_game.getBalloon();
+				//msg.Balloon = active_game.getBalloon(); //todo
 				msg.GameId = active_game.getID();
 				msg.TargetPlayerId = Convert.ToInt16(target_str);
 
 				com.send(new Envelope(msg));
-				if (com.receive())
+				if (com.receive("Ack"))
 				{
 					active_game.setMessage(com.returnMessage());
 					return true;

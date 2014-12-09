@@ -108,30 +108,46 @@ namespace Actors
 							Messages.Message msg = request.getPayload();
 							switch (msg.getTypeAsString())
 							{
+								case "AliveQuery":
+									{
+										Messages.ProcessSummary summary = new Messages.ProcessSummary();
+										summary.Data = Brain.getProcessData();
+										return_message = summary;
+										hasResourceToReturn = true;
+									}
+									break;
 								case "GameJoined":
-									return_message = msg as Messages.GameJoined;
-									hasResourceToReturn = true;
+									{
+										return_message = msg as Messages.GameJoined;
+										hasResourceToReturn = true;
+									}
 									break;
 
 								case "UmbrellaPurchased":
-									Messages.UmbrellaPurchased purchased = msg as Messages.UmbrellaPurchased;
-									addUmbrella(purchased.Umbrella);
+									{
+										Messages.UmbrellaPurchased purchased = msg as Messages.UmbrellaPurchased;
+										addUmbrella(purchased.Umbrella);
+									}
 									break;
 
 								case "BalloonPurchased":
-									//Messages.BalloonPurchased balloon = msg as Messages.BalloonPurchased;
-									return_message = msg as Messages.BalloonPurchased;
-									hasResourceToReturn = true;
-									//addBalloon(balloon.Balloon);
+									{
+										return_message = msg as Messages.BalloonPurchased;
+										hasResourceToReturn = true;
+									}
 									break;
 
 								case "Ack":
-									message_to_return = "Ack";
+									{
+										message_to_return = "Ack";
+									}
 									break;
 
 								case "Nak":
-									Messages.Nak nak = msg as Messages.Nak;
-									message_to_return = nak.Error;
+									{
+										Messages.Nak nak = msg as Messages.Nak;
+										message_to_return = nak.Error;
+									}
 									break;
 							}
 							new_flag = false;
@@ -143,6 +159,18 @@ namespace Actors
 
 		#endregion
 
+		private bool waitForResource()
+		{
+			short count = 0;
+			while (!hasResourceToReturn)
+			{
+				if (count++ > 100)
+					return false;
+			}
+			hasResourceToReturn = false;
+			return true;
+		}
+
 		#endregion
 
 		#region Public Methods
@@ -151,26 +179,23 @@ namespace Actors
 
 		public Messages.GameJoined gotGameJoinedMsg()
 		{
-			while (!hasResourceToReturn)
-			{
-				short count = 0;
-				if (count++ > 1000)
-					return null;
-			}
-			hasResourceToReturn = false;
-			return return_message as Messages.GameJoined;
+			if (waitForResource())
+				return return_message as Messages.GameJoined;
+			return null;
 		}
 
 		public Messages.BalloonPurchased gotBalloonPurchasedMsg()
 		{
-			while (!hasResourceToReturn)
-			{
-				short count = 0;
-				if (count++ > 1000)
-					return null;
-			}
-			hasResourceToReturn = false;
-			return return_message as Messages.BalloonPurchased;
+			if (waitForResource())
+				return return_message as Messages.BalloonPurchased;
+			return null;
+		}
+
+		public Messages.ProcessSummary gotAlivePingRequest()
+		{
+			if (waitForResource())
+				return return_message as Messages.ProcessSummary;
+			return null;
 		}
 
 		public SharedObjects.Balloon returnBalloon()

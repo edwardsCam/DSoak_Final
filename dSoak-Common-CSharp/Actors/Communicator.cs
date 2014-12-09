@@ -24,7 +24,6 @@ namespace Actors
 		private SharedObjects.PublicEndPoint gameManagerEP, localEP, registrarEP;
 		private UdpClient client;
 		private Listener listener;
-		//private Doer doer;
 		private short processID;
 
 		#endregion
@@ -37,7 +36,6 @@ namespace Actors
 			client.Client.ReceiveTimeout = 10000;
 
 			listener = new Listener();
-			//doer = new Doer();
 
 			myRegistrar = new _Registrar.Registrar();
 			string EPReflector = myRegistrar.EndPointReflector();
@@ -52,8 +50,6 @@ namespace Actors
 		{
 			client.Close();
 			listener.clear();
-			//doer.clear();
-
 			myRegistrar.Abort();
 		}
 
@@ -133,7 +129,7 @@ namespace Actors
 			}
 		}
 
-		public bool receive()
+		public bool receive(string type)
 		{
 			try
 			{
@@ -142,7 +138,7 @@ namespace Actors
 				if (response != null && response.hasPayload())
 				{
 					listener.addPending(response);
-					if (response.getPayload().getTypeAsString() != "Nak")
+					if (response.getPayload().getTypeAsString() == type)
 						return true;
 				}
 				return false;
@@ -172,36 +168,19 @@ namespace Actors
 
 		#region Resouce Getters
 
-		/*
-		public List<SharedObjects.Penny> returnPennies()
-		{
-			foreach (Messages.Message e in pendingActionMessages)
-			{
-				if (e.getTypeAsString() == "GameJoined")
-				{
-					Messages.GameJoined joined = e as Messages.GameJoined;
-					pendingActionMessages.Remove(e);
-					return joined.Pennies;
-				}
-			}
-			return null;
-			//return doer.returnPennies();
-		}
-		 * */
-
 		public SharedObjects.Umbrella returnUmbrella()
 		{
-			return null;// doer.returnUmbrella();
+			return null; //todo
 		}
 
 		public SharedObjects.Balloon returnBalloon()
 		{
-			return null;//doer.returnBalloon();
+			return null;//todo
 		}
 
 		public string returnMessage()
 		{
-			return null;//doer.returnMessage();
+			return null;//todo
 		}
 
 		#endregion
@@ -225,11 +204,6 @@ namespace Actors
 		public bool hasRegistrar()
 		{
 			return myRegistrar != null;
-		}
-
-		public bool doerHasThread()
-		{
-			return false;// doer.hasThread();
 		}
 
 		public bool listenerHasThread()

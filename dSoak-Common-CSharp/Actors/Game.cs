@@ -26,7 +26,6 @@ namespace Actors
 		private short lp;
 		private short id;
 		private short maxPlayers;
-		//private DateTime timestamp;
 		private SharedObjects.PublicEndPoint fightManagerEP;
 		private SharedObjects.GameInfo.StatusCode status;
 
@@ -55,7 +54,6 @@ namespace Actors
 				status = (SharedObjects.GameInfo.StatusCode)g.Status;
 				maxPlayers = g.MaxPlayers;
 				fightManagerEP = new SharedObjects.PublicEndPoint(g.FightManagerEP.HostAndPort);
-				//timestamp = g.AliveTimestamp;
 			}
 			else
 				new Game();
@@ -71,6 +69,11 @@ namespace Actors
 		#endregion
 
 		#region Public Methods
+
+		public Knapsack getResource()
+		{
+			return r;
+		}
 
 		public void setInitialLP(short p)
 		{
@@ -94,38 +97,19 @@ namespace Actors
 			raisedUmbrella = false;
 		}
 
-		public int umbrellaState()
-		{
-			if (r.umbrella == null)
-				return 0;
-			else
-				if (!raisedUmbrella)
-					return 1;
-				else
-					return 2;
-		}
-
 		public int pennyCount()
 		{
 			return r.pennies.Count();
 		}
 
-		public bool hasUmbrella()
+		public bool hasUmbrellas()
 		{
-			return r.umbrella != null;
+			return r.umbrellas.Count() > 0;
 		}
 
 		public bool umbrellaIsRaised()
 		{
 			return raisedUmbrella;
-		}
-
-		public string balloonStatus()
-		{
-			if (r.balloon == null)
-				return "NO BALLOON";
-			else
-				return "" + r.balloon.UnitsOfWater;
 		}
 
 		#endregion
@@ -137,19 +121,19 @@ namespace Actors
 			return active;
 		}
 
+		public bool hasBalloons()
+		{
+			return r.balloons.Count() > 0;
+		}
+
 		public List<SharedObjects.Penny> getPennyList()
 		{
 			return r.pennies;
 		}
 
-		public SharedObjects.Balloon getBalloon()
+		public List<SharedObjects.Umbrella> getUmbrellas()
 		{
-			return r.balloon;
-		}
-
-		public SharedObjects.Umbrella getUmbrella()
-		{
-			return r.umbrella;
+			return r.umbrellas;
 		}
 
 		public SharedObjects.PublicEndPoint getFightManagerEP()
@@ -204,14 +188,14 @@ namespace Actors
 			r.pennies = l;
 		}
 
-		public void setBalloon(SharedObjects.Balloon b)
+		public void addBalloon(SharedObjects.Balloon b)
 		{
-			r.balloon = b;
+			r.balloons.Add(b);
 		}
 
-		public void setUmbrella(SharedObjects.Umbrella u)
+		public void addUmbrella(SharedObjects.Umbrella u)
 		{
-			r.umbrella = u;
+			r.umbrellas.Add(u);
 		}
 
 		public void setID(short i)

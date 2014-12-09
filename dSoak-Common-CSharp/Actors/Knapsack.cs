@@ -14,8 +14,8 @@ namespace Actors
 		#region Public Properties
 
 		public List<SharedObjects.Penny> pennies { get; set; }
-		public SharedObjects.Balloon balloon { get; set; }
-		public SharedObjects.Umbrella umbrella { get; set; }
+		public List<SharedObjects.Balloon> balloons { get; set; }
+		public List<SharedObjects.Umbrella> umbrellas { get; set; }
 
 		#endregion
 
@@ -24,19 +24,37 @@ namespace Actors
 		public Knapsack()
 		{
 			pennies = new List<SharedObjects.Penny>();
-			balloon = null;
-			umbrella = null;
+			balloons = new List<SharedObjects.Balloon>();
+			umbrellas = new List<SharedObjects.Umbrella>();
 		}
 
 		#endregion
 
 		#region Public Methods
 
+		public short numFilledBalloons()
+		{
+			short count = 0;
+			foreach (SharedObjects.Balloon b in balloons.ToList())
+				if (b.IsValid && b.UnitsOfWater > 0)
+					count++;
+			return count;
+		}
+
+		public short numUnraisedUmbrellas()
+		{
+			short count = 0;
+			foreach (SharedObjects.Umbrella u in umbrellas)
+				if (u.IsValid)
+					count++;
+			return (short)(umbrellas.Count() - (int)count);
+		}
+
 		public void clear()
 		{
 			pennies = null;
-			balloon = null;
-			umbrella = null;
+			balloons = null;
+			umbrellas = null;
 		}
 
 		#endregion
