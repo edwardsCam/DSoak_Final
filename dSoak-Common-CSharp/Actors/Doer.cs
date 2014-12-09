@@ -88,7 +88,6 @@ namespace Actors
 									{
 										Messages.ProcessSummary summary = new Messages.ProcessSummary();
 										summary.Data = Brain.getProcessData();
-										summary.ConvId = msg.ConvId;
 										gotMessage(summary);
 									}
 									break;
@@ -96,7 +95,6 @@ namespace Actors
 								case "SetupStream":
 									{
 										Messages.SetupStream setup = msg as Messages.SetupStream;
-										setup.ConvId = msg.ConvId;
 										gotMessage(setup);
 									}
 									break;
@@ -104,7 +102,6 @@ namespace Actors
 								case "GameJoined":
 									{
 										Messages.GameJoined joined = msg as Messages.GameJoined;
-										joined.ConvId = msg.ConvId;
 										gotMessage(joined);
 									}
 									break;
@@ -186,6 +183,15 @@ namespace Actors
 			if (waitForResource())
 				return return_message as Messages.ProcessSummary;
 			return null;
+		}
+
+		#endregion
+
+		#region Unit Test Helpers
+
+		public void readRequest()
+		{
+			conversation_queues.peek();
 		}
 
 		#endregion

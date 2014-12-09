@@ -90,6 +90,11 @@ namespace Actors
 			ep = val;
 		}
 
+		public void setConvID(SharedObjects.MessageNumber num)
+		{
+			payload.ConvId = num;
+		}
+
 		#endregion
 
 		#region Packing / Unpacking

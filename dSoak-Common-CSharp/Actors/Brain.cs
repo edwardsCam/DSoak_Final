@@ -73,7 +73,7 @@ namespace Actors
 						break;
 
 					case stat.Searching: //searching for games
-						if (joinAttempts++ > 10)
+						if (joinAttempts++ > 3)
 						{
 							status = stat.Error;
 							joinAttempts = 0;
@@ -87,7 +87,7 @@ namespace Actors
 						break;
 
 					case stat.Joining: //joining game
-						if (joinAttempts++ > 10)
+						if (joinAttempts++ > 3)
 						{
 							status = stat.Error;
 							joinAttempts = 0;
@@ -329,6 +329,11 @@ namespace Actors
 		#endregion
 
 		#region Status Accessors
+
+		public Brain.stat getStatus()
+		{
+			return status;
+		}
 
 		public bool isUninitialized()
 		{

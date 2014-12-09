@@ -97,7 +97,7 @@ namespace Actors
 
 		#region UDP Client stuff
 
-		public void send(Messages.Message payload)
+		public int send(Messages.Message payload)
 		{
 			Envelope msg = new Envelope(payload);
 			try
@@ -105,11 +105,11 @@ namespace Actors
 				client.Connect(gameManagerEP.IPEndPoint);
 				listener.addPending(msg);
 				byte[] datagram = msg.encode();
-				client.Send(datagram, datagram.Length);
+				return client.Send(datagram, datagram.Length);
 			}
 			catch (Exception)
 			{
-				return;
+				return -1;
 			}
 		}
 
@@ -197,6 +197,11 @@ namespace Actors
 		public string getRegistrarEPReflector()
 		{
 			return myRegistrar.EndPointReflector();
+		}
+
+		public SharedObjects.PublicEndPoint getGameManagerEP()
+		{
+			return gameManagerEP;
 		}
 
 		#endregion

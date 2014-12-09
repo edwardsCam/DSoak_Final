@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Actors", "Actors\Actors.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Player", "Player\Player.csproj", "{3B2D9D4F-253E-463F-8B92-A235812C30AC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ActorsTesting", "ActorsTesting\ActorsTesting.csproj", "{C32C9208-2788-46B7-8FB7-ED6E3EBB3C3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{3B2D9D4F-253E-463F-8B92-A235812C30AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B2D9D4F-253E-463F-8B92-A235812C30AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B2D9D4F-253E-463F-8B92-A235812C30AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C32C9208-2788-46B7-8FB7-ED6E3EBB3C3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C32C9208-2788-46B7-8FB7-ED6E3EBB3C3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C32C9208-2788-46B7-8FB7-ED6E3EBB3C3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C32C9208-2788-46B7-8FB7-ED6E3EBB3C3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
