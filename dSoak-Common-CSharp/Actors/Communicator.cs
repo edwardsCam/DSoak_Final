@@ -41,8 +41,9 @@ namespace Actors
 			string EPReflector = myRegistrar.EndPointReflector();
 			registrarEP = new SharedObjects.PublicEndPoint(EPReflector);
 			_Registrar.RegistryEntry[] managers = myRegistrar.GetGameManagers();
+
 			if (managers.Count() > 0)
-				gameManagerEP = new SharedObjects.PublicEndPoint(managers[0].Ep.HostAndPort);
+				gameManagerEP = new SharedObjects.PublicEndPoint(managers.Last().Ep.HostAndPort);
 			localEP = null;
 		}
 
@@ -96,36 +97,33 @@ namespace Actors
 
 		#region UDP Client stuff
 
-		public int send(Envelope msg)
+		public void send(Messages.Message payload)
 		{
+			Envelope msg = new Envelope(payload);
 			try
 			{
-				if (msg.hasEP())
-					client.Connect(msg.getEP().IPEndPoint);
-
 				client.Connect(gameManagerEP.IPEndPoint);
-
 				listener.addPending(msg);
 				byte[] datagram = msg.encode();
-				return client.Send(datagram, datagram.Length);
+				client.Send(datagram, datagram.Length);
 			}
 			catch (Exception)
 			{
-				return -1;
+				return;
 			}
 		}
 
-		public int sendToRegistrar(Envelope msg)
+		public void sendToRegistrar(Envelope msg)
 		{
 			try
 			{
 				client.Connect(registrarEP.IPEndPoint);
 				byte[] datagram = msg.encode();
-				return client.Send(datagram, datagram.Length);
+				client.Send(datagram, datagram.Length);
 			}
 			catch (Exception)
 			{
-				return -1;
+				return;
 			}
 		}
 

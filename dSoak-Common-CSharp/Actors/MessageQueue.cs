@@ -64,7 +64,10 @@ namespace Actors
 
 		public Envelope peek()
 		{
-			return messages.ToList().Last();
+			lock (_locker)
+			{
+				return messages.ToList().Last();
+			}
 		}
 
 		public List<Envelope> asList()

@@ -18,9 +18,7 @@ namespace Actors
 		#region Private Properties
 
 		private static bool isInitialized = false;
-		private string message_to_return;
 		private bool hasResourceToReturn;
-
 		private Messages.Message return_message;
 
 		#endregion
@@ -90,14 +88,24 @@ namespace Actors
 									{
 										Messages.ProcessSummary summary = new Messages.ProcessSummary();
 										summary.Data = Brain.getProcessData();
-										return_message = summary;
-										hasResourceToReturn = true;
+										summary.ConvId = msg.ConvId;
+										gotMessage(summary);
 									}
 									break;
+
+								case "SetupStream":
+									{
+										Messages.SetupStream setup = msg as Messages.SetupStream;
+										setup.ConvId = msg.ConvId;
+										gotMessage(setup);
+									}
+									break;
+
 								case "GameJoined":
 									{
-										return_message = msg as Messages.GameJoined;
-										hasResourceToReturn = true;
+										Messages.GameJoined joined = msg as Messages.GameJoined;
+										joined.ConvId = msg.ConvId;
+										gotMessage(joined);
 									}
 									break;
 
@@ -110,21 +118,19 @@ namespace Actors
 
 								case "BalloonPurchased":
 									{
-										return_message = msg as Messages.BalloonPurchased;
-										hasResourceToReturn = true;
+										gotMessage(msg as Messages.BalloonPurchased);
 									}
 									break;
-
+									
 								case "Ack":
 									{
-										message_to_return = "Ack";
+										return_message = msg;
 									}
 									break;
 
 								case "Nak":
 									{
-										Messages.Nak nak = msg as Messages.Nak;
-										message_to_return = nak.Error;
+										return_message = msg;
 									}
 									break;
 							}
@@ -136,6 +142,12 @@ namespace Actors
 		}
 
 		#endregion
+
+		private void gotMessage(Messages.Message msg)
+		{
+			return_message = msg;
+			hasResourceToReturn = true;
+		}
 
 		private bool waitForResource()
 		{
