@@ -37,6 +37,7 @@
 			this.LAB_gameID2 = new System.Windows.Forms.Label();
 			this.LAB_lp1 = new System.Windows.Forms.Label();
 			this.LAB_lp2 = new System.Windows.Forms.Label();
+			this.BUT_stop = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// BUT_start_brain
@@ -120,11 +121,23 @@
 			this.LAB_lp2.TabIndex = 8;
 			this.LAB_lp2.Text = " ";
 			// 
+			// BUT_stop
+			// 
+			this.BUT_stop.Enabled = false;
+			this.BUT_stop.Location = new System.Drawing.Point(515, 38);
+			this.BUT_stop.Name = "BUT_stop";
+			this.BUT_stop.Size = new System.Drawing.Size(109, 23);
+			this.BUT_stop.TabIndex = 9;
+			this.BUT_stop.Text = "Restart Process";
+			this.BUT_stop.UseVisualStyleBackColor = true;
+			this.BUT_stop.Click += new System.EventHandler(this.BUT_stop_Click);
+			// 
 			// GUI
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(636, 262);
+			this.Controls.Add(this.BUT_stop);
 			this.Controls.Add(this.LAB_lp2);
 			this.Controls.Add(this.LAB_lp1);
 			this.Controls.Add(this.LAB_gameID2);
@@ -152,6 +165,7 @@
 		private System.Windows.Forms.Label LAB_gameID2;
 		private System.Windows.Forms.Label LAB_lp1;
 		private System.Windows.Forms.Label LAB_lp2;
+		private System.Windows.Forms.Button BUT_stop;
 	}
 }
 
