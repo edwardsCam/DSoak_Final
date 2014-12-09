@@ -177,6 +177,9 @@ namespace Actors
 			{
 				sendAlivePing();
 				buyBalloon();
+				fillBalloon();
+				umbrellaAction();
+				//throwBalloon();
 			}
 		}
 
@@ -249,42 +252,46 @@ namespace Actors
 	
 		#region Resource Methods
 
-		public void umbrellaAction()
+		public bool umbrellaAction()
 		{
 			if (active_game.hasUmbrellas())
 			{
 				if (!active_game.umbrellaIsRaised())
 				{
 					Messages.RaiseUmbrella msg = new Messages.RaiseUmbrella();
-					//msg.Umbrella = active_game.getUmbrella(); //todo
+					msg.Umbrella = active_game.getUmbrellaToRaise();
 
 					com.send(msg);
-					if (com.receive("Ack")) ;
-						//active_game.setMessage(com.returnMessage()); //todo
+					if (com.receive("Ack"))
+					{
+						return true;
+					}
 				}
 			}
 			else //no umbrella
 			{
-				Messages.BuyUmbrella msg = new Messages.BuyUmbrella();
-				msg.Pennies = active_game.getPennyList();
-
-				com.send(msg);
-				if (com.receive("UmbrellaPurchased")) ;
-					//active_game.addUmbrella(com.returnUmbrella()); //todo
+				return buyUmbrella();
 			}
+			return false;
 		}
 
-		public void fillBalloon()
+		public bool fillBalloon()
 		{
 			if (active_game.hasBalloons())
 			{
 				Messages.FillBalloon msg = new Messages.FillBalloon();
+				msg.Balloon = active_game.getBalloonToFill();
 				msg.Pennies = active_game.getPennyList();
 
 				com.send(msg);
-				if (com.receive("BalloonFilled")) ;
-					//active_game.addBalloon(com.returnBalloon()); //todo
+				if (com.receive("BalloonFilled"))
+				{
+					Messages.BalloonFilled balloon_msg = doer.gotBalloonFilledMsg();
+					active_game.addBalloon(balloon_msg.Balloon);
+					return true;
+				}
 			}
+			return false;
 		}
 
 		public bool buyBalloon()
@@ -299,31 +306,46 @@ namespace Actors
 				{
 					Messages.BalloonPurchased balloon_msg = doer.gotBalloonPurchasedMsg();
 					active_game.addBalloon(balloon_msg.Balloon);
-				}
-				return true;
+					return true;
+				}			
 			}
 			return false;
 		}
 
-		public bool throwBalloon(string target_str)
+		public bool buyUmbrella()
+		{
+			if (!active_game.hasUmbrellas())
+			{
+				Messages.BuyUmbrella msg = new Messages.BuyUmbrella();
+				msg.Pennies = active_game.getPennyList();
+
+				com.send(msg);
+				if (com.receive("UmbrellaPurchased"))
+				{
+					Messages.UmbrellaPurchased umbrella_msg = doer.gotUmbrellaPurchasedMsg();
+					active_game.addUmbrella(umbrella_msg.Umbrella);
+					return true;
+				}			
+			}
+			return false;
+		}
+
+		public bool throwBalloon(short target)
 		{
 			if (active_game.hasBalloons())
 			{
 				Messages.ThrowBalloon msg = new Messages.ThrowBalloon();
-				//msg.Balloon = active_game.getBalloon(); //todo
+				msg.Balloon = active_game.getBalloonToThrow();
 				msg.GameId = active_game.getID();
-				msg.TargetPlayerId = Convert.ToInt16(target_str);
+				msg.TargetPlayerId = target;
 
 				com.send(msg);
 				if (com.receive("Ack"))
 				{
-					//active_game.setMessage(com.returnMessage()); //todo
 					return true;
 				}
-				return false;
 			}
-			else
-				return false;
+			return false;
 		}
 
 		#endregion

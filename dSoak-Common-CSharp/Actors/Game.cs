@@ -131,9 +131,38 @@ namespace Actors
 			return r.pennies;
 		}
 
-		public List<SharedObjects.Umbrella> getUmbrellas()
+		public List<SharedObjects.Balloon> getBalloonList()
+		{
+			return r.balloons;
+		}
+
+		public List<SharedObjects.Umbrella> getUmbrellaList()
 		{
 			return r.umbrellas;
+		}
+
+		public SharedObjects.Balloon getBalloonToThrow()
+		{
+			foreach (SharedObjects.Balloon b in r.balloons.ToList())			
+				if (b.IsValid && b.UnitsOfWater > 0)			
+					return b;
+			return null;
+		}
+
+		public SharedObjects.Balloon getBalloonToFill()
+		{
+			foreach (SharedObjects.Balloon b in r.balloons.ToList())
+				if (b.IsValid && b.UnitsOfWater == 0)
+					return b;
+			return null;
+		}
+
+		public SharedObjects.Umbrella getUmbrellaToRaise()
+		{
+			foreach (SharedObjects.Umbrella u in r.umbrellas.ToList())
+				if (u.IsValid)
+					return u;
+			return null;
 		}
 
 		public SharedObjects.PublicEndPoint getFightManagerEP()
@@ -188,9 +217,17 @@ namespace Actors
 			r.pennies = l;
 		}
 
-		public void addBalloon(SharedObjects.Balloon b)
+		public void addBalloon(SharedObjects.Balloon b1)
 		{
-			r.balloons.Add(b);
+			foreach (SharedObjects.Balloon b2 in r.balloons.ToList())
+			{
+				if (b2.Id == b1.Id)
+				{
+					r.balloons.Remove(b2);
+					break;
+				}
+			}
+			r.balloons.Add(b1);
 		}
 
 		public void addUmbrella(SharedObjects.Umbrella u)

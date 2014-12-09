@@ -109,13 +109,21 @@ namespace Actors
 								case "UmbrellaPurchased":
 									{
 										Messages.UmbrellaPurchased purchased = msg as Messages.UmbrellaPurchased;
-										//addUmbrella(purchased.Umbrella); //todo
+										gotMessage(purchased);
 									}
 									break;
 
 								case "BalloonPurchased":
 									{
-										gotMessage(msg as Messages.BalloonPurchased);
+										Messages.BalloonPurchased purchased = msg as Messages.BalloonPurchased;
+										gotMessage(purchased);
+									}
+									break;
+
+								case "BalloonFilled":
+									{
+										Messages.BalloonFilled filled = msg as Messages.BalloonFilled;
+										gotMessage(filled);
 									}
 									break;
 									
@@ -175,6 +183,20 @@ namespace Actors
 		{
 			if (waitForResource())
 				return return_message as Messages.BalloonPurchased;
+			return null;
+		}
+
+		public Messages.BalloonFilled gotBalloonFilledMsg()
+		{
+			if (waitForResource())
+				return return_message as Messages.BalloonFilled;
+			return null;
+		}
+
+		public Messages.UmbrellaPurchased gotUmbrellaPurchasedMsg()
+		{
+			if (waitForResource())
+				return return_message as Messages.UmbrellaPurchased;
 			return null;
 		}
 

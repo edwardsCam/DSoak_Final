@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 /*
@@ -15,6 +16,7 @@ namespace Actors
 		#region Private Properties
 
 		private List<Conversation> convos;
+		private readonly ReaderWriterLock _locker = new ReaderWriterLock();
 
 		#endregion
 
@@ -31,9 +33,12 @@ namespace Actors
 
 		public bool hasConvos()
 		{
-			foreach (Conversation c in convos.ToList())
-				if (c.hasMsg())
-					return true;
+			lock (_locker)
+			{
+				foreach (Conversation c in convos.ToList())
+					if (c.hasMsg())
+						return true;
+			}
 			return false;
 		}
 
@@ -50,12 +55,15 @@ namespace Actors
 			SharedObjects.MessageNumber convID = e.getPayload().ConvId;
 			if (hasConvo(convID))
 			{
-				foreach (Conversation c in convos.ToList())
+				lock (_locker)
 				{
-					if (c.getID() == convID)
+					foreach (Conversation c in convos.ToList())
 					{
-						c.push(e);
-						c.setUnchecked();
+						if (c.getID() == convID)
+						{
+							c.push(e);
+							c.setUnchecked();
+						}
 					}
 				}
 			}
@@ -65,13 +73,16 @@ namespace Actors
 
 		public Conversation peek()
 		{
-			foreach (Conversation c in convos.ToList())
+			lock (_locker)
 			{
-				Envelope e = c.peek();
-				if (e.isIncoming() && !c.isChecked())
+				foreach (Conversation c in convos.ToList())
 				{
-					c.setChecked();
-					return c;
+					Envelope e = c.peek();
+					if (e.isIncoming() && !c.isChecked())
+					{
+						c.setChecked();
+						return c;
+					}
 				}
 			}
 			return null;
