@@ -99,6 +99,13 @@ namespace Actors
 									}
 									break;
 
+								case "GameData":
+									{
+										Messages.GameData data = msg as Messages.GameData;
+										gotMessage(data);
+									}
+									break;
+
 								case "GameJoined":
 									{
 										Messages.GameJoined joined = msg as Messages.GameJoined;

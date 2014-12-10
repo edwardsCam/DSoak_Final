@@ -95,6 +95,7 @@ namespace Player
 		private void BUT_stop_Click(object sender, EventArgs e)
 		{
 			brain.stop();
+			BUT_start_brain_Click(sender, e);
 		}
 
 	}
