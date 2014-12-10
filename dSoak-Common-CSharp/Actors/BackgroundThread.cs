@@ -20,6 +20,7 @@ namespace Actors
 		private Thread _t;
 		protected static ConversationList conversation_queues;
 		protected static bool new_flag;
+		protected static bool listener_on;
 
 		#endregion
 

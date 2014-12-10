@@ -73,7 +73,7 @@ namespace Actors
 		{
 			while (true)
 			{
-				if (new_flag)
+				if (!listener_on && new_flag)
 				{
 					Conversation new_convo = conversation_queues.peek();
 					if (new_convo != null)
@@ -96,6 +96,13 @@ namespace Actors
 									{
 										Messages.SetupStream setup = msg as Messages.SetupStream;
 										gotMessage(setup);
+									}
+									break;
+
+								case "GameData":
+									{
+										Messages.GameData data = msg as Messages.GameData;
+										gotMessage(data);
 									}
 									break;
 
@@ -142,6 +149,7 @@ namespace Actors
 							new_flag = false;
 						}
 					}
+					listener_on = true;
 				}
 			}
 		}

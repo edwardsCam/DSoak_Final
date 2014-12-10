@@ -48,8 +48,17 @@ namespace Actors
 				com.clear();
 			if (active_game != null)
 				active_game.clear();
-			_t.Abort();
-			_t = null;
+			if (_t != null)
+			{
+				_t.Abort();
+				_t = null;
+			}
+		}
+
+		public void stop()
+		{
+			clear();
+			status = stat.Uninitialized;
 		}
 
 		#endregion
@@ -73,17 +82,13 @@ namespace Actors
 						break;
 
 					case stat.Searching: //searching for games
-						if (attempts++ > 5)
-						{
-							status = stat.Error;
-							attempts = 0;
-						}
 						if (chooseGame())
 						{
 							status = stat.Joining;
-							attempts = 0;
 							doer = new Doer();
 						}
+						else
+							Thread.Sleep(1000);
 						break;
 
 					case stat.Joining: //joining game

@@ -64,6 +64,7 @@ namespace Actors
 			}
 			isInitialized = true;
 			active = false;
+			listener_on = true;
 		}
 
 		#endregion
@@ -74,7 +75,7 @@ namespace Actors
 		{
 			while (true)
 			{
-				if (active)
+				if (listener_on && active)
 				{
 					if (pendingMessages.size() > 0)
 					{
@@ -86,6 +87,7 @@ namespace Actors
 							new_flag = true;
 						}
 					}
+					listener_on = false;
 				}
 			}
 		}

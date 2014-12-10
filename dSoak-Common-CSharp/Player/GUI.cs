@@ -60,6 +60,7 @@ namespace Player
 		private void BUT_start_brain_Click(object sender, EventArgs e)
 		{
 			BUT_start_brain.Enabled = false;
+			BUT_stop.Enabled = false;
 			resetGameInfo();
 
 			brain = new Actors.Brain();
@@ -68,14 +69,11 @@ namespace Player
 			while (brain.isUninitialized()) ;
 
 			updateStatus("Searching for Games...");
+			BUT_stop.Enabled = true;
 			while (brain.isSearching()) ;
 
 			updateStatus("Joining Game...");
 			while (brain.isJoining()) ;
-
-			updateStatus("In Game!");
-			updateGameInfo(brain.getProcessID(), brain.getGameID(), brain.getLifepoints());
-			while (brain.isInGame()) ;
 
 			if (brain.isInError())
 			{
@@ -83,11 +81,21 @@ namespace Player
 				BUT_start_brain.Enabled = true;
 				brain.clear();
 			}
+
+			updateStatus("In Game!");
+			updateGameInfo(brain.getProcessID(), brain.getGameID(), brain.getLifepoints());
+			while (brain.isInGame()) ;
 		}
 
 		private void GUI_FormClosed(object sender, FormClosedEventArgs e)
 		{
 			brain.clear();
+		}
+
+		private void BUT_stop_Click(object sender, EventArgs e)
+		{
+			brain.stop();
+			BUT_start_brain_Click(sender, e);
 		}
 
 	}
